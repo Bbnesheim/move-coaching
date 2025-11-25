@@ -32,6 +32,73 @@
         "color_scheme": ""
       }
     },
+    "move_pricing_table_7hhP8t": {
+      "type": "move-pricing-table",
+      "blocks": {
+        "plan_NAw68E": {
+          "type": "plan",
+          "settings": {
+            "plan_handle": "plan-6m",
+            "plan_name": "Halvårsboost",
+            "duration_label": "6 måneder",
+            "price_per_month": "2 999 kr",
+            "total_price": "Oppstartsgebyr kommer i tillegg",
+            "badge": "Mest populær",
+            "description": "Perfekt for deg som vil ha tydelig struktur, tett oppfølging og rom til å gjøre endring i ditt tempo.",
+            "benefits": "Ukentlig oppfølging\nTilgang til MOVE-appen\nTilpasset kost og trening",
+            "primary_cta_label": "Start din dag én",
+            "primary_cta_link": ""
+          }
+        },
+        "plan_JJDFM8": {
+          "type": "plan",
+          "settings": {
+            "plan_handle": "plan-9m",
+            "plan_name": "Veien mot Suksess",
+            "duration_label": "9 måneder",
+            "price_per_month": "2 799 kr",
+            "total_price": "Oppstartsgebyr kommer i tillegg",
+            "badge": "Mest populær",
+            "description": "Perfekt for deg som vil ha tydelig struktur, tett oppfølging og rom til å gjøre endring i ditt tempo.",
+            "benefits": "Ukentlig oppfølging\nTilgang til MOVE-appen\nTilpasset kost og trening",
+            "primary_cta_label": "Start din dag én",
+            "primary_cta_link": ""
+          }
+        },
+        "plan_J76nN6": {
+          "type": "plan",
+          "settings": {
+            "plan_handle": "plan-12m",
+            "plan_name": "Full livsstilsendring",
+            "duration_label": "12 måneder",
+            "price_per_month": "2 499 kr",
+            "total_price": "Gratis oppstart + 1 ekstra måned",
+            "badge": "Mest populær",
+            "description": "Perfekt for deg som vil ha tydelig struktur, tett oppfølging og rom til å gjøre endring i ditt tempo.",
+            "benefits": "Ukentlig oppfølging\nTilgang til MOVE-appen\nTilpasset kost og trening",
+            "primary_cta_label": "Start din dag én",
+            "primary_cta_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "plan_NAw68E",
+        "plan_JJDFM8",
+        "plan_J76nN6"
+      ],
+      "name": "MOVE pricing table",
+      "settings": {
+        "heading": "Velg et løp som passer din hverdag",
+        "intro": "Tre ulike løp – samme varme støtte. Velg 6, 9 eller 12 måneder avhengig av hvor mye tid du trenger til varig endring.",
+        "highlight_plan_handle": "plan-12m",
+        "show_monthly_price": true,
+        "heading_alignment": "center",
+        "background_variant": "surface",
+        "padding_top": 84,
+        "padding_bottom": 84,
+        "color_scheme": ""
+      }
+    },
     "move_brief_qrBEqe": {
       "type": "move-brief",
       "disabled": true,
@@ -167,6 +234,7 @@
       "settings": {
         "heading": "Derfor fungerer MOVE Coaching",
         "intro": "Langsiktig coaching, varm støtte og en app som er laget for hverdagen – ikke for raske quick fixes.",
+        "side_image": "shopify://shop_images/aline_24.webp",
         "heading_alignment": "center",
         "columns_desktop": 3,
         "background_variant": "surface",
@@ -210,6 +278,7 @@
       "settings": {
         "heading": "Følg oss i hverdagen",
         "intro": "Få et ærlig innblikk i hverdagen, mat, trening og små steg mot varig endring.",
+        "main_image": "shopify://shop_images/matplan_3.webp",
         "default_cta_label": "Følg på Instagram",
         "instagram_label": "Aline på Instagram",
         "instagram_handle": "@coach.alineskk",
@@ -282,6 +351,7 @@
   },
   "order": [
     "move_hero_with_nav_CB6cgm",
+    "move_pricing_table_7hhP8t",
     "move_brief_qrBEqe",
     "move_testimonials_hi4zgH",
     "move_usps_AJiweM",
