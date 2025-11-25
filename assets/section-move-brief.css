@@ -34,17 +34,27 @@
   max-width: 620px;
 }
 
-/* Brand-colored depth shadow behind the card */
-.move-brief__card::before {
+/* Brand-colored depth gradient shadow behind the card */
+.move-brief__card--shadow::before {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: #5c4842; /* primary brown */
+  background: radial-gradient(
+    120% 160% at 20% 10%,
+    rgba(92, 72, 66, 0.6) 0%,
+    rgba(92, 72, 66, 0.4) 40%,
+    rgba(92, 72, 66, 0) 100%
+  );
   z-index: -1;
   transform: translate(10px, 12px);
-  opacity: 0.22;
+  opacity: 0.4;
   filter: blur(8px);
+}
+
+.move-brief__card--shadow:hover::before {
+  opacity: 0.22;
+  transform: translate(6px, 8px);
 }
 
 @media screen and (max-width: 1023px) {

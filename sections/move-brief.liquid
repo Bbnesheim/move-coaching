@@ -4,7 +4,7 @@
   style="{% if section.settings.padding_top > 0 %}padding-top: {{ section.settings.padding_top }}px;{% endif %}{% if section.settings.padding_bottom > 0 %} padding-bottom: {{ section.settings.padding_bottom }}px;{% endif %}"
 >
   <div class="page-width move-brief__inner move-brief__inner--{{ section.settings.container_alignment }}">
-    <div class="move-brief__card move-brief__card--{{ section.settings.text_alignment }}">
+    <div class="move-brief__card move-brief__card--{{ section.settings.text_alignment }}{% if section.settings.enable_depth_shadow %} move-brief__card--shadow{% endif %}">
       {%- if section.settings.heading != blank -%}
         <h2 class="move-brief__heading h2">{{ section.settings.heading }}</h2>
       {%- endif -%}
@@ -78,6 +78,12 @@
         { "value": "right", "label": "Right" }
       ],
       "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_depth_shadow",
+      "label": "Enable depth gradient shadow behind card",
+      "default": true
     }
   ],
   "presets": [

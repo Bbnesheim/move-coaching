@@ -16,6 +16,7 @@
 /* Quote cards should follow MOVE brief container proportions */
 .move-testimonials__item--quote {
   position: relative;
+  z-index: 0; /* ensure pseudo element stays behind */
   background: #ffffff;
   border-radius: var(--radius-md, 8px);
   padding: 2.4rem 2.8rem;
@@ -24,17 +25,26 @@
   max-width: 620px;
 }
 
-/* Brand-colored depth shadow behind testimonial card (pink accent) */
-.move-testimonials__item--quote::before {
+/* Brand-colored depth gradient shadow behind testimonial card (pink accent) */
+.move-testimonials--shadow .move-testimonials__item--quote::before {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: #f5b5c4; /* secondary pink */
+  background: radial-gradient(
+    120% 160% at 20% 10%,
+    rgba(245, 181, 196, 0.9) 0%,
+    rgba(245, 181, 196, 0.5) 40%,
+    rgba(245, 181, 196, 0) 100%
+  );
   z-index: -1;
   transform: translate(10px, 12px);
-  opacity: 0.32;
+  opacity: 0.35;
   filter: blur(10px);
+}
+
+.move-testimonials--shadow .move-testimonials__item--quote:hover::before {
+  opacity: 0.65; /* stronger pink glow on hover */
 }
 
 @media screen and (max-width: 1023px) {

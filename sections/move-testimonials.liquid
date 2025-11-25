@@ -18,7 +18,7 @@
 
 <section
   id="MoveTestimonials-{{ section.id }}"
-  class="section move-testimonials move-testimonials--scroller {{ bg_class }} color-{{ section.settings.color_scheme }} gradient{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+  class="section move-testimonials move-testimonials--scroller{% if section.settings.enable_card_shadow %} move-testimonials--shadow{% endif %} {{ bg_class }} color-{{ section.settings.color_scheme }} gradient{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
 >
   <div
     class="page-width move-section-padding"
@@ -150,6 +150,12 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_card_shadow",
+      "label": "Enable depth gradient shadow behind testimonial card",
+      "default": true
     }
   ],
   "blocks": [
