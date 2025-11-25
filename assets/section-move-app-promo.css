@@ -42,7 +42,7 @@
 }
 
 .move-app-promo__screenshot {
-  border-radius: var(--radius-lg, 12px);
+  border-radius: var(--radius-md, 8px);
   overflow: hidden;
 }
 

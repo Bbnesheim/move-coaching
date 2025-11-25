@@ -20,7 +20,10 @@
   id="MovePricingTable-{{ section.id }}"
   class="section move-pricing-table {{ bg_class }} color-{{ section.settings.color_scheme }} gradient{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
 >
-  <div class="page-width move-section-padding">
+  <div
+    class="page-width move-section-padding"
+    style="{% if section.settings.padding_top > 0 %}padding-top: {{ section.settings.padding_top }}px;{% endif %}{% if section.settings.padding_bottom > 0 %} padding-bottom: {{ section.settings.padding_bottom }}px;{% endif %}"
+  >
     <header class="move-pricing-table__header {{ section.settings.heading_alignment }}">
       {%- if section.settings.heading != blank -%}
         <h2 class="h2">{{ section.settings.heading }}</h2>
@@ -178,6 +181,26 @@
       "default": "surface"
     },
     {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding override",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding override",
+      "default": 0
+    },
+    {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
@@ -246,7 +269,7 @@
           "type": "text",
           "id": "primary_cta_label",
           "label": "Primary CTA label",
-          "default": "Start nå"
+          "default": "Start din dag én"
         },
         {
           "type": "url",
