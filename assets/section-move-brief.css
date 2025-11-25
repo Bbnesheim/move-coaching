@@ -1,0 +1,85 @@
+.move-brief {
+  position: relative;
+}
+
+.section.move-brief {
+  padding: 0;
+}
+
+.move-brief__inner {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  display: flex;
+}
+
+.move-brief__inner--left {
+  justify-content: flex-start;
+}
+
+.move-brief__inner--center {
+  justify-content: center;
+}
+
+.move-brief__inner--right {
+  justify-content: flex-end;
+}
+
+.move-brief__card {
+  background: #ffffff;
+  border-radius: var(--radius-md, 8px);
+  padding: 2.4rem 2.8rem;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.06);
+  width: 50vw;
+  max-width: 620px;
+}
+
+@media screen and (max-width: 1023px) {
+  .move-brief__card {
+    width: 70vw;
+    max-width: none;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .move-brief__card {
+    width: 100%;
+    padding: 1.8rem 1.6rem;
+  }
+}
+
+.move-brief__heading {
+  margin-bottom: 1.6rem;
+}
+
+.move-brief__body {
+  max-width: 46rem;
+}
+
+/* Text alignment variants applied via schema */
+.move-brief__card--left {
+  text-align: left;
+}
+
+.move-brief__card--center {
+  text-align: center;
+}
+
+.move-brief__card--right {
+  text-align: right;
+}
+
+/* Ensure the text block width aligns with the chosen text alignment */
+.move-brief__card--left .move-brief__body {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.move-brief__card--center .move-brief__body {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.move-brief__card--right .move-brief__body {
+  margin-left: auto;
+  margin-right: 0;
+}

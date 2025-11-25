@@ -1,0 +1,127 @@
+.move-hero {
+  position: relative;
+  min-height: calc(100vh - var(--header-height, 80px));
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.move-hero .page-width {
+  max-width: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.move-hero__inner {
+  display: grid;
+  gap: var(--space-xl, 3rem);
+  align-items: center;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.move-hero__content {
+  position: relative;
+  z-index: 2;
+}
+
+@media screen and (min-width: 750px) {
+  .move-hero__inner {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: flex-start;
+  }
+
+  .move-hero__inner--text_left {
+    justify-items: flex-start;
+    text-align: left;
+  }
+
+  .move-hero__inner--text_right {
+    justify-items: flex-end;
+    text-align: right;
+  }
+}
+
+.move-hero__badge {
+  margin-bottom: 1.2rem;
+}
+
+.move-hero__headline-layer {
+  position: relative;
+  max-width: 36rem;
+}
+
+.move-hero__headline-layer--on_image .move-hero__heading,
+.move-hero__headline-layer--on_image .move-hero__subheading {
+  color: #ffffff;
+}
+
+.move-hero__headline-layer--on_background .move-hero__heading,
+.move-hero__headline-layer--on_background .move-hero__subheading {
+  color: var(--color-move-pink, #f47da5);
+}
+
+.move-hero__heading {
+  margin-bottom: 1.6rem;
+}
+
+.move-hero__subheading {
+  margin-bottom: 2.4rem;
+}
+
+.move-hero__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.move-hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.move-hero__bg-image {
+  width: 100%;
+  min-width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.move-hero__media {
+  position: absolute;
+  right: max(5vw, 40px);
+  bottom: max(8vh, 40px);
+  width: min(var(--move-hero-overlay-width, 32vw), 520px);
+  z-index: 3;
+}
+
+.move-hero__media-inner {
+  border-radius: var(--radius-md, 8px);
+  overflow: hidden;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+}
+
+.move-hero__media-inner--secondary {
+  width: 100%;
+}
+
+@media screen and (max-width: 749px) {
+  .move-hero__media {
+    position: static;
+    margin-top: 2.4rem;
+    width: min(82vw, 420px);
+    justify-self: flex-end;
+  }
+}
+
+.move-hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

@@ -1,0 +1,175 @@
+{{ 'section-move-cta-strip.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign bg_class = ''
+  case section.settings.background_variant
+    when 'default'
+      assign bg_class = 'move-bg-default'
+    when 'cream'
+      assign bg_class = 'move-bg-cream'
+    when 'surface'
+      assign bg_class = 'move-bg-surface'
+    when 'brown'
+      assign bg_class = 'move-bg-brown'
+    when 'pink'
+      assign bg_class = 'move-bg-pink'
+  endcase
+-%}
+
+<section
+  id="MoveCtaStrip-{{ section.id }}"
+  class="section move-cta-strip {{ bg_class }} color-{{ section.settings.color_scheme }} gradient{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+>
+  <div
+    class="page-width move-section-padding"
+    style="{% if section.settings.padding_top > 0 %}padding-top: {{ section.settings.padding_top }}px;{% endif %}{% if section.settings.padding_bottom > 0 %} padding-bottom: {{ section.settings.padding_bottom }}px;{% endif %}"
+  >
+    <div class="move-cta-strip__inner move-cta-strip__inner--{{ section.settings.align }}">
+      <div class="move-cta-strip__text">
+        {%- if section.settings.icon != blank -%}
+          <div class="move-cta-strip__icon media media--circle">
+            {{ section.settings.icon | image_url: width: 80 | image_tag: widths: '40, 60, 80', class: 'move-cta-strip__icon-image' }}
+          </div>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="h3">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.body != blank -%}
+          <p class="text-body">{{ section.settings.body }}</p>
+        {%- endif -%}
+      </div>
+      <div class="move-cta-strip__buttons">
+        {%- if section.settings.primary_cta_label != blank -%}
+          <a
+            {% if section.settings.primary_cta_link == blank %}
+              role="link" aria-disabled="true"
+            {% else %}
+              href="{{ section.settings.primary_cta_link }}"
+            {% endif %}
+            class="button button--primary"
+          >
+            {{- section.settings.primary_cta_label | escape -}}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.secondary_cta_label != blank -%}
+          <a
+            {% if section.settings.secondary_cta_link == blank %}
+              role="link" aria-disabled="true"
+            {% else %}
+              href="{{ section.settings.secondary_cta_link }}"
+            {% endif %}
+            class="button button--secondary"
+          >
+            {{- section.settings.secondary_cta_label | escape -}}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MOVE CTA strip",
+  "tag": "section",
+  "class": "section move-cta-strip",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Klar for å starte din dag én?"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "Start din dag én med et løp som passer din hverdag – uten forpliktelse før du er klar."
+    },
+    {
+      "type": "image_picker",
+      "id": "icon",
+      "label": "Icon image"
+    },
+    {
+      "type": "text",
+      "id": "primary_cta_label",
+      "label": "Primary CTA label",
+      "default": "Start din dag én"
+    },
+    {
+      "type": "url",
+      "id": "primary_cta_link",
+      "label": "Primary CTA link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_cta_label",
+      "label": "Secondary CTA label"
+    },
+    {
+      "type": "url",
+      "id": "secondary_cta_link",
+      "label": "Secondary CTA link"
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignment",
+      "options": [
+        { "value": "center", "label": "Center" },
+        { "value": "left", "label": "Left" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "background_variant",
+      "label": "Background",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "cream", "label": "Cream" },
+        { "value": "surface", "label": "Surface" },
+        { "value": "brown", "label": "Brown" },
+        { "value": "pink", "label": "Pink" }
+      ],
+      "default": "brown"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding override",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding override",
+      "default": 0
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "MOVE CTA strip",
+      "category": "MOVE"
+    }
+  ]
+}
+{% endschema %}

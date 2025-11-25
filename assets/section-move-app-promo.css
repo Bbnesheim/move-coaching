@@ -1,0 +1,53 @@
+.move-app-promo .page-width {
+  max-width: var(--page-width);
+}
+
+.move-app-promo__inner {
+  display: grid;
+  gap: 3rem;
+}
+
+@media screen and (min-width: 750px) {
+  .move-app-promo__inner {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    align-items: center;
+  }
+}
+
+.move-app-promo__body {
+  margin-top: 1.2rem;
+}
+
+.move-app-promo__bullets {
+  margin: 1.6rem 0 0;
+  padding-left: 1.6rem;
+}
+
+.move-app-promo__bullet + .move-app-promo__bullet {
+  margin-top: 0.4rem;
+}
+
+.move-app-promo__actions {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.move-app-promo__stores {
+  margin-top: 1.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.move-app-promo__screenshot {
+  border-radius: var(--radius-md, 8px);
+  overflow: hidden;
+}
+
+.move-app-promo__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

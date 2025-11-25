@@ -1,0 +1,228 @@
+{{ 'section-move-social-media.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign bg_class = ''
+  case section.settings.background_variant
+    when 'default'
+      assign bg_class = 'move-bg-default'
+    when 'cream'
+      assign bg_class = 'move-bg-cream'
+    when 'surface'
+      assign bg_class = 'move-bg-surface'
+    when 'brown'
+      assign bg_class = 'move-bg-brown'
+    when 'pink'
+      assign bg_class = 'move-bg-pink'
+  endcase
+-%}
+
+<section
+  id="MoveSocialMedia-{{ section.id }}"
+  class="section move-social-media {{ bg_class }} color-{{ section.settings.color_scheme }} gradient{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+>
+  <div
+    class="page-width move-section-padding"
+    style="{% if section.settings.padding_top > 0 %}padding-top: {{ section.settings.padding_top }}px;{% endif %}{% if section.settings.padding_bottom > 0 %} padding-bottom: {{ section.settings.padding_bottom }}px;{% endif %}"
+  >
+    <header class="move-social-media__header {{ section.settings.heading_alignment }}">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="h2">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.intro != blank -%}
+        <div class="move-social-media__intro text-body">{{ section.settings.intro }}</div>
+      {%- endif -%}
+    </header>
+
+    <div class="move-social-media__grid grid grid--2-col-tablet grid--1-col-tablet-down">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'profile' -%}
+          <article class="move-social-media__item grid__item" {{ block.shopify_attributes }}>
+            {%- if block.settings.avatar != blank -%}
+              <div class="move-social-media__avatar media media--circle">
+                {{ block.settings.avatar | image_url: width: 120 | image_tag: widths: '80, 120', class: 'move-social-media__avatar-image' }}
+              </div>
+            {%- endif -%}
+
+            <div class="move-social-media__body">
+              {%- if block.settings.label != blank -%}
+                <h3 class="h3 move-social-media__label">{{ block.settings.label }}</h3>
+              {%- endif -%}
+              <p class="move-social-media__meta text-body">
+                {%- if block.settings.platform != 'other' -%}
+                  <span class="move-social-media__platform">{{ block.settings.platform | capitalize }}</span>
+                {%- endif -%}
+                {%- if block.settings.handle != blank -%}
+                  <span class="move-social-media__handle">{{ block.settings.handle }}</span>
+                {%- endif -%}
+              </p>
+
+              {%- if block.settings.description != blank -%}
+                <p class="move-social-media__description text-body">{{ block.settings.description }}</p>
+              {%- endif -%}
+
+              {%- if block.settings.url != blank -%}
+                <a href="{{ block.settings.url }}" class="button button--secondary">
+                  {{ block.settings.cta_label | default: section.settings.default_cta_label | escape }}
+                </a>
+              {%- endif -%}
+            </div>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MOVE social media",
+  "tag": "section",
+  "class": "section move-social-media",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Følg oss i hverdagen"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro text",
+      "default": "Få et ærlig innblikk i hverdagen, mat, trening og små steg mot varig endring."
+    },
+    {
+      "type": "text",
+      "id": "default_cta_label",
+      "label": "Default CTA label",
+      "default": "Følg på Instagram"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "background_variant",
+      "label": "Background",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "cream", "label": "Cream" },
+        { "value": "surface", "label": "Surface" },
+        { "value": "brown", "label": "Brown" },
+        { "value": "pink", "label": "Pink" }
+      ],
+      "default": "surface"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding override",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding override",
+      "default": 0
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "profile",
+      "name": "Profile",
+      "settings": [
+        {
+          "type": "select",
+          "id": "profile_type",
+          "label": "Profile type",
+          "options": [
+            { "value": "aline", "label": "Aline" },
+            { "value": "move", "label": "MOVE Coaching" },
+            { "value": "other", "label": "Other" }
+          ],
+          "default": "aline"
+        },
+        {
+          "type": "select",
+          "id": "platform",
+          "label": "Platform",
+          "options": [
+            { "value": "instagram", "label": "Instagram" },
+            { "value": "tiktok", "label": "TikTok" },
+            { "value": "facebook", "label": "Facebook" },
+            { "value": "youtube", "label": "YouTube" },
+            { "value": "other", "label": "Other" }
+          ],
+          "default": "instagram"
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Avatar image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Display label",
+          "default": "Aline på Instagram"
+        },
+        {
+          "type": "text",
+          "id": "handle",
+          "label": "Handle",
+          "default": "@coach.alineskk"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Profile URL"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Short description",
+          "default": "Personlig innhold fra Aline – hverdagsliv, refleksjoner og små seire fra MOVE-familien."
+        },
+        {
+          "type": "text",
+          "id": "cta_label",
+          "label": "CTA label (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MOVE social media",
+      "category": "MOVE",
+      "blocks": [
+        { "type": "profile" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -257,3 +257,22 @@ Ensure forms are **double opt-in** if CRM/platform or local regulations require 
 - Structured Data: JSON-LD examples for services/programmes and blog posts.
 
 These artefacts satisfy the requirements defined for analytics and SEO in `PROMPT.md` at a specification level; theme implementation will follow this mapping.
+
+---
+
+## 6. Social Profiles & Linking
+
+Documented primary social profiles to be used for SEO (sameAs), footer links and CTA sections:
+
+- **Aline – Instagram**  
+  - Handle: `@coach.alineskk`  
+  - URL: https://www.instagram.com/coach.alineskk/
+  - Use in JSON-LD `sameAs` arrays for `Person` (Aline) where appropriate.
+
+- **MOVE Coaching – Social accounts**  
+  - Brand-specific handles/URLs to be confirmed with client (e.g., separate MOVE Instagram or TikTok).  
+  - Once agreed, add them here and to theme settings (e.g., social links in `settings_schema.json`).
+
+Implementation notes:
+- Add social profile URLs to global theme settings so footer/header and social sections can reference a single source of truth.
+- Where relevant, include `sameAs` arrays in JSON-LD for `Organization`/`Brand` using these URLs.

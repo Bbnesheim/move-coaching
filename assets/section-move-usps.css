@@ -1,0 +1,46 @@
+.move-usps .page-width {
+  max-width: var(--page-width);
+}
+
+.move-usps__header {
+  max-width: 56rem;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.move-usps__header.left {
+  text-align: left;
+  margin-left: 0;
+}
+
+.move-usps__intro {
+  margin-top: 1.2rem;
+}
+
+.move-usps__grid {
+  row-gap: var(--grid-mobile-vertical-spacing);
+}
+
+@media screen and (min-width: 750px) {
+  .move-usps__grid {
+    row-gap: var(--grid-desktop-vertical-spacing);
+  }
+}
+
+.move-usps__item {
+  padding: 2.4rem 2rem;
+  border-radius: var(--radius-md, 8px);
+  background-color: rgba(var(--color-background), 0.9);
+}
+
+.move-usps__icon {
+  margin-bottom: 1.2rem;
+}
+
+.move-usps__title {
+  margin-bottom: 0.8rem;
+}
+
+.move-usps__text {
+  margin: 0;
+}

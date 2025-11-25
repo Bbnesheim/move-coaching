@@ -45,8 +45,8 @@ From `tokens.json`:
 ### 2.1 Theme Settings
 
 Expose font selections in `settings_schema.json`:
-- `settings.font_heading_family` (text) → default to `"Playfair Display", "DM Serif Display", serif`
-- `settings.font_body_family` (text) → default to `"Inter", "Lato", "Open Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`
+- `settings.font_heading_family` (text) → default to `"Black Mango", serif`
+- `settings.font_body_family` (text) → default to `"Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`
 
 Optionally bind to Shopify font pickers if available; otherwise, treat as custom code + loaded web fonts.
 

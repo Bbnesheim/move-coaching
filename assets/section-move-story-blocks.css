@@ -1,0 +1,42 @@
+.move-story-blocks .page-width {
+  max-width: var(--page-width);
+}
+
+.move-story-blocks__header {
+  max-width: 56rem;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.move-story-blocks__grid {
+  display: grid;
+  gap: 2.4rem;
+}
+
+@media screen and (min-width: 750px) {
+  .move-story-blocks__grid--timeline {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.move-story-blocks__item {
+  padding: 2.4rem 2rem;
+  border-radius: var(--radius-md, 8px);
+  background-color: rgba(var(--color-background), 0.9);
+}
+
+.move-story-blocks__media {
+  margin-bottom: 1.4rem;
+}
+
+.move-story-blocks__title {
+  margin-bottom: 0.8rem;
+}
+
+.move-story-blocks__body {
+  margin-bottom: 0.8rem;
+}
+
+.move-story-blocks__quote {
+  font-style: italic;
+}

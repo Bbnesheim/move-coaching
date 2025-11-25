@@ -71,7 +71,7 @@ From the signed agreement and Vedlegg A:
 | Text Dark Grey | `#2F2E2B` |
 
 **Typography**  
-- Headings: Playfair Display / DM Serif Display  
+- Headings: Black Mango (display serif)  
 - Body: Inter / Lato / Open Sans  
 
 **Imagery**  

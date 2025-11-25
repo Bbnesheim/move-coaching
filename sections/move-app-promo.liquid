@@ -1,0 +1,241 @@
+{{ 'section-move-app-promo.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign bg_class = ''
+  case section.settings.background_variant
+    when 'default'
+      assign bg_class = 'move-bg-default'
+    when 'cream'
+      assign bg_class = 'move-bg-cream'
+    when 'surface'
+      assign bg_class = 'move-bg-surface'
+    when 'brown'
+      assign bg_class = 'move-bg-brown'
+    when 'pink'
+      assign bg_class = 'move-bg-pink'
+  endcase
+-%}
+
+<section
+  id="MoveAppPromo-{{ section.id }}"
+  class="section move-app-promo {{ bg_class }} color-{{ section.settings.color_scheme }} gradient{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+>
+  <div
+    class="page-width move-section-padding"
+    style="{% if section.settings.padding_top > 0 %}padding-top: {{ section.settings.padding_top }}px;{% endif %}{% if section.settings.padding_bottom > 0 %} padding-bottom: {{ section.settings.padding_bottom }}px;{% endif %}"
+  >
+    <div class="move-app-promo__inner">
+      <div class="move-app-promo__content">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="h2">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.body != blank -%}
+          <div class="move-app-promo__body text-body">{{ section.settings.body }}</div>
+        {%- endif -%}
+
+        <ul class="move-app-promo__bullets">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'bullet' and block.settings.text != blank -%}
+              <li class="move-app-promo__bullet" {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+
+        <div class="move-app-promo__actions">
+          {%- if section.settings.primary_cta_label != blank -%}
+            <a
+              {% if section.settings.primary_cta_link == blank %}
+                role="link" aria-disabled="true"
+              {% else %}
+                href="{{ section.settings.primary_cta_link }}"
+              {% endif %}
+              class="button button--primary"
+            >
+              {{- section.settings.primary_cta_label | escape -}}
+            </a>
+          {%- endif -%}
+
+          {%- if section.settings.secondary_cta_label != blank -%}
+            <a
+              {% if section.settings.secondary_cta_link == blank %}
+                role="link" aria-disabled="true"
+              {% else %}
+                href="{{ section.settings.secondary_cta_link }}"
+              {% endif %}
+              class="button button--secondary"
+            >
+              {{- section.settings.secondary_cta_label | escape -}}
+            </a>
+          {%- endif -%}
+        </div>
+
+        <div class="move-app-promo__stores">
+          {%- if section.settings.app_store_badge != blank -%}
+            <a
+              {% if section.settings.app_store_link != blank %}
+                href="{{ section.settings.app_store_link }}"
+              {% endif %}
+              class="move-app-promo__store-link"
+            >
+              {{ section.settings.app_store_badge | image_url: width: 180 | image_tag: widths: '120, 160, 180', class: 'move-app-promo__store-badge' }}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.play_store_badge != blank -%}
+            <a
+              {% if section.settings.play_store_link != blank %}
+                href="{{ section.settings.play_store_link }}"
+              {% endif %}
+              class="move-app-promo__store-link"
+            >
+              {{ section.settings.play_store_badge | image_url: width: 180 | image_tag: widths: '120, 160, 180', class: 'move-app-promo__store-badge' }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="move-app-promo__media">
+        {%- if section.settings.screenshot != blank -%}
+          <div class="move-app-promo__screenshot media media--portrait">
+            {{ section.settings.screenshot | image_url: width: 900 | image_tag: widths: '400, 600, 900', class: 'move-app-promo__image' }}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MOVE app promo",
+  "tag": "section",
+  "class": "section move-app-promo",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "MOVE-appen – verktøyet som følger deg i hverdagen"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "Planlegg menyen, få raske familievennlige oppskrifter, følg treningsøkter med video og hold oversikt – alt samlet i én app."
+    },
+    {
+      "type": "text",
+      "id": "primary_cta_label",
+      "label": "Primary CTA label",
+      "default": "Les mer om appen"
+    },
+    {
+      "type": "url",
+      "id": "primary_cta_link",
+      "label": "Primary CTA link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_cta_label",
+      "label": "Secondary CTA label",
+      "default": "Se programmer"
+    },
+    {
+      "type": "url",
+      "id": "secondary_cta_link",
+      "label": "Secondary CTA link"
+    },
+    {
+      "type": "image_picker",
+      "id": "screenshot",
+      "label": "App screenshot"
+    },
+    {
+      "type": "image_picker",
+      "id": "app_store_badge",
+      "label": "App Store badge image"
+    },
+    {
+      "type": "url",
+      "id": "app_store_link",
+      "label": "App Store link"
+    },
+    {
+      "type": "image_picker",
+      "id": "play_store_badge",
+      "label": "Google Play badge image"
+    },
+    {
+      "type": "url",
+      "id": "play_store_link",
+      "label": "Google Play link"
+    },
+    {
+      "type": "select",
+      "id": "background_variant",
+      "label": "Background",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "cream", "label": "Cream" },
+        { "value": "surface", "label": "Surface" },
+        { "value": "brown", "label": "Brown" },
+        { "value": "pink", "label": "Pink" }
+      ],
+      "default": "cream"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding override",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding override",
+      "default": 0
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bullet",
+      "name": "Bullet",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Bullet text",
+          "default": "Menyplanlegging med familievennlige oppskrifter."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MOVE app promo",
+      "category": "MOVE",
+      "blocks": [
+        { "type": "bullet" },
+        { "type": "bullet" },
+        { "type": "bullet" }
+      ]
+    }
+  ]
+}
+{% endschema %}

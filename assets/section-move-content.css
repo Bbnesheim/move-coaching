@@ -1,0 +1,23 @@
+.move-content .page-width {
+  max-width: var(--page-width);
+}
+
+.move-content__inner {
+  margin: 0 auto;
+}
+
+.move-content__inner--narrow {
+  max-width: 48rem;
+}
+
+.move-content__inner--default {
+  max-width: 64rem;
+}
+
+.move-content__inner--wide {
+  max-width: 80rem;
+}
+
+.move-content__body {
+  margin-top: 1.2rem;
+}

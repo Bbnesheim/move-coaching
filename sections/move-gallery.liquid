@@ -1,0 +1,167 @@
+{{ 'section-move-gallery.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign bg_class = ''
+  case section.settings.background_variant
+    when 'default'
+      assign bg_class = 'move-bg-default'
+    when 'cream'
+      assign bg_class = 'move-bg-cream'
+    when 'surface'
+      assign bg_class = 'move-bg-surface'
+    when 'brown'
+      assign bg_class = 'move-bg-brown'
+    when 'pink'
+      assign bg_class = 'move-bg-pink'
+  endcase
+-%}
+
+<section
+  id="MoveGallery-{{ section.id }}"
+  class="section move-gallery {{ bg_class }} color-{{ section.settings.color_scheme }} gradient{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+>
+  <div
+    class="page-width move-section-padding"
+    style="{% if section.settings.padding_top > 0 %}padding-top: {{ section.settings.padding_top }}px;{% endif %}{% if section.settings.padding_bottom > 0 %} padding-bottom: {{ section.settings.padding_bottom }}px;{% endif %}"
+  >
+    {%- if section.settings.heading != blank -%}
+      <div class="move-gallery__header {{ section.settings.heading_alignment }}">
+        <h2 class="h2">{{ section.settings.heading }}</h2>
+      </div>
+    {%- endif -%}
+
+    <div class="move-gallery__grid grid grid--3-col-desktop grid--2-col-tablet grid--1-col-tablet-down">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'image' -%}
+          <figure class="move-gallery__item grid__item" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <div class="move-gallery__media media media--square">
+                {{ block.settings.image | image_url: width: 900 | image_tag: widths: '400, 600, 900', class: 'move-gallery__image' }}
+              </div>
+            {%- endif -%}
+            {%- if section.settings.display_captions -%}
+              {%- if block.settings.caption != blank or block.settings.tag != blank -%}
+                <figcaption class="move-gallery__caption">
+                  {%- if block.settings.tag != blank -%}
+                    <span class="move-gallery__tag caption-with-letter-spacing">{{ block.settings.tag }}</span>
+                  {%- endif -%}
+                  {%- if block.settings.caption != blank -%}
+                    <span class="move-gallery__caption-text">{{ block.settings.caption }}</span>
+                  {%- endif -%}
+                </figcaption>
+              {%- endif -%}
+            {%- endif -%}
+          </figure>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MOVE gallery",
+  "tag": "section",
+  "class": "section move-gallery",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Før, etter og glimt fra hverdagen"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_captions",
+      "label": "Display captions",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "background_variant",
+      "label": "Background",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "cream", "label": "Cream" },
+        { "value": "surface", "label": "Surface" },
+        { "value": "brown", "label": "Brown" },
+        { "value": "pink", "label": "Pink" }
+      ],
+      "default": "surface"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding override",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding override",
+      "default": 0
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag (e.g. Før / Etter)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MOVE gallery",
+      "category": "MOVE",
+      "blocks": [
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" }
+      ]
+    }
+  ]
+}
+{% endschema %}
