@@ -1,25 +1,31 @@
 class MoveTestimonialsScroller {
   constructor(section) {
     this.section = section;
-    this.rows = Array.from(
-      section.querySelectorAll('.move-testimonials__row--testimonials')
-    );
+    this.track = section.querySelector('.move-testimonials__grid');
+    this.arrow = section.querySelector('.move-testimonials__arrow');
 
-    if (!this.rows.length) return;
+    if (!this.track || !this.arrow) return;
 
-    this.rows.forEach((row) => this.randomizeItems(row));
+    this.arrow.addEventListener('click', () => this.scrollNext());
   }
 
-  randomizeItems(track) {
-    const items = Array.from(track.children);
-    if (items.length <= 1) return;
+  scrollNext() {
+    if (!this.track) return;
 
-    const shuffled = items
-      .map((item) => ({ item, sort: Math.random() }))
-      .sort((a, b) => a.sort - b.sort)
-      .map(({ item }) => item);
+    const firstItem = this.track.querySelector('.move-testimonials__item');
+    const itemWidth = firstItem
+      ? firstItem.getBoundingClientRect().width
+      : 320;
 
-    shuffled.forEach((item) => this.track.appendChild(item));
+    const gap = parseFloat(
+      getComputedStyle(this.track).columnGap ||
+        getComputedStyle(this.track).gap ||
+        24
+    );
+
+    const delta = itemWidth + gap;
+
+    this.track.scrollBy({ left: delta, behavior: 'smooth' });
   }
 }
 
