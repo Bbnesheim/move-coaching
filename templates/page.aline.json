@@ -1,0 +1,89 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "move_hero_YaJyLd": {
+      "type": "move-hero",
+      "name": "MOVE hero",
+      "settings": {
+        "heading": "Langsiktig livsstilsendring med støtte hele veien",
+        "subheading": "Coaching, app og støtte som faktisk passer inn i tidsklemma.",
+        "badge_text": "6, 9 eller 12 måneder – du velger tempoet.",
+        "primary_cta_label": "Start din dag én",
+        "primary_cta_link": "",
+        "secondary_cta_label": "Ta quizen først",
+        "secondary_cta_link": "",
+        "image_aspect_ratio": "portrait",
+        "layout": "text_left",
+        "headline_style": "on_image",
+        "background_variant": "cream",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "color_scheme": ""
+      }
+    },
+    "move_story_blocks_hRkMie": {
+      "type": "move-story-blocks",
+      "blocks": {
+        "story_HaJLd8": {
+          "type": "story",
+          "settings": {
+            "title": "Hvor hun startet",
+            "body": "Aline startet sin egen reise i 2011, med mange av de samme utfordringene som hennes kunder står i i dag. Hun har kjent på hvordan det er å kjempe med overvekt, trøstespising, overspising og å finne seg selv igjen etter å ha blitt mamma.",
+            "emphasis_quote": "Hun har gått veien selv – og vet hvordan det føles."
+          }
+        },
+        "story_CfRtXN": {
+          "type": "story",
+          "settings": {
+            "title": "Fra egen kamp til MOVE",
+            "body": "Erfaringene fra hennes egen livsstilsendring gjorde henne trygg på at det måtte finnes en bedre, mer ærlig og bærekraftig måte å hjelpe andre på. Det ble starten på MOVE – et program skapt for kvinner som kjenner seg igjen i Aline sin historie, og som trenger støtte, struktur og en som forstår.",
+            "emphasis_quote": "MOVE ble skapt for alle som føler at de står fast – slik Aline en gang gjorde."
+          }
+        },
+        "story_WBfz4d": {
+          "type": "story",
+          "settings": {
+            "title": "I dag: coach, mamma og grunnlegger",
+            "body": "I dag er Aline tobarnsmamma, fitnessutøver, sertifisert personlig trener og kostholdsveileder. Hun kombinerer fagkunnskap med egne erfaringer, og er opptatt av helhetlig livsstilsendring – ikke quick-fix. Med en ærlig, motiverende og støttende tilnærming hjelper hun kvinner med å bygge selvtillit, finne treningsglede og skape en hverdag de trives i.",
+            "emphasis_quote": "For Aline handler det ikke bare om trening og mat – men om å bli sterkere i hele livet."
+          }
+        }
+      },
+      "block_order": [
+        "story_HaJLd8",
+        "story_CfRtXN",
+        "story_WBfz4d"
+      ],
+      "name": "MOVE story blocks",
+      "settings": {
+        "heading": "Aline sin reise – fra tidsklemma til MOVE Coaching",
+        "layout": "stacked",
+        "background_variant": "cream",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "color_scheme": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "move_hero_YaJyLd",
+    "move_story_blocks_hRkMie"
+  ]
+}
