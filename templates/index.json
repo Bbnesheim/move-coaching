@@ -42,35 +42,6 @@
         "text_alignment": "right"
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
-      "disabled": true,
-      "settings": {
-        "collection": "all",
-        "products_to_show": 8,
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 4,
-        "enable_desktop_slider": false,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "color_scheme": "scheme-1",
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 44,
-        "padding_bottom": 36
-      }
-    },
     "move_steps_FYE4Lf": {
       "type": "move-steps",
       "blocks": {
@@ -116,11 +87,88 @@
         "padding_bottom": 0,
         "color_scheme": ""
       }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "collection": "all",
+        "products_to_show": 8,
+        "title": "Featured products",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 44,
+        "padding_bottom": 36
+      }
+    },
+    "move_testimonials_hi4zgH": {
+      "type": "move-testimonials",
+      "blocks": {
+        "testimonial_MnxnWR": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Jeg trodde jeg måtte være perfekt for å lykkes. Nå har jeg funnet en måte å leve på som faktisk fungerer i hverdagen.",
+            "name": "Kunde, 2-barnsmor",
+            "role_or_context": "",
+            "before_after_label": ""
+          }
+        },
+        "testimonial_kpdXc3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Jeg trodde jeg måtte være perfekt for å lykkes. Nå har jeg funnet en måte å leve på som faktisk fungerer i hverdagen.",
+            "name": "Kunde, 2-barnsmor",
+            "role_or_context": "",
+            "before_after_label": ""
+          }
+        },
+        "testimonial_xwrq8Y": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Jeg trodde jeg måtte være perfekt for å lykkes. Nå har jeg funnet en måte å leve på som faktisk fungerer i hverdagen.",
+            "name": "Kunde, 2-barnsmor",
+            "role_or_context": "",
+            "before_after_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_MnxnWR",
+        "testimonial_kpdXc3",
+        "testimonial_xwrq8Y"
+      ],
+      "name": "MOVE testimonials",
+      "settings": {
+        "heading": "Dette sier kvinnene i MOVE Coaching",
+        "intro": "Les hvordan kvinner i MOVE Coaching beskriver hverdagen før og etter små, realistiske endringer.",
+        "heading_alignment": "center",
+        "background_variant": "surface",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "color_scheme": ""
+      }
     }
   },
   "order": [
     "move_hero_pb33Lr",
     "move_brief_qrBEqe",
+    "move_testimonials_hi4zgH",
     "move_steps_FYE4Lf",
     "featured_collection"
   ]
