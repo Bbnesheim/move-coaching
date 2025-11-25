@@ -1,0 +1,72 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "move_testimonials_gaTHCH": {
+      "type": "move-testimonials",
+      "blocks": {
+        "testimonial_DKEyM6": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Jeg trodde jeg måtte være perfekt for å lykkes. Nå har jeg funnet en måte å leve på som faktisk fungerer i hverdagen.",
+            "name": "Kunde, 2-barnsmor",
+            "role_or_context": "",
+            "before_after_label": ""
+          }
+        },
+        "testimonial_wECDDL": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Jeg trodde jeg måtte være perfekt for å lykkes. Nå har jeg funnet en måte å leve på som faktisk fungerer i hverdagen.",
+            "name": "Kunde, 2-barnsmor",
+            "role_or_context": "",
+            "before_after_label": ""
+          }
+        },
+        "testimonial_6FgiYN": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Jeg trodde jeg måtte være perfekt for å lykkes. Nå har jeg funnet en måte å leve på som faktisk fungerer i hverdagen.",
+            "name": "Kunde, 2-barnsmor",
+            "role_or_context": "",
+            "before_after_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_DKEyM6",
+        "testimonial_wECDDL",
+        "testimonial_6FgiYN"
+      ],
+      "name": "MOVE testimonials",
+      "settings": {
+        "heading": "Dette sier kvinnene i MOVE Coaching",
+        "intro": "Les hvordan kvinner i MOVE Coaching beskriver hverdagen før og etter små, realistiske endringer.",
+        "heading_alignment": "center",
+        "background_variant": "surface",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "color_scheme": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "move_testimonials_gaTHCH"
+  ]
+}
