@@ -9,6 +9,39 @@
  */
 {
   "sections": {
+    "move_hero_pb33Lr": {
+      "type": "move-hero",
+      "name": "MOVE hero",
+      "settings": {
+        "heading": "Langsiktig livsstilsendring med støtte hele veien",
+        "subheading": "Coaching, app og støtte som faktisk passer inn i tidsklemma.",
+        "badge_text": "6, 9 eller 12 måneder – du velger tempoet.",
+        "primary_cta_label": "Start din dag én",
+        "primary_cta_link": "",
+        "secondary_cta_label": "Ta quizen først",
+        "secondary_cta_link": "",
+        "image": "shopify://shop_images/hero1.webp",
+        "image_aspect_ratio": "portrait",
+        "layout": "text_left",
+        "headline_style": "on_image",
+        "background_variant": "cream",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "color_scheme": ""
+      }
+    },
+    "move_brief_qrBEqe": {
+      "type": "move-brief",
+      "name": "MOVE brief",
+      "settings": {
+        "heading": "Hva er MOVE Coaching?",
+        "body": "MOVE er skapt av Aline – tobarnsmamma, coach og grunnlegger – for kvinner som vil ha en ærlig, bærekraftig vei til en sunnere hverdag. Her får du coaching, struktur og støtte som faktisk passer inn i tidsklemma.",
+        "padding_top": 32,
+        "padding_bottom": 36,
+        "container_alignment": "center",
+        "text_alignment": "left"
+      }
+    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -39,6 +72,8 @@
     }
   },
   "order": [
+    "move_hero_pb33Lr",
+    "move_brief_qrBEqe",
     "featured_collection"
   ]
 }
