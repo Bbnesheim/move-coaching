@@ -92,10 +92,10 @@
         "intro": "Tre ulike løp – samme varme støtte. Velg 6, 9 eller 12 måneder avhengig av hvor mye tid du trenger til varig endring.",
         "highlight_plan_handle": "plan-12m",
         "show_monthly_price": true,
-        "heading_alignment": "center",
+        "heading_alignment": "left",
         "background_variant": "surface",
         "padding_top": 84,
-        "padding_bottom": 84,
+        "padding_bottom": 124,
         "color_scheme": ""
       }
     },
