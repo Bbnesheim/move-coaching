@@ -38,8 +38,8 @@
         "body": "MOVE er skapt av Aline – tobarnsmamma, coach og grunnlegger – for kvinner som vil ha en ærlig, bærekraftig vei til en sunnere hverdag. Her får du coaching, struktur og støtte som faktisk passer inn i tidsklemma.",
         "padding_top": 32,
         "padding_bottom": 36,
-        "container_alignment": "center",
-        "text_alignment": "left"
+        "container_alignment": "right",
+        "text_alignment": "right"
       }
     },
     "featured_collection": {
@@ -69,11 +69,56 @@
         "padding_top": 44,
         "padding_bottom": 36
       }
+    },
+    "move_steps_FYE4Lf": {
+      "type": "move-steps",
+      "blocks": {
+        "step_CGMLWH": {
+          "type": "step",
+          "settings": {
+            "step_label": "1",
+            "icon": "shopify://shop_images/aline_24.webp",
+            "title": "Start med en uforpliktende samtale",
+            "description": "Vi blir kjent med deg, hverdagen din og hva du ønsker å få til – helt uten forpliktelser."
+          }
+        },
+        "step_xN4TwJ": {
+          "type": "step",
+          "settings": {
+            "step_label": "2",
+            "title": "Få et personlig MOVE-opplegg",
+            "description": "Du og coachen din lager en plan over 6, 9 eller 12 måneder som passer din hverdag."
+          }
+        },
+        "step_hQWdjx": {
+          "type": "step",
+          "settings": {
+            "step_label": "3",
+            "title": "Små steg – store endringer",
+            "description": "Du får tett oppfølging, verktøy og støtte underveis, slik at nye vaner faktisk blir en del av livet ditt."
+          }
+        }
+      },
+      "block_order": [
+        "step_CGMLWH",
+        "step_xN4TwJ",
+        "step_hQWdjx"
+      ],
+      "name": "MOVE steps",
+      "settings": {
+        "heading": "Slik fungerer det",
+        "intro": "En enkel, trygg prosess fra første steg til nye vaner i hverdagen.",
+        "background_variant": "surface",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "color_scheme": ""
+      }
     }
   },
   "order": [
     "move_hero_pb33Lr",
     "move_brief_qrBEqe",
-    "featured_collection"
+    "featured_collection",
+    "move_steps_FYE4Lf"
   ]
 }
