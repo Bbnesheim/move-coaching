@@ -1,0 +1,92 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "move_pricing_table_UcYbfa": {
+      "type": "move-pricing-table",
+      "blocks": {
+        "plan_twjeeF": {
+          "type": "plan",
+          "settings": {
+            "plan_handle": "",
+            "plan_name": "12 måneder – Full livsstilsendring",
+            "duration_label": "12 måneder",
+            "price_per_month": "2 490 kr",
+            "total_price": "Totalt 12 måneder – første måned gratis + 1 ekstra måned",
+            "badge": "Mest populær",
+            "description": "Perfekt for deg som vil ha tydelig struktur, tett oppfølging og rom til å gjøre endring i ditt tempo.",
+            "benefits": "Ukentlig oppfølging\nTilgang til MOVE-appen\nTilpasset kost og trening",
+            "primary_cta_label": "Start din dag én",
+            "primary_cta_link": ""
+          }
+        },
+        "plan_yYqWyN": {
+          "type": "plan",
+          "settings": {
+            "plan_handle": "",
+            "plan_name": "12 måneder – Full livsstilsendring",
+            "duration_label": "12 måneder",
+            "price_per_month": "2 490 kr",
+            "total_price": "Totalt 12 måneder – første måned gratis + 1 ekstra måned",
+            "badge": "Mest populær",
+            "description": "Perfekt for deg som vil ha tydelig struktur, tett oppfølging og rom til å gjøre endring i ditt tempo.",
+            "benefits": "Ukentlig oppfølging\nTilgang til MOVE-appen\nTilpasset kost og trening",
+            "primary_cta_label": "Start din dag én",
+            "primary_cta_link": ""
+          }
+        },
+        "plan_brbzeY": {
+          "type": "plan",
+          "settings": {
+            "plan_handle": "",
+            "plan_name": "12 måneder – Full livsstilsendring",
+            "duration_label": "12 måneder",
+            "price_per_month": "2 490 kr",
+            "total_price": "Totalt 12 måneder – første måned gratis + 1 ekstra måned",
+            "badge": "Mest populær",
+            "description": "Perfekt for deg som vil ha tydelig struktur, tett oppfølging og rom til å gjøre endring i ditt tempo.",
+            "benefits": "Ukentlig oppfølging\nTilgang til MOVE-appen\nTilpasset kost og trening",
+            "primary_cta_label": "Start din dag én",
+            "primary_cta_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "plan_twjeeF",
+        "plan_yYqWyN",
+        "plan_brbzeY"
+      ],
+      "name": "MOVE pricing table",
+      "settings": {
+        "heading": "Velg et løp som passer din hverdag",
+        "intro": "Tre ulike løp – samme varme støtte. Velg 6, 9 eller 12 måneder avhengig av hvor mye tid du trenger til varig endring.",
+        "highlight_plan_handle": "plan-12m",
+        "show_monthly_price": true,
+        "heading_alignment": "center",
+        "background_variant": "surface",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "color_scheme": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "move_pricing_table_UcYbfa"
+  ]
+}
