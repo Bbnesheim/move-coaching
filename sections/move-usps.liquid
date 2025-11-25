@@ -24,39 +24,54 @@
     class="page-width move-section-padding"
     style="{% if section.settings.padding_top > 0 %}padding-top: {{ section.settings.padding_top }}px;{% endif %}{% if section.settings.padding_bottom > 0 %} padding-bottom: {{ section.settings.padding_bottom }}px;{% endif %}"
   >
-    <header class="move-usps__header {{ section.settings.heading_alignment }}">
-      {%- if section.settings.heading != blank -%}
-        <h2 class="h2">{{ section.settings.heading }}</h2>
-      {%- endif -%}
-      {%- if section.settings.intro != blank -%}
-        <div class="move-usps__intro text-body">
-          {{ section.settings.intro }}
+    <div class="move-usps__layout">
+      <div class="move-usps__column move-usps__column--left">
+        <div class="move-usps__accordion">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'usp' -%}
+              {%- liquid
+                assign color_index = forloop.index0 | modulo: 3
+                assign color_class = 'move-usps__item--white'
+                if color_index == 1
+                  assign color_class = 'move-usps__item--pink'
+                elsif color_index == 2
+                  assign color_class = 'move-usps__item--brown'
+                endif
+              -%}
+              <article class="move-usps__item {{ color_class }}" {{ block.shopify_attributes }}>
+                {%- if block.settings.icon != blank -%}
+                  <div class="move-usps__icon">
+                    {{ block.settings.icon | image_url: width: 96 | image_tag: widths: '48, 64, 96', class: 'move-usps__icon-image' }}
+                  </div>
+                {%- endif -%}
+
+                {%- if block.settings.title != blank -%}
+                  <h3 class="h3 move-usps__title">{{ block.settings.title }}</h3>
+                {%- endif -%}
+
+                {%- if block.settings.text != blank -%}
+                  <p class="move-usps__text text-body">{{ block.settings.text }}</p>
+                {%- endif -%}
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
         </div>
-      {%- endif -%}
-    </header>
+      </div>
 
-    <div
-      class="move-usps__grid grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--2-col-tablet grid--1-col-tablet-down"
-    >
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'usp' -%}
-          <article class="move-usps__item grid__item" {{ block.shopify_attributes }}>
-            {%- if block.settings.icon != blank -%}
-              <div class="move-usps__icon">
-                {{ block.settings.icon | image_url: width: 96 | image_tag: widths: '48, 64, 96', class: 'move-usps__icon-image' }}
-              </div>
-            {%- endif -%}
-
-            {%- if block.settings.title != blank -%}
-              <h3 class="h3 move-usps__title">{{ block.settings.title }}</h3>
-            {%- endif -%}
-
-            {%- if block.settings.text != blank -%}
-              <p class="move-usps__text text-body">{{ block.settings.text }}</p>
-            {%- endif -%}
-          </article>
+      <div class="move-usps__column move-usps__column--right">
+        {%- if section.settings.side_image != blank -%}
+          <div class="move-usps__image-wrapper">
+            {{
+              section.settings.side_image
+              | image_url: width: 1600
+              | image_tag:
+                widths: '800, 1200, 1600',
+                sizes: '50vw',
+                class: 'move-usps__image'
+            }}
+          </div>
         {%- endif -%}
-      {%- endfor -%}
+      </div>
     </div>
   </div>
 </section>
@@ -81,6 +96,11 @@
       "id": "intro",
       "label": "Intro text",
       "default": "Langsiktig coaching, varm støtte og en app som er laget for hverdagen – ikke for raske quick fixes."
+    },
+    {
+      "type": "image_picker",
+      "id": "side_image",
+      "label": "Right column image"
     },
     {
       "type": "select",
