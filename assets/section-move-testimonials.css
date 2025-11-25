@@ -259,7 +259,7 @@
 .move-testimonials--scroller .move-testimonials__grid {
   display: flex;
   flex-wrap: nowrap;
-  align-items: stretch; /* every block matches the scroller height */
+  align-items: flex-start; /* each card keeps intrinsic height, aligned to the top */
   column-gap: var(--grid-mobile-horizontal-spacing, 1.6rem);
   overflow-x: auto;
   padding-bottom: 1.2rem;
@@ -281,18 +281,19 @@
 .move-testimonials--scroller .move-testimonials__item {
   flex: 0 0 auto; /* width is intrinsic based on content */
   scroll-snap-align: start;
-  display: flex; /* let each block fill height and control its own vertical alignment */
+  display: flex; /* let each block control its own vertical alignment */
   flex-direction: column;
-  height: 100%;
 }
 
-/* Image blocks: content sits toward the top, with room below */
+/* Image blocks: card container uses top baseline, content sits toward the top of the card */
 .move-testimonials--scroller .move-testimonials__item--image {
+  align-self: flex-start; /* top baseline */
   justify-content: flex-start;
 }
 
-/* Testimonial cards: content sits toward the bottom, with room above */
+/* Testimonial cards: card container uses bottom baseline, content aligned to the bottom of each card */
 .move-testimonials--scroller .move-testimonials__item--quote {
+  align-self: flex-end; /* bottom baseline */
   justify-content: flex-end;
 }
 
