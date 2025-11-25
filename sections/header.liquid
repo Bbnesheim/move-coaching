@@ -77,18 +77,41 @@
 </style>
 
 {%- style -%}
+  /* Make header visually blend with the hero/background */
+  .header-wrapper {
+    background-color: transparent;
+    background-image: none;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .header-wrapper--border-bottom {
+    border-bottom: none;
+  }
+
   .header {
     padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 3rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 3rem;
   }
 
   .section-header {
-    position: sticky; /* This is for fixing a Safari z-index issue. PR #2147 */
-    margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px;
+    /* Default sticky behavior for non-hero templates */
+    position: sticky; /* Safari z-index fix (PR #2147) */
+    margin-bottom: 0;
+  }
+
+  /* On the home template, float the header over the hero so text hovers on the image */
+  .template-index .section-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-bottom: 0;
+    z-index: 5;
   }
 
   @media screen and (min-width: 750px) {
     .section-header {
-      margin-bottom: {{ section.settings.margin_bottom }}px;
+      margin-bottom: 0;
     }
   }
 
@@ -96,6 +119,32 @@
     .header {
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
+      /* Desktop layout: icons on the left, logo in the middle, nav on the right */
+      grid-template-areas: 'icons heading navigation';
+      grid-template-columns: auto 1fr auto;
+      column-gap: 2rem;
+    }
+
+    .header__icons {
+      justify-self: start;
+      padding-right: 0;
+    }
+
+    .header__inline-menu {
+      justify-self: end;
+      margin-left: 0;
+    }
+
+    /* On the home template, stack nav items in a vertical column at the right edge */
+    .template-index .header__inline-menu > .list-menu--inline {
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: flex-start;
+      gap: 0.4rem;
+    }
+
+    .template-index .header__inline-menu .list-menu__item {
+      justify-content: flex-end;
     }
   }
 {%- endstyle -%}
@@ -142,8 +191,8 @@
         render 'header-drawer'
       endif
 
-      if section.settings.logo_position == 'top-center' or section.settings.menu == blank
-        render 'header-search', input_id: 'Search-In-Modal-1'
+      if false
+        echo ''
       endif
     -%}
 
@@ -247,7 +296,6 @@
           </localization-form>
         {%- endif -%}
       </div>
-      {% render 'header-search', input_id: 'Search-In-Modal' %}
 
       {%- if shop.customer_accounts_enabled -%}
         <a
