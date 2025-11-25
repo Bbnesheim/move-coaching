@@ -189,7 +189,7 @@
   padding: 2rem 0;
   margin-bottom: 3.2rem;
   position: relative;
-  z-index: 3; /* above image/overlay */
+  z-index: 5; /* sit above hero overlay and nav overlay background */
 }
 
 .move-hero__logo-image {
@@ -204,6 +204,13 @@
   display: inline-block;
   position: relative;
   overflow: hidden; /* contain the gradient swoosh */
+}
+
+/* Ensure logo + hamburger/X always sit above the overlay background */
+.move-hero__logo,
+.move-hero__menu-toggle {
+  position: relative;
+  z-index: 6;
 }
 
 /* Subtle scale on hover */
@@ -222,7 +229,9 @@
 }
 
 /* Desktop: stack nav links vertically at the top-right corner */
-@media screen and (min-width: 990px) {
+/* Desktop / large screens: stack nav links vertically at the top-right corner.
+   We keep this layout down to 955px where we switch to a hamburger overlay. */
+@media screen and (min-width: 955px) {
   .move-hero__nav-menu {
     margin-left: auto;
     text-align: right;
@@ -235,6 +244,7 @@
   }
 }
 
+/* Base link styling shared by inline and overlay menus */
 .move-hero__nav-link {
   text-decoration: none;
   font-size: 1.4rem;
@@ -268,6 +278,114 @@
   background-position: 100% 0; /* sweep gradient across text */
   -webkit-text-fill-color: transparent;
   color: transparent;
+}
+
+/* Hamburger toggle button (shown below 955px) */
+.move-hero__menu-toggle {
+  display: none; /* shown via media query on small screens */
+  margin-left: auto;
+  padding: 0.8rem 0.4rem; /* taller touch target */
+  border: 0;
+  background: transparent; /* remove pill/circle, just lines */
+  cursor: pointer;
+  line-height: 0;
+}
+
+.move-hero__menu-toggle:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+.move-hero__menu-toggle-icon {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px; /* a bit more separation between lines */
+}
+
+.move-hero__menu-toggle-icon span {
+  display: block;
+  width: 22px;   /* larger hamburger */
+  height: 3px;
+  border-radius: 999px;
+  background: #ffffff;
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+  transform-origin: center;
+}
+
+/* Animate hamburger into an X when nav is open */
+.move-hero__nav--open .move-hero__menu-toggle-icon span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.move-hero__nav--open .move-hero__menu-toggle-icon span:nth-child(2) {
+  opacity: 0;
+}
+
+.move-hero__nav--open .move-hero__menu-toggle-icon span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Fullscreen overlay for hero nav on small screens */
+.move-hero__nav-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 4; /* below nav bar (5) but above hero background */
+  display: flex;
+  align-items: flex-end; /* anchor menu block toward the bottom of the viewport */
+  justify-content: flex-end; /* push menu block to the right edge */
+  padding-right: 3.2rem; /* breathing room from right screen edge */
+  padding-bottom: 25vh; /* position menu roughly in the bottom third of the screen */
+  background: rgba(13, 7, 3, 0.92); /* deep brown overlay */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-short, 180ms) var(--ease-out-slow, ease-out);
+}
+
+.move-hero__nav--open .move-hero__nav-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Prevent background scroll when hero overlay menu is open */
+html.move-hero-nav-open {
+  overflow: hidden;
+}
+
+/* Overlay menu layout: right-aligned column of links */
+.move-hero__nav-menu--overlay .move-hero__nav-list {
+  flex-direction: column;
+  align-items: flex-end; /* align items to the right margin */
+  gap: 2.2rem;
+}
+
+.move-hero__nav-menu--overlay .move-hero__nav-link {
+  font-size: 1.6rem;
+  text-align: right;
+}
+
+/* Breakpoint behavior: below 955px, hide inline column menu and show hamburger */
+@media screen and (max-width: 954px) {
+  .move-hero__nav-menu--inline {
+    display: none;
+  }
+
+  .move-hero__menu-toggle {
+    display: inline-flex;
+  }
+
+  /* Slightly reduce logo size on mobile to make room for hamburger */
+  .move-hero__logo-image {
+    width: 88%;
+  }
+}
+
+/* On larger screens, never show the overlay (even if JS toggles classes) */
+@media screen and (min-width: 955px) {
+  .move-hero__nav-overlay {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 749px) {

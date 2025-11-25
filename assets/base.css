@@ -2316,6 +2316,10 @@ input[type='checkbox'] {
   margin: 0;
   letter-spacing: 0.1rem;
   min-height: 3.8rem;
+  font-family: var(--font-body-family);
+  font-style: var(--font-body-style);
+  font-weight: var(--font-body-weight);
+  font-size: 0.9rem;
 }
 
 .announcement-bar-slider--fade-in-next .announcement-bar__message,

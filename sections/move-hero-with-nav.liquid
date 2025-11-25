@@ -44,7 +44,7 @@
     style="{% if section.settings.padding_top > 0 %}padding-top: {{ section.settings.padding_top }}px;{% endif %}{% if section.settings.padding_bottom > 0 %} padding-bottom: {{ section.settings.padding_bottom }}px;{% endif %}"
   >
     <!-- MOVE hero navigation merged into hero image -->
-    <div class="move-hero__nav">
+    <div class="move-hero__nav" data-move-hero-nav>
       <a href="{{ routes.root_url }}" class="move-hero__logo" style="max-width: {{ settings.logo_width }}px;">
         {%- if settings.logo != blank -%}
           {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
@@ -68,7 +68,8 @@
       </a>
 
       {%- if section.settings.nav_menu != blank -%}
-        <nav class="move-hero__nav-menu" aria-label="Hovedmeny">
+        <!-- Inline column menu for >= 955px -->
+        <nav class="move-hero__nav-menu move-hero__nav-menu--inline" aria-label="Hovedmeny">
           <ul class="move-hero__nav-list" role="list">
             {%- for link in section.settings.nav_menu.links -%}
               <li>
@@ -82,6 +83,38 @@
             {%- endfor -%}
           </ul>
         </nav>
+
+        <!-- Hamburger toggle + overlay menu for < 955px -->
+        <button
+          class="move-hero__menu-toggle"
+          type="button"
+          aria-label="Åpne meny"
+          aria-expanded="false"
+          aria-controls="MoveHeroNavOverlay-{{ section.id }}"
+        >
+          <span class="move-hero__menu-toggle-icon" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+
+        <div class="move-hero__nav-overlay" id="MoveHeroNavOverlay-{{ section.id }}" aria-hidden="true">
+          <nav class="move-hero__nav-menu move-hero__nav-menu--overlay" aria-label="Hovedmeny">
+            <ul class="move-hero__nav-list" role="list">
+              {%- for link in section.settings.nav_menu.links -%}
+                <li>
+                  <a
+                    href="{{ link.url }}"
+                    class="move-hero__nav-link{% if link.current %} move-hero__nav-link--active{% endif %}"
+                  >
+                    {{ link.title | escape }}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </nav>
+        </div>
       {%- endif -%}
     </div>
 
@@ -137,6 +170,86 @@
     </div>
   </div>
 </section>
+
+{% javascript %}
+  function initMoveHeroNav(section) {
+    const nav = section.querySelector('[data-move-hero-nav]');
+    if (!nav) return;
+
+    const toggle = nav.querySelector('.move-hero__menu-toggle');
+    const overlay = nav.querySelector('.move-hero__nav-overlay');
+    if (!toggle || !overlay) return;
+
+    const openClass = 'move-hero__nav--open';
+
+    const setState = (isOpen) => {
+      nav.classList.toggle(openClass, isOpen);
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      toggle.setAttribute('aria-label', isOpen ? 'Lukk meny' : 'Åpne meny');
+      overlay.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+
+      if (isOpen) {
+        document.documentElement.classList.add('move-hero-nav-open');
+      } else {
+        document.documentElement.classList.remove('move-hero-nav-open');
+      }
+    };
+
+    const close = () => {
+      if (!nav.classList.contains(openClass)) return;
+      setState(false);
+    };
+
+    const handleToggleClick = () => {
+      const isOpen = !nav.classList.contains(openClass);
+      setState(isOpen);
+    };
+
+    toggle.addEventListener('click', handleToggleClick);
+
+    overlay.addEventListener('click', (event) => {
+      if (event.target === overlay) {
+        close();
+      }
+    });
+
+    const handleKeydown = (event) => {
+      if (event.key === 'Escape') {
+        close();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeydown);
+
+    const mql = window.matchMedia('(min-width: 955px)');
+    const handleMediaChange = (event) => {
+      if (event.matches) {
+        // When we cross back into desktop range, ensure the overlay is closed
+        close();
+      }
+    };
+
+    if (mql.addEventListener) {
+      mql.addEventListener('change', handleMediaChange);
+    } else if (mql.addListener) {
+      // Safari fallback
+      mql.addListener(handleMediaChange);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document
+      .querySelectorAll('[data-move-hero-nav]')
+      .forEach((section) => initMoveHeroNav(section.closest('section') || section));
+  });
+
+  document.addEventListener('shopify:section:load', (event) => {
+    const section = event.target;
+    if (section && section.querySelector && section.querySelector('[data-move-hero-nav]')) {
+      initMoveHeroNav(section);
+    }
+  });
+{% endjavascript %}
 
 {% schema %}
 {
