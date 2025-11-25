@@ -31,11 +31,22 @@
   border-radius: var(--radius-md, 8px);
   padding: 2.4rem 2rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  transition: transform var(--duration-short) var(--ease-out-slow),
+    box-shadow var(--duration-short) var(--ease-out-slow);
+}
+
+.move-pricing-table__card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
 }
 
 .move-pricing-table__card--highlight {
   border: 2px solid var(--move-color-brown-primary);
   transform: translateY(-4px);
+}
+
+.move-pricing-table__card--highlight:hover {
+  transform: translateY(-6px);
 }
 
 .move-pricing-table__badge {

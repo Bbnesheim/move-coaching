@@ -38,6 +38,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform var(--duration-long) var(--ease-out-slow);
+}
+
+.move-gallery__media:hover .move-gallery__image {
+  transform: scale(1.03);
 }
 
 .move-gallery__caption {

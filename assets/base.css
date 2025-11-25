@@ -49,6 +49,31 @@
   }
 }
 
+/* MOVE sections: force 8px radius on CTA buttons via button radius tokens */
+.section[class*="move-"] {
+  --buttons-radius: 8px;
+  --buttons-radius-outset: calc(8px + var(--buttons-border-width));
+}
+
+/* Empower-inspired CTA treatment for MOVE sections */
+.section[class*="move-"] .button {
+  text-transform: uppercase;
+  letter-spacing: 0.12rem;
+  font-weight: 600;
+}
+
+.section[class*="move-"] .button--primary {
+  --color-button: 92, 72, 66; /* #5C4842 MOVE brown */
+  --color-button-text: 255, 255, 255;
+}
+
+.section[class*="move-"] .button--secondary {
+  --color-button: 255, 255, 255;
+  --color-button-text: 92, 72, 66;
+  --alpha-button-background: 0;
+  --alpha-button-border: 0.2;
+}
+
 .product-card-wrapper .card,
 .contains-card--product {
   --border-radius: var(--product-card-corner-radius);
