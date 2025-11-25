@@ -46,16 +46,16 @@ Guidelines:
 
 ## 3. Typography
 
-From PRD and PROMPT:
-- **Headings**: Playfair Display / DM Serif Display–style serif.
-- **Body**: Inter / Lato / Open Sans–style sans serif.
+From PRD and PROMPT (updated):
+- **Headings**: Playfair Display–style serif.
+- **Body**: Poppins–style geometric sans serif.
 
 Recommended mapping for implementation:
 
 - Heading font family (CSS):
-  - `font-family: "Playfair Display", "DM Serif Display", serif;`
+  - `font-family: "Playfair Display", serif;`
 - Body font family (CSS):
-  - `font-family: "Inter", "Lato", "Open Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;`
+  - `font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;`
 
 Typographic hierarchy (approximate sizes for web, mobile-first):
 
@@ -104,7 +104,21 @@ Placement patterns:
 - Use galleries/sliders for testimonials, before/after, and app feature walkthroughs.
 - Avoid cluttered collages; opt for simple, focused compositions with breathing room.
 
-## 5. Tone of Voice
+## 5. Social Presence
+
+Primary organic channels today:
+- **Instagram – Aline (founder)**: `@coach.alineskk`  
+  - URL: https://www.instagram.com/coach.alineskk/
+  - Role: Personal story, hverdagsglimt, før/etter, reels og nær kommunikasjon med følgerne.
+- **Instagram – MOVE Coaching (brand)**: to be confirmed.  
+  - When available, document handle + URL here and mirror in `analytics_seo_crm.md`.
+
+Guidelines:
+- Bruk samme tone som på nettsiden: varm, ærlig, realistisk og uten quick‑fix‑lovnader.
+- Del ekte hverdagsinnhold (mat, familie, trening, energi) fremfor polerte «fitness»-bilder.
+- Lenker fra bio bør peke til viktigste landingssider (Home, Priser, Quiz, App) og oppdateres ved kampanjer.
+
+## 6. Tone of Voice
 
 Core attributes:
 - **Direct and motivational**: Encourage action without being aggressive.
