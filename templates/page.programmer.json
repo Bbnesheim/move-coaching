@@ -83,10 +83,138 @@
         "padding_bottom": 0,
         "color_scheme": ""
       }
+    },
+    "move_app_promo_dLYP8T": {
+      "type": "move-app-promo",
+      "blocks": {
+        "bullet_XV8K6e": {
+          "type": "bullet",
+          "settings": {
+            "text": "Menyplanlegging med familievennlige oppskrifter."
+          }
+        },
+        "bullet_aAwfjn": {
+          "type": "bullet",
+          "settings": {
+            "text": "Menyplanlegging med familievennlige oppskrifter."
+          }
+        },
+        "bullet_fNKKmL": {
+          "type": "bullet",
+          "settings": {
+            "text": "Menyplanlegging med familievennlige oppskrifter."
+          }
+        }
+      },
+      "block_order": [
+        "bullet_XV8K6e",
+        "bullet_aAwfjn",
+        "bullet_fNKKmL"
+      ],
+      "name": "MOVE app promo",
+      "settings": {
+        "heading": "MOVE-appen – verktøyet som følger deg i hverdagen",
+        "body": "Planlegg menyen, få raske familievennlige oppskrifter, følg treningsøkter med video og hold oversikt – alt samlet i én app.",
+        "primary_cta_label": "Les mer om appen",
+        "primary_cta_link": "",
+        "secondary_cta_label": "Se programmer",
+        "secondary_cta_link": "",
+        "app_store_link": "",
+        "play_store_link": "",
+        "background_variant": "cream",
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "color_scheme": ""
+      }
+    },
+    "move_cta_strip_dTKppD": {
+      "type": "move-cta-strip",
+      "name": "MOVE CTA strip",
+      "settings": {
+        "heading": "Klar for å starte din dag én?",
+        "body": "Start din dag én med et løp som passer din hverdag – uten forpliktelse før du er klar.",
+        "primary_cta_label": "Start din dag én",
+        "primary_cta_link": "",
+        "secondary_cta_label": "",
+        "secondary_cta_link": "",
+        "align": "center",
+        "background_variant": "brown",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "color_scheme": ""
+      }
+    },
+    "move_app_features_JKNFPM": {
+      "type": "move-app-features",
+      "blocks": {
+        "feature_FQmcTL": {
+          "type": "feature",
+          "settings": {
+            "title": "Bygg menyen din",
+            "description": "Planlegg ukens måltider med familievennlige, realistiske oppskrifter tilpasset budsjett og hverdag."
+          }
+        },
+        "feature_WeqEnY": {
+          "type": "feature",
+          "settings": {
+            "title": "Bygg menyen din",
+            "description": "Planlegg ukens måltider med familievennlige, realistiske oppskrifter tilpasset budsjett og hverdag."
+          }
+        },
+        "feature_kJrLTR": {
+          "type": "feature",
+          "settings": {
+            "title": "Bygg menyen din",
+            "description": "Planlegg ukens måltider med familievennlige, realistiske oppskrifter tilpasset budsjett og hverdag."
+          }
+        },
+        "feature_QbHpDN": {
+          "type": "feature",
+          "settings": {
+            "title": "Bygg menyen din",
+            "description": "Planlegg ukens måltider med familievennlige, realistiske oppskrifter tilpasset budsjett og hverdag."
+          }
+        }
+      },
+      "block_order": [
+        "feature_FQmcTL",
+        "feature_WeqEnY",
+        "feature_kJrLTR",
+        "feature_QbHpDN"
+      ],
+      "name": "MOVE app features",
+      "settings": {
+        "heading": "Dette får du i MOVE-appen",
+        "intro": "Planlegging, oppskrifter, trening og oppfølging samlet i én app som faktisk passer inn i tidsklemma.",
+        "background_variant": "surface",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "color_scheme": ""
+      }
+    },
+    "move_quiz_entry_Bgedjm": {
+      "type": "move-quiz-entry",
+      "name": "MOVE quiz entry",
+      "settings": {
+        "heading": "Usikker på hvor du skal starte?",
+        "body": "Ta en kort quiz og få forslag til hva som passer deg og din hverdag – et enkelt første steg mot dag én.",
+        "primary_cta_label": "Ta quizen",
+        "primary_cta_link": "",
+        "secondary_text": "Quizen tar bare noen minutter og gir deg et ærlig bilde av hvor du står i dag.",
+        "alignment": "center",
+        "background_variant": "brown",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "color_scheme": ""
+      }
     }
   },
   "order": [
     "main",
-    "move_pricing_table_UcYbfa"
+    "move_pricing_table_UcYbfa",
+    "move_app_promo_dLYP8T",
+    "move_cta_strip_dTKppD",
+    "move_app_features_JKNFPM",
+    "move_quiz_entry_Bgedjm"
   ]
 }
