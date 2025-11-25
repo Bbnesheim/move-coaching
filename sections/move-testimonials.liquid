@@ -1,5 +1,4 @@
 {{ 'section-move-testimonials.css' | asset_url | stylesheet_tag }}
-{{ 'section-move-testimonials.js' | asset_url | script_tag }}
 
 {%- liquid
   assign bg_class = ''
@@ -38,10 +37,10 @@
       </div>
     {%- endif -%}
 
-    <div class="move-testimonials__grid move-testimonials__grid--two-rows">
-      <div class="move-testimonials__row move-testimonials__row--images">
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'image' -%}
+    <div class="move-testimonials__grid">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'image' -%}
             <figure class="move-testimonials__item move-testimonials__item--image" {{ block.shopify_attributes }}>
               {%- if block.settings.image != blank -%}
                 <div class="move-testimonials__image-wrapper media media--circle">
@@ -59,13 +58,7 @@
                 </figcaption>
               {%- endif -%}
             </figure>
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
-
-      <div class="move-testimonials__row move-testimonials__row--testimonials">
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'testimonial' -%}
+          {%- when 'testimonial' -%}
             <article class="move-testimonials__item move-testimonials__item--quote" {{ block.shopify_attributes }}>
               {%- if block.settings.quote != blank -%}
                 <blockquote class="move-testimonials__quote">{{ block.settings.quote }}</blockquote>
@@ -82,9 +75,8 @@
                 {%- endif -%}
               </div>
             </article>
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
+        {%- endcase -%}
+      {%- endfor -%}
     </div>
   </div>
 </section>
@@ -207,7 +199,7 @@
           "type": "textarea",
           "id": "caption",
           "label": "Caption",
-          "default": ""
+          "default": "Bildetekst"
         }
       ]
     }
@@ -217,9 +209,42 @@
       "name": "MOVE testimonials",
       "category": "MOVE",
       "blocks": [
-        { "type": "testimonial" },
-        { "type": "testimonial" },
-        { "type": "testimonial" }
+        {
+          "type": "image"
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Den beste investeringen jeg har gjort for meg selv! Jeg er 35 år, student, brystkreftoverlever og småbarnsmor. Med MOVE har kosthold og trening blitt en naturlig del av hverdagen igjen – selv når livet er hektisk. Jeg har mer energi og overskudd, er endelig smertefri etter flere år med bekkensmerter, og har fått en enorm mestringsfølelse.",
+            "name": "Kristin",
+            "role_or_context": "35 år, student, brystkreftoverlever og småbarnsmor",
+            "before_after_label": "6 måneder med MOVE"
+          }
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Coaching som virkelig gjør en forskjell. Jeg startet hos MOVE for å bli den beste versjonen av meg selv, og nå er jeg i full gang. Aline møter meg med konkrete tips, ærlige tilbakemeldinger og løsninger som faktisk passer min hverdag – også på de tunge dagene. Det gjør at jeg har lyst til å pushe meg selv videre.",
+            "name": "Maren",
+            "role_or_context": "Coachingkunde hos MOVE",
+            "before_after_label": "Coaching som gjør en forskjell"
+          }
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Anbefaler MOVE Coaching med hele mitt hjerte. Jeg har slitt med sykdom i mange år, men med støtten fra teamet føler jeg at både kropp og hode har det bedre. De hjelper meg ikke bare med trening og mat, men også med mental støtte – det føles nesten som å få psykolog på kjøpet. Dette er virkelig den beste investeringen jeg har gjort.",
+            "name": "Ellen",
+            "role_or_context": "Coachingkunde hos MOVE",
+            "before_after_label": "Beste investeringen jeg har gjort"
+          }
+        }
       ]
     }
   ]

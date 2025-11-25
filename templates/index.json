@@ -45,38 +45,65 @@
     "move_testimonials_hi4zgH": {
       "type": "move-testimonials",
       "blocks": {
-        "testimonial_MnxnWR": {
-          "type": "testimonial",
+        "image_1": {
+          "type": "image",
           "settings": {
-            "quote": "Jeg trodde jeg måtte være perfekt for å lykkes. Nå har jeg funnet en måte å leve på som faktisk fungerer i hverdagen.",
-            "name": "Kunde, 2-barnsmor",
-            "role_or_context": "",
-            "before_after_label": ""
+            "image": "",
+            "tag": "",
+            "caption": ""
           }
         },
-        "testimonial_kpdXc3": {
+        "testimonial_kristin": {
           "type": "testimonial",
           "settings": {
-            "quote": "Jeg trodde jeg måtte være perfekt for å lykkes. Nå har jeg funnet en måte å leve på som faktisk fungerer i hverdagen.",
-            "name": "Kunde, 2-barnsmor",
-            "role_or_context": "",
-            "before_after_label": ""
+            "quote": "Den beste investeringen jeg har gjort for meg selv! Jeg er 35 år, student, brystkreftoverlever og småbarnsmor. Med MOVE har kosthold og trening blitt en naturlig del av hverdagen igjen – selv når livet er hektisk. Jeg har mer energi og overskudd, er endelig smertefri etter flere år med bekkensmerter, og har fått en enorm mestringsfølelse.",
+            "name": "Kristin",
+            "role_or_context": "35 år, student, brystkreftoverlever og småbarnsmor",
+            "before_after_label": "6 måneder med MOVE"
           }
         },
-        "testimonial_xwrq8Y": {
+        "image_2": {
+          "type": "image",
+          "settings": {
+            "image": "",
+            "tag": "",
+            "caption": ""
+          }
+        },
+        "testimonial_maren": {
           "type": "testimonial",
           "settings": {
-            "quote": "Jeg trodde jeg måtte være perfekt for å lykkes. Nå har jeg funnet en måte å leve på som faktisk fungerer i hverdagen.",
-            "name": "Kunde, 2-barnsmor",
-            "role_or_context": "",
-            "before_after_label": ""
+            "quote": "Coaching som virkelig gjør en forskjell. Jeg startet hos MOVE for å bli den beste versjonen av meg selv, og nå er jeg i full gang. Aline møter meg med konkrete tips, ærlige tilbakemeldinger og løsninger som faktisk passer min hverdag – også på de tunge dagene. Det gjør at jeg har lyst til å pushe meg selv videre.",
+            "name": "Maren",
+            "role_or_context": "Coachingkunde hos MOVE",
+            "before_after_label": "Coaching som gjør en forskjell"
+          }
+        },
+        "image_3": {
+          "type": "image",
+          "settings": {
+            "image": "",
+            "tag": "",
+            "caption": ""
+          }
+        },
+        "testimonial_ellen": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Anbefaler MOVE Coaching med hele mitt hjerte. Jeg har slitt med sykdom i mange år, men med støtten fra teamet føler jeg at både kropp og hode har det bedre. De hjelper meg ikke bare med trening og mat, men også med mental støtte – det føles nesten som å få psykolog på kjøpet. Dette er virkelig den beste investeringen jeg har gjort.",
+            "name": "Ellen",
+            "role_or_context": "Coachingkunde hos MOVE",
+            "before_after_label": "Beste investeringen jeg har gjort"
           }
         }
       },
       "block_order": [
-        "testimonial_MnxnWR",
-        "testimonial_kpdXc3",
-        "testimonial_xwrq8Y"
+        "image_1",
+        "testimonial_kristin",
+        "image_2",
+        "testimonial_maren",
+        "image_3",
+        "testimonial_ellen"
       ],
       "name": "MOVE testimonials",
       "settings": {

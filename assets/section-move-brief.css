@@ -25,12 +25,26 @@
 }
 
 .move-brief__card {
+  position: relative;
   background: #ffffff;
   border-radius: var(--radius-md, 8px);
   padding: 2.4rem 2.8rem;
   box-shadow: 0 14px 40px rgba(0, 0, 0, 0.06);
   width: 50vw;
   max-width: 620px;
+}
+
+/* Brand-colored depth shadow behind the card */
+.move-brief__card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: #5c4842; /* primary brown */
+  z-index: -1;
+  transform: translate(10px, 12px);
+  opacity: 0.22;
+  filter: blur(8px);
 }
 
 @media screen and (max-width: 1023px) {
