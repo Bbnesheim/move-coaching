@@ -39,15 +39,17 @@
                 {{ block.settings.image | image_url: width: 900 | image_tag: widths: '400, 600, 900', class: 'move-gallery__image' }}
               </div>
             {%- endif -%}
-            {%- if section.settings.display_captions and (block.settings.caption != blank or block.settings.tag != blank) -%}
-              <figcaption class="move-gallery__caption">
-                {%- if block.settings.tag != blank -%}
-                  <span class="move-gallery__tag caption-with-letter-spacing">{{ block.settings.tag }}</span>
-                {%- endif -%}
-                {%- if block.settings.caption != blank -%}
-                  <span class="move-gallery__caption-text">{{ block.settings.caption }}</span>
-                {%- endif -%}
-              </figcaption>
+            {%- if section.settings.display_captions -%}
+              {%- if block.settings.caption != blank or block.settings.tag != blank -%}
+                <figcaption class="move-gallery__caption">
+                  {%- if block.settings.tag != blank -%}
+                    <span class="move-gallery__tag caption-with-letter-spacing">{{ block.settings.tag }}</span>
+                  {%- endif -%}
+                  {%- if block.settings.caption != blank -%}
+                    <span class="move-gallery__caption-text">{{ block.settings.caption }}</span>
+                  {%- endif -%}
+                </figcaption>
+              {%- endif -%}
             {%- endif -%}
           </figure>
         {%- endif -%}

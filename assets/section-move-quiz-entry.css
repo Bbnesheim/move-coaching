@@ -24,3 +24,8 @@
 .move-quiz-entry__secondary {
   margin-top: 1rem;
 }
+
+/* Ensure readable text when using the brown background variant */
+.move-quiz-entry.move-bg-brown {
+  color: var(--move-color-cream-background);
+}
