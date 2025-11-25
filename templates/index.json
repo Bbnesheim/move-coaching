@@ -89,49 +89,45 @@
         "color_scheme": "scheme-3"
       }
     },
-    "move_steps_FYE4Lf": {
-      "type": "move-steps",
+    "move_usps_AJiweM": {
+      "type": "move-usps",
       "blocks": {
-        "step_CGMLWH": {
-          "type": "step",
+        "usp_FVzDpN": {
+          "type": "usp",
           "settings": {
-            "step_label": "1",
-            "icon": "shopify://shop_images/conversation-circular-symbol-svgrepo-com.svg",
-            "title": "Start med en uforpliktende samtale",
-            "description": "Vi blir kjent med deg, hverdagen din og hva du ønsker å få til – helt uten forpliktelser."
+            "title": "Langsiktig støtte",
+            "text": "Vi bygger varige vaner steg for steg – uten streng diett eller alt‑eller‑ingenting‑tanker."
           }
         },
-        "step_xN4TwJ": {
-          "type": "step",
+        "usp_rRH84h": {
+          "type": "usp",
           "settings": {
-            "step_label": "2",
-            "icon": "shopify://shop_images/plan-svgrepo-com.svg",
-            "title": "Få et personlig MOVE-opplegg",
-            "description": "Du og coachen din lager en plan over 6, 9 eller 12 måneder som passer din hverdag."
+            "title": "Langsiktig støtte",
+            "text": "Vi bygger varige vaner steg for steg – uten streng diett eller alt‑eller‑ingenting‑tanker."
           }
         },
-        "step_hQWdjx": {
-          "type": "step",
+        "usp_eTzcbK": {
+          "type": "usp",
           "settings": {
-            "step_label": "3",
-            "icon": "shopify://shop_images/shuffle-change-svgrepo-com.svg",
-            "title": "Små steg – store endringer",
-            "description": "Du får tett oppfølging, verktøy og støtte underveis, slik at nye vaner faktisk blir en del av livet ditt."
+            "title": "Langsiktig støtte",
+            "text": "Vi bygger varige vaner steg for steg – uten streng diett eller alt‑eller‑ingenting‑tanker."
           }
         }
       },
       "block_order": [
-        "step_CGMLWH",
-        "step_xN4TwJ",
-        "step_hQWdjx"
+        "usp_FVzDpN",
+        "usp_rRH84h",
+        "usp_eTzcbK"
       ],
-      "name": "MOVE steps",
+      "name": "MOVE USP grid",
       "settings": {
-        "heading": "Slik fungerer det",
-        "intro": "En enkel, trygg prosess fra første steg til nye vaner i hverdagen.",
+        "heading": "Derfor fungerer MOVE Coaching",
+        "intro": "Langsiktig coaching, varm støtte og en app som er laget for hverdagen – ikke for raske quick fixes.",
+        "heading_alignment": "center",
+        "columns_desktop": 3,
         "background_variant": "surface",
-        "padding_top": 0,
-        "padding_bottom": 0,
+        "padding_top": 20,
+        "padding_bottom": 20,
         "color_scheme": ""
       }
     },
@@ -194,14 +190,61 @@
         "padding_bottom": 0,
         "color_scheme": ""
       }
+    },
+    "move_steps_FYE4Lf": {
+      "type": "move-steps",
+      "blocks": {
+        "step_CGMLWH": {
+          "type": "step",
+          "settings": {
+            "step_label": "1",
+            "icon": "shopify://shop_images/conversation-circular-symbol-svgrepo-com.svg",
+            "title": "Start med en uforpliktende samtale",
+            "description": "Vi blir kjent med deg, hverdagen din og hva du ønsker å få til – helt uten forpliktelser."
+          }
+        },
+        "step_xN4TwJ": {
+          "type": "step",
+          "settings": {
+            "step_label": "2",
+            "icon": "shopify://shop_images/plan-svgrepo-com.svg",
+            "title": "Få et personlig MOVE-opplegg",
+            "description": "Du og coachen din lager en plan over 6, 9 eller 12 måneder som passer din hverdag."
+          }
+        },
+        "step_hQWdjx": {
+          "type": "step",
+          "settings": {
+            "step_label": "3",
+            "icon": "shopify://shop_images/shuffle-change-svgrepo-com.svg",
+            "title": "Små steg – store endringer",
+            "description": "Du får tett oppfølging, verktøy og støtte underveis, slik at nye vaner faktisk blir en del av livet ditt."
+          }
+        }
+      },
+      "block_order": [
+        "step_CGMLWH",
+        "step_xN4TwJ",
+        "step_hQWdjx"
+      ],
+      "name": "MOVE steps",
+      "settings": {
+        "heading": "Slik fungerer det",
+        "intro": "En enkel, trygg prosess fra første steg til nye vaner i hverdagen.",
+        "background_variant": "surface",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "color_scheme": ""
+      }
     }
   },
   "order": [
     "move_hero_pb33Lr",
     "move_brief_qrBEqe",
     "move_testimonials_hi4zgH",
-    "move_steps_FYE4Lf",
+    "move_usps_AJiweM",
     "featured_collection",
-    "move_social_media_97dAx3"
+    "move_social_media_97dAx3",
+    "move_steps_FYE4Lf"
   ]
 }
