@@ -47,13 +47,13 @@ Guidelines:
 ## 3. Typography
 
 From PRD and PROMPT (updated):
-- **Headings**: Playfair Display–style serif.
+- **Headings**: Black Mango–style display serif.
 - **Body**: Poppins–style geometric sans serif.
 
 Recommended mapping for implementation:
 
 - Heading font family (CSS):
-  - `font-family: "Playfair Display", serif;`
+  - `font-family: "Black Mango", serif;`
 - Body font family (CSS):
   - `font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;`
 
@@ -188,3 +188,94 @@ Spacing & rhythm:
 - Prefer Dawn’s native section patterns for layout (grid, split, collage) and adapt with brand styles instead of building entirely custom layouts.
 - Keep custom CSS scoped and minimal; rely on tokens and theme settings rather than hard-coded values spread across templates.
 - When adding new sections, ensure they are configurable via the Shopify theme editor (content, layout, and background variants) instead of being single-use.
+
+## 9. Layout, UX & Content Guidelines (inspired by best-in-class coaching sites)
+
+This section captures learnings from auditing best-in-class online coaching brands and translates them into concrete guidelines for MOVE Coaching. Use this as inspiration for structure, messaging, and UX – always implemented with MOVE’s own brand essence, colour palette, typography, and CSS rulings.
+
+### 9.1 Overall positioning & narrative
+
+- Lead with a clear, outcome-oriented promise in the hero, focused on sustainable weight loss and long-term lifestyle change, tidsklemma, and a Norwegian audience.
+- Pair the hero headline with a short, supportive subheading that frames the offer as guidance and support, not a quick fix.
+- Ensure the founder story (Aline) is prominent and story-led, mirroring how a founder’s personal journey and transformation can be made central across pages.
+- Use a consistent narrative spine: visitor’s struggle → founder’s similar past struggle → method that works → invitation to join.
+
+### 9.2 Social proof & community
+
+- Use persistent, high-level social proof near the top of key pages, with a concise summary metric (e.g., total members helped, routines established, meals planned, years of coaching) rather than only kilos lost.
+- Create a dedicated community / testimonials page that aggregates longer-form social proof: quotes, mini-stories, and before/after narratives.
+- On the home page, feature a shorter testimonial carousel or grid section directly under the hero, reusing the same quotes for consistency.
+- For each testimonial, include:
+  - Name (first name + initial) and optionally age/role (e.g., “smallbarnsmor, 36”).
+  - 1–3 sentence quote focused on sustainable change, routines, or energy – avoid purely weight-number bragging.
+- Encourage community language that emphasises support, belonging, and that change happens together, adapted to Norwegian and MOVE’s tone of voice.
+
+### 9.3 Program structure & feature communication
+
+- Use a “How it works / What we’re offering” section on the home page that clearly lists the main pillars of the coaching programme, similar to clear breakdowns used on other successful coaching sites (meal plans, workouts, tracking, check-ins, habits, community).
+- For MOVE, reflect our actual pillars, e.g.:
+  - Planlagt, familievennlig mat og menyer.
+  - Trening og aktivitet tilpasset tidsklemma.
+  - Ukentlige check-ins og støtte.
+  - Vaner, søvn og stressmestring.
+  - App-funksjoner (tracking, kurs, påminnelser, etc.).
+- Present features as benefits-first: a short heading (benefit) + 1–2 lines of explanatory copy, aligned with our “no quick fixes” and realistic framing.
+- Use a simple icon + text layout or Dawn’s feature grid for this section; keep copy scannable.
+
+### 9.4 Recipes, food, and “no restriction” framing
+
+- Emphasise “delicious recipes you’ll love” and “no restrictions” in a way that reflects MOVE’s focus on balance, everyday Norwegian food, and realistic portions.
+- On relevant pages (Home, App, or Program), include a small grid of 4–8 example meals or recipes with:
+  - Descriptive, appetising names.
+  - Simple meta info (e.g., kcal or key attributes like “familievennlig”, “15 min”, “billig”).
+- Use this section to visually break up the page and show that the method is enjoyable and sustainable, not a rigid diet.
+- Avoid glorifying ultra-low calorie counts; focus on satiety, family-friendliness, and flexibility.
+
+### 9.5 Founder & team presentation
+
+- Mirror the strength of well-structured About + Team pages by dedicating sections to Aline’s story and any supporting coaches/experts.
+- For Aline:
+  - Use a section structure similar to strong “I tried everything”-style stories: past struggle → turning point → process → current mission.
+  - Include at least one strong pull-quote that encapsulates her philosophy (e.g., “I never focused on setting a weight loss goal, I just wanted to be healthy and feel good in my body.”).
+- For team/coaches (if applicable):
+  - Provide short bios with qualifications, location, and a 2–4 sentence personal story tying their expertise to MOVE’s mission.
+  - Use consistent patterns for headings (Coach name) and subheadings (credentials) as seen on strong coaching team pages.
+  - Include accessible, descriptive alt text for headshots (e.g., “Headshot of [name], MOVE coach”).
+
+### 9.6 CTAs, flows, and forms
+
+- Ensure every primary page has one clear, repeated CTA pattern, with short, motivational labels (e.g., “Start din dag én”, “Book en uforpliktende prat”, “Start quizen”).
+- For MOVE, define 1–2 core CTA labels and reuse them consistently across sections and pages.
+- Place a strong CTA near:
+  - The hero (above the fold).
+  - After key social proof sections (testimonials, results, community).
+  - Near the bottom of each page, paired with a simple motivational line.
+- Keep forms lean and high-intent:
+  - Only ask for the minimum fields needed (e.g., navn, e‑post, evt. telefon) unless it’s a more specialised flow like applying for a coaching role.
+  - Use clear field labels and helper text; avoid jargon.
+
+### 9.7 Page structure & section ordering
+
+- The MOVE home page should roughly follow this flow (inspired by best-in-class coaching sites but adapted to our content):
+  1) Hero: core promise + key CTA.
+  2) Social proof snapshot (metrics + 2–3 short testimonials).
+  3) “How it works” / programme pillars.
+  4) Recipes/food or “Everyday life” section visualising lifestyle.
+  5) Founder story (Aline) + pull-quote.
+  6) Optional: Team/coaches preview with link to full team page.
+  7) Strong CTA section (“Start din dag én”) with short motivational copy.
+  8) Newsletter or low-friction lead capture.
+- Community/testimonials page should:
+  - Start with a short intro heading (e.g., “Dette sier kvinnene i MOVE Coaching”) and 2–3 sentences of framing.
+  - Present testimonials in a structured layout (cards or quotes) with clear attribution.
+  - End with a CTA back into the main conversion flow (e.g., quiz, prices, or application).
+
+### 9.8 Accessibility & UX lessons from the audit
+
+- Avoid duplicating navigation lists and content purely for layout purposes; ensure screen readers don’t encounter the same menu or testimonial looped multiple times, as can happen on some sites.
+- Keep long testimonial and story copy broken into paragraphs or shorter highlights so they’re easier to scan on mobile.
+- Maintain our existing accessibility guidelines (Section 7) and extend them to:
+  - Provide descriptive alt text for all key imagery (founder, team, transformations, recipes).
+  - Ensure CTAs and forms are fully keyboard navigable and labelled.
+
+These guidelines should be used as a reference when designing or updating sections and templates in the MOVE theme, borrowing strong patterns from modern coaching and fitness brands while staying true to MOVE’s own brand values, CSS rulings, and colour system.
