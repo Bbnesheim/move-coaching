@@ -1,0 +1,90 @@
+{{ 'section-move-brief.css' | asset_url | stylesheet_tag }}
+
+<section id="MoveBrief-{{ section.id }}" class="section move-brief move-bg-cream"
+  style="{% if section.settings.padding_top > 0 %}padding-top: {{ section.settings.padding_top }}px;{% endif %}{% if section.settings.padding_bottom > 0 %} padding-bottom: {{ section.settings.padding_bottom }}px;{% endif %}"
+>
+  <div class="page-width move-brief__inner move-brief__inner--{{ section.settings.container_alignment }}">
+    <div class="move-brief__card move-brief__card--{{ section.settings.text_alignment }}">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="move-brief__heading h2">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.body != blank -%}
+        <div class="move-brief__body text-body">{{ section.settings.body }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MOVE brief",
+  "tag": "section",
+  "class": "section move-brief",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Hva er MOVE Coaching?"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "MOVE er skapt av Aline – tobarnsmamma, coach og grunnlegger – for kvinner som vil ha en ærlig, bærekraftig vei til en sunnere hverdag. Her får du coaching, struktur og støtte som faktisk passer inn i tidsklemma."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "container_alignment",
+      "label": "Container alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    }
+  ],
+  "presets": [
+    {
+      "name": "MOVE brief",
+      "category": "MOVE"
+    }
+  ]
+}
+{% endschema %}

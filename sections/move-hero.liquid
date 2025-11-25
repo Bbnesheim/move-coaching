@@ -20,6 +20,19 @@
   id="MoveHero-{{ section.id }}"
   class="section move-hero {{ bg_class }} color-{{ section.settings.color_scheme }} gradient{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
 >
+  {%- if section.settings.image != blank -%}
+    <div class="move-hero__bg">
+      {{
+        section.settings.image
+        | image_url: width: 2200
+        | image_tag:
+          widths: '800, 1200, 1600, 2000, 2200',
+          sizes: '100vw',
+          class: 'move-hero__bg-image'
+      }}
+    </div>
+  {%- endif -%}
+
   <div
     class="page-width move-section-padding"
     style="{% if section.settings.padding_top > 0 %}padding-top: {{ section.settings.padding_top }}px;{% endif %}{% if section.settings.padding_bottom > 0 %} padding-bottom: {{ section.settings.padding_bottom }}px;{% endif %}"
@@ -30,17 +43,19 @@
           <p class="move-hero__badge caption-with-letter-spacing">{{ section.settings.badge_text }}</p>
         {%- endif -%}
 
-        {%- if section.settings.heading != blank -%}
-          <h1 class="move-hero__heading h1">
-            {{ section.settings.heading }}
-          </h1>
-        {%- endif -%}
+        <div class="move-hero__headline-layer move-hero__headline-layer--{{ section.settings.headline_style }}">
+          {%- if section.settings.heading != blank -%}
+            <h1 class="move-hero__heading h1">
+              {{ section.settings.heading }}
+            </h1>
+          {%- endif -%}
 
-        {%- if section.settings.subheading != blank -%}
-          <div class="move-hero__subheading text-body">
-            {{ section.settings.subheading }}
-          </div>
-        {%- endif -%}
+          {%- if section.settings.subheading != blank -%}
+            <div class="move-hero__subheading text-body">
+              {{ section.settings.subheading }}
+            </div>
+          {%- endif -%}
+        </div>
 
         <div class="move-hero__buttons">
           {%- if section.settings.primary_cta_label != blank -%}
@@ -71,31 +86,6 @@
         </div>
       </div>
 
-      <div class="move-hero__media">
-        {%- if section.settings.image != blank -%}
-          {%- liquid
-            assign aspect_class = 'media--portrait'
-            case section.settings.image_aspect_ratio
-              when 'square'
-                assign aspect_class = 'media--square'
-              when 'portrait'
-                assign aspect_class = 'media--portrait'
-              when 'landscape'
-                assign aspect_class = 'media--landscape'
-            endcase
-          -%}
-          <div class="move-hero__media-inner media {{ aspect_class }}">
-            {{
-              section.settings.image
-              | image_url: width: 1600
-              | image_tag:
-                widths: '400, 600, 800, 1200, 1600',
-                sizes: 'min(100vw, 800px)',
-                class: 'move-hero__image'
-            }}
-          </div>
-        {%- endif -%}
-      </div>
     </div>
   </div>
 </section>
@@ -152,7 +142,7 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Hero image"
+      "label": "Hero image (background)"
     },
     {
       "type": "select",
@@ -174,6 +164,16 @@
         { "value": "text_right", "label": "Text right, image left" }
       ],
       "default": "text_left"
+    },
+    {
+      "type": "select",
+      "id": "headline_style",
+      "label": "Headline style",
+      "options": [
+        { "value": "on_image", "label": "On image" },
+        { "value": "on_background", "label": "On background" }
+      ],
+      "default": "on_image"
     },
     {
       "type": "select",
