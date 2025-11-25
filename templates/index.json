@@ -77,7 +77,7 @@
           "type": "step",
           "settings": {
             "step_label": "1",
-            "icon": "shopify://shop_images/aline_24.webp",
+            "icon": "shopify://shop_images/conversation-circular-symbol-svgrepo-com.svg",
             "title": "Start med en uforpliktende samtale",
             "description": "Vi blir kjent med deg, hverdagen din og hva du ønsker å få til – helt uten forpliktelser."
           }
@@ -86,6 +86,7 @@
           "type": "step",
           "settings": {
             "step_label": "2",
+            "icon": "shopify://shop_images/plan-svgrepo-com.svg",
             "title": "Få et personlig MOVE-opplegg",
             "description": "Du og coachen din lager en plan over 6, 9 eller 12 måneder som passer din hverdag."
           }
@@ -94,6 +95,7 @@
           "type": "step",
           "settings": {
             "step_label": "3",
+            "icon": "shopify://shop_images/shuffle-change-svgrepo-com.svg",
             "title": "Små steg – store endringer",
             "description": "Du får tett oppfølging, verktøy og støtte underveis, slik at nye vaner faktisk blir en del av livet ditt."
           }
