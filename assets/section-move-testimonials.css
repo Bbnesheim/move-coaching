@@ -34,6 +34,9 @@
 .move-testimonials__content {
   position: relative;
   padding: 3.2rem var(--page-width-padding, 1.6rem) 3.6rem var(--page-width-padding, 1.6rem);
+  min-height: 520px; /* match layout height so scroller area fills section height */
+  display: flex;
+  align-items: stretch; /* let inner scroller take full height */
 }
 
 .move-testimonials__arrow {
@@ -53,7 +56,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 2.8rem;
+  font-size: 3.4rem; /* larger scroll arrow */
   line-height: 1;
 }
 
@@ -123,11 +126,12 @@
   z-index: 0; /* ensure pseudo element stays behind */
   background: #ffffff;
   border-radius: var(--radius-md, 8px);
-  padding: 2rem 2.2rem;
+  padding: 2.1rem 2.4rem;
   box-shadow: 0 14px 40px rgba(0, 0, 0, 0.06);
   width: auto;
-  max-width: 32rem; /* readability cap; height & width now follow content */
-  min-height: 420px;
+  max-width: 32rem; /* width follows content up to this cap */
+  margin-top: 1rem; /* allow some breathing room from the top edge */
+  margin-bottom: 1.4rem; /* and from the bottom edge inside the tall block */
 }
 
 /* Brand-colored depth gradient shadow behind testimonial card (pink accent) */
@@ -175,28 +179,53 @@
   padding: 0;
   position: relative;
   z-index: 1;
-  display: flex;
-  align-items: center;
+  align-items: flex-start; /* keep image stack starting from the top within its card */
   justify-content: center;
-  overflow: visible;
 }
 
 .move-testimonials__image-stack {
   position: relative;
-  width: 280px;
-  height: 420px;
+  width: 320px;
+  height: 260px;
+  margin-top: 1.2rem; /* space from the top edge inside tall block */
+  margin-bottom: 1.4rem; /* and some breathing room above meta */
+}
+
+@media screen and (max-width: 749px) {
+  .move-testimonials__image-stack {
+    width: 260px;
+    height: 220px;
+  }
+}
+
+.move-testimonials__image-wrapper {
+  position: absolute;
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
 .move-testimonials__image-wrapper--primary {
-  position: absolute;
   top: -10px;
-  left: -10px;
+  left: -6px;
+  width: 70%;
 }
 
 .move-testimonials__image-wrapper--secondary {
-  position: absolute;
   bottom: -10px;
-  right: -16px;
+  right: -10px;
+  width: 60%;
+}
+
+.move-testimonials__image-stack--double .move-testimonials__image-wrapper--secondary {
+  transform: translate(8px, 8px);
+}
+
+.move-testimonials__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Two-row grid wrapper */
@@ -230,6 +259,7 @@
 .move-testimonials--scroller .move-testimonials__grid {
   display: flex;
   flex-wrap: nowrap;
+  align-items: stretch; /* every block matches the scroller height */
   column-gap: var(--grid-mobile-horizontal-spacing, 1.6rem);
   overflow-x: auto;
   padding-bottom: 1.2rem;
@@ -251,6 +281,19 @@
 .move-testimonials--scroller .move-testimonials__item {
   flex: 0 0 auto; /* width is intrinsic based on content */
   scroll-snap-align: start;
+  display: flex; /* let each block fill height and control its own vertical alignment */
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Image blocks: content sits toward the top, with room below */
+.move-testimonials--scroller .move-testimonials__item--image {
+  justify-content: flex-start;
+}
+
+/* Testimonial cards: content sits toward the bottom, with room above */
+.move-testimonials--scroller .move-testimonials__item--quote {
+  justify-content: flex-end;
 }
 
 @media screen and (min-width: 1000px) {
@@ -281,15 +324,13 @@
   transform: translateY(-2px);
 }
 
-.move-testimonials__image-wrapper {
-  margin-bottom: 1.4rem;
-}
+/* spacing now handled on the stack container */
 
 .move-testimonials__quote {
   margin: 0 0 1.2rem;
   color: #2f2e2b; /* text dark grey */
-  font-size: 0.94rem;
-  line-height: 1.5;
+  font-size: 1.02rem;
+  line-height: 1.6;
 }
 
 .move-testimonials__name {
