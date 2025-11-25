@@ -28,6 +28,9 @@
 .move-hero__content {
   position: relative;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 @media screen and (min-width: 750px) {
@@ -53,7 +56,13 @@
 
 .move-hero__headline-layer {
   position: relative;
-  max-width: 36rem;
+  max-width: 40rem;
+}
+
+@media screen and (min-width: 990px) {
+  .move-hero__headline-layer {
+    max-width: 48rem;
+  }
 }
 
 .move-hero__headline-layer--on_image .move-hero__heading,
@@ -68,6 +77,13 @@
 
 .move-hero__heading {
   margin-bottom: 1.6rem;
+  font-size: calc(var(--font-heading-scale) * 3.4rem);
+}
+
+@media screen and (min-width: 750px) {
+  .move-hero__heading {
+    font-size: calc(var(--font-heading-scale) * 4.4rem);
+  }
 }
 
 .move-hero__subheading {
@@ -78,8 +94,9 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1.2rem;
+  margin-top: auto; /* push CTA group to bottom of hero content */
+  padding-bottom: 40px; /* add breathing room from bottom edge of image */
 }
-
 /* Hero-specific secondary CTA: outline-only but pink */
 /*
   Use a slightly higher-specificity selector so this wins over
@@ -157,6 +174,13 @@
   padding-top: 0;
 }
 
+/* Ensure hero content (including CTA buttons) can occupy the full
+   remaining height beneath the nav so the button row can stick to
+   the bottom of the hero image on all breakpoints. */
+.move-hero--with-nav .move-hero__inner {
+  flex: 1 1 auto;
+}
+
 .move-hero__nav {
   display: flex;
   align-items: center;
@@ -169,14 +193,25 @@
 }
 
 .move-hero__logo-image {
-  max-height: 4.2rem;
+  display: block;
+  width: 100%;
   height: auto;
-  width: auto;
+  transition: transform 0.2s ease-out;
 }
 
 .move-hero__logo {
   align-self: flex-start; /* keep logo locked to top-left within nav bar */
+  display: inline-block;
+  position: relative;
+  overflow: hidden; /* contain the gradient swoosh */
 }
+
+/* Subtle scale on hover */
+.move-hero__logo:hover .move-hero__logo-image,
+.move-hero__logo:focus-visible .move-hero__logo-image {
+  transform: scale(1.05);
+}
+
 
 .move-hero__nav-list {
   display: flex;

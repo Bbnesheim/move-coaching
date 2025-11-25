@@ -45,16 +45,22 @@
   >
     <!-- MOVE hero navigation merged into hero image -->
     <div class="move-hero__nav">
-      <a href="{{ routes.root_url }}" class="move-hero__logo">
+      <a href="{{ routes.root_url }}" class="move-hero__logo" style="max-width: {{ settings.logo_width }}px;">
         {%- if settings.logo != blank -%}
+          {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+          {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
+          {% capture hero_logo_sizes %}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width }}px{% endcapture %}
+          {% capture hero_logo_widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
           {{
             settings.logo
-            | image_url: width: 260
+            | image_url: width: 600
             | image_tag:
-              widths: '180, 220, 260',
-              sizes: '30vw',
               class: 'move-hero__logo-image',
-              alt: settings.logo.alt | default: shop.name
+              widths: hero_logo_widths,
+              height: logo_height,
+              width: settings.logo_width,
+              alt: logo_alt,
+              sizes: hero_logo_sizes
           }}
         {%- else -%}
           <span class="h3">{{ shop.name }}</span>
