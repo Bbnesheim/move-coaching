@@ -1,0 +1,142 @@
+{{ 'section-move-steps.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign bg_class = ''
+  case section.settings.background_variant
+    when 'default'
+      assign bg_class = 'move-bg-default'
+    when 'cream'
+      assign bg_class = 'move-bg-cream'
+    when 'surface'
+      assign bg_class = 'move-bg-surface'
+    when 'brown'
+      assign bg_class = 'move-bg-brown'
+    when 'pink'
+      assign bg_class = 'move-bg-pink'
+  endcase
+-%}
+
+<section
+  id="MoveSteps-{{ section.id }}"
+  class="section move-steps {{ bg_class }} color-{{ section.settings.color_scheme }} gradient{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+>
+  <div class="page-width move-section-padding">
+    <header class="move-steps__header">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="h2">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.intro != blank -%}
+        <div class="move-steps__intro text-body">{{ section.settings.intro }}</div>
+      {%- endif -%}
+    </header>
+
+    <div class="move-steps__grid grid grid--3-col-desktop grid--1-col-tablet-down">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'step' -%}
+          <article class="move-steps__item grid__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.step_label != blank -%}
+              <div class="move-steps__badge caption-with-letter-spacing">{{ block.settings.step_label }}</div>
+            {%- endif -%}
+            {%- if block.settings.icon != blank -%}
+              <div class="move-steps__icon media media--square">
+                {{ block.settings.icon | image_url: width: 80 | image_tag: widths: '40, 60, 80', class: 'move-steps__icon-image' }}
+              </div>
+            {%- endif -%}
+            {%- if block.settings.title != blank -%}
+              <h3 class="h3 move-steps__title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.description != blank -%}
+              <p class="move-steps__text text-body">{{ block.settings.description }}</p>
+            {%- endif -%}
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MOVE steps",
+  "tag": "section",
+  "class": "section move-steps",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Slik fungerer det"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro text",
+      "default": "En enkel, trygg prosess fra første steg til nye vaner i hverdagen."
+    },
+    {
+      "type": "select",
+      "id": "background_variant",
+      "label": "Background",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "cream", "label": "Cream" },
+        { "value": "surface", "label": "Surface" },
+        { "value": "brown", "label": "Brown" },
+        { "value": "pink", "label": "Pink" }
+      ],
+      "default": "surface"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "step_label",
+          "label": "Step label",
+          "default": "1"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Velg programmet som passer deg"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Sammen finner vi et 6, 9 eller 12 måneders løp som passer din hverdag og ditt utgangspunkt."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MOVE steps",
+      "category": "MOVE",
+      "blocks": [
+        { "type": "step" },
+        { "type": "step" },
+        { "type": "step" }
+      ]
+    }
+  ]
+}
+{% endschema %}

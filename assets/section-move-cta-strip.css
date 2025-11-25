@@ -1,0 +1,29 @@
+.move-cta-strip .page-width {
+  max-width: var(--page-width);
+}
+
+.move-cta-strip__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  align-items: flex-start;
+}
+
+.move-cta-strip__inner.center {
+  align-items: center;
+  text-align: center;
+}
+
+@media screen and (min-width: 750px) {
+  .move-cta-strip__inner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.move-cta-strip__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}

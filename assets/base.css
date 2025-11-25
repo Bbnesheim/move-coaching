@@ -8,6 +8,47 @@
   --focused-base-box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
 }
 
+:root {
+  /* MOVE Coaching brand tokens (mirrors tokens.json) */
+  --move-color-brown-primary: #5C4842;
+  --move-color-pink-secondary: #F5B5C4;
+  --move-color-cream-background: #F9F5F0;
+  --move-color-text-dark: #2F2E2B;
+}
+
+.move-bg-default,
+.move-bg-cream {
+  background-color: var(--move-color-cream-background);
+  color: var(--move-color-text-dark);
+}
+
+.move-bg-surface {
+  background-color: #FFFFFF;
+  color: var(--move-color-text-dark);
+}
+
+.move-bg-brown {
+  background-color: var(--move-color-brown-primary);
+  color: #FFFFFF;
+}
+
+.move-bg-pink {
+  background-color: var(--move-color-pink-secondary);
+  color: var(--move-color-text-dark);
+}
+
+.move-section-padding {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+@media screen and (min-width: 750px) {
+  .move-section-padding {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
 .product-card-wrapper .card,
 .contains-card--product {
   --border-radius: var(--product-card-corner-radius);

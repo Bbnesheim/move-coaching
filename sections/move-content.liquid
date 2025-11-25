@@ -1,0 +1,102 @@
+{{ 'section-move-content.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign bg_class = ''
+  case section.settings.background_variant
+    when 'default'
+      assign bg_class = 'move-bg-default'
+    when 'cream'
+      assign bg_class = 'move-bg-cream'
+    when 'surface'
+      assign bg_class = 'move-bg-surface'
+    when 'brown'
+      assign bg_class = 'move-bg-brown'
+    when 'pink'
+      assign bg_class = 'move-bg-pink'
+  endcase
+-%}
+
+<section
+  id="MoveContent-{{ section.id }}"
+  class="section move-content {{ bg_class }} color-{{ section.settings.color_scheme }} gradient{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+>
+  <div class="page-width move-section-padding">
+    <div class="move-content__inner move-content__inner--{{ section.settings.max_width }}">
+      {%- if section.settings.image != blank -%}
+        <div class="move-content__media media media--landscape">
+          {{ section.settings.image | image_url: width: 1200 | image_tag: widths: '600, 900, 1200', class: 'move-content__image' }}
+        </div>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="h2">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.content != blank -%}
+        <div class="move-content__body rte">{{ section.settings.content }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MOVE content",
+  "tag": "section",
+  "class": "section move-content",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Leading image"
+    },
+    {
+      "type": "select",
+      "id": "max_width",
+      "label": "Content width",
+      "options": [
+        { "value": "narrow", "label": "Narrow" },
+        { "value": "default", "label": "Default" },
+        { "value": "wide", "label": "Wide" }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "background_variant",
+      "label": "Background",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "cream", "label": "Cream" },
+        { "value": "surface", "label": "Surface" },
+        { "value": "brown", "label": "Brown" },
+        { "value": "pink", "label": "Pink" }
+      ],
+      "default": "surface"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "MOVE content",
+      "category": "MOVE"
+    }
+  ]
+}
+{% endschema %}

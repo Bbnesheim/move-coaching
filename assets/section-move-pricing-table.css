@@ -1,0 +1,81 @@
+.move-pricing-table .page-width {
+  max-width: var(--page-width);
+}
+
+.move-pricing-table__header {
+  max-width: 56rem;
+  margin: 0 auto 3rem;
+}
+
+.move-pricing-table__header.left {
+  margin-left: 0;
+}
+
+.move-pricing-table__intro {
+  margin-top: 1.2rem;
+}
+
+.move-pricing-table__grid {
+  display: grid;
+  gap: 2rem;
+}
+
+@media screen and (min-width: 750px) {
+  .move-pricing-table__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.move-pricing-table__card {
+  background: rgba(var(--color-background), 0.9);
+  border-radius: var(--radius-md, 8px);
+  padding: 2.4rem 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+.move-pricing-table__card--highlight {
+  border: 2px solid var(--move-color-brown-primary);
+  transform: translateY(-4px);
+}
+
+.move-pricing-table__badge {
+  margin-bottom: 0.8rem;
+}
+
+.move-pricing-table__duration {
+  margin-top: 0.4rem;
+  opacity: 0.8;
+}
+
+.move-pricing-table__price {
+  margin-top: 1.6rem;
+  margin-bottom: 1.6rem;
+}
+
+.move-pricing-table__price-main {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.move-pricing-table__price-unit {
+  font-size: 1.4rem;
+  margin-left: 0.2rem;
+}
+
+.move-pricing-table__price-total {
+  font-size: 1.3rem;
+  opacity: 0.8;
+}
+
+.move-pricing-table__benefits {
+  margin: 0 0 1.8rem;
+  padding-left: 1.4rem;
+}
+
+.move-pricing-table__benefits li + li {
+  margin-top: 0.4rem;
+}
+
+.move-pricing-table__cta {
+  margin-top: 0.8rem;
+}
