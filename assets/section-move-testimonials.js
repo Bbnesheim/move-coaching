@@ -76,3 +76,8 @@ if (typeof document !== 'undefined') {
     }
   });
 }
+
+// Export for testing in Node/Jest environments without affecting storefront usage
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+  module.exports = { MoveTestimonialsScroller, initMoveTestimonials };
+}

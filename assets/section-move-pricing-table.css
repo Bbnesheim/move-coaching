@@ -17,27 +17,30 @@
 
 .move-pricing-table__grid {
   display: grid;
-  gap: 2rem;
+  row-gap: var(--grid-mobile-vertical-spacing, 2rem);
+  column-gap: var(--grid-mobile-horizontal-spacing, 1.6rem);
 }
 
 @media screen and (min-width: 750px) {
   .move-pricing-table__grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: var(--grid-desktop-vertical-spacing, 2.4rem);
+    column-gap: var(--grid-desktop-horizontal-spacing, 2.4rem);
   }
 }
 
 .move-pricing-table__card {
-  background: rgba(var(--color-background), 0.9);
+  background: #ffffff;
   border-radius: var(--radius-md, 8px);
   padding: 2.4rem 2rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.06);
   transition: transform var(--duration-short) var(--ease-out-slow),
     box-shadow var(--duration-short) var(--ease-out-slow);
 }
 
 .move-pricing-table__card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
 }
 
 .move-pricing-table__card--highlight {
@@ -89,4 +92,9 @@
 
 .move-pricing-table__cta {
   margin-top: 0.8rem;
+}
+
+/* Match MOVE hero secondary CTA styling: outline-style with pink text */
+.move-pricing-table.move-pricing-table .button--secondary {
+  --color-button-text: 245, 181, 196; /* #F5B5C4 MOVE pink */
 }
