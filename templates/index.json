@@ -189,56 +189,29 @@
     },
     "move_social_media_97dAx3": {
       "type": "move-social-media",
-      "blocks": {
-        "profile_aline_instagram": {
-          "type": "profile",
-          "settings": {
-            "profile_type": "aline",
-            "platform": "instagram",
-            "label": "Aline på Instagram",
-            "handle": "@coach.alineskk",
-            "url": "https://www.instagram.com/coach.alineskk/",
-            "description": "Personlig innhold fra Aline – hverdagsliv, refleksjoner og små seire fra MOVE-familien.",
-            "cta_label": ""
-          }
-        },
-        "profile_aline_facebook": {
-          "type": "profile",
-          "settings": {
-            "profile_type": "aline",
-            "platform": "facebook",
-            "label": "Aline på Facebook",
-            "handle": "Aline Skancke Husby",
-            "url": "https://www.facebook.com/aline.s.husby",
-            "description": "Lengre innlegg, deling av artikler og nær kommunikasjon med Aline.",
-            "cta_label": ""
-          }
-        },
-        "profile_aline_tiktok": {
-          "type": "profile",
-          "settings": {
-            "profile_type": "aline",
-            "platform": "tiktok",
-            "label": "Aline på TikTok",
-            "handle": "@alineskk",
-            "url": "https://www.tiktok.com/@alineskk",
-            "description": "Kortformat video, hverdagsglimt, motivasjon og lavterskel tips fra Aline.",
-            "cta_label": ""
-          }
-        }
-      },
-      "block_order": [
-        "profile_aline_instagram",
-        "profile_aline_facebook",
-        "profile_aline_tiktok"
-      ],
       "name": "MOVE social media",
       "settings": {
         "heading": "Følg oss i hverdagen",
         "intro": "Få et ærlig innblikk i hverdagen, mat, trening og små steg mot varig endring.",
+        "main_image": null,
         "default_cta_label": "Følg på Instagram",
-        "heading_alignment": "center",
+        "instagram_label": "Aline på Instagram",
+        "instagram_handle": "@coach.alineskk",
+        "instagram_url": "https://www.instagram.com/coach.alineskk/",
+        "instagram_description": "Personlig innhold fra Aline – hverdagsliv, refleksjoner og små seire fra MOVE-familien.",
+        "instagram_cta_label": "",
+        "tiktok_label": "Aline på TikTok",
+        "tiktok_handle": "@alineskk",
+        "tiktok_url": "https://www.tiktok.com/@alineskk",
+        "tiktok_description": "Kortformat video, hverdagsglimt, motivasjon og lavterskel tips fra Aline.",
+        "tiktok_cta_label": "",
+        "facebook_label": "Aline på Facebook",
+        "facebook_handle": "Aline Skancke Husby",
+        "facebook_url": "https://www.facebook.com/aline.s.husby",
+        "facebook_description": "Lengre innlegg, deling av artikler og nær kommunikasjon med Aline.",
+        "facebook_cta_label": "",
         "background_variant": "surface",
+        "heading_alignment": "center",
         "padding_top": 0,
         "padding_bottom": 0,
         "color_scheme": "scheme-2"

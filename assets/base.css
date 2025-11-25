@@ -3673,3 +3673,17 @@ details-disclosure > details {
   box-shadow: none !important;
   border-bottom: none !important;
 }
+
+/* Global header transparency override – must stay at the very end of base.css */
+.section-header .header-wrapper,
+.section-header .header-wrapper.gradient,
+.section-header .header-wrapper[class*='color-'],
+.section-header .header-wrapper--border-bottom,
+.section-header .header {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  background-attachment: initial !important;
+  box-shadow: none !important;
+  border-bottom: none !important;
+}

@@ -1,0 +1,282 @@
+{{ 'section-move-hero.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #MoveHeroNav-{{ section.id }}::after {
+    opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign bg_class = ''
+  case section.settings.background_variant
+    when 'default'
+      assign bg_class = 'move-bg-default'
+    when 'cream'
+      assign bg_class = 'move-bg-cream'
+    when 'surface'
+      assign bg_class = 'move-bg-surface'
+    when 'brown'
+      assign bg_class = 'move-bg-brown'
+    when 'pink'
+      assign bg_class = 'move-bg-pink'
+  endcase
+-%}
+
+<section
+  id="MoveHeroNav-{{ section.id }}"
+  class="section move-hero {{ bg_class }} color-{{ section.settings.color_scheme }} gradient{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+>
+  {%- if section.settings.image != blank -%}
+    <div class="move-hero__bg">
+      {{
+        section.settings.image
+        | image_url: width: 2200
+        | image_tag:
+          widths: '800, 1200, 1600, 2000, 2200',
+          sizes: '100vw',
+          class: 'move-hero__bg-image'
+      }}
+    </div>
+  {%- endif -%}
+
+  <div
+    class="page-width move-section-padding move-hero--with-nav"
+    style="{% if section.settings.padding_top > 0 %}padding-top: {{ section.settings.padding_top }}px;{% endif %}{% if section.settings.padding_bottom > 0 %} padding-bottom: {{ section.settings.padding_bottom }}px;{% endif %}"
+  >
+    <!-- MOVE hero navigation merged into hero image -->
+    <div class="move-hero__nav">
+      <a href="{{ routes.root_url }}" class="move-hero__logo">
+        {%- if settings.logo != blank -%}
+          {{
+            settings.logo
+            | image_url: width: 260
+            | image_tag:
+              widths: '180, 220, 260',
+              sizes: '30vw',
+              class: 'move-hero__logo-image',
+              alt: settings.logo.alt | default: shop.name
+          }}
+        {%- else -%}
+          <span class="h3">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+
+      {%- if section.settings.nav_menu != blank -%}
+        <nav class="move-hero__nav-menu" aria-label="Hovedmeny">
+          <ul class="move-hero__nav-list" role="list">
+            {%- for link in section.settings.nav_menu.links -%}
+              <li>
+                <a
+                  href="{{ link.url }}"
+                  class="move-hero__nav-link{% if link.current %} move-hero__nav-link--active{% endif %}"
+                >
+                  {{ link.title | escape }}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </nav>
+      {%- endif -%}
+    </div>
+
+    <div class="move-hero__inner move-hero__inner--{{ section.settings.layout }}">
+      <div class="move-hero__content">
+        {%- if section.settings.badge_text != blank -%}
+          <p class="move-hero__badge caption-with-letter-spacing">{{ section.settings.badge_text }}</p>
+        {%- endif -%}
+
+        <div class="move-hero__headline-layer move-hero__headline-layer--{{ section.settings.headline_style }}">
+          {%- if section.settings.heading != blank -%}
+            <h1 class="move-hero__heading h1">
+              {{ section.settings.heading }}
+            </h1>
+          {%- endif -%}
+
+          {%- if section.settings.subheading != blank -%}
+            <div class="move-hero__subheading text-body">
+              {{ section.settings.subheading }}
+            </div>
+          {%- endif -%}
+        </div>
+
+        <div class="move-hero__buttons">
+          {%- if section.settings.primary_cta_label != blank -%}
+            <a
+              {% if section.settings.primary_cta_link == blank %}
+                role="link" aria-disabled="true"
+              {% else %}
+                href="{{ section.settings.primary_cta_link }}"
+              {% endif %}
+              class="button button--primary"
+            >
+              {{- section.settings.primary_cta_label | escape -}}
+            </a>
+          {%- endif -%}
+
+          {%- if section.settings.secondary_cta_label != blank -%}
+            <a
+              {% if section.settings.secondary_cta_link == blank %}
+                role="link" aria-disabled="true"
+              {% else %}
+                href="{{ section.settings.secondary_cta_link }}"
+              {% endif %}
+              class="button button--secondary"
+            >
+              {{- section.settings.secondary_cta_label | escape -}}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MOVE hero + nav",
+  "tag": "section",
+  "class": "section move-hero",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "nav_menu",
+      "label": "Hero navigation menu"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Langsiktig livsstilsendring med støtte hele veien"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Coaching, app og støtte som faktisk passer inn i tidsklemma."
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "6, 9 eller 12 måneder – du velger tempoet."
+    },
+    {
+      "type": "text",
+      "id": "primary_cta_label",
+      "label": "Primary CTA label",
+      "default": "Start din dag én"
+    },
+    {
+      "type": "url",
+      "id": "primary_cta_link",
+      "label": "Primary CTA link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_cta_label",
+      "label": "Secondary CTA label",
+      "default": "Ta quizen først"
+    },
+    {
+      "type": "url",
+      "id": "secondary_cta_link",
+      "label": "Secondary CTA link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero image (background)"
+    },
+    {
+      "type": "select",
+      "id": "image_aspect_ratio",
+      "label": "Image aspect ratio",
+      "options": [
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "landscape", "label": "Landscape" }
+      ],
+      "default": "portrait"
+    },
+    {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "label": "Image overlay opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "text_left", "label": "Text left, image right" },
+        { "value": "text_right", "label": "Text right, image left" }
+      ],
+      "default": "text_left"
+    },
+    {
+      "type": "select",
+      "id": "headline_style",
+      "label": "Headline style",
+      "options": [
+        { "value": "on_image", "label": "On image" },
+        { "value": "on_background", "label": "On background" }
+      ],
+      "default": "on_image"
+    },
+    {
+      "type": "select",
+      "id": "background_variant",
+      "label": "Background",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "cream", "label": "Cream" },
+        { "value": "surface", "label": "Surface" },
+        { "value": "brown", "label": "Brown" },
+        { "value": "pink", "label": "Pink" }
+      ],
+      "default": "cream"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding override",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding override",
+      "default": 0
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "MOVE hero + nav",
+      "category": "MOVE"
+    }
+  ]
+}
+{% endschema %}

@@ -13,7 +13,7 @@
   max-width: none;
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: stretch; /* let inner container control vertical layout */
 }
 
 .move-hero__inner {
@@ -145,4 +145,87 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* MOVE hero + nav layout */
+.move-hero--with-nav {
+  /* Container for hero + nav: fill hero height and stack nav + content vertically */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding-top: 0;
+}
+
+.move-hero__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2rem 0;
+  margin-bottom: 3.2rem;
+  position: relative;
+  z-index: 3; /* above image/overlay */
+}
+
+.move-hero__logo-image {
+  max-height: 4.2rem;
+  height: auto;
+  width: auto;
+}
+
+.move-hero__logo {
+  align-self: flex-start; /* keep logo locked to top-left within nav bar */
+}
+
+.move-hero__nav-list {
+  display: flex;
+  gap: 2.4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Desktop: stack nav links vertically at the top-right corner */
+@media screen and (min-width: 990px) {
+  .move-hero__nav-menu {
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .move-hero__nav-list {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.6rem; /* tighter line distance between menu items */
+  }
+}
+
+.move-hero__nav-link {
+  text-decoration: none;
+  font-size: 1.4rem;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+  color: rgb(var(--color-foreground));
+}
+
+.move-hero__nav-link--active,
+.move-hero__nav-link:hover {
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+@media screen and (max-width: 749px) {
+  .move-hero__nav-list {
+    gap: 1.6rem;
+  }
+
+  .move-hero__nav-link {
+    font-size: 1.2rem;
+  }
+}
+
+/* On the home page, make the hero fill the full viewport height */
+@media screen and (min-width: 990px) {
+  .template-index .move-hero {
+    min-height: 100vh;
+  }
 }
