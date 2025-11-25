@@ -18,7 +18,7 @@
       }
     },
     "move_testimonials_gaTHCH": {
-      "type": "move-testimonials",
+      "type": "move-testimonials-list",
       "blocks": {
         "testimonial_DKEyM6": {
           "type": "testimonial",

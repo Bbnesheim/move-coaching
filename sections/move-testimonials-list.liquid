@@ -1,5 +1,4 @@
 {{ 'section-move-testimonials.css' | asset_url | stylesheet_tag }}
-{{ 'section-move-testimonials.js' | asset_url | script_tag }}
 
 {%- liquid
   assign bg_class = ''
@@ -18,8 +17,8 @@
 -%}
 
 <section
-  id="MoveTestimonials-{{ section.id }}"
-  class="section move-testimonials move-testimonials--scroller {{ bg_class }} color-{{ section.settings.color_scheme }} gradient{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+  id="MoveTestimonialsList-{{ section.id }}"
+  class="section move-testimonials move-testimonials--list {{ bg_class }} color-{{ section.settings.color_scheme }} gradient{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
 >
   <div
     class="page-width move-section-padding"
@@ -91,9 +90,9 @@
 
 {% schema %}
 {
-  "name": "MOVE testimonials",
+  "name": "MOVE testimonials (list)",
   "tag": "section",
-  "class": "section move-testimonials",
+  "class": "section move-testimonials move-testimonials--list",
   "disabled_on": {
     "groups": ["header", "footer"]
   },
@@ -214,7 +213,7 @@
   ],
   "presets": [
     {
-      "name": "MOVE testimonials",
+      "name": "MOVE testimonials (list)",
       "category": "MOVE",
       "blocks": [
         { "type": "testimonial" },
