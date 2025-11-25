@@ -27,7 +27,7 @@
   background-color: #f5b5c4; /* secondary pink */
   color: #5c4842; /* primary brown */
   border-radius: 0;
-  padding: 0 10px; /* 10px side margin for contents */
+  padding: 10px; /* 10px padding on all sides */
   margin: 0;
 }
 
@@ -74,18 +74,23 @@
   margin: 0;
 }
 
-.move-testimonials__panel .h2 {
-  color: #5c4842;
-  font-size: clamp(2.3rem, 2.8vw, 2.6rem);
+.move-testimonials__heading-line {
   text-align: right;
+  margin: 0 0 5px;
 }
 
 .move-testimonials__panel .move-testimonials__intro {
-  margin-top: 1rem;
-  font-size: 1.06rem;
-  line-height: 1.7;
-  color: #5c4842;
+  display: none;
+}
+
+.move-testimonials__cta-wrapper {
+  margin-top: 2.2rem;
   text-align: right;
+}
+
+.move-testimonials__panel-cta {
+  background-color: #5c4842;
+  color: #f9f5f0;
 }
 
 @media screen and (min-width: 750px) {
