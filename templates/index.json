@@ -9,10 +9,11 @@
  */
 {
   "sections": {
-    "move_hero_pb33Lr": {
-      "type": "move-hero",
-      "name": "MOVE hero",
+    "move_hero_with_nav_CB6cgm": {
+      "type": "move-hero-with-nav",
+      "name": "MOVE hero + nav",
       "settings": {
+        "nav_menu": "hovedmeny",
         "heading": "Langsiktig livsstilsendring med støtte hele veien",
         "subheading": "Coaching, app og støtte som faktisk passer inn i tidsklemma.",
         "badge_text": "6, 9 eller 12 måneder – du velger tempoet.",
@@ -22,6 +23,7 @@
         "secondary_cta_link": "",
         "image": "shopify://shop_images/hero1.webp",
         "image_aspect_ratio": "portrait",
+        "image_overlay_opacity": 40,
         "layout": "text_left",
         "headline_style": "on_image",
         "background_variant": "cream",
@@ -39,7 +41,8 @@
         "padding_top": 32,
         "padding_bottom": 36,
         "container_alignment": "right",
-        "text_alignment": "right"
+        "text_alignment": "right",
+        "enable_depth_shadow": true
       }
     },
     "move_testimonials_hi4zgH": {
@@ -48,7 +51,6 @@
         "image_1": {
           "type": "image",
           "settings": {
-            "image": "",
             "tag": "",
             "caption": ""
           }
@@ -65,7 +67,6 @@
         "image_2": {
           "type": "image",
           "settings": {
-            "image": "",
             "tag": "",
             "caption": ""
           }
@@ -82,7 +83,6 @@
         "image_3": {
           "type": "image",
           "settings": {
-            "image": "",
             "tag": "",
             "caption": ""
           }
@@ -107,13 +107,23 @@
       ],
       "name": "MOVE testimonials",
       "settings": {
-        "heading": "Dette sier kvinnene i MOVE Coaching",
-        "intro": "Les hvordan kvinner i MOVE Coaching beskriver hverdagen før og etter små, realistiske endringer.",
+        "heading_line_1": "Opplevelser og",
+        "heading_line_1_size": 36,
+        "heading_line_1_color": "#5c4842",
+        "heading_line_2": "Tilbakemeldinger",
+        "heading_line_2_size": 36,
+        "heading_line_2_color": "#5c4842",
+        "heading_line_3": "MOVE Coaching",
+        "heading_line_3_size": 36,
+        "heading_line_3_color": "#ffffff",
+        "panel_cta_label": "Les mer",
+        "panel_cta_link": "",
         "heading_alignment": "center",
         "background_variant": "surface",
         "padding_top": 36,
         "padding_bottom": 32,
-        "color_scheme": "scheme-3"
+        "color_scheme": "scheme-3",
+        "enable_card_shadow": true
       }
     },
     "move_usps_AJiweM": {
@@ -193,7 +203,6 @@
       "settings": {
         "heading": "Følg oss i hverdagen",
         "intro": "Få et ærlig innblikk i hverdagen, mat, trening og små steg mot varig endring.",
-        "main_image": null,
         "default_cta_label": "Følg på Instagram",
         "instagram_label": "Aline på Instagram",
         "instagram_handle": "@coach.alineskk",
@@ -265,7 +274,7 @@
     }
   },
   "order": [
-    "move_hero_pb33Lr",
+    "move_hero_with_nav_CB6cgm",
     "move_brief_qrBEqe",
     "move_testimonials_hi4zgH",
     "move_usps_AJiweM",

@@ -37,6 +37,7 @@
     },
     "header": {
       "type": "move-header",
+      "disabled": true,
       "settings": {
         "logo_position": "top-center",
         "mobile_logo_position": "center",
