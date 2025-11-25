@@ -110,8 +110,15 @@ Primary organic channels today:
 - **Instagram – Aline (founder)**: `@coach.alineskk`  
   - URL: https://www.instagram.com/coach.alineskk/
   - Role: Personal story, hverdagsglimt, før/etter, reels og nær kommunikasjon med følgerne.
-- **Instagram – MOVE Coaching (brand)**: to be confirmed.  
-  - When available, document handle + URL here and mirror in `analytics_seo_crm.md`.
+- **Instagram – MOVE Coaching (brand)**: `@movecoaching.no`  
+  - URL: https://www.instagram.com/movecoaching.no/
+  - Role: App-hverdagen, kundehistorier, glimt fra coaching og fellesskap.
+- **Facebook – Aline (founder)**: `Aline Skancke Husby`  
+  - URL: https://www.facebook.com/aline.s.husby
+  - Role: Lengre innlegg, deling av artikler/innhold og relasjonell kommunikasjon.
+- **TikTok – Aline (founder)**: `@alineskk`  
+  - URL: https://www.tiktok.com/@alineskk
+  - Role: Kortformat video, hverdagsglimt, motivasjon og lavterskel tips.
 
 Guidelines:
 - Bruk samme tone som på nettsiden: varm, ærlig, realistisk og uten quick‑fix‑lovnader.
