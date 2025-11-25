@@ -3661,3 +3661,15 @@ details-disclosure > details {
     transform: translateX(100%) scaleX(0);
   }
 }
+
+/* Global header transparency override */
+.section-header,
+.section-header .header-wrapper,
+.section-header .header-wrapper.gradient,
+.section-header .header-wrapper[class*='color-'],
+.section-header .header {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border-bottom: none !important;
+}

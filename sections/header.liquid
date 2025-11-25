@@ -85,12 +85,16 @@
     box-shadow: none;
   }
 
-  .header-wrapper--border-bottom {
-    border-bottom: none;
+  /* Explicitly override the gradient background used on the header wrapper */
+.header-wrapper.gradient {
+    background-color: transparent !important;
+    background-image: none !important;
+    background: transparent !important;
+    background-attachment: initial !important;
   }
 
-  .header {
-    padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 3rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 3rem;
+  .header-wrapper--border-bottom {
+    border-bottom: none;
   }
 
   .section-header {
@@ -116,34 +120,43 @@
   }
 
   @media screen and (min-width: 990px) {
-    .header {
+    /* Desktop layout: icons on the left, logo in the middle, nav on the right
+       for the TOP-CENTER header variant used on your site */
+    .header.header--top-center {
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
-      /* Desktop layout: icons on the left, logo in the middle, nav on the right */
       grid-template-areas: 'icons heading navigation';
       grid-template-columns: auto 1fr auto;
       column-gap: 2rem;
     }
 
-    .header__icons {
+    .header--top-center .header__icons {
       justify-self: start;
       padding-right: 0;
     }
 
-    .header__inline-menu {
+    .header--top-center .header__inline-menu {
       justify-self: end;
       margin-left: 0;
     }
 
-    /* On the home template, stack nav items in a vertical column at the right edge */
-    .template-index .header__inline-menu > .list-menu--inline {
+    /* Stack nav items in a vertical column at the right edge on desktop */
+    .header--top-center .header__inline-menu > .list-menu--inline {
+      display: flex;
       flex-direction: column;
       align-items: flex-end;
       justify-content: flex-start;
-      gap: 0.4rem;
+      gap: 0; /* no extra gap between items */
     }
 
-    .template-index .header__inline-menu .list-menu__item {
+    /* Remove top/bottom padding from header menu items so they sit tightly */
+    .header--top-center .header__inline-menu .header__menu-item {
+      padding-top: 0;
+      padding-bottom: 0;
+      line-height: 1.2;
+    }
+
+    .header--top-center .header__inline-menu .list-menu__item {
       justify-content: flex-end;
     }
   }
