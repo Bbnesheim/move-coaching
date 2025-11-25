@@ -163,6 +163,37 @@
         "padding_top": 44,
         "padding_bottom": 36
       }
+    },
+    "move_social_media_97dAx3": {
+      "type": "move-social-media",
+      "blocks": {
+        "profile_eTXAK3": {
+          "type": "profile",
+          "settings": {
+            "profile_type": "aline",
+            "platform": "instagram",
+            "label": "Aline på Instagram",
+            "handle": "@coach.alineskk",
+            "url": "",
+            "description": "Personlig innhold fra Aline – hverdagsliv, refleksjoner og små seire fra MOVE-familien.",
+            "cta_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "profile_eTXAK3"
+      ],
+      "name": "MOVE social media",
+      "settings": {
+        "heading": "Følg oss i hverdagen",
+        "intro": "Få et ærlig innblikk i hverdagen, mat, trening og små steg mot varig endring.",
+        "default_cta_label": "Følg på Instagram",
+        "heading_alignment": "center",
+        "background_variant": "surface",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "color_scheme": ""
+      }
     }
   },
   "order": [
@@ -170,6 +201,7 @@
     "move_brief_qrBEqe",
     "move_testimonials_hi4zgH",
     "move_steps_FYE4Lf",
-    "featured_collection"
+    "featured_collection",
+    "move_social_media_97dAx3"
   ]
 }
