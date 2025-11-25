@@ -45,9 +45,16 @@
                 assign highlight = true
               endif
             endif
+
+            assign card_position_class = ''
+            if forloop.index == 1
+              assign card_position_class = ' move-pricing-table__card--primary'
+            elsif forloop.index == 2
+              assign card_position_class = ' move-pricing-table__card--secondary'
+            endif
           -%}
           <article
-            class="move-pricing-table__card{% if highlight %} move-pricing-table__card--highlight{% endif %}"
+            class="move-pricing-table__card{{ card_position_class }}{% if highlight %} move-pricing-table__card--highlight{% endif %}"
             {{ block.shopify_attributes }}
           >
             <header class="move-pricing-table__card-header">
@@ -287,11 +294,12 @@
         {
           "type": "plan",
           "settings": {
-            "plan_handle": "plan-6m",
-            "plan_name": "6 måneder – Halvårsboost",
-            "duration_label": "6 måneder",
-            "price_per_month": "2 999 kr",
-            "total_price": "Oppstartsgebyr kommer i tillegg"
+            "plan_handle": "plan-12m",
+            "plan_name": "12 måneder – Full livsstilsendring",
+            "duration_label": "12 måneder",
+            "price_per_month": "2 499 kr",
+            "total_price": "Gratis oppstart + 1 ekstra måned",
+            "badge": "Mest populær"
           }
         },
         {
@@ -307,12 +315,11 @@
         {
           "type": "plan",
           "settings": {
-            "plan_handle": "plan-12m",
-            "plan_name": "12 måneder – Full livsstilsendring",
-            "duration_label": "12 måneder",
-            "price_per_month": "2 499 kr",
-            "total_price": "Gratis oppstart + 1 ekstra måned",
-            "badge": "Mest populær"
+            "plan_handle": "plan-6m",
+            "plan_name": "6 måneder – Halvårsboost",
+            "duration_label": "6 måneder",
+            "price_per_month": "2 999 kr",
+            "total_price": "Oppstartsgebyr kommer i tillegg"
           }
         }
       ]
