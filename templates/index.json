@@ -34,6 +34,7 @@
     },
     "move_brief_qrBEqe": {
       "type": "move-brief",
+      "disabled": true,
       "name": "MOVE brief",
       "settings": {
         "heading": "Hva er MOVE Coaching?",
@@ -51,6 +52,8 @@
         "image_1": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/progresjon_15.webp",
+            "secondary_image": "shopify://shop_images/progresjon_14.webp",
             "tag": "",
             "caption": ""
           }
@@ -67,6 +70,8 @@
         "image_2": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/progresjon_6.webp",
+            "secondary_image": "shopify://shop_images/progresjon_7.webp",
             "tag": "",
             "caption": ""
           }
@@ -83,6 +88,8 @@
         "image_3": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/progresjon_1.webp",
+            "secondary_image": "shopify://shop_images/progresjon_1.webp",
             "tag": "",
             "caption": ""
           }
