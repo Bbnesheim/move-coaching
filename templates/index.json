@@ -44,6 +44,7 @@
     },
     "featured_collection": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "collection": "all",
         "products_to_show": 8,
@@ -120,7 +121,7 @@
   "order": [
     "move_hero_pb33Lr",
     "move_brief_qrBEqe",
-    "featured_collection",
-    "move_steps_FYE4Lf"
+    "move_steps_FYE4Lf",
+    "featured_collection"
   ]
 }
