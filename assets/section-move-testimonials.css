@@ -42,11 +42,10 @@
 .move-testimonials__arrow {
   position: absolute;
   top: 50%;
-  right: var(--page-width-padding, 1.6rem);
   transform: translateY(-50%);
   z-index: 3;
   background: transparent;
-  color: #f9f5f0; /* cream text */
+  color: var(--move-color-cream-background); /* cream */
   border: none;
   border-radius: 0;
   width: auto;
@@ -56,12 +55,29 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 3.4rem; /* larger scroll arrow */
+  font-size: 4rem; /* larger arrow icon without background */
   line-height: 1;
 }
 
-.move-testimonials__arrow:hover {
+.move-testimonials__arrow--next {
+  right: var(--page-width-padding, 1.6rem);
+}
+
+.move-testimonials__arrow--prev {
+  left: var(--page-width-padding, 1.6rem);
+}
+
+.move-testimonials__arrow--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.move-testimonials__arrow--next:hover {
   transform: translateY(-50%) translateX(2px);
+}
+
+.move-testimonials__arrow--prev:hover {
+  transform: translateY(-50%) translateX(-2px);
 }
 
 @media screen and (min-width: 750px) {
@@ -117,6 +133,21 @@
 
   .move-testimonials__content {
     padding-left: clamp(310px, 35%, 390px);
+  }
+
+  /* Move prev arrow to sit just to the right of the pink panel on desktop */
+  .move-testimonials__arrow--prev {
+    left: calc(clamp(310px, 35%, 390px) + 1.6rem);
+  }
+
+  /* Give the first scroller item some breathing room from the panel */
+  .move-testimonials--scroller .move-testimonials__grid {
+    padding-left: 1.6rem;
+  }
+
+  /* Push the very first card right so it doesn’t sit under the pink panel */
+  .move-testimonials--scroller .move-testimonials__item:first-child {
+    margin-left: 5rem;
   }
 }
 

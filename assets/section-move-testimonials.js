@@ -2,14 +2,25 @@ class MoveTestimonialsScroller {
   constructor(section) {
     this.section = section;
     this.track = section.querySelector('.move-testimonials__grid');
-    this.arrow = section.querySelector('.move-testimonials__arrow');
+    this.nextArrow = section.querySelector('.move-testimonials__arrow--next');
+    this.prevArrow = section.querySelector('.move-testimonials__arrow--prev');
 
-    if (!this.track || !this.arrow) return;
+    if (!this.track || !this.nextArrow) return;
 
-    this.arrow.addEventListener('click', () => this.scrollNext());
+    this.handleScroll = this.handleScroll.bind(this);
+
+    this.nextArrow.addEventListener('click', () => this.scrollBy(1));
+    if (this.prevArrow) {
+      this.prevArrow.addEventListener('click', () => this.scrollBy(-1));
+    }
+
+    this.track.addEventListener('scroll', this.handleScroll);
+
+    // Set initial arrow visibility based on starting scroll position
+    this.handleScroll();
   }
 
-  scrollNext() {
+  scrollBy(direction) {
     if (!this.track) return;
 
     const firstItem = this.track.querySelector('.move-testimonials__item');
@@ -23,9 +34,25 @@ class MoveTestimonialsScroller {
         24
     );
 
-    const delta = itemWidth + gap;
+    const delta = (itemWidth + gap) * direction;
 
     this.track.scrollBy({ left: delta, behavior: 'smooth' });
+  }
+
+  handleScroll() {
+    if (!this.track) return;
+
+    const maxScrollLeft = this.track.scrollWidth - this.track.clientWidth - 1;
+    const atStart = this.track.scrollLeft <= 0;
+    const atEnd = this.track.scrollLeft >= maxScrollLeft;
+
+    if (this.prevArrow) {
+      this.prevArrow.classList.toggle('move-testimonials__arrow--hidden', atStart);
+    }
+
+    if (this.nextArrow) {
+      this.nextArrow.classList.toggle('move-testimonials__arrow--hidden', atEnd);
+    }
   }
 }
 
