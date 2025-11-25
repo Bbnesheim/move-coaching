@@ -1,5 +1,11 @@
 {{ 'section-move-hero.css' | asset_url | stylesheet_tag }}
 
+{%- style -%}
+  #MoveHero-{{ section.id }}::after {
+    opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
+  }
+{%- endstyle -%}
+
 {%- liquid
   assign bg_class = ''
   case section.settings.background_variant
@@ -154,6 +160,16 @@
         { "value": "landscape", "label": "Landscape" }
       ],
       "default": "portrait"
+    },
+    {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "label": "Image overlay opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "default": 40
     },
     {
       "type": "select",
