@@ -156,6 +156,23 @@
               {%- endfor -%}
             </ul>
           </nav>
+
+          {%- if section.settings.primary_cta_label != blank -%}
+            <div class="move-hero__nav-overlay-cta-wrapper">
+              <a
+                {% if section.settings.primary_cta_link == blank %}
+                  role="link" aria-disabled="true"
+                {% else %}
+                  href="{{ section.settings.primary_cta_link }}"
+                {% endif %}
+                class="button button--primary move-hero__nav-overlay-cta"
+                data-move-hero-overlay-cta
+              >
+                {{- section.settings.primary_cta_label | escape -}}
+              </a>
+            </div>
+          {%- endif -%}
+
         </div>
       {%- endif -%}
     </div>
@@ -245,6 +262,25 @@
     const overlay = nav.querySelector('.move-hero__nav-overlay');
     if (!toggle || !overlay) return;
 
+    // Primary CTA inside the mobile hero nav overlay.
+    const overlayCta = overlay.querySelector('[data-move-hero-overlay-cta]');
+    const CTA_APPEAR_DELAY_MS = 3000;
+    const CTA_STORAGE_KEY = 'moveHeroNavOverlayCtaShown';
+    let ctaTimeoutId = null;
+    let hasShownOverlayCtaOnce = false;
+
+    if (overlayCta && window.localStorage) {
+      try {
+        hasShownOverlayCtaOnce = window.localStorage.getItem(CTA_STORAGE_KEY) === '1';
+      } catch (e) {}
+    }
+
+    // If the CTA has already been revealed in a previous visit, keep it
+    // visible immediately without re-running the delayed swoosh.
+    if (overlayCta && hasShownOverlayCtaOnce) {
+      overlayCta.classList.add('move-hero__nav-overlay-cta--visible');
+    }
+
     // State for the announcement gradient pulse in the overlay header.
     const PULSE_INTERVAL_MS = 5000;
     const PULSE_DURATION_MS = 1400;
@@ -322,6 +358,37 @@
         // Schedule the gradient animation for this open; it will
         // begin 5 seconds after the overlay is opened.
         schedulePulsesForCurrentOpen();
+
+        // On the very first time the overlay is opened, reveal the
+        // primary CTA after a short delay with a swoosh animation.
+        if (overlayCta && !hasShownOverlayCtaOnce) {
+          if (ctaTimeoutId) {
+            clearTimeout(ctaTimeoutId);
+          }
+
+          // Ensure CTA starts hidden for the first open.
+          overlayCta.classList.remove(
+            'move-hero__nav-overlay-cta--visible',
+            'move-hero__nav-overlay-cta--animate'
+          );
+
+          ctaTimeoutId = setTimeout(() => {
+            // If the overlay was closed before the delay elapsed, abort.
+            if (overlay.getAttribute('aria-hidden') === 'true') return;
+
+            overlayCta.classList.add(
+              'move-hero__nav-overlay-cta--visible',
+              'move-hero__nav-overlay-cta--animate'
+            );
+
+            hasShownOverlayCtaOnce = true;
+            if (window.localStorage) {
+              try {
+                window.localStorage.setItem(CTA_STORAGE_KEY, '1');
+              } catch (e) {}
+            }
+          }, CTA_APPEAR_DELAY_MS);
+        }
       } else {
         document.documentElement.classList.remove('move-hero-nav-open');
 
@@ -334,6 +401,19 @@
         if (firstPulseTimeoutId) {
           clearTimeout(firstPulseTimeoutId);
           firstPulseTimeoutId = null;
+        }
+
+        // If the overlay closes before the CTA has appeared on the
+        // very first open, cancel the pending reveal.
+        if (ctaTimeoutId) {
+          clearTimeout(ctaTimeoutId);
+          ctaTimeoutId = null;
+        }
+
+        // Remove the one-off swoosh animation class after it has run,
+        // but keep the CTA visible once it has been revealed.
+        if (overlayCta) {
+          overlayCta.classList.remove('move-hero__nav-overlay-cta--animate');
         }
       }
     };

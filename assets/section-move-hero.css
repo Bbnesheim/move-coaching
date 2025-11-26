@@ -495,6 +495,68 @@ html.move-hero-nav-open .announcement-bar-section .announcement-bar__link path {
   text-align: right;
 }
 
+/* Primary CTA inside the hero nav overlay.
+   Absolutely positioned so it doesn't affect menu alignment. */
+.move-hero__nav-overlay-cta-wrapper {
+  position: absolute;
+  right: 12.6rem; /* move CTA further left from screen edge */
+  bottom: 16vh; /* nudge CTA slightly further down */
+  z-index: 6; /* above overlay background and heading inside overlay */
+}
+
+.move-hero__nav-overlay-cta {
+  opacity: 0;
+  transform: translateY(16px) scale(0.96);
+  pointer-events: none;
+  /* Outline style: no fill, thicker brown border + white text on dark overlay */
+  background-color: transparent !important;
+  color: #ffffff !important;
+  border: 4px solid var(--move-color-brown-primary, #7c4a33) !important;
+  --color-button-text: 255, 255, 255; /* white text */
+  --alpha-button-background: 0;
+  --color-button-border: 124, 74, 51;
+  transition:
+    opacity var(--duration-medium, 220ms) var(--ease-out-slow, ease-out),
+    transform var(--duration-medium, 220ms) var(--ease-out-slow, ease-out),
+    background-color var(--duration-short, 150ms) ease-out,
+    border-color var(--duration-short, 150ms) ease-out;
+}
+
+.move-hero__nav-overlay-cta:hover,
+.move-hero__nav-overlay-cta:focus-visible {
+  background-color: rgba(124, 74, 51, 0.08) !important; /* very light brown wash */
+  border-color: var(--move-color-brown-primary, #7c4a33) !important;
+}
+
+/* Once revealed, the CTA stays visible on subsequent overlay opens. */
+.move-hero__nav-overlay-cta--visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* One-off swoosh animation the first time the CTA appears. */
+.move-hero__nav-overlay-cta--animate {
+  animation: move-hero-nav-overlay-cta-swoosh 420ms var(--ease-out-slow, ease-out);
+}
+
+@keyframes move-hero-nav-overlay-cta-swoosh {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.9);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.03);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 /* Breakpoint behavior: below 955px, hide inline column menu and show hamburger */
 @media screen and (max-width: 954px) {
   .move-hero__nav-menu--inline {
