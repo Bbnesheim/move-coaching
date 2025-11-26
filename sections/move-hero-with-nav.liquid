@@ -265,21 +265,9 @@
     // Primary CTA inside the mobile hero nav overlay.
     const overlayCta = overlay.querySelector('[data-move-hero-overlay-cta]');
     const CTA_APPEAR_DELAY_MS = 3000;
-    const CTA_STORAGE_KEY = 'moveHeroNavOverlayCtaShown';
     let ctaTimeoutId = null;
+    // Tracks whether the CTA has appeared at least once for this page view.
     let hasShownOverlayCtaOnce = false;
-
-    if (overlayCta && window.localStorage) {
-      try {
-        hasShownOverlayCtaOnce = window.localStorage.getItem(CTA_STORAGE_KEY) === '1';
-      } catch (e) {}
-    }
-
-    // If the CTA has already been revealed in a previous visit, keep it
-    // visible immediately without re-running the delayed swoosh.
-    if (overlayCta && hasShownOverlayCtaOnce) {
-      overlayCta.classList.add('move-hero__nav-overlay-cta--visible');
-    }
 
     // State for the announcement gradient pulse in the overlay header.
     const PULSE_INTERVAL_MS = 5000;
@@ -359,8 +347,8 @@
         // begin 5 seconds after the overlay is opened.
         schedulePulsesForCurrentOpen();
 
-        // On the very first time the overlay is opened, reveal the
-        // primary CTA after a short delay with a swoosh animation.
+        // On the very first time the overlay is opened in this page view,
+        // reveal the primary CTA after a short delay with a swoosh.
         if (overlayCta && !hasShownOverlayCtaOnce) {
           if (ctaTimeoutId) {
             clearTimeout(ctaTimeoutId);
@@ -382,11 +370,6 @@
             );
 
             hasShownOverlayCtaOnce = true;
-            if (window.localStorage) {
-              try {
-                window.localStorage.setItem(CTA_STORAGE_KEY, '1');
-              } catch (e) {}
-            }
           }, CTA_APPEAR_DELAY_MS);
         }
       } else {

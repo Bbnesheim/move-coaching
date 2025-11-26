@@ -542,18 +542,24 @@ html.move-hero-nav-open .announcement-bar-section .announcement-bar__link path {
 
 @keyframes move-hero-nav-overlay-cta-swoosh {
   0% {
+    /* Completely hidden, clipped from the right so we can reveal from left → right */
     opacity: 0;
-    transform: translateY(18px) scale(0.9);
+    transform: translateX(-8px);
+    clip-path: inset(0 100% 0 0);
   }
 
   60% {
+    /* Most of the swoosh: fully revealed, aligned in place */
     opacity: 1;
-    transform: translateY(-4px) scale(1.03);
+    transform: translateX(0);
+    clip-path: inset(0 0 0 0);
   }
 
   100% {
+    /* Final resting state */
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateX(0);
+    clip-path: inset(0 0 0 0);
   }
 }
 
