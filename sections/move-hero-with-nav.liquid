@@ -125,9 +125,32 @@
         {%- endif -%}
 
         <div class="move-hero__headline-layer move-hero__headline-layer--{{ section.settings.headline_style }}">
-          {%- if section.settings.heading != blank -%}
+          {%- if section.settings.heading_line_1 != blank or section.settings.heading_line_2 != blank or section.settings.heading_line_3 != blank -%}
             <h1 class="move-hero__heading h1">
-              {{ section.settings.heading }}
+              {%- if section.settings.heading_line_1 != blank -%}
+                <span
+                  class="move-hero__heading-line move-hero__heading-line--1"
+                  style="font-size: {{ section.settings.heading_line_1_font_size }}px;"
+                >
+                  {{ section.settings.heading_line_1 }}
+                </span>
+              {%- endif -%}
+              {%- if section.settings.heading_line_2 != blank -%}
+                <span
+                  class="move-hero__heading-line move-hero__heading-line--2"
+                  style="font-size: {{ section.settings.heading_line_2_font_size }}px;"
+                >
+                  {{ section.settings.heading_line_2 }}
+                </span>
+              {%- endif -%}
+              {%- if section.settings.heading_line_3 != blank -%}
+                <span
+                  class="move-hero__heading-line move-hero__heading-line--3"
+                  style="font-size: {{ section.settings.heading_line_3_font_size }}px;"
+                >
+                  {{ section.settings.heading_line_3 }}
+                </span>
+              {%- endif -%}
             </h1>
           {%- endif -%}
 
@@ -344,10 +367,56 @@
       "label": "Hero navigation menu"
     },
     {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
       "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Langsiktig livsstilsendring med støtte hele veien"
+      "id": "heading_line_1",
+      "label": "Line 1",
+      "default": "Målet er å<br> få overskudd,"
+    },
+    {
+      "type": "range",
+      "id": "heading_line_1_font_size",
+      "label": "Line 1 font size (px)",
+      "min": 20,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "default": 33
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Line 2",
+      "default": "og veien tar",
+    },
+    {
+      "type": "range",
+      "id": "heading_line_2_font_size",
+      "label": "Line 2 font size (px)",
+      "min": 20,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "default": 42
+    },
+    {
+      "type": "text",
+      "id": "heading_line_3",
+      "label": "Line 3",
+      "default": "vi sammen",
+    },
+    {
+      "type": "range",
+      "id": "heading_line_3_font_size",
+      "label": "Line 3 font size (px)",
+      "min": 20,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "default": 32
     },
     {
       "type": "textarea",
