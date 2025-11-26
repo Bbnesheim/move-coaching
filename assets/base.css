@@ -176,6 +176,15 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
     padding-left: 3.2rem;
     padding-right: 3.2rem;
   }
+}
+
+/* Mobile: let announcement bar text use a wider portion of the section */
+@media screen and (max-width: 749px) {
+  .announcement-bar-section .utility-bar__grid.page-width {
+    padding-left: 1.5rem; /* match base page-width gutter instead of the larger utility default */
+    padding-right: 1.5rem;
+  }
+}
 
   .page-width--narrow {
     padding: 0 9rem;
@@ -2206,8 +2215,9 @@ input[type='checkbox'] {
 
   .announcement-bar.announcement-bar--one-announcement,
   .announcement-bar--one-announcement .announcement-bar__link {
-    width: fit-content;
-    margin: auto;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 
@@ -2217,11 +2227,12 @@ input[type='checkbox'] {
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: flex-start; /* icon + text aligned to the left */
+  justify-content: center; /* center the content in the bar */
   align-items: center;
   flex-wrap: nowrap;
   align-content: center;
   grid-area: announcements;
+  position: relative; /* allow back arrow to be pinned to the far left */
 }
 
 .announcement-bar .slider--everywhere {
@@ -2282,11 +2293,25 @@ input[type='checkbox'] {
   }
 
   .announcement-bar-slider {
-    width: 60%;
+    width: 100%; /* let the announcement block reach further to the sides */
   }
 
   .announcement-bar .slider-button {
     height: 3.8rem;
+  }
+}
+
+/* Mobile: keep content centered while arrow sits in outer margin */
+@media screen and (max-width: 989px) {
+  .announcement-bar,
+  .announcement-bar__announcement {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .announcement-bar__message {
+    width: 100%;
+    justify-content: center;
   }
 }
 
@@ -2316,10 +2341,16 @@ input[type='checkbox'] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-left: 0.5rem; /* push slightly past the text container towards screen edge */
-  margin-right: 1.0rem;
+  position: absolute;
+  left: -0.5rem; /* nudge arrow slightly to the right on mobile */
   color: rgb(var(--color-foreground));
   text-decoration: none;
+}
+
+@media screen and (min-width: 750px) {
+  .announcement-bar__back-link {
+    left: -2.8rem; /* keep wider offset on tablet/desktop */
+  }
 }
 
 .announcement-bar__back-icon {
@@ -2331,8 +2362,8 @@ input[type='checkbox'] {
 .announcement-bar__message {
   display: inline-flex;
   align-items: center;
-  text-align: left;
-  padding: 1rem 0;
+  text-align: center;
+  padding: 1.1rem 0 0.9rem; /* nudge text very slightly downward */
   margin: 0;
   /* Match hero overlay announcement typography */
   letter-spacing: 0.08rem;
@@ -2341,7 +2372,7 @@ input[type='checkbox'] {
   font-family: var(--font-body-family);
   font-style: var(--font-body-style);
   font-weight: var(--font-body-weight);
-  font-size: 1rem;
+  font-size: 0.9rem; /* slightly smaller to match overlay copy */
 }
 
 .announcement-bar-slider--fade-in-next .announcement-bar__message,

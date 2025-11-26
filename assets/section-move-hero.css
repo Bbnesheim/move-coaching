@@ -383,11 +383,11 @@ html.move-hero-nav-open .announcement-bar-section .announcement-bar__link path {
 /* Cloned announcement text inside the hero mobile nav overlay */
 .move-hero__nav-announcement {
   position: absolute;
-  top: 0.1rem;
+  top: 0.25rem; /* nudge text slightly downward to match announcement bar placement */
   left: 50%;
   transform: translateX(-50%);
   color: #ffffff;
-  font-size: 1rem;
+  font-size: 0.9rem; /* match announcement bar text size */
   letter-spacing: 0.08rem;
   text-transform: uppercase;
   white-space: nowrap;
