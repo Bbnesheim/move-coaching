@@ -180,6 +180,19 @@
     const overlay = nav.querySelector('.move-hero__nav-overlay');
     if (!toggle || !overlay) return;
 
+    // Mirror the current announcement bar text into the hero mobile
+    // navigation overlay so it appears as part of the overlay header.
+    const announcementSource =
+      document.querySelector('.announcement-bar__message span') ||
+      document.querySelector('.announcement-bar__announcement .announcement-bar__message span');
+
+    if (announcementSource && !overlay.querySelector('.move-hero__nav-announcement')) {
+      const overlayAnnouncement = document.createElement('p');
+      overlayAnnouncement.className = 'move-hero__nav-announcement';
+      overlayAnnouncement.textContent = announcementSource.textContent;
+      overlay.insertBefore(overlayAnnouncement, overlay.firstChild);
+    }
+
     const openClass = 'move-hero__nav--open';
 
     const setState = (isOpen) => {

@@ -32,6 +32,15 @@
         aria-label="{{ 'sections.header.announcement' | t }}"
         {{ section.blocks.first.shopify_attributes }}
       >
+        {% unless template == 'index' %}
+          <a
+            href="{{ routes.root_url }}"
+            class="announcement-bar__back-link"
+          >
+            <span class="announcement-bar__back-icon">&lt;</span>
+            <span class="visually-hidden">Til forsiden</span>
+          </a>
+        {% endunless %}
         {%- if section.blocks.first.settings.text != blank -%}
           {%- if section.blocks.first.settings.link != blank -%}
             <a
@@ -41,9 +50,6 @@
           {%- endif -%}
           <p class="announcement-bar__message h5">
             <span>{{ section.blocks.first.settings.text | escape }}</span>
-            {%- if section.blocks.first.settings.link != blank -%}
-              {{- 'icon-arrow.svg' | inline_asset_content -}}
-            {%- endif -%}
           </p>
           {%- if section.blocks.first.settings.link != blank -%}
             </a>
@@ -92,6 +98,15 @@
                   role="region"
                   aria-label="{{ 'sections.header.announcement' | t }}"
                 >
+                  {% unless template == 'index' %}
+                    <a
+                      href="{{ routes.root_url }}"
+                      class="announcement-bar__back-link"
+                    >
+                      <span class="announcement-bar__back-icon">&lt;</span>
+                      <span class="visually-hidden">Til forsiden</span>
+                    </a>
+                  {% endunless %}
                   {%- if block.settings.text != blank -%}
                     {%- if block.settings.link != blank -%}
                       <a
@@ -101,9 +116,6 @@
                     {%- endif -%}
                     <p class="announcement-bar__message h5">
                       <span>{{ block.settings.text | escape }}</span>
-                      {%- if block.settings.link != blank -%}
-                        {{- 'icon-arrow.svg' | inline_asset_content -}}
-                      {%- endif -%}
                     </p>
                     {%- if block.settings.link != blank -%}
                       </a>

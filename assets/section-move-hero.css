@@ -353,6 +353,47 @@ html.move-hero-nav-open {
   overflow: hidden;
 }
 
+/* When the hero mobile nav overlay is open, keep the announcement bar
+   visually above the overlay and make its content render "inside" the
+   dark overlay by using a transparent background and white text. */
+.announcement-bar-section .utility-bar {
+  position: relative;
+  z-index: 7; /* above hero nav (5) and overlay (4) */
+}
+
+html.move-hero-nav-open .announcement-bar-section .utility-bar,
+html.move-hero-nav-open .announcement-bar-section .announcement-bar,
+html.move-hero-nav-open .announcement-bar-section .announcement-bar__announcement {
+  background: transparent !important;
+  box-shadow: none;
+}
+
+html.move-hero-nav-open .announcement-bar-section .announcement-bar__message,
+html.move-hero-nav-open .announcement-bar-section .announcement-bar__message span,
+html.move-hero-nav-open .announcement-bar-section .announcement-bar__link {
+  color: #ffffff !important;
+}
+
+html.move-hero-nav-open .announcement-bar-section .announcement-bar__link svg,
+html.move-hero-nav-open .announcement-bar-section .announcement-bar__link path {
+  fill: #ffffff;
+  stroke: #ffffff;
+}
+
+/* Cloned announcement text inside the hero mobile nav overlay */
+.move-hero__nav-announcement {
+  position: absolute;
+  top: 0.1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffffff;
+  font-size: 1rem;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none; /* don't block taps on close icon or nav */
+}
+
 /* Overlay menu layout: right-aligned column of links */
 .move-hero__nav-menu--overlay .move-hero__nav-list {
   flex-direction: column;
