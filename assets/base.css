@@ -2316,8 +2316,8 @@ input[type='checkbox'] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-left: 0.2rem; /* closer to the left edge */
-  margin-right: 0.8rem;
+  margin-left: -2rem; /* push slightly past the text container towards screen edge */
+  margin-right: 1.0rem;
   color: rgb(var(--color-foreground));
   text-decoration: none;
 }
