@@ -381,6 +381,42 @@ html.move-hero-nav-open .announcement-bar-section .announcement-bar__link path {
   stroke: #ffffff;
 }
 
+/* Cloned hero heading inside the hero mobile nav overlay.
+   Uses the same three heading lines + font sizes as the hero, but overlay-specific colors. */
+.move-hero__nav-overlay-heading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-start; /* align with top of hero content rather than center */
+  justify-content: flex-start;
+  padding-top: 22.6vh; /* move heading down from top; tweak to match hero heading position */
+  padding-left: 5vw; /* tweak to roughly align with hero heading */
+  padding-right: 8vw;
+  pointer-events: none; /* heading is decorative in overlay; menu handles interaction */
+}
+
+.move-hero__heading--overlay,
+.move-hero__heading--overlay .move-hero__heading-line {
+  color: #000000;
+}
+
+/* Colored MOVE letters inside the overlay heading */
+.move-hero__heading--overlay .move-hero__nav-overlay-letter--m {
+  color: #ffffff !important;
+}
+
+.move-hero__heading--overlay .move-hero__nav-overlay-letter--o {
+  color: var(--move-color-pink-secondary, #f5b5c4) !important;
+}
+
+.move-hero__heading--overlay .move-hero__nav-overlay-letter--v {
+  color: var(--move-color-brown-primary, #7c4a33) !important;
+}
+
+.move-hero__heading--overlay .move-hero__nav-overlay-letter--e {
+  color: var(--move-color-cream, #fbe9de) !important;
+}
+
 /* Cloned announcement text inside the hero mobile nav overlay */
 .move-hero__nav-announcement {
   position: absolute;

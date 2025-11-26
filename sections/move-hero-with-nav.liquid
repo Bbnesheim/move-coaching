@@ -100,6 +100,48 @@
         </button>
 
         <div class="move-hero__nav-overlay" id="MoveHeroNavOverlay-{{ section.id }}" aria-hidden="true">
+          <!-- Clone of the hero heading inside the overlay -->
+          <div class="move-hero__nav-overlay-heading" aria-hidden="true">
+            {%- if section.settings.heading_line_1 != blank
+              or section.settings.heading_line_2 != blank
+              or section.settings.heading_line_3 != blank
+            -%}
+              <h1 class="move-hero__heading h1 move-hero__heading--overlay">
+                {%- if section.settings.heading_line_1 != blank -%}
+                  {% assign heading_overlay_line_1 = section.settings.heading_line_1
+                    | replace_first: 'M', "<span class='move-hero__nav-overlay-letter move-hero__nav-overlay-letter--m'>M</span>"
+                    | replace_first: 'overskudd', "<span class='move-hero__nav-overlay-letter move-hero__nav-overlay-letter--o'>o</span>verskudd" %}
+                  <span
+                    class="move-hero__heading-line move-hero__heading-line--1"
+                    style="font-size: {{ section.settings.heading_line_1_font_size }}px;"
+                  >
+                    {{ heading_overlay_line_1 }}
+                  </span>
+                {%- endif -%}
+                {%- if section.settings.heading_line_2 != blank -%}
+                  {% assign heading_overlay_line_2 = section.settings.heading_line_2
+                    | replace_first: 'veien', "<span class='move-hero__nav-overlay-letter move-hero__nav-overlay-letter--v'>v</span>eien" %}
+                  <span
+                    class="move-hero__heading-line move-hero__heading-line--2"
+                    style="font-size: {{ section.settings.heading_line_2_font_size }}px;"
+                  >
+                    {{ heading_overlay_line_2 }}
+                  </span>
+                {%- endif -%}
+                {%- if section.settings.heading_line_3 != blank -%}
+                  {% assign heading_overlay_line_3 = section.settings.heading_line_3
+                    | replace_first: 'sammen', "samm<span class='move-hero__nav-overlay-letter move-hero__nav-overlay-letter--e'>e</span>n" %}
+                  <span
+                    class="move-hero__heading-line move-hero__heading-line--3"
+                    style="font-size: {{ section.settings.heading_line_3_font_size }}px;"
+                  >
+                    {{ heading_overlay_line_3 }}
+                  </span>
+                {%- endif -%}
+              </h1>
+            {%- endif -%}
+          </div>
+
           <nav class="move-hero__nav-menu move-hero__nav-menu--overlay" aria-label="Hovedmeny">
             <ul class="move-hero__nav-list" role="list">
               {%- for link in section.settings.nav_menu.links -%}
