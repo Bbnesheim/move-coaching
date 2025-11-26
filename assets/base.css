@@ -2316,7 +2316,7 @@ input[type='checkbox'] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-left: -2rem; /* push slightly past the text container towards screen edge */
+  margin-left: 0.5rem; /* push slightly past the text container towards screen edge */
   margin-right: 1.0rem;
   color: rgb(var(--color-foreground));
   text-decoration: none;
@@ -3688,28 +3688,3 @@ details-disclosure > details {
   }
 }
 
-/* Global header transparency override */
-.section-header,
-.section-header .header-wrapper,
-.section-header .header-wrapper.gradient,
-.section-header .header-wrapper[class*='color-'],
-.section-header .header {
-  background: transparent !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
-  border-bottom: none !important;
-}
-
-/* Global header transparency override – must stay at the very end of base.css */
-.section-header .header-wrapper,
-.section-header .header-wrapper.gradient,
-.section-header .header-wrapper[class*='color-'],
-.section-header .header-wrapper--border-bottom,
-.section-header .header {
-  background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
-  background-attachment: initial !important;
-  box-shadow: none !important;
-  border-bottom: none !important;
-}
