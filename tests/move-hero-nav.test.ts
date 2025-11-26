@@ -86,6 +86,14 @@ function createDomWithHeroNav(options?: { withAnnouncementBar?: boolean }): Hero
   innerNav.className = 'move-hero__nav-menu move-hero__nav-menu--overlay';
   overlay.appendChild(innerNav);
 
+  // Minimal primary CTA inside the overlay to exercise the swoosh
+  // animation behavior implemented in initMoveHeroNav.
+  const overlayCta = document.createElement('a');
+  overlayCta.className = 'button button--primary move-hero__nav-overlay-cta';
+  overlayCta.setAttribute('data-move-hero-overlay-cta', '');
+  overlayCta.textContent = 'Test CTA';
+  overlay.appendChild(overlayCta);
+
   nav.appendChild(toggle);
   nav.appendChild(overlay);
   section.appendChild(nav);
@@ -198,6 +206,106 @@ describe('MOVE hero mobile navigation behavior', () => {
     toggle.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
     expect(nav.classList.contains('move-hero__nav--open')).toBe(false);
     expect(htmlEl.classList.contains('move-hero-nav-open')).toBe(false);
+  });
+
+  test('CTA swoosh animation runs on first overlay open in a page view', () => {
+    jest.useFakeTimers();
+
+    const { dom, toggle, overlay } = createDomWithHeroNav();
+    const overlayCta = overlay.querySelector('[data-move-hero-overlay-cta]') as HTMLElement | null;
+    const VISIBLE_CLASS = 'move-hero__nav-overlay-cta--visible';
+    const ANIMATE_CLASS = 'move-hero__nav-overlay-cta--animate';
+
+    expect(overlayCta).not.toBeNull();
+    if (!overlayCta) return;
+
+    // Initially, the CTA should not have the swoosh classes applied.
+    expect(overlayCta.classList.contains(VISIBLE_CLASS)).toBe(false);
+    expect(overlayCta.classList.contains(ANIMATE_CLASS)).toBe(false);
+
+    // Open the overlay; this should schedule the delayed CTA reveal.
+    toggle.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+
+    // Before the CTA_APPEAR_DELAY_MS elapses, no animation should have run.
+    jest.advanceTimersByTime(2999); // CTA_APPEAR_DELAY_MS - 1
+    expect(overlayCta.classList.contains(VISIBLE_CLASS)).toBe(false);
+    expect(overlayCta.classList.contains(ANIMATE_CLASS)).toBe(false);
+
+    // Once the delay has fully elapsed, the CTA should swoosh in.
+    jest.advanceTimersByTime(1); // reach CTA_APPEAR_DELAY_MS (3000ms)
+    expect(overlay.getAttribute('aria-hidden')).toBe('false');
+    expect(overlayCta.classList.contains(VISIBLE_CLASS)).toBe(true);
+    expect(overlayCta.classList.contains(ANIMATE_CLASS)).toBe(true);
+  });
+
+  test('CTA swoosh animation does not rerun on subsequent opens in the same page view', () => {
+    jest.useFakeTimers();
+
+    const { dom, nav, toggle, overlay } = createDomWithHeroNav();
+    const overlayCta = overlay.querySelector('[data-move-hero-overlay-cta]') as HTMLElement | null;
+    const VISIBLE_CLASS = 'move-hero__nav-overlay-cta--visible';
+    const ANIMATE_CLASS = 'move-hero__nav-overlay-cta--animate';
+
+    expect(overlayCta).not.toBeNull();
+    if (!overlayCta) return;
+
+    // First open: let the swoosh animation run to completion.
+    toggle.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+    jest.advanceTimersByTime(3000); // CTA_APPEAR_DELAY_MS
+    expect(overlayCta.classList.contains(VISIBLE_CLASS)).toBe(true);
+    expect(overlayCta.classList.contains(ANIMATE_CLASS)).toBe(true);
+
+    // Close the overlay; this should remove the one-off animation class
+    // but keep the CTA visible.
+    toggle.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+    expect(nav.classList.contains('move-hero__nav--open')).toBe(false);
+    expect(overlayCta.classList.contains(VISIBLE_CLASS)).toBe(true);
+    expect(overlayCta.classList.contains(ANIMATE_CLASS)).toBe(false);
+
+    // Reopen the overlay in the same page view.
+    toggle.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+    expect(nav.classList.contains('move-hero__nav--open')).toBe(true);
+
+    // Advance time well past the original delay; since the CTA has
+    // already been shown once in this page view, no new swoosh should run.
+    jest.advanceTimersByTime(3000 + 1000);
+    expect(overlayCta.classList.contains(VISIBLE_CLASS)).toBe(true);
+    expect(overlayCta.classList.contains(ANIMATE_CLASS)).toBe(false);
+  });
+
+  test('CTA swoosh animation runs again after a simulated page reload', () => {
+    jest.useFakeTimers();
+
+    // First "page view" – open the overlay once and let the swoosh run.
+    const firstView = createDomWithHeroNav();
+    const firstOverlayCta = firstView.overlay.querySelector('[data-move-hero-overlay-cta]') as HTMLElement | null;
+    const VISIBLE_CLASS = 'move-hero__nav-overlay-cta--visible';
+    const ANIMATE_CLASS = 'move-hero__nav-overlay-cta--animate';
+
+    expect(firstOverlayCta).not.toBeNull();
+    if (!firstOverlayCta) return;
+
+    firstView.toggle.dispatchEvent(new firstView.dom.window.MouseEvent('click', { bubbles: true }));
+    jest.advanceTimersByTime(3000); // CTA_APPEAR_DELAY_MS
+    expect(firstOverlayCta.classList.contains(VISIBLE_CLASS)).toBe(true);
+    expect(firstOverlayCta.classList.contains(ANIMATE_CLASS)).toBe(true);
+
+    // Simulate navigating away / reloading by creating a fresh DOM and
+    // re-running initMoveHeroNav via createDomWithHeroNav.
+    jest.clearAllTimers();
+
+    const secondView = createDomWithHeroNav();
+    const secondOverlayCta = secondView.overlay.querySelector('[data-move-hero-overlay-cta]') as HTMLElement | null;
+
+    expect(secondOverlayCta).not.toBeNull();
+    if (!secondOverlayCta) return;
+
+    // On the first overlay open in this new page view, the swoosh should
+    // run again after the configured delay.
+    secondView.toggle.dispatchEvent(new secondView.dom.window.MouseEvent('click', { bubbles: true }));
+    jest.advanceTimersByTime(3000); // CTA_APPEAR_DELAY_MS
+    expect(secondOverlayCta.classList.contains(VISIBLE_CLASS)).toBe(true);
+    expect(secondOverlayCta.classList.contains(ANIMATE_CLASS)).toBe(true);
   });
 
   test('runAnnouncementPulse adds and then removes the animation class', () => {

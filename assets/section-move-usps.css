@@ -8,6 +8,29 @@
   align-items: stretch;
 }
 
+/* On small screens, stack with the image column first */
+@media screen and (max-width: 899px) {
+  .move-usps__layout {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .move-usps__column--right {
+    order: -1;
+  }
+
+  /* Slightly crop and shorten the hero image so it doesn't dominate the viewport */
+  .move-usps__image-wrapper {
+    max-height: 380px;
+    overflow: hidden;
+  }
+
+  .move-usps__image {
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
 @media screen and (min-width: 900px) {
   .move-usps__layout {
     grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
@@ -114,12 +137,30 @@
 
 .move-usps__image-wrapper {
   width: 100%;
-  height: 100%;
 }
 
 .move-usps__image {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
+}
+
+/* Desktop: make the image match the height of the USP column */
+@media screen and (min-width: 900px) {
+  .move-usps__column--right {
+    display: flex;
+  }
+
+  .move-usps__image-wrapper {
+    position: relative;
+    height: 100%;
+    flex: 1 1 auto;
+  }
+
+  .move-usps__image {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+  }
 }
