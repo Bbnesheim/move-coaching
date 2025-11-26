@@ -392,6 +392,58 @@ html.move-hero-nav-open .announcement-bar-section .announcement-bar__link path {
   text-transform: uppercase;
   white-space: nowrap;
   pointer-events: none; /* don't block taps on close icon or nav */
+  /* Prepare a brand gradient that we can reveal during the pulse.
+     By default the text remains solid white; during the animation we
+     switch to transparent text so the gradient shows through. */
+  background-image: linear-gradient(
+    120deg,
+    var(--move-color-pink-secondary),
+    var(--move-color-brown-primary),
+    var(--move-color-pink-secondary)
+  );
+  /* Slightly larger background so the bright band is a narrower swoosh
+     moving across the text instead of flooding it all at once. */
+  background-size: 300% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: #ffffff;
+}
+
+/* Applied by JS for a short burst every 5 seconds. */
+.move-hero__nav-announcement--animate {
+  animation: move-hero-nav-announcement-gradient-pulse 1.4s ease-out;
+}
+
+@keyframes move-hero-nav-announcement-gradient-pulse {
+  0% {
+    background-position: 100% 0; /* start from the right */
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+  }
+
+  25% {
+    background-position: 85% 0;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+  }
+
+  35% {
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  70% {
+    background-position: 0 0; /* sweep toward the left */
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  100% {
+    background-position: 0 0;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+  }
 }
 
 /* Overlay menu layout: right-aligned column of links */

@@ -180,6 +180,55 @@
     const overlay = nav.querySelector('.move-hero__nav-overlay');
     if (!toggle || !overlay) return;
 
+    // State for the announcement gradient pulse in the overlay header.
+    const PULSE_INTERVAL_MS = 5000;
+    const PULSE_DURATION_MS = 1400;
+    const FIRST_PULSE_DELAY_MS = 5000;
+    let overlayAnnouncement = null;
+    let pulseIntervalId = null;
+    let firstPulseTimeoutId = null;
+
+    const runAnnouncementPulse = () => {
+      if (!overlayAnnouncement || !document.body.contains(overlayAnnouncement)) return;
+      overlayAnnouncement.classList.add('move-hero__nav-announcement--animate');
+      setTimeout(() => {
+        if (!overlayAnnouncement || !document.body.contains(overlayAnnouncement)) return;
+        overlayAnnouncement.classList.remove('move-hero__nav-announcement--animate');
+      }, PULSE_DURATION_MS);
+    };
+
+    const schedulePulsesForCurrentOpen = () => {
+      if (!overlayAnnouncement) return;
+
+      // Clear any previous timers in case we're reopening quickly.
+      if (firstPulseTimeoutId) {
+        clearTimeout(firstPulseTimeoutId);
+        firstPulseTimeoutId = null;
+      }
+      if (pulseIntervalId) {
+        clearInterval(pulseIntervalId);
+        pulseIntervalId = null;
+      }
+
+      // Wait 5 seconds after the overlay has been opened before
+      // starting the gradient pulse loop for this open session.
+      firstPulseTimeoutId = setTimeout(() => {
+        // If the overlay is no longer open when the delay expires, abort.
+        if (overlay.getAttribute('aria-hidden') === 'true') return;
+
+        runAnnouncementPulse();
+
+        pulseIntervalId = setInterval(() => {
+          if (overlay.getAttribute('aria-hidden') === 'true') {
+            clearInterval(pulseIntervalId);
+            pulseIntervalId = null;
+            return;
+          }
+          runAnnouncementPulse();
+        }, PULSE_INTERVAL_MS);
+      }, FIRST_PULSE_DELAY_MS);
+    };
+
     // Mirror the current announcement bar text into the hero mobile
     // navigation overlay so it appears as part of the overlay header.
     const announcementSource =
@@ -187,10 +236,12 @@
       document.querySelector('.announcement-bar__announcement .announcement-bar__message span');
 
     if (announcementSource && !overlay.querySelector('.move-hero__nav-announcement')) {
-      const overlayAnnouncement = document.createElement('p');
+      overlayAnnouncement = document.createElement('p');
       overlayAnnouncement.className = 'move-hero__nav-announcement';
       overlayAnnouncement.textContent = announcementSource.textContent;
       overlay.insertBefore(overlayAnnouncement, overlay.firstChild);
+    } else {
+      overlayAnnouncement = overlay.querySelector('.move-hero__nav-announcement');
     }
 
     const openClass = 'move-hero__nav--open';
@@ -203,8 +254,22 @@
 
       if (isOpen) {
         document.documentElement.classList.add('move-hero-nav-open');
+        // Schedule the gradient animation for this open; it will
+        // begin 5 seconds after the overlay is opened.
+        schedulePulsesForCurrentOpen();
       } else {
         document.documentElement.classList.remove('move-hero-nav-open');
+
+        // Stop pulsing once the overlay is closed so we don't animate
+        // hidden content, and clear any pending first pulse timeout.
+        if (pulseIntervalId) {
+          clearInterval(pulseIntervalId);
+          pulseIntervalId = null;
+        }
+        if (firstPulseTimeoutId) {
+          clearTimeout(firstPulseTimeoutId);
+          firstPulseTimeoutId = null;
+        }
       }
     };
 
