@@ -446,6 +446,18 @@
   font-size: 1.1rem;
 }
 
+/* Developer & company info spacing */
+.footer__business-info {
+  display: block;
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.copyright__content--developer {
+  display: block;
+  margin-top: 1rem;
+}
+
 .copyright__content a {
   color: currentColor;
   text-decoration: none;
