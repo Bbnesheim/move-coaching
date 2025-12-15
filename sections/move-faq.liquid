@@ -128,13 +128,13 @@
           "type": "text",
           "id": "question",
           "label": "Question",
-          "default": "Hvordan fungerer MOVE Coaching i praksis?"
+          "default": "Hvor ofte oppdateres planen?"
         },
         {
           "type": "richtext",
           "id": "answer",
           "label": "Answer",
-          "default": "<p>Du får personlig oppfølging av Aline kombinert med MOVE-appen, ukentlige check-ins og støtte som tar hensyn til familie, jobb og energi.</p>"
+          "default": "<p>Så ofte som nødvendig – vanligvis hver 2.–4. uke.</p>"
         }
       ]
     }
@@ -144,9 +144,48 @@
       "name": "MOVE FAQ",
       "category": "MOVE",
       "blocks": [
-        { "type": "question" },
-        { "type": "question" },
-        { "type": "question" }
+        {
+          "type": "question",
+          "settings": {
+            "question": "Hvor ofte oppdateres planen?",
+            "answer": "<p>Så ofte som nødvendig – vanligvis hver 2.–4. uke.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Passer dette for nybegynnere?",
+            "answer": "<p>Ja! Mange av mine beste resultater kommer fra helt ferske klienter.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Hva hvis jeg har lite tid?",
+            "answer": "<p>Da tilpasses øktene. Du trenger ikke trene 5 dager i uka.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Må jeg følge en streng diett?",
+            "answer": "<p>Nei. Du får en fleksibel plan tilpasset livet ditt – med mat du faktisk liker.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Hva koster det?",
+            "answer": "<p>Prisen varierer etter lengde og behov. Se prissiden for oppdaterte priser og pakker.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Når får jeg tilgang?",
+            "answer": "<p>Umiddelbart etter innsending av spørreskjema.</p>"
+          }
+        }
       ]
     }
   ]

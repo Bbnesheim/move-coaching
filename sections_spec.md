@@ -2,6 +2,10 @@
 
 This document defines reusable Shopify Dawn sections/components required for the MOVE Coaching site, including their configuration schemas and layout options.
 
+Source-of-truth content references:
+- Founder/product copy baseline: `OM_ALINE.md`
+- Client-facing product info + policy baseline: `CLIENT_PRODUCT_INFO_AND_POLICIES.md`
+
 ## 1. Global Principles
 
 - All sections must be **reusable and configurable** via the Shopify theme editor.

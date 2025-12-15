@@ -23,29 +23,53 @@
         "question_Kyafwq": {
           "type": "question",
           "settings": {
-            "question": "Hvordan fungerer MOVE Coaching i praksis?",
-            "answer": "<p>Du får personlig oppfølging av Aline kombinert med MOVE-appen, ukentlige check-ins og støtte som tar hensyn til familie, jobb og energi.</p>"
+            "question": "Hvor ofte oppdateres planen?",
+            "answer": "<p>Så ofte som nødvendig – vanligvis hver 2.–4. uke.</p>"
           }
         },
         "question_HaWEEP": {
           "type": "question",
           "settings": {
-            "question": "Hvordan fungerer MOVE Coaching i praksis?",
-            "answer": "<p>Du får personlig oppfølging av Aline kombinert med MOVE-appen, ukentlige check-ins og støtte som tar hensyn til familie, jobb og energi.</p>"
+            "question": "Passer dette for nybegynnere?",
+            "answer": "<p>Ja! Mange av mine beste resultater kommer fra helt ferske klienter.</p>"
           }
         },
         "question_iUc4jn": {
           "type": "question",
           "settings": {
-            "question": "Hvordan fungerer MOVE Coaching i praksis?",
-            "answer": "<p>Du får personlig oppfølging av Aline kombinert med MOVE-appen, ukentlige check-ins og støtte som tar hensyn til familie, jobb og energi.</p>"
+            "question": "Hva hvis jeg har lite tid?",
+            "answer": "<p>Da tilpasses øktene. Du trenger ikke trene 5 dager i uka.</p>"
+          }
+        },
+        "question_2W7u6k": {
+          "type": "question",
+          "settings": {
+            "question": "Må jeg følge en streng diett?",
+            "answer": "<p>Nei. Du får en fleksibel plan tilpasset livet ditt – med mat du faktisk liker.</p>"
+          }
+        },
+        "question_6b0pCw": {
+          "type": "question",
+          "settings": {
+            "question": "Hva koster det?",
+            "answer": "<p>Prisen varierer etter lengde og behov. Se prissiden for oppdaterte priser og pakker.</p>"
+          }
+        },
+        "question_q2Qz5V": {
+          "type": "question",
+          "settings": {
+            "question": "Når får jeg tilgang?",
+            "answer": "<p>Umiddelbart etter innsending av spørreskjema.</p>"
           }
         }
       },
       "block_order": [
         "question_Kyafwq",
         "question_HaWEEP",
-        "question_iUc4jn"
+        "question_iUc4jn",
+        "question_2W7u6k",
+        "question_6b0pCw",
+        "question_q2Qz5V"
       ],
       "name": "MOVE FAQ",
       "settings": {

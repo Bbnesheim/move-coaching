@@ -38,7 +38,12 @@ Rebuild MOVE Coaching’s website on Shopify using the Dawn theme as a high-conv
   - Design & IA sign-off: TBD (to be confirmed with client).
   - Theme build complete: TBD.
   - Soft launch (password-protected): TBD.
-  - Public launch: TBD.
+- Public launch: TBD.
+
+## 1.1 Authoritative product copy & policies
+To avoid copy drift between design, sections, and pages, these documents are the source of truth:
+- Founder/product long-form copy baseline: `OM_ALINE.md`
+- Client-facing product info + policy baseline: `CLIENT_PRODUCT_INFO_AND_POLICIES.md`
 
 ## 2. Context Summary (from RESEARCH.md)
 **Brand personality**

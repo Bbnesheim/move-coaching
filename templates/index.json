@@ -44,13 +44,13 @@
           "type": "plan",
           "settings": {
             "plan_handle": "plan-12m",
-            "plan_name": "Full livsstilsendring",
+            "plan_name": "12 måneder – Full livsstilsendring",
             "duration_label": "12 måneder",
             "price_per_month": "2 499 kr",
             "total_price": "Gratis oppstart + 1 ekstra måned",
             "badge": "Mest populær",
-            "description": "Perfekt for deg som vil ha tydelig struktur, tett oppfølging og rom til å gjøre endring i ditt tempo.",
-            "benefits": "Ukentlig oppfølging\nTilgang til MOVE-appen\nTilpasset kost og trening",
+            "description": "For deg som vil bygge en varig livsstil med god tid til progresjon, læring og støtte – uten stress.",
+            "benefits": "Skreddersydd treningsprogram\nPersonlig kostholdsplan\nUkentlige innsjekker\nChat-support\nFull tilgang til MOVE-appen",
             "primary_cta_label": "Start din dag én",
             "primary_cta_link": ""
           }
@@ -59,13 +59,13 @@
           "type": "plan",
           "settings": {
             "plan_handle": "plan-9m",
-            "plan_name": "Veien mot Suksess",
+            "plan_name": "9 måneder – Veien mot Suksess",
             "duration_label": "9 måneder",
             "price_per_month": "2 799 kr",
             "total_price": "Oppstartsgebyr kommer i tillegg",
-            "badge": "Mest populær",
-            "description": "Perfekt for deg som vil ha tydelig struktur, tett oppfølging og rom til å gjøre endring i ditt tempo.",
-            "benefits": "Ukentlig oppfølging\nTilgang til MOVE-appen\nTilpasset kost og trening",
+            "badge": "",
+            "description": "En trygg mellomvei for deg som vil ha god oppfølging og tydelig struktur – med rom for livet.",
+            "benefits": "Skreddersydd treningsprogram\nPersonlig kostholdsplan\nUkentlige innsjekker\nChat-support\nFull tilgang til MOVE-appen",
             "primary_cta_label": "Start din dag én",
             "primary_cta_link": ""
           }
@@ -74,13 +74,13 @@
           "type": "plan",
           "settings": {
             "plan_handle": "plan-6m",
-            "plan_name": "Halvårsboost",
+            "plan_name": "6 måneder – Halvårsboost",
             "duration_label": "6 måneder",
             "price_per_month": "2 999 kr",
             "total_price": "Oppstartsgebyr kommer i tillegg",
-            "badge": "Mest populær",
-            "description": "Perfekt for deg som vil ha tydelig struktur, tett oppfølging og rom til å gjøre endring i ditt tempo.",
-            "benefits": "Ukentlig oppfølging\nTilgang til MOVE-appen\nTilpasset kost og trening",
+            "badge": "",
+            "description": "Et kraftig, strukturert halvår for deg som vil komme i gang og se tydelige resultater – med tett støtte.",
+            "benefits": "Skreddersydd treningsprogram\nPersonlig kostholdsplan\nUkentlige innsjekker\nChat-support\nFull tilgang til MOVE-appen",
             "primary_cta_label": "Start din dag én",
             "primary_cta_link": ""
           }
@@ -94,7 +94,7 @@
       "name": "MOVE pricing table",
       "settings": {
         "heading": "Velg et løp som passer din hverdag",
-        "intro": "Tre ulike løp – samme varme støtte. Velg 6, 9 eller 12 måneder avhengig av hvor mye tid du trenger til varig endring.",
+        "intro": "Velg 6, 9 eller 12 måneder – du velger tempoet. Alle pakker inkluderer skreddersydd trening og kosthold, ukentlige innsjekker, chat-support og full tilgang til MOVE-appen.",
         "highlight_plan_handle": "plan-12m",
         "show_monthly_price": true,
         "heading_alignment": "left",
@@ -211,34 +211,42 @@
         "usp_FVzDpN": {
           "type": "usp",
           "settings": {
-            "title": "Langsiktig støtte",
-            "text": "Vi bygger varige vaner steg for steg – uten streng diett eller alt‑eller‑ingenting‑tanker."
+            "title": "Skreddersydd treningsprogram",
+            "text": "Tilpasset nivå, utstyr og tidsbruk – med progresjon og teknikkforklaringer i app."
           }
         },
         "usp_rRH84h": {
           "type": "usp",
           "settings": {
-            "title": "Langsiktig støtte",
-            "text": "Vi bygger varige vaner steg for steg – uten streng diett eller alt‑eller‑ingenting‑tanker."
+            "title": "Personlig kostholdsplan",
+            "text": "Mat du liker – ingen forbud. Fleksible løsninger for familieliv og jobb, med fokus på balanse og energi."
           }
         },
         "usp_eTzcbK": {
           "type": "usp",
           "settings": {
-            "title": "Langsiktig støtte",
-            "text": "Vi bygger varige vaner steg for steg – uten streng diett eller alt‑eller‑ingenting‑tanker."
+            "title": "Ukentlige innsjekker",
+            "text": "Analyse av progresjon, personlige tilbakemeldinger og justeringer som holder deg på sporet."
+          }
+        },
+        "usp_0aK3qP": {
+          "type": "usp",
+          "settings": {
+            "title": "Chat-support + full app-tilgang",
+            "text": "Spør når du står fast. Du får støtte på trening, mat, teknikk og mindset – og full tilgang til MOVE-appen."
           }
         }
       },
       "block_order": [
         "usp_FVzDpN",
         "usp_rRH84h",
-        "usp_eTzcbK"
+        "usp_eTzcbK",
+        "usp_0aK3qP"
       ],
       "name": "MOVE USP grid",
       "settings": {
-        "heading": "Derfor fungerer MOVE Coaching",
-        "intro": "Langsiktig coaching, varm støtte og en app som er laget for hverdagen – ikke for raske quick fixes.",
+        "heading": "Hva du får i coaching med meg",
+        "intro": "Du får en skreddersydd plan og tett støtte – laget for å gi resultater i en travel hverdag.",
         "side_image": "shopify://shop_images/aline_24.webp",
         "heading_alignment": "center",
         "columns_desktop": 3,
@@ -315,8 +323,8 @@
           "settings": {
             "step_label": "1",
             "icon": "shopify://shop_images/conversation-circular-symbol-svgrepo-com.svg",
-            "title": "Start med en uforpliktende samtale",
-            "description": "Vi blir kjent med deg, hverdagen din og hva du ønsker å få til – helt uten forpliktelser."
+            "title": "Send inn spørreskjema",
+            "description": "Du forteller meg om mål, hverdag og preferanser – så vi kan starte med en plan som faktisk passer livet ditt."
           }
         },
         "step_xN4TwJ": {
@@ -324,8 +332,8 @@
           "settings": {
             "step_label": "2",
             "icon": "shopify://shop_images/plan-svgrepo-com.svg",
-            "title": "Få et personlig MOVE-opplegg",
-            "description": "Du og coachen din lager en plan over 6, 9 eller 12 måneder som passer din hverdag."
+            "title": "Få skreddersydd plan i appen",
+            "description": "Du får treningsprogram, kostholdsplan og verktøy i MOVE-appen – tilpasset nivå, utstyr og tid."
           }
         },
         "step_hQWdjx": {
@@ -333,8 +341,8 @@
           "settings": {
             "step_label": "3",
             "icon": "shopify://shop_images/shuffle-change-svgrepo-com.svg",
-            "title": "Små steg – store endringer",
-            "description": "Du får tett oppfølging, verktøy og støtte underveis, slik at nye vaner faktisk blir en del av livet ditt."
+            "title": "Tett oppfølging hele veien",
+            "description": "Ukentlige innsjekker, justeringer og chat-support gjør at du bygger varige vaner – steg for steg."
           }
         }
       },
@@ -346,7 +354,7 @@
       "name": "MOVE steps",
       "settings": {
         "heading": "Slik fungerer det",
-        "intro": "En enkel, trygg prosess fra første steg til nye vaner i hverdagen.",
+        "intro": "En enkel prosess fra første innsending til skreddersydd plan, tett støtte og nye vaner som varer.",
         "background_variant": "surface",
         "padding_top": 88,
         "padding_bottom": 88,

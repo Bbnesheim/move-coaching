@@ -2,6 +2,9 @@
 
 This document describes how to model MOVE Coaching products in Shopify, configure subscriptions via a compatible app, and set up checkout/payment flows (Stripe/Shopify Payments, Klarna, Vipps) in line with the PRD and PROMPT acceptance tests.
 
+Policy/copy reference:
+- Operational product info + cancellation/refund policy baseline: `CLIENT_PRODUCT_INFO_AND_POLICIES.md`
+
 ## 1. Product & Subscription Modelling
 
 ### 1.1 Core Coaching Packages

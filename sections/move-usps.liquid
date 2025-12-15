@@ -24,6 +24,15 @@
     class="page-width move-section-padding"
     style="{% if section.settings.padding_top > 0 %}padding-top: {{ section.settings.padding_top }}px;{% endif %}{% if section.settings.padding_bottom > 0 %} padding-bottom: {{ section.settings.padding_bottom }}px;{% endif %}"
   >
+    <header class="move-usps__header {{ section.settings.heading_alignment }}">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="h2">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.intro != blank -%}
+        <div class="move-usps__intro text-body">{{ section.settings.intro }}</div>
+      {%- endif -%}
+    </header>
+
     <div class="move-usps__layout">
       <div class="move-usps__column move-usps__column--left">
         <div class="move-usps__accordion">
@@ -89,13 +98,13 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Derfor fungerer MOVE Coaching"
+      "default": "Hva du får i coaching med meg"
     },
     {
       "type": "textarea",
       "id": "intro",
       "label": "Intro text",
-      "default": "Langsiktig coaching, varm støtte og en app som er laget for hverdagen – ikke for raske quick fixes."
+      "default": "Du får en skreddersydd plan og tett støtte – laget for å gi resultater i en travel hverdag."
     },
     {
       "type": "image_picker",
@@ -175,13 +184,13 @@
           "type": "text",
           "id": "title",
           "label": "Title",
-          "default": "Langsiktig støtte"
+          "default": "Skreddersydd treningsprogram"
         },
         {
           "type": "textarea",
           "id": "text",
           "label": "Text",
-          "default": "Vi bygger varige vaner steg for steg – uten streng diett eller alt‑eller‑ingenting‑tanker."
+          "default": "Tilpasset nivå, utstyr og tidsbruk – med progresjon og teknikkforklaringer i app."
         }
       ]
     }
@@ -191,9 +200,34 @@
       "name": "MOVE USP grid",
       "category": "MOVE",
       "blocks": [
-        { "type": "usp" },
-        { "type": "usp" },
-        { "type": "usp" }
+        {
+          "type": "usp",
+          "settings": {
+            "title": "Skreddersydd treningsprogram",
+            "text": "Tilpasset nivå, utstyr og tidsbruk – med progresjon og teknikkforklaringer i app."
+          }
+        },
+        {
+          "type": "usp",
+          "settings": {
+            "title": "Personlig kostholdsplan",
+            "text": "Mat du liker – ingen forbud. Fleksible løsninger for familieliv og jobb, med fokus på balanse og energi."
+          }
+        },
+        {
+          "type": "usp",
+          "settings": {
+            "title": "Ukentlige innsjekker",
+            "text": "Analyse av progresjon, personlige tilbakemeldinger og justeringer som holder deg på sporet."
+          }
+        },
+        {
+          "type": "usp",
+          "settings": {
+            "title": "Chat-support + full app-tilgang",
+            "text": "Spør når du står fast. Du får støtte på trening, mat, teknikk og mindset – og full tilgang til MOVE-appen."
+          }
+        }
       ]
     }
   ]

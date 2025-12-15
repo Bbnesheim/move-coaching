@@ -23,14 +23,14 @@
         "plan_twjeeF": {
           "type": "plan",
           "settings": {
-            "plan_handle": "",
+            "plan_handle": "plan-12m",
             "plan_name": "12 måneder – Full livsstilsendring",
             "duration_label": "12 måneder",
-            "price_per_month": "2 490 kr",
-            "total_price": "Totalt 12 måneder – første måned gratis + 1 ekstra måned",
+            "price_per_month": "2 499 kr",
+            "total_price": "Gratis oppstart + 1 ekstra måned",
             "badge": "Mest populær",
-            "description": "Perfekt for deg som vil ha tydelig struktur, tett oppfølging og rom til å gjøre endring i ditt tempo.",
-            "benefits": "Ukentlig oppfølging\nTilgang til MOVE-appen\nTilpasset kost og trening",
+            "description": "For deg som vil bygge en varig livsstil med god tid til progresjon, læring og støtte – uten stress.",
+            "benefits": "Skreddersydd treningsprogram\nPersonlig kostholdsplan\nUkentlige innsjekker\nChat-support\nFull tilgang til MOVE-appen",
             "primary_cta_label": "Start din dag én",
             "primary_cta_link": ""
           }
@@ -38,14 +38,14 @@
         "plan_yYqWyN": {
           "type": "plan",
           "settings": {
-            "plan_handle": "",
-            "plan_name": "12 måneder – Full livsstilsendring",
-            "duration_label": "12 måneder",
-            "price_per_month": "2 490 kr",
-            "total_price": "Totalt 12 måneder – første måned gratis + 1 ekstra måned",
-            "badge": "Mest populær",
-            "description": "Perfekt for deg som vil ha tydelig struktur, tett oppfølging og rom til å gjøre endring i ditt tempo.",
-            "benefits": "Ukentlig oppfølging\nTilgang til MOVE-appen\nTilpasset kost og trening",
+            "plan_handle": "plan-9m",
+            "plan_name": "9 måneder – Veien mot Suksess",
+            "duration_label": "9 måneder",
+            "price_per_month": "2 799 kr",
+            "total_price": "Oppstartsgebyr kommer i tillegg",
+            "badge": "",
+            "description": "En trygg mellomvei for deg som vil ha god oppfølging og tydelig struktur – med rom for livet.",
+            "benefits": "Skreddersydd treningsprogram\nPersonlig kostholdsplan\nUkentlige innsjekker\nChat-support\nFull tilgang til MOVE-appen",
             "primary_cta_label": "Start din dag én",
             "primary_cta_link": ""
           }
@@ -53,14 +53,14 @@
         "plan_brbzeY": {
           "type": "plan",
           "settings": {
-            "plan_handle": "",
-            "plan_name": "12 måneder – Full livsstilsendring",
-            "duration_label": "12 måneder",
-            "price_per_month": "2 490 kr",
-            "total_price": "Totalt 12 måneder – første måned gratis + 1 ekstra måned",
-            "badge": "Mest populær",
-            "description": "Perfekt for deg som vil ha tydelig struktur, tett oppfølging og rom til å gjøre endring i ditt tempo.",
-            "benefits": "Ukentlig oppfølging\nTilgang til MOVE-appen\nTilpasset kost og trening",
+            "plan_handle": "plan-6m",
+            "plan_name": "6 måneder – Halvårsboost",
+            "duration_label": "6 måneder",
+            "price_per_month": "2 999 kr",
+            "total_price": "Oppstartsgebyr kommer i tillegg",
+            "badge": "",
+            "description": "Et kraftig, strukturert halvår for deg som vil komme i gang og se tydelige resultater – med tett støtte.",
+            "benefits": "Skreddersydd treningsprogram\nPersonlig kostholdsplan\nUkentlige innsjekker\nChat-support\nFull tilgang til MOVE-appen",
             "primary_cta_label": "Start din dag én",
             "primary_cta_link": ""
           }
@@ -74,7 +74,7 @@
       "name": "MOVE pricing table",
       "settings": {
         "heading": "Velg et løp som passer din hverdag",
-        "intro": "Tre ulike løp – samme varme støtte. Velg 6, 9 eller 12 måneder avhengig av hvor mye tid du trenger til varig endring.",
+        "intro": "Velg 6, 9 eller 12 måneder – du velger tempoet. Alle pakker inkluderer skreddersydd trening og kosthold, ukentlige innsjekker, chat-support og full tilgang til MOVE-appen.",
         "highlight_plan_handle": "plan-12m",
         "show_monthly_price": true,
         "heading_alignment": "center",
