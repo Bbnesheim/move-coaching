@@ -5,6 +5,18 @@
   #MoveImageBanner-{{ section.id }}::after {
     opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
   }
+
+  {%- if section.settings.override_spacing_below -%}
+    #shopify-section-{{ section.id }} + .section {
+      margin-top: {{ section.settings.spacing_below_mobile }}px;
+    }
+
+    @media screen and (min-width: 750px) {
+      #shopify-section-{{ section.id }} + .section {
+        margin-top: {{ section.settings.spacing_below_desktop }}px;
+      }
+    }
+  {%- endif -%}
 {%- endstyle -%}
 
 <section
@@ -100,7 +112,7 @@
 {
   "name": "MOVE image banner",
   "tag": "section",
-  "class": "section move-image-banner",
+  "class": "section",
   "disabled_on": {
     "groups": ["header", "footer"]
   },
@@ -227,6 +239,36 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "checkbox",
+      "id": "override_spacing_below",
+      "label": "Override space below this section",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "spacing_below_mobile",
+      "label": "Space below (mobile)",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "spacing_below_desktop",
+      "label": "Space below (desktop)",
+      "min": 0,
+      "max": 240,
+      "step": 4,
+      "unit": "px",
+      "default": 0
     }
   ],
   "presets": [
