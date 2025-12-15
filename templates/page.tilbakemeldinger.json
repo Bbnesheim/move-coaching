@@ -83,10 +83,58 @@
         "padding_bottom": 0,
         "color_scheme": ""
       }
+    },
+    "move_testimonials_list_XTBBtt": {
+      "type": "move-testimonials-list",
+      "blocks": {
+        "testimonial_CEik4L": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Jeg trodde jeg måtte være perfekt for å lykkes. Nå har jeg funnet en måte å leve på som faktisk fungerer i hverdagen.",
+            "name": "Kunde, 2-barnsmor",
+            "role_or_context": "",
+            "before_after_label": ""
+          }
+        },
+        "testimonial_ijejw4": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Jeg trodde jeg måtte være perfekt for å lykkes. Nå har jeg funnet en måte å leve på som faktisk fungerer i hverdagen.",
+            "name": "Kunde, 2-barnsmor",
+            "role_or_context": "",
+            "before_after_label": ""
+          }
+        },
+        "testimonial_8Fwtcm": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Jeg trodde jeg måtte være perfekt for å lykkes. Nå har jeg funnet en måte å leve på som faktisk fungerer i hverdagen.",
+            "name": "Kunde, 2-barnsmor",
+            "role_or_context": "",
+            "before_after_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_CEik4L",
+        "testimonial_ijejw4",
+        "testimonial_8Fwtcm"
+      ],
+      "name": "MOVE testimonials (list)",
+      "settings": {
+        "heading": "Dette sier kvinnene i MOVE Coaching",
+        "intro": "Les hvordan kvinner i MOVE Coaching beskriver hverdagen før og etter små, realistiske endringer.",
+        "heading_alignment": "center",
+        "background_variant": "surface",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "color_scheme": ""
+      }
     }
   },
   "order": [
     "main",
-    "move_testimonials_gaTHCH"
+    "move_testimonials_gaTHCH",
+    "move_testimonials_list_XTBBtt"
   ]
 }
