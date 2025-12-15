@@ -78,6 +78,8 @@ class MoveStepsJourney {
 
     this.steps.forEach((step, i) => {
       step.classList.toggle('is-active', i === clamped);
+      // Used for styling: fill step bubbles only once the user has reached/passed them.
+      step.classList.toggle('is-reached', i <= clamped);
     });
 
     if (scroll) {
@@ -223,15 +225,15 @@ class MoveStepsJourney {
 
     const rect = this.journey.getBoundingClientRect();
 
-    // Fade each segment from transparent -> solid as the viewport center passes through it.
-    const viewportCenterY = window.innerHeight / 2;
+    // Fade each segment from transparent -> solid a bit earlier than the viewport center.
+    const viewportProbeY = window.innerHeight * 0.65;
 
     this.segments.forEach(({ progress: segProgress, start, end }) => {
       const startY = rect.top + start.y;
       const endY = rect.top + end.y;
       const denom = Math.max(1, endY - startY);
 
-      let t = (viewportCenterY - startY) / denom;
+      let t = (viewportProbeY - startY) / denom;
       t = Math.max(0, Math.min(1, t));
 
       segProgress.style.opacity = `${t}`;
@@ -244,7 +246,7 @@ class MoveStepsJourney {
     const lastY = rect.top + lastEnd.y;
     const denom = Math.max(1, lastY - firstY);
 
-    let overall = (viewportCenterY - firstY) / denom;
+    let overall = (viewportProbeY - firstY) / denom;
     overall = Math.max(0, Math.min(1, overall));
 
     const active = Math.max(0, Math.min(this.steps.length - 1, Math.round(overall * (this.steps.length - 1))));

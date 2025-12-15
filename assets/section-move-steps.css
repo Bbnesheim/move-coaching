@@ -333,6 +333,12 @@
   }
 }
 
+@media screen and (max-width: 374px) {
+  .move-steps__overlay .move-steps__title {
+    font-size: 1.35rem;
+  }
+}
+
 @media screen and (max-width: 450px) {
   .move-steps__overlay .move-steps__text {
     font-size: 1.2rem;
@@ -450,22 +456,22 @@
   border-color: rgba(var(--color-foreground), 0.5);
 }
 
-/* Node styling per step */
-.move-steps__step[data-step-index="1"] .move-steps__node {
+/* Step bubbles: stay neutral until reached, then fill with brand colors */
+.move-steps__step.is-reached[data-step-index="1"] .move-steps__node {
   background: var(--move-color-pink-secondary);
   border-color: var(--move-color-pink-secondary);
 }
 
-.move-steps__step[data-step-index="1"] .move-steps__node-label {
+.move-steps__step.is-reached[data-step-index="1"] .move-steps__node-label {
   color: var(--move-color-text-dark);
 }
 
-.move-steps__step[data-step-index="2"] .move-steps__node {
+.move-steps__step.is-reached[data-step-index="2"] .move-steps__node {
   background: var(--move-color-brown-primary);
   border-color: var(--move-color-brown-primary);
 }
 
-.move-steps__step[data-step-index="2"] .move-steps__node-label {
+.move-steps__step.is-reached[data-step-index="2"] .move-steps__node-label {
   color: #ffffff;
 }
 
