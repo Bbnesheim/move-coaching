@@ -238,16 +238,10 @@ This section captures learnings from auditing best-in-class online coaching bran
 - Use this section to visually break up the page and show that the method is enjoyable and sustainable, not a rigid diet.
 - Avoid glorifying ultra-low calorie counts; focus on satiety, family-friendliness, and flexibility.
 
-### 9.5 Founder & team presentation
-
-- Mirror the strength of well-structured About + Team pages by dedicating sections to Aline’s story and any supporting coaches/experts.
-- For Aline:
-  - Use a section structure similar to strong “I tried everything”-style stories: past struggle → turning point → process → current mission.
-  - Include at least one strong pull-quote that encapsulates her philosophy (e.g., “I never focused on setting a weight loss goal, I just wanted to be healthy and feel good in my body.”).
-- For team/coaches (if applicable):
-  - Provide short bios with qualifications, location, and a 2–4 sentence personal story tying their expertise to MOVE’s mission.
-  - Use consistent patterns for headings (Coach name) and subheadings (credentials) as seen on strong coaching team pages.
-  - Include accessible, descriptive alt text for headshots (e.g., “Headshot of [name], MOVE coach”).
+### 9.5 Founder presentation (Aline)
+- Make Aline’s story a core part of the site experience.
+- Use a section structure similar to strong “I tried everything”-style stories: past struggle → turning point → process → current mission.
+- Include at least one strong pull-quote that encapsulates her philosophy.
 
 ### 9.6 CTAs, flows, and forms
 
@@ -269,9 +263,8 @@ This section captures learnings from auditing best-in-class online coaching bran
   3) “How it works” / programme pillars.
   4) Recipes/food or “Everyday life” section visualising lifestyle.
   5) Founder story (Aline) + pull-quote.
-  6) Optional: Team/coaches preview with link to full team page.
-  7) Strong CTA section (“Start din dag én”) with short motivational copy.
-  8) Newsletter or low-friction lead capture.
+  6) Strong CTA section (“Start din dag én”) with short motivational copy.
+  7) Newsletter or low-friction lead capture.
 - Community/testimonials page should:
   - Start with a short intro heading (e.g., “Dette sier kvinnene i MOVE Coaching”) and 2–3 sentences of framing.
   - Present testimonials in a structured layout (cards or quotes) with clear attribution.

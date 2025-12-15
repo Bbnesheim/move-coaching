@@ -3,7 +3,6 @@
 ## Top-Level Navigation
 
 - Home (`/`)
-- Coaches (`/coaches`)
 - App (`/app`)
 - Priser (`/priser`)
 - Programmer (`/programmer`)
@@ -28,13 +27,6 @@ Sections (top to bottom):
 - FAQ teaser – 3–4 common questions with link to full FAQ.
 - Email signup / lead magnet (optional) – newsletter or lead capture.
 - Footer – navigation, contact, social links, legal links.
-
-## Coaches (`/coaches`)
-
-- Intro section – explanation of coaching philosophy.
-- Aline profile – photo, credentials, story summary, link to Aline page.
-- Additional coaches (future) – cards with photo, role, short bio.
-- CTA section – invite to explore programmes or take quiz.
 
 ## App (`/app`)
 

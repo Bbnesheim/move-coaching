@@ -68,27 +68,7 @@ These wireframes describe structure and hierarchy for key pages. They are text-o
 
 ---
 
-## 2. Coaches (`/coaches`)
-
-**Section 1 – Hero**
-- H1: “Møt coachene dine”.
-- Paragraph: Philosophy and what makes coaching personlig og tett på.
-
-**Section 2 – Aline Feature**
-- Large card with photo and bio snippet.
-- Key points (years of experience, own journey, credentials).
-- CTA: “Les mer om Aline” → Aline page.
-
-**Section 3 – Additional Coaches (future)**
-- Grid of coach cards (defensive design, can start with only Aline).
-
-**Section 4 – CTA**
-- Short section reinforcing value of getting støtte.
-- Button group: “Se programmer” / “Ta quizen”.
-
----
-
-## 3. App (`/app`)
+## 2. App (`/app`)
 
 **Section 1 – Hero**
 - H1: “MOVE-appen – verktøyet som følger deg i hverdagen”.
@@ -124,7 +104,7 @@ These wireframes describe structure and hierarchy for key pages. They are text-o
 
 ---
 
-## 4. Priser (`/priser`)
+## 3. Priser (`/priser`)
 
 **Section 1 – Hero**
 - H1: “Velg et løp som passer din hverdag”.
@@ -158,9 +138,9 @@ These wireframes describe structure and hierarchy for key pages. They are text-o
 
 ---
 
-## 5. Programmer (`/programmer`)
+## 4. Programmer (`/programmer`)
 
-### 5.1 Overview (`/programmer`)
+### 4.1 Overview (`/programmer`)
 
 **Section 1 – Hero**
 - H1: “Programmer som følger deg over tid”.
@@ -181,7 +161,7 @@ These wireframes describe structure and hierarchy for key pages. They are text-o
 **Section 5 – CTA**
 - Buttons: “Ta quizen” og “Se priser”.
 
-### 5.2 Programme Detail (`/programmer/{slug}`)
+### 4.2 Programme Detail (`/programmer/{slug}`)
 
 **Section 1 – Hero**
 - H1: Programme name (e.g., “12 måneder – Full livsstilsendring”).
@@ -212,7 +192,7 @@ These wireframes describe structure and hierarchy for key pages. They are text-o
 
 ---
 
-## 6. FAQ (`/faq`)
+## 5. FAQ (`/faq`)
 
 **Section 1 – Hero**
 - H1: “Ofte stilte spørsmål”.
@@ -233,9 +213,9 @@ These wireframes describe structure and hierarchy for key pages. They are text-o
 
 ---
 
-## 7. Blogg (`/blogg`)
+## 6. Blogg (`/blogg`)
 
-### 7.1 Listing (`/blogg`)
+### 6.1 Listing (`/blogg`)
 
 **Section 1 – Hero**
 - H1: “Blogg”.
@@ -247,7 +227,7 @@ These wireframes describe structure and hierarchy for key pages. They are text-o
 **Section 3 – CTA**
 - Invite to newsletter or relevant programme.
 
-### 7.2 Post Detail (`/blogg/{slug}`)
+### 6.2 Post Detail (`/blogg/{slug}`)
 
 **Section 1 – Hero**
 - Post title, date, author.
@@ -263,7 +243,7 @@ These wireframes describe structure and hierarchy for key pages. They are text-o
 
 ---
 
-## 8. Aline (`/aline`)
+## 7. Aline (`/aline`)
 
 **Section 1 – Hero**
 - H1: “Dette er Aline”.
@@ -293,9 +273,9 @@ These wireframes describe structure and hierarchy for key pages. They are text-o
 
 ---
 
-## 9. Juridisk (`/juridisk` + subpages)
+## 8. Juridisk (`/juridisk` + subpages)
 
-### 9.1 Juridisk Overview (`/juridisk`)
+### 8.1 Juridisk Overview (`/juridisk`)
 
 **Section 1 – Intro**
 - H1: “Juridisk informasjon”.
@@ -304,21 +284,21 @@ These wireframes describe structure and hierarchy for key pages. They are text-o
 **Section 2 – Links**
 - Cards or list for Personvern, Vilkår, Informasjonskapsler.
 
-### 9.2 Personvernserklæring (`/juridisk/personvern`)
+### 8.2 Personvernserklæring (`/juridisk/personvern`)
 
 - Standard legal content sections with clear headings.
 
-### 9.3 Vilkår og betingelser (`/juridisk/vilkar`)
+### 8.3 Vilkår og betingelser (`/juridisk/vilkar`)
 
 - Standard terms split into readable sections.
 
-### 9.4 Informasjonskapsler (`/juridisk/cookies`)
+### 8.4 Informasjonskapsler (`/juridisk/cookies`)
 
 - Explanation of cookies, categories, consent.
 
 ---
 
-## 10. Shared Components
+## 9. Shared Components
 
 - **Header**: Logo, nav, mobile menu, primary CTA (e.g., “Se programmer”).
 - **Footer**: Logo, nav links, contact, social, legal links.
