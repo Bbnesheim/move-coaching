@@ -118,17 +118,41 @@ class MoveStepsJourney {
       };
     });
 
-    // Desired mapping:
-    // - Segment 0: point 1 (node[0]) -> image 2 (media[1])
-    // - Segment 1: point 2 (node[1]) -> image 3 (media[2])
+    const isMobile = window.matchMedia && window.matchMedia('(max-width: 749px)').matches;
+    const isMidWidth =
+      window.matchMedia &&
+      window.matchMedia('(min-width: 750px) and (max-width: 1200px)').matches;
+    const isWideDesktop = window.matchMedia && window.matchMedia('(min-width: 1201px)').matches;
+
+    // Segment mapping:
+    // - Wide desktop (>1200): curvy map route
+    // - Mid widths (750-1200): straight route centered between image/text (node column)
+    // - Mobile (<750): straight route down the points
     this.segmentAnchors = [];
 
-    if (this.nodePoints[0] && this.mediaPoints[1]) {
-      this.segmentAnchors.push({ start: this.nodePoints[0], end: this.mediaPoints[1] });
-    }
+    const nodeXs = this.nodePoints.map((p) => p.x).filter((n) => Number.isFinite(n));
+    const nodeX = nodeXs.length
+      ? nodeXs.reduce((sum, x) => sum + x, 0) / nodeXs.length
+      : (this.nodePoints[0]?.x ?? width * 0.12);
 
-    if (this.nodePoints[1] && this.mediaPoints[2]) {
-      this.segmentAnchors.push({ start: this.nodePoints[1], end: this.mediaPoints[2] });
+    if (isMobile || isMidWidth) {
+      const x = Math.max(0, Math.min(width, nodeX));
+
+      const p1 = this.nodePoints[0] ? { x, y: this.nodePoints[0].y } : null;
+      const p2 = this.nodePoints[1] ? { x, y: this.nodePoints[1].y } : null;
+      const p3 = this.nodePoints[2] ? { x, y: this.nodePoints[2].y } : null;
+
+      if (p1 && p2) this.segmentAnchors.push({ start: p1, end: p2 });
+      if (p2 && p3) this.segmentAnchors.push({ start: p2, end: p3 });
+    } else {
+      // Default desktop/tablet: point 1 -> image 2, point 2 -> image 3
+      if (this.nodePoints[0] && this.mediaPoints[1]) {
+        this.segmentAnchors.push({ start: this.nodePoints[0], end: this.mediaPoints[1] });
+      }
+
+      if (this.nodePoints[1] && this.mediaPoints[2]) {
+        this.segmentAnchors.push({ start: this.nodePoints[1], end: this.mediaPoints[2] });
+      }
     }
 
     // Fallback if we don't have all media points (e.g. missing images)
@@ -141,20 +165,34 @@ class MoveStepsJourney {
     if (this.segmentAnchors.length === 0) return;
 
     const segmentCount = this.segmentAnchors.length;
-    const amplitude = Math.min(width * 0.28, 420);
+    const amplitude = isWideDesktop ? Math.min(width * 0.38, 560) : Math.min(width * 0.28, 420);
 
     for (let i = 0; i < segmentCount; i++) {
       const prev = this.segmentAnchors[i].start;
       const cur = this.segmentAnchors[i].end;
       const dy = cur.y - prev.y;
 
-      // Big flowing curve: bend outward between each pair.
-      const direction = i % 2 === 0 ? 1 : -1;
-      const bendX = (prev.x + cur.x) / 2 + direction * amplitude;
-      const y1 = prev.y + dy * 0.35;
-      const y2 = prev.y + dy * 0.65;
+      // Mobile: straight down-the-page guide.
+      // Desktop/tablet: big flowing curve.
+      const d = isMobile || isMidWidth
+        ? `M ${prev.x} ${prev.y} L ${cur.x} ${cur.y}`
+        : (() => {
+            const direction = i % 2 === 0 ? 1 : -1;
 
-      const d = `M ${prev.x} ${prev.y} C ${bendX} ${y1}, ${bendX} ${y2}, ${cur.x} ${cur.y}`;
+            // On wide desktop, push the curve further out horizontally before dropping down.
+            if (isWideDesktop) {
+              const bendX1 = prev.x + direction * amplitude;
+              const bendX2 = cur.x + direction * amplitude;
+              const y1 = prev.y + dy * 0.2;
+              const y2 = prev.y + dy * 0.8;
+              return `M ${prev.x} ${prev.y} C ${bendX1} ${y1}, ${bendX2} ${y2}, ${cur.x} ${cur.y}`;
+            }
+
+            const bendX = (prev.x + cur.x) / 2 + direction * amplitude;
+            const y1 = prev.y + dy * 0.35;
+            const y2 = prev.y + dy * 0.65;
+            return `M ${prev.x} ${prev.y} C ${bendX} ${y1}, ${bendX} ${y2}, ${cur.x} ${cur.y}`;
+          })();
 
       const base = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       base.setAttribute('d', d);

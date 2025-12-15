@@ -43,6 +43,34 @@
   stroke-width: 3.5;
 }
 
+@media screen and (max-width: 749px) {
+  .move-steps__path-line {
+    stroke-width: 4.5;
+  }
+
+  .move-steps__path-line--base {
+    opacity: 0.35;
+  }
+
+  /* Point positioning rules on mobile:
+     - Point 1 stays at the top (default)
+     - Point 2 aligns to the vertical center of block 2
+     - Point 3 aligns to the bottom of block 3 */
+  .move-steps__center {
+    align-self: start;
+    padding-top: 0;
+  }
+
+  .move-steps__step[data-step-index="1"] .move-steps__center {
+    align-self: center;
+  }
+
+  .move-steps__step[data-step-index="2"] .move-steps__center {
+    align-self: end;
+    padding-bottom: 0;
+  }
+}
+
 .move-steps__path-line--base {
   opacity: 0.25;
 }
@@ -116,6 +144,30 @@
   overflow: visible;
 }
 
+/* Mobile layout: alternate image/text left-right per step (more compact than stacking) */
+@media screen and (max-width: 749px) {
+  .move-steps__media.move-steps__panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas: 'img text';
+    column-gap: 1.2rem;
+    align-items: end;
+  }
+
+  .move-steps__media-inner {
+    grid-area: img;
+  }
+
+  .move-steps__overlay {
+    grid-area: text;
+    align-self: end;
+  }
+
+  .move-steps__step:nth-child(even) .move-steps__media.move-steps__panel {
+    grid-template-areas: 'text img';
+  }
+}
+
 
 .move-steps__step-button:focus-visible .move-steps__panel {
   outline: 2px solid rgba(var(--color-foreground), 0.55);
@@ -155,9 +207,9 @@
 }
 
 .move-steps__overlay {
-  /* Mobile: text sits below the image (not over it) */
+  /* Mobile: participates in a side-by-side image/text layout */
   position: static;
-  margin-top: 1.2rem;
+  margin-top: 0;
   padding: 0;
   background: none;
   box-shadow: none;
@@ -166,19 +218,55 @@
 /* Let the text fully render; if it gets tall it will naturally expand upward from the bottom anchor. */
 .move-steps__overlay .move-steps__title {
   margin-bottom: 0.4rem;
-  font-size: 2.2rem;
+  font-size: clamp(1.9rem, 2.2vw + 0.6rem, 2.6rem);
   line-height: 1.15;
   overflow-wrap: anywhere;
 }
 
-@media screen and (min-width: 750px) {
+.move-steps__overlay .move-steps__text {
+  overflow-wrap: anywhere;
+}
+
+/* Very small phones: shrink typography further and allow portrait imagery for a tighter read */
+@media screen and (max-width: 499px) {
   .move-steps__overlay .move-steps__title {
-    font-size: 2.6rem;
+    font-size: clamp(1.6rem, 3.8vw + 0.4rem, 1.95rem);
+  }
+
+  .move-steps__overlay .move-steps__text {
+    font-size: 1.3rem;
+    line-height: 1.35;
+  }
+
+  .move-steps__media-inner {
+    aspect-ratio: 4 / 5;
   }
 }
 
-.move-steps__overlay .move-steps__text {
-  overflow-wrap: anywhere;
+@media screen and (max-width: 460px) {
+  .move-steps__overlay .move-steps__title {
+    font-size: clamp(1.5rem, 3.4vw + 0.3rem, 1.85rem);
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .move-steps__overlay .move-steps__title {
+    font-size: 1.45rem;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .move-steps__overlay .move-steps__text {
+    font-size: 1.2rem;
+    line-height: 1.32;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .move-steps__overlay .move-steps__text {
+    font-size: 1.1rem;
+    line-height: 1.3;
+  }
 }
 
 @media screen and (min-width: 750px) {
@@ -193,18 +281,49 @@
     overflow: visible;
   }
 
-  /* Left-side blocks (odd): place text to the right (towards center/path) */
+  /* Default (>= 1200px): place text on the INNER side (towards center/path) */
   .move-steps__step:nth-child(odd) .move-steps__overlay {
     left: calc(100% + 2.4rem);
     right: auto;
     text-align: left;
   }
 
-  /* Right-side blocks (even): place text to the left (towards center/path) */
   .move-steps__step:nth-child(even) .move-steps__overlay {
     right: calc(100% + 2.4rem);
     left: auto;
     text-align: right;
+  }
+}
+
+/* Mid widths: place text on the opposite side of the step number (node) to avoid crashes */
+@media screen and (min-width: 750px) and (max-width: 1200px) {
+  .move-steps {
+    --move-steps-center-col: 9rem;
+    --move-steps-col-gap: 3.2rem;
+  }
+
+  .move-steps__overlay {
+    width: min(25rem, 30vw);
+  }
+
+  /* Odd steps: image is left of node, so text goes to the RIGHT of the node */
+  .move-steps__step:nth-child(odd) .move-steps__overlay {
+    left: calc(
+      100% + var(--move-steps-col-gap) + var(--move-steps-center-col) +
+        var(--move-steps-col-gap)
+    );
+    right: auto;
+    text-align: left;
+  }
+
+  /* Even steps: image is right of node, so text goes to the LEFT of the node */
+  .move-steps__step:nth-child(even) .move-steps__overlay {
+    right: calc(
+      100% + var(--move-steps-col-gap) + var(--move-steps-center-col) +
+        var(--move-steps-col-gap)
+    );
+    left: auto;
+    text-align: left;
   }
 }
 
