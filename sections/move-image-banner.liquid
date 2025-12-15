@@ -1,4 +1,5 @@
 {{ 'section-move-image-banner.css' | asset_url | stylesheet_tag }}
+{{ 'section-move-image-banner.js' | asset_url | script_tag }}
 
 {%- style -%}
   #MoveImageBanner-{{ section.id }}::after {
@@ -8,7 +9,7 @@
 
 <section
   id="MoveImageBanner-{{ section.id }}"
-  class="section move-image-banner move-image-banner--{{ section.settings.image_count }}-images color-{{ section.settings.color_scheme }} gradient{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+  class="section move-image-banner move-image-banner--{{ section.settings.image_count }}-images move-image-banner--text-layout-{{ section.settings.text_layout | default: 'standard' }} color-{{ section.settings.color_scheme }} gradient{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
 >
   <div class="move-image-banner__media" aria-hidden="true">
     <div class="move-image-banner__media-item">
@@ -49,43 +50,47 @@
   <div
     class="move-image-banner__content move-image-banner__content--{{ section.settings.content_placement }} move-image-banner__content-align--{{ section.settings.content_alignment }}"
   >
-    <div class="page-width move-image-banner__content-container">
+    <div
+      class="{% unless section.settings.text_layout == 'cover' %}page-width {% endunless %}move-image-banner__content-container"
+    >
       <div class="move-image-banner__content-box">
         {%- if section.settings.heading != blank -%}
           <h1 class="move-image-banner__heading {{ section.settings.heading_size | default: 'h1' }}">{{ section.settings.heading }}</h1>
         {%- endif -%}
 
-        {%- if section.settings.subheading != blank -%}
-          <div class="move-image-banner__subheading text-body rte">{{ section.settings.subheading }}</div>
-        {%- endif -%}
+        {%- unless section.settings.text_layout == 'cover' -%}
+          {%- if section.settings.subheading != blank -%}
+            <div class="move-image-banner__subheading text-body rte">{{ section.settings.subheading }}</div>
+          {%- endif -%}
 
-        {%- if section.settings.primary_cta_label != blank -%}
-          <div class="move-image-banner__buttons">
-            <a
-              {% if section.settings.primary_cta_link == blank %}
-                role="link" aria-disabled="true"
-              {% else %}
-                href="{{ section.settings.primary_cta_link }}"
-              {% endif %}
-              class="button button--primary"
-            >
-              {{- section.settings.primary_cta_label | escape -}}
-            </a>
-
-            {%- if section.settings.secondary_cta_label != blank -%}
+          {%- if section.settings.primary_cta_label != blank -%}
+            <div class="move-image-banner__buttons">
               <a
-                {% if section.settings.secondary_cta_link == blank %}
+                {% if section.settings.primary_cta_link == blank %}
                   role="link" aria-disabled="true"
                 {% else %}
-                  href="{{ section.settings.secondary_cta_link }}"
+                  href="{{ section.settings.primary_cta_link }}"
                 {% endif %}
-                class="button button--secondary"
+                class="button button--primary"
               >
-                {{- section.settings.secondary_cta_label | escape -}}
+                {{- section.settings.primary_cta_label | escape -}}
               </a>
-            {%- endif -%}
-          </div>
-        {%- endif -%}
+
+              {%- if section.settings.secondary_cta_label != blank -%}
+                <a
+                  {% if section.settings.secondary_cta_link == blank %}
+                    role="link" aria-disabled="true"
+                  {% else %}
+                    href="{{ section.settings.secondary_cta_link }}"
+                  {% endif %}
+                  class="button button--secondary"
+                >
+                  {{- section.settings.secondary_cta_label | escape -}}
+                </a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endunless -%}
       </div>
     </div>
   </div>
@@ -165,6 +170,16 @@
         { "value": "right", "label": "Right" }
       ],
       "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "text_layout",
+      "label": "Text layout",
+      "options": [
+        { "value": "standard", "label": "Standard" },
+        { "value": "cover", "label": "Cover (heading fills image)" }
+      ],
+      "default": "standard"
     },
     {
       "type": "select",
