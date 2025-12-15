@@ -15,6 +15,13 @@
     when 'pink'
       assign bg_class = 'move-bg-pink'
   endcase
+
+  assign header_placement = section.settings.header_placement | default: 'above'
+  assign heading_align = section.settings.heading_alignment | default: 'center'
+  assign intro_align = section.settings.intro_alignment | default: 'inherit'
+  if intro_align == 'inherit'
+    assign intro_align = heading_align
+  endif
 -%}
 
 <section
@@ -22,78 +29,82 @@
   class="section move-steps {{ bg_class }} color-{{ section.settings.color_scheme }} gradient{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
 >
   <div
-    class="move-steps__container move-section-padding"
-    style="{% if section.settings.padding_top > 0 %}padding-top: {{ section.settings.padding_top }}px;{% endif %}{% if section.settings.padding_bottom > 0 %} padding-bottom: {{ section.settings.padding_bottom }}px;{% endif %}"
+    class="move-steps__container move-section-padding move-steps__container--header-{{ header_placement }}"
+    style="{% if section.settings.padding_top > 0 %}padding-top: {{ section.settings.padding_top }}px;{% endif %}{% if section.settings.padding_bottom > 0 %} padding-bottom: {{ section.settings.padding_bottom }}px;{% endif %}--move-steps-heading-size-mobile: {{ section.settings.heading_size_mobile }}px;--move-steps-heading-size-desktop: {{ section.settings.heading_size_desktop }}px;--move-steps-intro-size-mobile: {{ section.settings.intro_size_mobile }}px;--move-steps-intro-size-desktop: {{ section.settings.intro_size_desktop }}px;--move-steps-header-max-width: {{ section.settings.header_max_width }}rem;"
   >
-    <header class="move-steps__header">
-      {%- if section.settings.heading != blank -%}
-        <h2 class="h2">{{ section.settings.heading }}</h2>
-      {%- endif -%}
-      {%- if section.settings.intro != blank -%}
-        <div class="move-steps__intro text-body">{{ section.settings.intro }}</div>
-      {%- endif -%}
-    </header>
+    <div class="move-steps__layout move-steps__layout--{{ header_placement }}">
+      <header class="move-steps__header move-steps__header--align-{{ heading_align }}">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="h2">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.intro != blank -%}
+          <div class="move-steps__intro move-steps__intro--align-{{ intro_align }} text-body">
+            {{ section.settings.intro }}
+          </div>
+        {%- endif -%}
+      </header>
 
-    <div class="move-steps__journey" data-move-steps>
-      <div class="move-steps__path" aria-hidden="true">
-        <svg class="move-steps__path-svg" data-move-steps-path preserveAspectRatio="none"></svg>
-      </div>
+      <div class="move-steps__journey" data-move-steps>
+        <div class="move-steps__path" aria-hidden="true">
+          <svg class="move-steps__path-svg" data-move-steps-path preserveAspectRatio="none"></svg>
+        </div>
 
-      <ol class="move-steps__list" role="list">
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'step' -%}
-            <li
-              class="move-steps__step"
-              data-move-steps-step
-              data-step-index="{{ forloop.index0 }}"
-              {{ block.shopify_attributes }}
-            >
-              <button
-                class="move-steps__step-button"
-                type="button"
-                aria-label="Steg {{ block.settings.step_label | escape }}: {{ block.settings.title | escape }}"
+        <ol class="move-steps__list" role="list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'step' -%}
+              <li
+                class="move-steps__step"
+                data-move-steps-step
+                data-step-index="{{ forloop.index0 }}"
+                {{ block.shopify_attributes }}
               >
-                <div class="move-steps__side">
-                  <div class="move-steps__panel move-steps__media">
-                    {%- if block.settings.icon != blank -%}
-                      <div class="move-steps__media-inner">
-                        {{
-                          block.settings.icon
-                          | image_url: width: 1400
-                          | image_tag:
-                            widths: '320, 480, 720, 960, 1200, 1400',
-                            sizes: '(min-width: 990px) 520px, (min-width: 750px) 440px, 92vw',
-                            class: 'move-steps__image',
-                            loading: 'lazy'
-                        }}
-                      </div>
-                    {%- endif -%}
+                <button
+                  class="move-steps__step-button"
+                  type="button"
+                  aria-label="Steg {{ block.settings.step_label | escape }}: {{ block.settings.title | escape }}"
+                >
+                  <div class="move-steps__side">
+                    <div class="move-steps__panel move-steps__media">
+                      {%- if block.settings.icon != blank -%}
+                        <div class="move-steps__media-inner">
+                          {{
+                            block.settings.icon
+                            | image_url: width: 1400
+                            | image_tag:
+                              widths: '320, 480, 720, 960, 1200, 1400',
+                              sizes: '(min-width: 990px) 520px, (min-width: 750px) 440px, 92vw',
+                              class: 'move-steps__image',
+                              loading: 'lazy'
+                          }}
+                        </div>
+                      {%- endif -%}
 
-                    <div class="move-steps__overlay">
-                      {%- if block.settings.title != blank -%}
-                        <h3 class="h3 move-steps__title">{{ block.settings.title }}</h3>
-                      {%- endif -%}
-                      {%- if block.settings.description != blank -%}
-                        <p class="move-steps__text text-body">{{ block.settings.description }}</p>
-                      {%- endif -%}
+                      <div class="move-steps__overlay">
+                        {%- if block.settings.title != blank -%}
+                          <h3 class="h3 move-steps__title">{{ block.settings.title }}</h3>
+                        {%- endif -%}
+                        {%- if block.settings.description != blank -%}
+                          <p class="move-steps__text text-body">{{ block.settings.description }}</p>
+                        {%- endif -%}
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div class="move-steps__center">
-                  <span class="move-steps__node" data-move-steps-node>
-                    {%- if block.settings.step_label != blank -%}
-                      <span class="move-steps__node-label">{{ block.settings.step_label }}</span>
-                    {%- endif -%}
-                  </span>
-                </div>
+                  <div class="move-steps__center">
+                    <span class="move-steps__node" data-move-steps-node>
+                      {%- if block.settings.step_label != blank -%}
+                        <span class="move-steps__node-label">{{ block.settings.step_label }}</span>
+                      {%- endif -%}
+                    </span>
+                  </div>
 
-                <div class="move-steps__spacer" aria-hidden="true"></div>
-              </button>
-            </li>
-          {%- endif -%}
-        {%- endfor -%}
-      </ol>
+                  <div class="move-steps__spacer" aria-hidden="true"></div>
+                </button>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ol>
+      </div>
     </div>
   </div>
 </section>
@@ -118,6 +129,93 @@
       "id": "intro",
       "label": "Intro text",
       "default": "En enkel prosess fra første innsending til skreddersydd plan, tett støtte og nye vaner som varer."
+    },
+    {
+      "type": "header",
+      "content": "Header layout"
+    },
+    {
+      "type": "select",
+      "id": "header_placement",
+      "label": "Header placement",
+      "options": [
+        { "value": "above", "label": "Above steps" },
+        { "value": "side", "label": "Left of steps (desktop)" }
+      ],
+      "default": "above"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "intro_alignment",
+      "label": "Intro alignment",
+      "options": [
+        { "value": "inherit", "label": "Match heading" },
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size (mobile)",
+      "min": 18,
+      "max": 56,
+      "step": 1,
+      "unit": "px",
+      "default": 34
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading size (desktop)",
+      "min": 18,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "intro_size_mobile",
+      "label": "Intro size (mobile)",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "intro_size_desktop",
+      "label": "Intro size (desktop)",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "header_max_width",
+      "label": "Header max width",
+      "min": 24,
+      "max": 80,
+      "step": 1,
+      "unit": "rem",
+      "default": 56
     },
     {
       "type": "select",
