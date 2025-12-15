@@ -24,7 +24,7 @@
         "image_count": "1",
         "image_1": "shopify://shop_images/aline_15.webp",
         "image_overlay_opacity": 30,
-        "content_placement": "top-center",
+        "content_placement": "middle-center",
         "content_alignment": "center",
         "heading": "Kom i gang nå!",
         "subheading": "",
@@ -33,6 +33,19 @@
         "secondary_cta_label": "",
         "secondary_cta_link": "",
         "color_scheme": "scheme-3"
+      }
+    },
+    "move_brief_VPUDa6": {
+      "type": "move-brief",
+      "name": "MOVE brief",
+      "settings": {
+        "heading": "Hva er MOVE Coaching?",
+        "body": "MOVE er skapt av Aline – tobarnsmamma, coach og grunnlegger – for kvinner som vil ha en ærlig, bærekraftig vei til en sunnere hverdag. Her får du coaching, struktur og støtte som faktisk passer inn i tidsklemma.",
+        "padding_top": 32,
+        "padding_bottom": 36,
+        "container_alignment": "left",
+        "text_alignment": "left",
+        "enable_depth_shadow": true
       }
     },
     "move_steps_bekiGQ": {
@@ -77,11 +90,56 @@
         "padding_bottom": 0,
         "color_scheme": ""
       }
+    },
+    "move_app_promo_ngTpek": {
+      "type": "move-app-promo",
+      "blocks": {
+        "bullet_yYKYLd": {
+          "type": "bullet",
+          "settings": {
+            "text": "Menyplanlegging med familievennlige oppskrifter."
+          }
+        },
+        "bullet_mVfAww": {
+          "type": "bullet",
+          "settings": {
+            "text": "Menyplanlegging med familievennlige oppskrifter."
+          }
+        },
+        "bullet_FHfm6H": {
+          "type": "bullet",
+          "settings": {
+            "text": "Menyplanlegging med familievennlige oppskrifter."
+          }
+        }
+      },
+      "block_order": [
+        "bullet_yYKYLd",
+        "bullet_mVfAww",
+        "bullet_FHfm6H"
+      ],
+      "name": "MOVE app promo",
+      "settings": {
+        "heading": "MOVE-appen – verktøyet som følger deg i hverdagen",
+        "body": "Planlegg menyen, få raske familievennlige oppskrifter, følg treningsøkter med video og hold oversikt – alt samlet i én app.",
+        "primary_cta_label": "Les mer om appen",
+        "primary_cta_link": "",
+        "secondary_cta_label": "Se programmer",
+        "secondary_cta_link": "",
+        "app_store_link": "",
+        "play_store_link": "",
+        "background_variant": "cream",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "color_scheme": ""
+      }
     }
   },
   "order": [
     "main",
     "move_image_banner_Gt9ecH",
-    "move_steps_bekiGQ"
+    "move_brief_VPUDa6",
+    "move_steps_bekiGQ",
+    "move_app_promo_ngTpek"
   ]
 }
