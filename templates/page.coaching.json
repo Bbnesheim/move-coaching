@@ -129,6 +129,7 @@
         "primary_cta_link": "",
         "secondary_cta_label": "Se programmer",
         "secondary_cta_link": "",
+        "screenshot": "shopify://shop_images/move-app-1.webp",
         "app_store_link": "",
         "play_store_link": "",
         "background_variant": "cream",
@@ -143,6 +144,7 @@
         "feature_HVMjgX": {
           "type": "feature",
           "settings": {
+            "icon": "shopify://shop_images/strong-bull-side-view-svgrepo-com.svg",
             "title": "Bygg menyen din",
             "description": "Planlegg ukens måltider med familievennlige, realistiske oppskrifter tilpasset budsjett og hverdag."
           }
@@ -150,6 +152,7 @@
         "feature_qKp3zq": {
           "type": "feature",
           "settings": {
+            "icon": "shopify://shop_images/strong-bull-side-view-svgrepo-com.svg",
             "title": "Bygg menyen din",
             "description": "Planlegg ukens måltider med familievennlige, realistiske oppskrifter tilpasset budsjett og hverdag."
           }
@@ -157,6 +160,7 @@
         "feature_RiUk6C": {
           "type": "feature",
           "settings": {
+            "icon": "shopify://shop_images/strong-bull-side-view-svgrepo-com.svg",
             "title": "Bygg menyen din",
             "description": "Planlegg ukens måltider med familievennlige, realistiske oppskrifter tilpasset budsjett og hverdag."
           }
@@ -164,6 +168,7 @@
         "feature_XcC9qY": {
           "type": "feature",
           "settings": {
+            "icon": "shopify://shop_images/strong-bull-side-view-svgrepo-com.svg",
             "title": "Bygg menyen din",
             "description": "Planlegg ukens måltider med familievennlige, realistiske oppskrifter tilpasset budsjett og hverdag."
           }
@@ -179,6 +184,7 @@
       "settings": {
         "heading": "Dette får du i MOVE-appen",
         "intro": "Planlegging, oppskrifter, trening og oppfølging samlet i én app som faktisk passer inn i tidsklemma.",
+        "app_screenshot": "shopify://shop_images/move-app-1.webp",
         "background_variant": "surface",
         "padding_top": 0,
         "padding_bottom": 0,
