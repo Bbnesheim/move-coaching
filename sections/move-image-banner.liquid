@@ -1,0 +1,213 @@
+{{ 'section-move-image-banner.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #MoveImageBanner-{{ section.id }}::after {
+    opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
+  }
+{%- endstyle -%}
+
+<section
+  id="MoveImageBanner-{{ section.id }}"
+  class="section move-image-banner move-image-banner--{{ section.settings.image_count }}-images color-{{ section.settings.color_scheme }} gradient{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+>
+  <div class="move-image-banner__media" aria-hidden="true">
+    <div class="move-image-banner__media-item">
+      {%- if section.settings.image_1 != blank -%}
+        {{
+          section.settings.image_1
+          | image_url: width: 2400
+          | image_tag:
+            widths: '800, 1200, 1600, 2000, 2400',
+            sizes: '100vw',
+            class: 'move-image-banner__image',
+            loading: 'eager'
+        }}
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg move-image-banner__placeholder' }}
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.image_count == '2' -%}
+      <div class="move-image-banner__media-item">
+        {%- if section.settings.image_2 != blank -%}
+          {{
+            section.settings.image_2
+            | image_url: width: 2400
+            | image_tag:
+              widths: '800, 1200, 1600, 2000, 2400',
+              sizes: '100vw',
+              class: 'move-image-banner__image',
+              loading: 'lazy'
+          }}
+        {%- else -%}
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg move-image-banner__placeholder' }}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div
+    class="move-image-banner__content move-image-banner__content--{{ section.settings.content_placement }} move-image-banner__content-align--{{ section.settings.content_alignment }}"
+  >
+    <div class="page-width move-image-banner__content-container">
+      <div class="move-image-banner__content-box">
+        {%- if section.settings.heading != blank -%}
+          <h1 class="move-image-banner__heading h1">{{ section.settings.heading }}</h1>
+        {%- endif -%}
+
+        {%- if section.settings.subheading != blank -%}
+          <div class="move-image-banner__subheading text-body rte">{{ section.settings.subheading }}</div>
+        {%- endif -%}
+
+        {%- if section.settings.primary_cta_label != blank -%}
+          <div class="move-image-banner__buttons">
+            <a
+              {% if section.settings.primary_cta_link == blank %}
+                role="link" aria-disabled="true"
+              {% else %}
+                href="{{ section.settings.primary_cta_link }}"
+              {% endif %}
+              class="button button--primary"
+            >
+              {{- section.settings.primary_cta_label | escape -}}
+            </a>
+
+            {%- if section.settings.secondary_cta_label != blank -%}
+              <a
+                {% if section.settings.secondary_cta_link == blank %}
+                  role="link" aria-disabled="true"
+                {% else %}
+                  href="{{ section.settings.secondary_cta_link }}"
+                {% endif %}
+                class="button button--secondary"
+              >
+                {{- section.settings.secondary_cta_label | escape -}}
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MOVE image banner",
+  "tag": "section",
+  "class": "section move-image-banner",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "select",
+      "id": "image_count",
+      "label": "Number of images",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2 (only if 2 images)"
+    },
+    {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "label": "Overlay",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "select",
+      "id": "content_placement",
+      "label": "Content placement",
+      "options": [
+        { "value": "top-left", "label": "Top left" },
+        { "value": "top-center", "label": "Top center" },
+        { "value": "top-right", "label": "Top right" },
+        { "value": "middle-left", "label": "Middle left" },
+        { "value": "middle-center", "label": "Middle center" },
+        { "value": "middle-right", "label": "Middle right" },
+        { "value": "bottom-left", "label": "Bottom left" },
+        { "value": "bottom-center", "label": "Bottom center" },
+        { "value": "bottom-right", "label": "Bottom right" }
+      ],
+      "default": "middle-left"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "primary_cta_label",
+      "label": "Primary CTA label"
+    },
+    {
+      "type": "url",
+      "id": "primary_cta_link",
+      "label": "Primary CTA link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_cta_label",
+      "label": "Secondary CTA label"
+    },
+    {
+      "type": "url",
+      "id": "secondary_cta_link",
+      "label": "Secondary CTA link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "MOVE image banner",
+      "category": "MOVE"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,151 @@
+.move-image-banner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 0;
+  /* Not full viewport like move-hero; intended for internal page hero banners */
+  min-height: clamp(320px, 52vh, 560px);
+}
+
+.move-image-banner__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+}
+
+.move-image-banner--2-images .move-image-banner__media {
+  grid-template-rows: 1fr 1fr;
+}
+
+@media screen and (min-width: 750px) {
+  .move-image-banner--2-images .move-image-banner__media {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
+}
+
+.move-image-banner__media-item {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.move-image-banner__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.move-image-banner__placeholder {
+  width: 100%;
+  height: 100%;
+}
+
+/* Dark overlay controlled by inline style on ::after */
+.move-image-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #000000;
+  opacity: 0;
+  z-index: 1;
+}
+
+.move-image-banner__content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  /* Vertical + horizontal padding so content is not flush to edges */
+  padding: clamp(2.4rem, 5vw, 6rem) 0;
+}
+
+/* Placement (vertical) */
+.move-image-banner__content--top-left,
+.move-image-banner__content--top-center,
+.move-image-banner__content--top-right {
+  align-items: flex-start;
+}
+
+.move-image-banner__content--middle-left,
+.move-image-banner__content--middle-center,
+.move-image-banner__content--middle-right {
+  align-items: center;
+}
+
+.move-image-banner__content--bottom-left,
+.move-image-banner__content--bottom-center,
+.move-image-banner__content--bottom-right {
+  align-items: flex-end;
+}
+
+.move-image-banner__content-container {
+  width: 100%;
+  display: flex;
+}
+
+/* Placement (horizontal) */
+.move-image-banner__content--top-left .move-image-banner__content-container,
+.move-image-banner__content--middle-left .move-image-banner__content-container,
+.move-image-banner__content--bottom-left .move-image-banner__content-container {
+  justify-content: flex-start;
+}
+
+.move-image-banner__content--top-center .move-image-banner__content-container,
+.move-image-banner__content--middle-center .move-image-banner__content-container,
+.move-image-banner__content--bottom-center .move-image-banner__content-container {
+  justify-content: center;
+}
+
+.move-image-banner__content--top-right .move-image-banner__content-container,
+.move-image-banner__content--middle-right .move-image-banner__content-container,
+.move-image-banner__content--bottom-right .move-image-banner__content-container {
+  justify-content: flex-end;
+}
+
+.move-image-banner__content-box {
+  width: 100%;
+  max-width: 62rem;
+}
+
+/* Alignment */
+.move-image-banner__content-align--left .move-image-banner__content-box {
+  text-align: left;
+}
+
+.move-image-banner__content-align--center .move-image-banner__content-box {
+  text-align: center;
+}
+
+.move-image-banner__content-align--right .move-image-banner__content-box {
+  text-align: right;
+}
+
+.move-image-banner__heading {
+  margin: 0;
+}
+
+.move-image-banner__subheading {
+  margin-top: 1.2rem;
+}
+
+.move-image-banner__buttons {
+  margin-top: 2.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.move-image-banner__content-align--center .move-image-banner__buttons {
+  justify-content: center;
+}
+
+.move-image-banner__content-align--right .move-image-banner__buttons {
+  justify-content: flex-end;
+}
