@@ -20,38 +20,58 @@
     "move_testimonials_gaTHCH": {
       "type": "move-testimonials-list",
       "blocks": {
-        "testimonial_DKEyM6": {
+        "testimonial_sina": {
           "type": "testimonial",
           "settings": {
-            "quote": "Jeg trodde jeg måtte være perfekt for å lykkes. Nå har jeg funnet en måte å leve på som faktisk fungerer i hverdagen.",
-            "name": "Kunde, 2-barnsmor",
-            "role_or_context": "",
-            "before_after_label": ""
+            "quote": "Etter to tette barn, og to keisersnitt så følte jeg at jeg ikke kom meg tilbake til der jeg var før jeg ble mamma. Jeg jobber 100% turnus og har en mann som jobber offshore. Jeg var vant med å trene 5 ganger i uka, og følte jeg ikke tiden strakk til. Jeg spiste det jeg trodde var nok, noe som viste seg å være alt for lite. Aline reduserte treningen min til 3 økter per uke, og økte matinntaket betraktelig, noe som raskt ga gode resultater. Nå, etter 6 mnd med coaching har jeg masse kunnskap om både kosthold og trening, jeg har lært at hvile og søvn er viktig, om det så går på bekostning av en av treningsøktene. Jeg føler meg vel i egen kropp, og er sterkere enn jeg noen gang har vært. Jeg er så takknemlig for å ha valgt en coach som har gjort det så enkelt å gjennomføre, samtidig som jeg kan fortsette i samme spor på egenhånd nå i etterkant❤️",
+            "name": "Sina Brekne",
+            "role_or_context": "Kunde av Aline",
+            "before_after_label": "Så takknemlig"
           }
         },
-        "testimonial_wECDDL": {
+        "testimonial_anita": {
           "type": "testimonial",
           "settings": {
-            "quote": "Jeg trodde jeg måtte være perfekt for å lykkes. Nå har jeg funnet en måte å leve på som faktisk fungerer i hverdagen.",
-            "name": "Kunde, 2-barnsmor",
-            "role_or_context": "",
-            "before_after_label": ""
+            "quote": "Jeg har hatt Aline som coach i litt over 6 uker nå, og jeg er såå fornøyd! 🥰 Er så glad for at jeg tok steget å kontaktet henne! Hun sitter på så mye kunnskap og erfaring, og er veldig flink til å formidle det videre. Hun motiverer og kommer med tips og gode råd når det trengs, og er veldig flink til å gi tilbakemeldinger underveis. Både kosthold- og treningsplan er tilpasset mine preferanser og mål. Det er mye god mat å velge mellom som er både familievennlig og enkel å lage. Det krever verken lang tid på kjøkkenet eller masse ingredienser som må kjøpes på diverse helsekostbutikker. Angrer ikke ett sekund på at jeg tok kontakt med Aline, og gleder meg såå til å se hva vi skal få til framover! ❤️❤️",
+            "name": "Anita",
+            "role_or_context": "Kunde av Aline",
+            "before_after_label": "Jeg er såå fornøyd"
           }
         },
-        "testimonial_6FgiYN": {
+        "testimonial_merete": {
           "type": "testimonial",
           "settings": {
-            "quote": "Jeg trodde jeg måtte være perfekt for å lykkes. Nå har jeg funnet en måte å leve på som faktisk fungerer i hverdagen.",
-            "name": "Kunde, 2-barnsmor",
-            "role_or_context": "",
-            "before_after_label": ""
+            "quote": "Anbefaler virkelig MOVE coaching! Her er det superdyktige fagfolk som virkelig vet hva de driver med 🙂 Mat- og treningsplanen er helt tilpasset meg og mine mål, og kunne ikke vært en bedre match! Jeg har lyst å gi en ekstra shoutout til coach Therese som jeg har. Denne dama er virkelig en stjerne❤️ hun gir så gode og positive tilbakemeldinger, med konstruktivitet og skryt. Jeg får oppriktig følelsen av at hun virkelig kjenner meg, og kun har meg som kunde med så god tid som hun gir seg❤️ hun backer meg 100% og kan virkelig å gi en motivasjonsboost! Planene til Aline og backingen til Therese har gjort denne reisen til en lek, og har gitt meg tilbake treningsmotivasjon og den superenergien jeg en gang hadde⭐ Om du vil investere noen kroner i egen helse, må jeg bare få si at disse flinke damene, de vet virkelig å løfte frem det beste i folk👏❤️",
+            "name": "Merete",
+            "role_or_context": "Kunde av Aline",
+            "before_after_label": "Det beste du kan gjøre"
+          }
+        },
+        "testimonial_suzann": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Har aldri vært sterkere, sprekere og hatt mer overskudd til familien og jobb. Måltidene og treningen blir tilpasset etter behov og hverdagen, slik at det blir veldig gjennomførbart og enkelt å følge opp. Når jeg har hatt dårlige perioder, og viljen og motivasjonen ikke har vært på topp er Aline kjempe støttende, hjelper å finne de små seirene i hverdagen og kommer med mange gode tips og råd til fremtiden. Trening som før bare var jobb og kjedelig er nå blitt et must for en god uke og er så gøy å se fremgangen både i speilbildet og økende styrke. For min del har dette vært den beste investeringen jeg kunne gjort for meg selv, og vil ikke nøle med å ta kontakt med Aline 😊",
+            "name": "Suzann",
+            "role_or_context": "Kunde av Aline",
+            "before_after_label": "Beste investeringen"
+          }
+        },
+        "testimonial_zulli": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Fantastiske flinke Aline som har hjulpet mæ å bli sterk! D æ har likt aller best med treningsplanene e at de e så enkel. D e ikke 8 forskjellige øvelser som tar 2 timer å utføre. De e veldig få øvelser som e veldig effektive. Som vil si at d passe helt perfekt for de som har travle dager. f.eks. mammaer. Digg mat som hold dæ mett lenge og hu e veldig flink t å gi tips og triks nu kossn man kan f.eks. blir sterkere eller gjør noe med søtsuget.",
+            "name": "Zulli",
+            "role_or_context": "Kunde av Aline",
+            "before_after_label": "10/10 coach"
           }
         }
       },
       "block_order": [
-        "testimonial_DKEyM6",
-        "testimonial_wECDDL",
-        "testimonial_6FgiYN"
+        "testimonial_sina",
+        "testimonial_anita",
+        "testimonial_merete",
+        "testimonial_suzann",
+        "testimonial_zulli"
       ],
       "name": "MOVE testimonials",
       "settings": {
