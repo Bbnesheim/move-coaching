@@ -94,6 +94,57 @@
         "color_scheme": ""
       }
     },
+    "move_gallery_yeKVMR": {
+      "type": "move-gallery",
+      "blocks": {
+        "image_fVjK7L": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/progresjon_13.webp",
+            "caption": "",
+            "tag": ""
+          }
+        },
+        "image_gAbEqh": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/progresjon_11.webp",
+            "caption": "",
+            "tag": ""
+          }
+        },
+        "image_MXgnjd": {
+          "type": "image",
+          "settings": {
+            "caption": "",
+            "tag": ""
+          }
+        },
+        "image_AtUCfC": {
+          "type": "image",
+          "settings": {
+            "caption": "",
+            "tag": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_fVjK7L",
+        "image_gAbEqh",
+        "image_MXgnjd",
+        "image_AtUCfC"
+      ],
+      "name": "MOVE gallery",
+      "settings": {
+        "heading": "Før, etter og glimt fra hverdagen",
+        "heading_alignment": "center",
+        "display_captions": true,
+        "background_variant": "surface",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "color_scheme": ""
+      }
+    },
     "move_app_promo_ngTpek": {
       "type": "move-app-promo",
       "blocks": {
@@ -196,6 +247,7 @@
     "move_image_banner_Gt9ecH",
     "move_brief_VPUDa6",
     "move_steps_bekiGQ",
+    "move_gallery_yeKVMR",
     "move_app_promo_ngTpek",
     "move_app_features_4H4CKf"
   ]
