@@ -22,7 +22,7 @@
   class="section move-steps {{ bg_class }} color-{{ section.settings.color_scheme }} gradient{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
 >
   <div
-    class="page-width move-section-padding"
+    class="move-steps__container move-section-padding"
     style="{% if section.settings.padding_top > 0 %}padding-top: {{ section.settings.padding_top }}px;{% endif %}{% if section.settings.padding_bottom > 0 %} padding-bottom: {{ section.settings.padding_bottom }}px;{% endif %}"
   >
     <header class="move-steps__header">
@@ -36,10 +36,7 @@
 
     <div class="move-steps__journey" data-move-steps>
       <div class="move-steps__path" aria-hidden="true">
-        <svg class="move-steps__path-svg" data-move-steps-path preserveAspectRatio="none">
-          <path class="move-steps__path-line move-steps__path-line--base" data-move-steps-path-base></path>
-          <path class="move-steps__path-line move-steps__path-line--progress" data-move-steps-path-progress></path>
-        </svg>
+        <svg class="move-steps__path-svg" data-move-steps-path preserveAspectRatio="none"></svg>
       </div>
 
       <ol class="move-steps__list" role="list">
@@ -56,20 +53,31 @@
                 type="button"
                 aria-label="Steg {{ block.settings.step_label | escape }}: {{ block.settings.title | escape }}"
               >
-                <div class="move-steps__panel move-steps__media">
-                  {%- if block.settings.icon != blank -%}
-                    <div class="move-steps__media-inner">
-                      {{
-                        block.settings.icon
-                        | image_url: width: 960
-                        | image_tag:
-                          widths: '240, 360, 480, 720, 960',
-                          sizes: '(min-width: 990px) 360px, (min-width: 750px) 280px, 220px',
-                          class: 'move-steps__image',
-                          loading: 'lazy'
-                      }}
+                <div class="move-steps__side">
+                  <div class="move-steps__panel move-steps__media">
+                    {%- if block.settings.icon != blank -%}
+                      <div class="move-steps__media-inner">
+                        {{
+                          block.settings.icon
+                          | image_url: width: 1400
+                          | image_tag:
+                            widths: '320, 480, 720, 960, 1200, 1400',
+                            sizes: '(min-width: 990px) 520px, (min-width: 750px) 440px, 92vw',
+                            class: 'move-steps__image',
+                            loading: 'lazy'
+                        }}
+                      </div>
+                    {%- endif -%}
+
+                    <div class="move-steps__overlay">
+                      {%- if block.settings.title != blank -%}
+                        <h3 class="h3 move-steps__title">{{ block.settings.title }}</h3>
+                      {%- endif -%}
+                      {%- if block.settings.description != blank -%}
+                        <p class="move-steps__text text-body">{{ block.settings.description }}</p>
+                      {%- endif -%}
                     </div>
-                  {%- endif -%}
+                  </div>
                 </div>
 
                 <div class="move-steps__center">
@@ -80,14 +88,7 @@
                   </span>
                 </div>
 
-                <div class="move-steps__panel move-steps__content">
-                  {%- if block.settings.title != blank -%}
-                    <h3 class="h3 move-steps__title">{{ block.settings.title }}</h3>
-                  {%- endif -%}
-                  {%- if block.settings.description != blank -%}
-                    <p class="move-steps__text text-body">{{ block.settings.description }}</p>
-                  {%- endif -%}
-                </div>
+                <div class="move-steps__spacer" aria-hidden="true"></div>
               </button>
             </li>
           {%- endif -%}

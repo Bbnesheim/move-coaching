@@ -1,5 +1,14 @@
-.move-steps .page-width {
-  max-width: var(--page-width);
+.move-steps__container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .move-steps__container {
+    padding: 0 3.2rem;
+  }
 }
 
 .move-steps__header {
@@ -28,18 +37,29 @@
 
 .move-steps__path-line {
   fill: none;
+  stroke: rgba(var(--color-foreground), 0.45);
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 3;
+  stroke-width: 3.5;
 }
 
 .move-steps__path-line--base {
-  stroke: rgba(var(--color-foreground), 0.18);
+  opacity: 0.25;
 }
 
 .move-steps__path-line--progress {
-  stroke: rgba(var(--color-foreground), 0.55);
-  transition: stroke-dashoffset 320ms var(--ease-out-slow);
+  opacity: 0;
+  transition: opacity 160ms linear;
+}
+
+/* Segment colors + styles */
+.move-steps__path-line--segment-0 {
+  stroke: var(--move-color-pink-secondary);
+  stroke-dasharray: 2 12;
+}
+
+.move-steps__path-line--segment-1 {
+  stroke: var(--move-color-brown-primary);
 }
 
 .move-steps__list {
@@ -64,13 +84,21 @@
   text-align: left;
   cursor: pointer;
   display: grid;
-  grid-template-columns: 5rem minmax(0, 1fr);
-  grid-template-areas:
-    'center media'
-    'center content';
+  grid-template-columns: 5.2rem minmax(0, 1fr);
+  grid-template-areas: 'center side';
   column-gap: 1.6rem;
-  row-gap: 1.2rem;
+  row-gap: 0;
   align-items: start;
+}
+
+.move-steps__side {
+  grid-area: side;
+  display: grid;
+  gap: 0;
+}
+
+.move-steps__spacer {
+  display: none;
 }
 
 .move-steps__panel {
@@ -81,31 +109,103 @@
     box-shadow var(--duration-short) var(--ease-out-slow);
 }
 
+/* Image container should only wrap around the image (not a big text card) */
+.move-steps__media.move-steps__panel {
+  padding: 1.2rem;
+  position: relative;
+  overflow: visible;
+}
+
+
 .move-steps__step-button:focus-visible .move-steps__panel {
   outline: 2px solid rgba(var(--color-foreground), 0.55);
   outline-offset: 3px;
 }
 
 .move-steps__media {
-  grid-area: media;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  max-width: 52rem;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 990px) {
+  .move-steps__media {
+    max-width: 56rem;
+  }
 }
 
 .move-steps__media-inner {
   width: 100%;
-  max-width: 26rem;
+  max-width: none;
+  border-radius: calc(var(--radius-md, 8px) - 2px);
+  overflow: hidden;
+  position: relative;
+  z-index: 0;
+  aspect-ratio: 1 / 1;
 }
 
 .move-steps__image {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
+  object-fit: cover;
 }
 
-.move-steps__content {
-  grid-area: content;
+.move-steps__overlay {
+  /* Mobile: text sits below the image (not over it) */
+  position: static;
+  margin-top: 1.2rem;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+
+/* Let the text fully render; if it gets tall it will naturally expand upward from the bottom anchor. */
+.move-steps__overlay .move-steps__title {
+  margin-bottom: 0.4rem;
+  font-size: 2.2rem;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+@media screen and (min-width: 750px) {
+  .move-steps__overlay .move-steps__title {
+    font-size: 2.6rem;
+  }
+}
+
+.move-steps__overlay .move-steps__text {
+  overflow-wrap: anywhere;
+}
+
+@media screen and (min-width: 750px) {
+  /* Desktop: lean text OUTSIDE the image, aligned from the bottom */
+  .move-steps__overlay {
+    position: absolute;
+    bottom: 1.2rem;
+    margin-top: 0;
+    width: min(26rem, 20vw);
+    z-index: 3;
+    /* Don’t clip; allow content to grow upward if it wraps */
+    overflow: visible;
+  }
+
+  /* Left-side blocks (odd): place text to the right (towards center/path) */
+  .move-steps__step:nth-child(odd) .move-steps__overlay {
+    left: calc(100% + 2.4rem);
+    right: auto;
+    text-align: left;
+  }
+
+  /* Right-side blocks (even): place text to the left (towards center/path) */
+  .move-steps__step:nth-child(even) .move-steps__overlay {
+    right: calc(100% + 2.4rem);
+    left: auto;
+    text-align: right;
+  }
 }
 
 .move-steps__center {
@@ -153,30 +253,56 @@
   border-color: rgba(var(--color-foreground), 0.5);
 }
 
-/* Create a subtle "map" wiggle in the route by offsetting the nodes */
-.move-steps__step:nth-child(odd) .move-steps__node {
-  transform: translateX(-10px);
+/* Node styling per step */
+.move-steps__step[data-step-index="1"] .move-steps__node {
+  background: var(--move-color-pink-secondary);
+  border-color: var(--move-color-pink-secondary);
 }
 
-.move-steps__step:nth-child(even) .move-steps__node {
-  transform: translateX(10px);
+.move-steps__step[data-step-index="1"] .move-steps__node-label {
+  color: var(--move-color-text-dark);
 }
+
+.move-steps__step[data-step-index="2"] .move-steps__node {
+  background: var(--move-color-brown-primary);
+  border-color: var(--move-color-brown-primary);
+}
+
+.move-steps__step[data-step-index="2"] .move-steps__node-label {
+  color: #ffffff;
+}
+
 
 @media screen and (min-width: 750px) {
   .move-steps__list {
-    gap: 3.2rem;
+    gap: 4rem;
+  }
+
+  /* Keep the images from spanning too wide within their grid column */
+  .move-steps__step:nth-child(odd) .move-steps__media {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  .move-steps__step:nth-child(even) .move-steps__media {
+    margin-left: auto;
+    margin-right: 0;
   }
 
   .move-steps__step-button {
-    grid-template-columns: minmax(0, 1fr) 7rem minmax(0, 1fr);
-    grid-template-areas: 'media center content';
-    column-gap: 2.4rem;
-    row-gap: 0;
+    grid-template-columns: minmax(0, 1fr) 9rem minmax(0, 1fr);
+    grid-template-areas: 'side center spacer';
+    column-gap: 3.2rem;
     align-items: center;
   }
 
+  .move-steps__spacer {
+    display: block;
+    grid-area: spacer;
+  }
+
   .move-steps__step:nth-child(even) .move-steps__step-button {
-    grid-template-areas: 'content center media';
+    grid-template-areas: 'spacer center side';
   }
 
   .move-steps__center {
@@ -184,13 +310,15 @@
   }
 
   .move-steps__media-inner {
-    max-width: 32rem;
+    max-width: none;
   }
 
+
   .move-steps__node {
-    width: 4.2rem;
-    height: 4.2rem;
+    width: 4.4rem;
+    height: 4.4rem;
   }
+
 }
 
 @media (prefers-reduced-motion: reduce) {

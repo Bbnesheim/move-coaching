@@ -4,32 +4,30 @@ class MoveStepsJourney {
     this.journey = section.querySelector('[data-move-steps]');
     this.steps = Array.from(section.querySelectorAll('[data-move-steps-step]'));
     this.nodes = Array.from(section.querySelectorAll('[data-move-steps-node]'));
+    this.mediaInners = Array.from(section.querySelectorAll('.move-steps__media-inner'));
 
     this.svg = section.querySelector('[data-move-steps-path]');
-    this.basePath = section.querySelector('[data-move-steps-path-base]');
-    this.progressPath = section.querySelector('[data-move-steps-path-progress]');
 
     this.activeIndex = 0;
+    this.nodePoints = [];
+    this.mediaPoints = [];
+    this.segmentAnchors = [];
+    this.segments = [];
 
-    if (
-      !this.journey ||
-      !this.svg ||
-      !this.basePath ||
-      !this.progressPath ||
-      this.steps.length === 0 ||
-      this.nodes.length !== this.steps.length
-    ) {
+    if (!this.journey || !this.svg || this.steps.length === 0 || this.nodes.length !== this.steps.length) {
       return;
     }
 
     this.handleResize = this.handleResize.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
 
     this.steps.forEach((step, index) => {
       const button = step.querySelector('button');
       if (!button) return;
 
       button.addEventListener('click', () => {
-        this.setActiveIndex(index, { scroll: false });
+        // Scroll to the step so the line "fills" through natural scroll.
+        this.setActiveIndex(index, { scroll: true });
       });
     });
 
@@ -40,45 +38,34 @@ class MoveStepsJourney {
     }
 
     window.addEventListener('resize', this.handleResize, { passive: true });
+    window.addEventListener('scroll', this.handleScroll, { passive: true });
 
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(() => this.rebuildPath()).catch(() => {});
     }
 
-    this.setupIntersectionObserver();
+    // Rebuild once images have loaded (prevents initial wrong path when lazy images resize)
+    this.section
+      .querySelectorAll('.move-steps__image')
+      .forEach((img) => img.addEventListener('load', () => this.rebuildPath(), { once: true }));
 
     this.rebuildPath();
     this.setActiveIndex(0, { scroll: false, silent: true });
-  }
-
-  setupIntersectionObserver() {
-    if (!('IntersectionObserver' in window)) return;
-
-    this.intersectionObserver = new IntersectionObserver(
-      (entries) => {
-        // Choose the most visible step
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => (b.intersectionRatio || 0) - (a.intersectionRatio || 0));
-
-        if (visible.length === 0) return;
-
-        const stepEl = visible[0].target;
-        const idx = this.steps.indexOf(stepEl);
-        if (idx >= 0) this.setActiveIndex(idx, { scroll: false });
-      },
-      {
-        root: null,
-        threshold: [0.25, 0.4, 0.55, 0.7],
-      }
-    );
-
-    this.steps.forEach((step) => this.intersectionObserver.observe(step));
+    this.updateFromScroll();
   }
 
   handleResize() {
-    // ResizeObserver will usually catch this; this is a safety net.
     this.rebuildPath();
+  }
+
+  handleScroll() {
+    if (this.rafPending) return;
+    this.rafPending = true;
+
+    requestAnimationFrame(() => {
+      this.rafPending = false;
+      this.updateFromScroll();
+    });
   }
 
   setActiveIndex(index, { scroll = false, silent = false } = {}) {
@@ -93,15 +80,13 @@ class MoveStepsJourney {
       step.classList.toggle('is-active', i === clamped);
     });
 
-    this.updateProgress();
-
     if (scroll) {
       this.steps[clamped].scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }
 
   rebuildPath() {
-    if (!this.journey || !this.svg || !this.basePath || !this.progressPath) return;
+    if (!this.journey || !this.svg) return;
 
     const width = this.journey.clientWidth;
     const height = this.journey.offsetHeight;
@@ -110,62 +95,128 @@ class MoveStepsJourney {
 
     this.svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
 
+    // Clear and rebuild all segment paths.
+    this.svg.innerHTML = '';
+    this.segments = [];
+
     const journeyRect = this.journey.getBoundingClientRect();
-    const points = this.nodes
-      .map((node) => {
-        const r = node.getBoundingClientRect();
-        return {
-          x: r.left - journeyRect.left + r.width / 2,
-          y: r.top - journeyRect.top + r.height / 2,
-        };
-      })
-      // Ensure y is strictly increasing to avoid self-intersections
-      .sort((a, b) => a.y - b.y);
 
-    if (points.length < 2) return;
+    // Compute anchor points in journey coordinates.
+    this.nodePoints = this.nodes.map((node) => {
+      const r = node.getBoundingClientRect();
+      return {
+        x: r.left - journeyRect.left + r.width / 2,
+        y: r.top - journeyRect.top + r.height / 2,
+      };
+    });
 
-    let d = `M ${points[0].x} ${points[0].y}`;
+    this.mediaPoints = this.mediaInners.map((el) => {
+      const r = el.getBoundingClientRect();
+      return {
+        x: r.left - journeyRect.left + r.width / 2,
+        y: r.top - journeyRect.top + r.height / 2,
+      };
+    });
 
-    for (let i = 1; i < points.length; i++) {
-      const prev = points[i - 1];
-      const cur = points[i];
-      const midY = (prev.y + cur.y) / 2;
+    // Desired mapping:
+    // - Segment 0: point 1 (node[0]) -> image 2 (media[1])
+    // - Segment 1: point 2 (node[1]) -> image 3 (media[2])
+    this.segmentAnchors = [];
 
-      // Smooth vertical "S" curve between nodes.
-      d += ` C ${prev.x} ${midY}, ${cur.x} ${midY}, ${cur.x} ${cur.y}`;
+    if (this.nodePoints[0] && this.mediaPoints[1]) {
+      this.segmentAnchors.push({ start: this.nodePoints[0], end: this.mediaPoints[1] });
     }
 
-    this.basePath.setAttribute('d', d);
-    this.progressPath.setAttribute('d', d);
+    if (this.nodePoints[1] && this.mediaPoints[2]) {
+      this.segmentAnchors.push({ start: this.nodePoints[1], end: this.mediaPoints[2] });
+    }
 
-    // Prepare dash drawing on the progress path
-    const total = this.progressPath.getTotalLength();
-    this.progressPath.style.strokeDasharray = `${total}`;
+    // Fallback if we don't have all media points (e.g. missing images)
+    if (this.segmentAnchors.length === 0 && this.nodePoints.length >= 2) {
+      for (let i = 0; i < this.nodePoints.length - 1; i++) {
+        this.segmentAnchors.push({ start: this.nodePoints[i], end: this.nodePoints[i + 1] });
+      }
+    }
 
-    // Ensure the base path is always solid
-    this.basePath.style.strokeDasharray = 'none';
-    this.basePath.style.strokeDashoffset = '0';
+    if (this.segmentAnchors.length === 0) return;
 
-    // Update progress on next frame so styles apply before dash offset
-    requestAnimationFrame(() => {
-      this.updateProgress();
-    });
+    const segmentCount = this.segmentAnchors.length;
+    const amplitude = Math.min(width * 0.28, 420);
+
+    for (let i = 0; i < segmentCount; i++) {
+      const prev = this.segmentAnchors[i].start;
+      const cur = this.segmentAnchors[i].end;
+      const dy = cur.y - prev.y;
+
+      // Big flowing curve: bend outward between each pair.
+      const direction = i % 2 === 0 ? 1 : -1;
+      const bendX = (prev.x + cur.x) / 2 + direction * amplitude;
+      const y1 = prev.y + dy * 0.35;
+      const y2 = prev.y + dy * 0.65;
+
+      const d = `M ${prev.x} ${prev.y} C ${bendX} ${y1}, ${bendX} ${y2}, ${cur.x} ${cur.y}`;
+
+      const base = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      base.setAttribute('d', d);
+      base.setAttribute(
+        'class',
+        `move-steps__path-line move-steps__path-line--base move-steps__path-line--segment-${i}`
+      );
+
+      const progress = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      progress.setAttribute('d', d);
+      progress.setAttribute(
+        'class',
+        `move-steps__path-line move-steps__path-line--progress move-steps__path-line--segment-${i}`
+      );
+      progress.style.opacity = '0';
+
+      this.svg.appendChild(base);
+      this.svg.appendChild(progress);
+
+      this.segments.push({ base, progress, start: prev, end: cur });
+    }
+
+    this.updateFromScroll();
   }
 
-  updateProgress() {
-    if (!this.progressPath) return;
+  updateFromScroll() {
+    if (!this.journey || this.segments.length === 0) return;
 
-    const total = this.progressPath.getTotalLength();
-    const denom = Math.max(1, this.steps.length - 1);
-    const t = this.activeIndex / denom;
+    const rect = this.journey.getBoundingClientRect();
 
-    this.progressPath.style.strokeDashoffset = `${total * (1 - t)}`;
+    // Fade each segment from transparent -> solid as the viewport center passes through it.
+    const viewportCenterY = window.innerHeight / 2;
+
+    this.segments.forEach(({ progress: segProgress, start, end }) => {
+      const startY = rect.top + start.y;
+      const endY = rect.top + end.y;
+      const denom = Math.max(1, endY - startY);
+
+      let t = (viewportCenterY - startY) / denom;
+      t = Math.max(0, Math.min(1, t));
+
+      segProgress.style.opacity = `${t}`;
+    });
+
+    // Keep active highlighting roughly in sync with overall scroll progress.
+    const firstStart = this.segments[0].start;
+    const lastEnd = this.segments[this.segments.length - 1].end;
+    const firstY = rect.top + firstStart.y;
+    const lastY = rect.top + lastEnd.y;
+    const denom = Math.max(1, lastY - firstY);
+
+    let overall = (viewportCenterY - firstY) / denom;
+    overall = Math.max(0, Math.min(1, overall));
+
+    const active = Math.max(0, Math.min(this.steps.length - 1, Math.round(overall * (this.steps.length - 1))));
+    this.setActiveIndex(active, { scroll: false, silent: true });
   }
 
   destroy() {
     if (this.resizeObserver) this.resizeObserver.disconnect();
-    if (this.intersectionObserver) this.intersectionObserver.disconnect();
     window.removeEventListener('resize', this.handleResize);
+    window.removeEventListener('scroll', this.handleScroll);
   }
 }
 
