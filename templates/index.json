@@ -14,7 +14,12 @@
       "name": "MOVE hero + nav",
       "settings": {
         "nav_menu": "hovedmeny",
-        "heading": "Målet er overskudd – <br> veien dit <br> tar vi <br>sammen.",
+        "heading_line_1": "Målet er å få overskudd,",
+        "heading_line_1_font_size": 33,
+        "heading_line_2": "og veien tar",
+        "heading_line_2_font_size": 42,
+        "heading_line_3": "vi sammen",
+        "heading_line_3_font_size": 32,
         "subheading": "",
         "badge_text": "6, 9 eller 12 måneder – du velger tempoet.",
         "primary_cta_label": "Start din dag én",
@@ -35,14 +40,14 @@
     "move_pricing_table_7hhP8t": {
       "type": "move-pricing-table",
       "blocks": {
-        "plan_NAw68E": {
+        "plan_J76nN6": {
           "type": "plan",
           "settings": {
-            "plan_handle": "plan-6m",
-            "plan_name": "Halvårsboost",
-            "duration_label": "6 måneder",
-            "price_per_month": "2 999 kr",
-            "total_price": "Oppstartsgebyr kommer i tillegg",
+            "plan_handle": "plan-12m",
+            "plan_name": "Full livsstilsendring",
+            "duration_label": "12 måneder",
+            "price_per_month": "2 499 kr",
+            "total_price": "Gratis oppstart + 1 ekstra måned",
             "badge": "Mest populær",
             "description": "Perfekt for deg som vil ha tydelig struktur, tett oppfølging og rom til å gjøre endring i ditt tempo.",
             "benefits": "Ukentlig oppfølging\nTilgang til MOVE-appen\nTilpasset kost og trening",
@@ -65,14 +70,14 @@
             "primary_cta_link": ""
           }
         },
-        "plan_J76nN6": {
+        "plan_NAw68E": {
           "type": "plan",
           "settings": {
-            "plan_handle": "plan-12m",
-            "plan_name": "Full livsstilsendring",
-            "duration_label": "12 måneder",
-            "price_per_month": "2 499 kr",
-            "total_price": "Gratis oppstart + 1 ekstra måned",
+            "plan_handle": "plan-6m",
+            "plan_name": "Halvårsboost",
+            "duration_label": "6 måneder",
+            "price_per_month": "2 999 kr",
+            "total_price": "Oppstartsgebyr kommer i tillegg",
             "badge": "Mest populær",
             "description": "Perfekt for deg som vil ha tydelig struktur, tett oppfølging og rom til å gjøre endring i ditt tempo.",
             "benefits": "Ukentlig oppfølging\nTilgang til MOVE-appen\nTilpasset kost og trening",
@@ -82,9 +87,9 @@
         }
       },
       "block_order": [
-        "plan_NAw68E",
+        "plan_J76nN6",
         "plan_JJDFM8",
-        "plan_J76nN6"
+        "plan_NAw68E"
       ],
       "name": "MOVE pricing table",
       "settings": {
