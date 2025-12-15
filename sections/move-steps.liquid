@@ -1,4 +1,5 @@
 {{ 'section-move-steps.css' | asset_url | stylesheet_tag }}
+{{ 'section-move-steps.js' | asset_url | script_tag }}
 
 {%- liquid
   assign bg_class = ''
@@ -33,27 +34,65 @@
       {%- endif -%}
     </header>
 
-    <div class="move-steps__grid grid grid--3-col-desktop grid--1-col-tablet-down">
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'step' -%}
-          <article class="move-steps__item grid__item" {{ block.shopify_attributes }}>
-          {%- if block.settings.step_label != blank -%}
-              <div class="move-steps__badge caption-with-letter-spacing">{{ block.settings.step_label }}</div>
-            {%- endif -%}
-            {%- if block.settings.icon != blank -%}
-              <div class="move-steps__icon media media--square">
-                {{ block.settings.icon | image_url: width: 80 | image_tag: widths: '40, 60, 80', class: 'move-steps__icon-image' }}
-              </div>
-            {%- endif -%}
-            {%- if block.settings.title != blank -%}
-              <h3 class="h3 move-steps__title">{{ block.settings.title }}</h3>
-            {%- endif -%}
-            {%- if block.settings.description != blank -%}
-              <p class="move-steps__text text-body">{{ block.settings.description }}</p>
-            {%- endif -%}
-          </article>
-        {%- endif -%}
-      {%- endfor -%}
+    <div class="move-steps__journey" data-move-steps>
+      <div class="move-steps__path" aria-hidden="true">
+        <svg class="move-steps__path-svg" data-move-steps-path preserveAspectRatio="none">
+          <path class="move-steps__path-line move-steps__path-line--base" data-move-steps-path-base></path>
+          <path class="move-steps__path-line move-steps__path-line--progress" data-move-steps-path-progress></path>
+        </svg>
+      </div>
+
+      <ol class="move-steps__list" role="list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'step' -%}
+            <li
+              class="move-steps__step"
+              data-move-steps-step
+              data-step-index="{{ forloop.index0 }}"
+              {{ block.shopify_attributes }}
+            >
+              <button
+                class="move-steps__step-button"
+                type="button"
+                aria-label="Steg {{ block.settings.step_label | escape }}: {{ block.settings.title | escape }}"
+              >
+                <div class="move-steps__panel move-steps__media">
+                  {%- if block.settings.icon != blank -%}
+                    <div class="move-steps__media-inner">
+                      {{
+                        block.settings.icon
+                        | image_url: width: 960
+                        | image_tag:
+                          widths: '240, 360, 480, 720, 960',
+                          sizes: '(min-width: 990px) 360px, (min-width: 750px) 280px, 220px',
+                          class: 'move-steps__image',
+                          loading: 'lazy'
+                      }}
+                    </div>
+                  {%- endif -%}
+                </div>
+
+                <div class="move-steps__center">
+                  <span class="move-steps__node" data-move-steps-node>
+                    {%- if block.settings.step_label != blank -%}
+                      <span class="move-steps__node-label">{{ block.settings.step_label }}</span>
+                    {%- endif -%}
+                  </span>
+                </div>
+
+                <div class="move-steps__panel move-steps__content">
+                  {%- if block.settings.title != blank -%}
+                    <h3 class="h3 move-steps__title">{{ block.settings.title }}</h3>
+                  {%- endif -%}
+                  {%- if block.settings.description != blank -%}
+                    <p class="move-steps__text text-body">{{ block.settings.description }}</p>
+                  {%- endif -%}
+                </div>
+              </button>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ol>
     </div>
   </div>
 </section>
@@ -133,7 +172,7 @@
         {
           "type": "image_picker",
           "id": "icon",
-          "label": "Icon"
+          "label": "Image"
         },
         {
           "type": "text",

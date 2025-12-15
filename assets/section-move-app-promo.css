@@ -14,6 +14,12 @@
   }
 }
 
+.move-app-promo__subheading {
+  margin: 1.2rem 0 0;
+  font-size: 1.6rem;
+  letter-spacing: 0.06rem;
+}
+
 .move-app-promo__body {
   margin-top: 1.2rem;
 }
@@ -34,16 +40,71 @@
   gap: 1.2rem;
 }
 
-.move-app-promo__stores {
-  margin-top: 1.6rem;
+.move-app-promo__media {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 1.2rem;
+}
+
+.move-app-promo__stores {
+  margin-top: 0;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.move-app-promo__store-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 5.2rem;
+  height: 5.2rem;
+  border-radius: 999px;
+  padding: 0.8rem;
+}
+
+.move-app-promo__store-link--pink {
+  background: var(--move-color-pink-secondary);
+}
+
+.move-app-promo__store-link--brown {
+  background: var(--move-color-brown-primary);
+}
+
+/* If the uploaded badge/icon is dark (common for monochrome SVG/PNG),
+   invert it on the dark brown background for contrast. */
+.move-app-promo__store-link--brown .move-app-promo__store-badge {
+  filter: brightness(0) invert(1);
+}
+
+.move-app-promo__store-badge {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 .move-app-promo__screenshot {
+  flex: 1 1 auto;
   border-radius: var(--radius-md, 8px);
   overflow: hidden;
+  background: transparent;
+}
+
+@media screen and (max-width: 749px) {
+  .move-app-promo__media {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .move-app-promo__stores {
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
 }
 
 .move-app-promo__image {

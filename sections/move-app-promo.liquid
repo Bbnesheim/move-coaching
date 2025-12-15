@@ -29,6 +29,9 @@
         {%- if section.settings.heading != blank -%}
           <h2 class="h2">{{ section.settings.heading }}</h2>
         {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <p class="move-app-promo__subheading">{{ section.settings.subheading }}</p>
+        {%- endif -%}
         {%- if section.settings.body != blank -%}
           <div class="move-app-promo__body text-body">{{ section.settings.body }}</div>
         {%- endif -%}
@@ -68,16 +71,24 @@
             </a>
           {%- endif -%}
         </div>
+      </div>
 
+      <div class="move-app-promo__media">
+        {%- if section.settings.screenshot != blank -%}
+          <div class="move-app-promo__screenshot media media--portrait media--transparent">
+            {{ section.settings.screenshot | image_url: width: 900 | image_tag: widths: '400, 600, 900', class: 'move-app-promo__image' }}
+          </div>
+        {%- endif -%}
+        
         <div class="move-app-promo__stores">
           {%- if section.settings.app_store_badge != blank -%}
             <a
               {% if section.settings.app_store_link != blank %}
                 href="{{ section.settings.app_store_link }}"
               {% endif %}
-              class="move-app-promo__store-link"
+              class="move-app-promo__store-link move-app-promo__store-link--pink"
             >
-              {{ section.settings.app_store_badge | image_url: width: 180 | image_tag: widths: '120, 160, 180', class: 'move-app-promo__store-badge' }}
+              {{ section.settings.app_store_badge | image_url: width: 120 | image_tag: widths: '60, 90, 120', class: 'move-app-promo__store-badge' }}
             </a>
           {%- endif -%}
           {%- if section.settings.play_store_badge != blank -%}
@@ -85,20 +96,12 @@
               {% if section.settings.play_store_link != blank %}
                 href="{{ section.settings.play_store_link }}"
               {% endif %}
-              class="move-app-promo__store-link"
+              class="move-app-promo__store-link move-app-promo__store-link--brown"
             >
-              {{ section.settings.play_store_badge | image_url: width: 180 | image_tag: widths: '120, 160, 180', class: 'move-app-promo__store-badge' }}
+              {{ section.settings.play_store_badge | image_url: width: 120 | image_tag: widths: '60, 90, 120', class: 'move-app-promo__store-badge' }}
             </a>
           {%- endif -%}
         </div>
-      </div>
-
-      <div class="move-app-promo__media">
-        {%- if section.settings.screenshot != blank -%}
-          <div class="move-app-promo__screenshot media media--portrait">
-            {{ section.settings.screenshot | image_url: width: 900 | image_tag: widths: '400, 600, 900', class: 'move-app-promo__image' }}
-          </div>
-        {%- endif -%}
       </div>
     </div>
   </div>
@@ -118,6 +121,11 @@
       "id": "heading",
       "label": "Heading",
       "default": "MOVE-appen – verktøyet som følger deg i hverdagen"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
     },
     {
       "type": "textarea",

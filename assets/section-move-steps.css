@@ -8,31 +8,127 @@
   text-align: center;
 }
 
-.move-steps__grid {
-  row-gap: var(--grid-mobile-vertical-spacing);
+.move-steps__journey {
+  position: relative;
 }
 
-@media screen and (min-width: 750px) {
-  .move-steps__grid {
-    row-gap: var(--grid-desktop-vertical-spacing);
-  }
+.move-steps__path {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
 }
 
-.move-steps__item {
-  padding: 2.4rem 2rem;
+.move-steps__path-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.move-steps__path-line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+}
+
+.move-steps__path-line--base {
+  stroke: rgba(var(--color-foreground), 0.18);
+}
+
+.move-steps__path-line--progress {
+  stroke: rgba(var(--color-foreground), 0.55);
+  transition: stroke-dashoffset 320ms var(--ease-out-slow);
+}
+
+.move-steps__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 2.4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.move-steps__step {
+  position: relative;
+}
+
+.move-steps__step-button {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1fr);
+  grid-template-areas:
+    'center media'
+    'center content';
+  column-gap: 1.6rem;
+  row-gap: 1.2rem;
+  align-items: start;
+}
+
+.move-steps__panel {
+  padding: 2.2rem 2rem;
   border-radius: var(--radius-md, 8px);
-  background-color: rgba(var(--color-background), 0.9);
+  background-color: rgba(var(--color-background), 0.92);
   transition: transform var(--duration-short) var(--ease-out-slow),
     box-shadow var(--duration-short) var(--ease-out-slow);
 }
 
-.move-steps__item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+.move-steps__step-button:focus-visible .move-steps__panel {
+  outline: 2px solid rgba(var(--color-foreground), 0.55);
+  outline-offset: 3px;
 }
 
-.move-steps__badge {
-  margin-bottom: 0.8rem;
+.move-steps__media {
+  grid-area: media;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.move-steps__media-inner {
+  width: 100%;
+  max-width: 26rem;
+}
+
+.move-steps__image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.move-steps__content {
+  grid-area: content;
+}
+
+.move-steps__center {
+  grid-area: center;
+  display: flex;
+  justify-content: center;
+  padding-top: 0.2rem;
+}
+
+.move-steps__node {
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 999px;
+  background: rgba(var(--color-background), 0.95);
+  border: 2px solid rgba(var(--color-foreground), 0.22);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+  display: grid;
+  place-items: center;
+}
+
+.move-steps__node-label {
+  font-weight: 600;
+  font-size: 1.4rem;
 }
 
 .move-steps__title {
@@ -41,4 +137,68 @@
 
 .move-steps__text {
   margin: 0;
+}
+
+.move-steps__step-button:hover .move-steps__panel {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.1);
+}
+
+.move-steps__step.is-active .move-steps__panel {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.1);
+}
+
+.move-steps__step.is-active .move-steps__node {
+  border-color: rgba(var(--color-foreground), 0.5);
+}
+
+/* Create a subtle "map" wiggle in the route by offsetting the nodes */
+.move-steps__step:nth-child(odd) .move-steps__node {
+  transform: translateX(-10px);
+}
+
+.move-steps__step:nth-child(even) .move-steps__node {
+  transform: translateX(10px);
+}
+
+@media screen and (min-width: 750px) {
+  .move-steps__list {
+    gap: 3.2rem;
+  }
+
+  .move-steps__step-button {
+    grid-template-columns: minmax(0, 1fr) 7rem minmax(0, 1fr);
+    grid-template-areas: 'media center content';
+    column-gap: 2.4rem;
+    row-gap: 0;
+    align-items: center;
+  }
+
+  .move-steps__step:nth-child(even) .move-steps__step-button {
+    grid-template-areas: 'content center media';
+  }
+
+  .move-steps__center {
+    padding-top: 0;
+  }
+
+  .move-steps__media-inner {
+    max-width: 32rem;
+  }
+
+  .move-steps__node {
+    width: 4.2rem;
+    height: 4.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .move-steps__panel {
+    transition: none;
+  }
+
+  .move-steps__path-line--progress {
+    transition: none;
+  }
 }
