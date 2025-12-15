@@ -52,7 +52,7 @@
     <div class="page-width move-image-banner__content-container">
       <div class="move-image-banner__content-box">
         {%- if section.settings.heading != blank -%}
-          <h1 class="move-image-banner__heading h1">{{ section.settings.heading }}</h1>
+          <h1 class="move-image-banner__heading {{ section.settings.heading_size | default: 'h1' }}">{{ section.settings.heading }}</h1>
         {%- endif -%}
 
         {%- if section.settings.subheading != blank -%}
@@ -153,7 +153,7 @@
         { "value": "bottom-center", "label": "Bottom center" },
         { "value": "bottom-right", "label": "Bottom right" }
       ],
-      "default": "middle-left"
+      "default": "middle-center"
     },
     {
       "type": "select",
@@ -164,7 +164,18 @@
         { "value": "center", "label": "Center" },
         { "value": "right", "label": "Right" }
       ],
-      "default": "left"
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h0", "label": "Large" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h2", "label": "Small" }
+      ],
+      "default": "h1"
     },
     {
       "type": "text",

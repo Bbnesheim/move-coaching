@@ -57,9 +57,9 @@
 }
 
 .move-image-banner__content {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 2;
-  height: 100%;
   display: flex;
   align-items: center;
   /* Vertical + horizontal padding so content is not flush to edges */
