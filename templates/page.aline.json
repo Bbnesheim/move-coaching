@@ -17,58 +17,41 @@
         "padding_bottom": 28
       }
     },
-    "move_hero_YaJyLd": {
-      "type": "move-hero",
-      "name": "MOVE hero",
-      "settings": {
-        "heading": "Langsiktig livsstilsendring med støtte hele veien",
-        "subheading": "Coaching, app og støtte som faktisk passer inn i tidsklemma.",
-        "badge_text": "6, 9 eller 12 måneder – du velger tempoet.",
-        "primary_cta_label": "Start din dag én",
-        "primary_cta_link": "",
-        "secondary_cta_label": "Ta quizen først",
-        "secondary_cta_link": "",
-        "image_aspect_ratio": "portrait",
-        "layout": "text_left",
-        "headline_style": "on_image",
-        "background_variant": "cream",
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "color_scheme": ""
-      }
-    },
-    "move_story_blocks_hRkMie": {
+    "move_story_blocks_JajjJz": {
       "type": "move-story-blocks",
       "blocks": {
-        "story_HaJLd8": {
+        "story_ywhpbr": {
           "type": "story",
           "settings": {
             "title": "Utgangspunktet",
             "body": "Jeg har alltid vært aktiv, men likevel la jeg på meg rundt 15 kg på kort tid. Etter at jeg flyttet for meg selv mistet jeg balansen med mat, og plutselig passet ikke klærne lenger – jeg kjente at kroppen ikke var min.",
+            "image": "shopify://shop_images/aline_7.webp",
             "emphasis_quote": "Jeg følte meg «normal», men visste innerst inne at noe var galt."
           }
         },
-        "story_CfRtXN": {
+        "story_7x3JB8": {
           "type": "story",
           "settings": {
             "title": "Vendepunktet",
             "body": "Jeg prøvde lavkarbo, jogging hver dag og masse trening. Vekten gikk ned, men kroppen ble ikke strammere – jeg følte meg «tynnfeit», uten muskler og uten selvtillit. Da bestemte jeg meg for strukturert trening og et kosthold jeg kunne leve med.",
+            "image": "shopify://shop_images/aline_3.webp",
             "emphasis_quote": "Jeg ville bli sterk, sprek og føle meg bra i min egen kropp."
           }
         },
-        "story_WBfz4d": {
+        "story_JddVwq": {
           "type": "story",
           "settings": {
             "title": "Resultatet",
             "body": "Etter noen uker var midjen minus 4,5 cm. Etter tre måneder hadde jeg mer energi, bedre humør og en sterkere kropp. Senere stilte jeg i bikinifitness – og etter to svangerskap tok jeg sølv i NM. Jeg vet hva som fungerer i en travel hverdag – når du har et mål, et system og støtte.",
+            "image": "shopify://shop_images/aline_16.webp",
             "emphasis_quote": "Dette var en livsstil."
           }
         }
       },
       "block_order": [
-        "story_HaJLd8",
-        "story_CfRtXN",
-        "story_WBfz4d"
+        "story_ywhpbr",
+        "story_7x3JB8",
+        "story_JddVwq"
       ],
       "name": "MOVE story blocks",
       "settings": {
@@ -83,7 +66,6 @@
   },
   "order": [
     "main",
-    "move_hero_YaJyLd",
-    "move_story_blocks_hRkMie"
+    "move_story_blocks_JajjJz"
   ]
 }
