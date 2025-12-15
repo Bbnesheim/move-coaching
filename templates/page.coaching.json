@@ -55,6 +55,7 @@
           "type": "step",
           "settings": {
             "step_label": "1",
+            "icon": "shopify://shop_images/aline_24.webp",
             "title": "Send inn spørreskjema",
             "description": "Du forteller meg om mål, hverdag og preferanser – så vi kan starte med en plan som faktisk passer livet ditt."
           }
@@ -63,6 +64,7 @@
           "type": "step",
           "settings": {
             "step_label": "2",
+            "icon": "shopify://shop_images/aline_24.webp",
             "title": "Få skreddersydd plan i appen",
             "description": "Du får treningsprogram, kostholdsplan og verktøy i MOVE-appen – tilpasset nivå, utstyr og tid."
           }
@@ -71,6 +73,7 @@
           "type": "step",
           "settings": {
             "step_label": "3",
+            "icon": "shopify://shop_images/aline_24.webp",
             "title": "Tett oppfølging hele veien",
             "description": "Ukentlige innsjekker, justeringer og chat-support gjør at du bygger varige vaner – steg for steg."
           }
