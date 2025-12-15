@@ -96,6 +96,13 @@
   min-height: clamp(420px, 62vh, 820px);
 }
 
+@media screen and (max-width: 600px) {
+  .move-image-banner--text-layout-cover {
+    /* Slightly shorter on small screens to keep a horizontal banner feel */
+    min-height: clamp(280px, 40vh, 420px);
+  }
+}
+
 .move-image-banner--text-layout-cover .move-image-banner__content {
   /* Remove default padding so text can touch edges */
   padding: 0;
