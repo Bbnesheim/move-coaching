@@ -133,6 +133,54 @@
         "padding_bottom": 0,
         "color_scheme": ""
       }
+    },
+    "move_app_features_4H4CKf": {
+      "type": "move-app-features",
+      "blocks": {
+        "feature_HVMjgX": {
+          "type": "feature",
+          "settings": {
+            "title": "Bygg menyen din",
+            "description": "Planlegg ukens måltider med familievennlige, realistiske oppskrifter tilpasset budsjett og hverdag."
+          }
+        },
+        "feature_qKp3zq": {
+          "type": "feature",
+          "settings": {
+            "title": "Bygg menyen din",
+            "description": "Planlegg ukens måltider med familievennlige, realistiske oppskrifter tilpasset budsjett og hverdag."
+          }
+        },
+        "feature_RiUk6C": {
+          "type": "feature",
+          "settings": {
+            "title": "Bygg menyen din",
+            "description": "Planlegg ukens måltider med familievennlige, realistiske oppskrifter tilpasset budsjett og hverdag."
+          }
+        },
+        "feature_XcC9qY": {
+          "type": "feature",
+          "settings": {
+            "title": "Bygg menyen din",
+            "description": "Planlegg ukens måltider med familievennlige, realistiske oppskrifter tilpasset budsjett og hverdag."
+          }
+        }
+      },
+      "block_order": [
+        "feature_HVMjgX",
+        "feature_qKp3zq",
+        "feature_RiUk6C",
+        "feature_XcC9qY"
+      ],
+      "name": "MOVE app features",
+      "settings": {
+        "heading": "Dette får du i MOVE-appen",
+        "intro": "Planlegging, oppskrifter, trening og oppfølging samlet i én app som faktisk passer inn i tidsklemma.",
+        "background_variant": "surface",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "color_scheme": ""
+      }
     }
   },
   "order": [
@@ -140,6 +188,7 @@
     "move_image_banner_Gt9ecH",
     "move_brief_VPUDa6",
     "move_steps_bekiGQ",
-    "move_app_promo_ngTpek"
+    "move_app_promo_ngTpek",
+    "move_app_features_4H4CKf"
   ]
 }
