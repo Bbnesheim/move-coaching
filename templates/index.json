@@ -44,7 +44,7 @@
           "type": "plan",
           "settings": {
             "plan_handle": "plan-12m",
-            "plan_name": "12 måneder – Full livsstilsendring",
+            "plan_name": "Full livsstilsendring",
             "duration_label": "12 måneder",
             "price_per_month": "2 499 kr",
             "total_price": "Gratis oppstart + 1 ekstra måned",
@@ -59,7 +59,7 @@
           "type": "plan",
           "settings": {
             "plan_handle": "plan-9m",
-            "plan_name": "9 måneder – Veien mot Suksess",
+            "plan_name": "Veien mot Suksess",
             "duration_label": "9 måneder",
             "price_per_month": "2 799 kr",
             "total_price": "Oppstartsgebyr kommer i tillegg",
