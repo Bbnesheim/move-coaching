@@ -88,7 +88,7 @@
                       {% else %}
                         href="{{ block.settings.app_store_link }}"
                       {% endif %}
-                      class="move-app-promo__store-link move-app-promo__store-link--{{ block.settings.app_store_style | default: 'pink' }}"
+                      class="move-app-promo__store-link move-app-promo__store-link--app-store move-app-promo__store-link--{{ block.settings.app_store_style | default: 'pink' }}"
                     >
                       {{ block.settings.app_store_badge | image_url: width: 120 | image_tag: widths: '60, 90, 120', class: 'move-app-promo__store-badge', loading: 'lazy' }}
                     </a>
@@ -99,7 +99,7 @@
                       {% else %}
                         href="{{ block.settings.app_store_link }}"
                       {% endif %}
-                      class="move-app-promo__download-link"
+                      class="move-app-promo__download-link move-app-promo__download-link--app-store"
                     >
                       {{ block.settings.app_store_badge | image_url: width: 240 | image_tag: widths: '120, 180, 240', class: 'move-app-promo__download-badge', loading: 'lazy' }}
                     </a>
@@ -114,7 +114,7 @@
                       {% else %}
                         href="{{ block.settings.play_store_link }}"
                       {% endif %}
-                      class="move-app-promo__store-link move-app-promo__store-link--{{ block.settings.play_store_style | default: 'brown' }}"
+                      class="move-app-promo__store-link move-app-promo__store-link--play-store move-app-promo__store-link--{{ block.settings.play_store_style | default: 'brown' }}"
                     >
                       {{ block.settings.play_store_badge | image_url: width: 120 | image_tag: widths: '60, 90, 120', class: 'move-app-promo__store-badge', loading: 'lazy' }}
                     </a>
@@ -125,7 +125,7 @@
                       {% else %}
                         href="{{ block.settings.play_store_link }}"
                       {% endif %}
-                      class="move-app-promo__download-link"
+                      class="move-app-promo__download-link move-app-promo__download-link--play-store"
                     >
                       {{ block.settings.play_store_badge | image_url: width: 240 | image_tag: widths: '120, 180, 240', class: 'move-app-promo__download-badge', loading: 'lazy' }}
                     </a>

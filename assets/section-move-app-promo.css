@@ -473,6 +473,18 @@
   height: auto;
   max-height: 100%;
   object-fit: contain;
+  object-position: center;
+}
+
+/* If the Play Store asset has extra whitespace or an off-center SVG viewBox,
+   it will look visually off-center even though the link is centered.
+   This small nudge compensates without requiring a new icon. */
+.move-app-promo__store-link--play-store {
+  --move-app-promo-play-store-badge-offset-x: 3px;
+}
+
+.move-app-promo__store-link--play-store .move-app-promo__store-badge {
+  transform: translateX(var(--move-app-promo-play-store-badge-offset-x));
 }
 
 .move-app-promo__screenshot {
