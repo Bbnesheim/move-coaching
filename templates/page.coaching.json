@@ -206,8 +206,8 @@
         "heading": "Dette får du i MOVE-appen",
         "intro": "Planlegging, oppskrifter, trening og oppfølging samlet i én app som faktisk passer inn i tidsklemma.",
         "background_variant": "surface",
-        "padding_top": 0,
-        "padding_bottom": 0,
+        "padding_top": 88,
+        "padding_bottom": 88,
         "color_scheme": ""
       }
     }
