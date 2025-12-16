@@ -84,49 +84,6 @@
         "color_scheme": ""
       }
     },
-    "move_app_promo_dLYP8T": {
-      "type": "move-app-promo",
-      "blocks": {
-        "bullet_XV8K6e": {
-          "type": "bullet",
-          "settings": {
-            "text": "Menyplanlegging med familievennlige oppskrifter."
-          }
-        },
-        "bullet_aAwfjn": {
-          "type": "bullet",
-          "settings": {
-            "text": "Menyplanlegging med familievennlige oppskrifter."
-          }
-        },
-        "bullet_fNKKmL": {
-          "type": "bullet",
-          "settings": {
-            "text": "Menyplanlegging med familievennlige oppskrifter."
-          }
-        }
-      },
-      "block_order": [
-        "bullet_XV8K6e",
-        "bullet_aAwfjn",
-        "bullet_fNKKmL"
-      ],
-      "name": "MOVE app promo",
-      "settings": {
-        "heading": "MOVE-appen – verktøyet som følger deg i hverdagen",
-        "body": "Planlegg menyen, få raske familievennlige oppskrifter, følg treningsøkter med video og hold oversikt – alt samlet i én app.",
-        "primary_cta_label": "Les mer om appen",
-        "primary_cta_link": "",
-        "secondary_cta_label": "Se programmer",
-        "secondary_cta_link": "",
-        "app_store_link": "",
-        "play_store_link": "",
-        "background_variant": "cream",
-        "padding_top": 32,
-        "padding_bottom": 32,
-        "color_scheme": ""
-      }
-    },
     "move_cta_strip_dTKppD": {
       "type": "move-cta-strip",
       "name": "MOVE CTA strip",
@@ -212,7 +169,6 @@
   "order": [
     "main",
     "move_pricing_table_UcYbfa",
-    "move_app_promo_dLYP8T",
     "move_cta_strip_dTKppD",
     "move_app_features_JKNFPM",
     "move_quiz_entry_Bgedjm"
