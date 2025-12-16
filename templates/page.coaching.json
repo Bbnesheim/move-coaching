@@ -88,7 +88,7 @@
         "intro_size_mobile": 12,
         "intro_size_desktop": 17,
         "header_max_width": 56,
-        "background_variant": "surface",
+        "background_variant": "default",
         "padding_top": 40,
         "padding_bottom": 88,
         "color_scheme": ""
