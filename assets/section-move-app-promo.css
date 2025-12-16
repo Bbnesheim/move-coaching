@@ -50,7 +50,7 @@
       'header header'
       'intro media'
       'bullets media'
-      'actions media';
+      'actions actions';
     align-items: start;
   }
 
@@ -86,7 +86,7 @@
       'header header'
       'intro media'
       'bullets media'
-      'actions media';
+      'actions actions';
     align-items: start;
   }
 
@@ -158,26 +158,40 @@
     margin-right: -50vw;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+
+    /* Ensure bullets stack and align from the left edge on small screens */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
   }
 
-  /* Full-bleed CTA row, centered */
+  .move-app-promo__bullet {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  /* CTA row: stacked + centered, aligned with the bullets column */
   .move-app-promo__actions {
     grid-area: actions;
+
+    /* Override earlier full-bleed behavior to avoid horizontal shifting */
+    position: static;
+    left: auto;
+    right: auto;
+
+    width: 100%;
+    max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
   }
 
   .move-app-promo__actions .button {
     width: 100%;
-    max-width: 48rem;
     margin-left: auto;
     margin-right: auto;
   }
@@ -288,6 +302,14 @@
   line-height: 1.45;
 }
 
+/* Match MOVE steps small-screen typography for the description only */
+@media screen and (max-width: 399px) {
+  .move-app-promo__body.text-body {
+    font-size: 1.1rem;
+    line-height: 1.3;
+  }
+}
+
 .move-app-promo__bullets {
   margin: 2.4rem 0 2.6rem;
   padding-left: 0;
@@ -327,6 +349,53 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1.2rem;
+}
+
+/* <=949px: stack + center CTA buttons (matches <=599px, but within page width) */
+@media screen and (max-width: 949px) {
+  .move-app-promo__actions {
+    justify-self: center;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .move-app-promo__actions .button {
+    width: 100%;
+    max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Re-assert the small-screen bullets layout AFTER the base bullets rules,
+   so it isn't overridden by the cascade. */
+@media screen and (max-width: 599px) {
+  .move-app-promo__bullets {
+    /* Break out of the earlier full-bleed positioning so the list can center */
+    position: static;
+    left: auto;
+    right: auto;
+    margin-left: auto;
+    margin-right: auto;
+
+    /* Keep bullets in the same centered column as the CTA buttons */
+    width: 100%;
+    max-width: 48rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+  }
+
+  .move-app-promo__bullet {
+    width: 100%;
+    justify-content: flex-start;
+  }
 }
 
 .move-app-promo__media {
