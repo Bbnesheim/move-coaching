@@ -27,32 +27,36 @@
     flex-direction: column;
     justify-content: center;
   }
-
-  .move-app-promo__stores {
-    align-self: flex-end;
-  }
 }
 
 .move-app-promo__content .h2 {
   margin: 0;
   color: var(--move-color-brown-primary);
+
+  /* Fluid type without relying on CSS division. */
   font-size: clamp(
     var(--move-app-promo-heading-size-min, 28px),
     calc(
-      var(--move-app-promo-heading-size-min, 28px) +
-        (var(--move-app-promo-heading-size-max, 42px) - var(--move-app-promo-heading-size-min, 28px)) *
-          ((100vw - 360px) / 840)
+      var(--move-app-promo-heading-fluid-intercept, 20px) +
+        var(--move-app-promo-heading-fluid-slope, 2vw)
     ),
     var(--move-app-promo-heading-size-max, 42px)
   );
+
   line-height: 1.1;
 }
 
 .move-app-promo__subheading {
   margin: 0.8rem 0 0;
   color: var(--move-color-brown-primary);
-  font-size: var(--move-app-promo-subheading-font-size, 16px);
+  font-size: var(--move-app-promo-subheading-font-size-mobile, 16px);
   letter-spacing: 0.06rem;
+}
+
+@media screen and (min-width: 750px) {
+  .move-app-promo__subheading {
+    font-size: var(--move-app-promo-subheading-font-size-desktop, 16px);
+  }
 }
 
 .move-app-promo__subheading--weight-regular {
@@ -72,13 +76,71 @@
   letter-spacing: 0.14rem;
 }
 
+.move-app-promo__download {
+  margin-top: 1.6rem;
+}
+
+.move-app-promo__download-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.move-app-promo__download-links--icon {
+  gap: 0.8rem;
+}
+
+@media screen and (max-width: 749px) {
+  .move-app-promo__download-links {
+    justify-content: flex-start;
+  }
+}
+
+.move-app-promo__download-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.move-app-promo__download-badge {
+  display: block;
+  height: 4.4rem;
+  width: auto;
+}
+
 .move-app-promo__body {
   margin-top: 1.2rem;
 }
 
 .move-app-promo__bullets {
-  margin: 1.6rem 0 0;
-  padding-left: 1.6rem;
+  margin: 2.4rem 0 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.move-app-promo__bullet {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.move-app-promo__bullet::before {
+  content: '•';
+  flex: 0 0 auto;
+  width: 1.2rem;
+  line-height: inherit;
+}
+
+.move-app-promo__bullets--dash .move-app-promo__bullet::before {
+  content: '—';
+}
+
+.move-app-promo__bullets--diamond .move-app-promo__bullet::before {
+  content: '◆';
+}
+
+.move-app-promo__bullets--plus .move-app-promo__bullet::before {
+  content: '+';
 }
 
 .move-app-promo__bullet + .move-app-promo__bullet {
@@ -146,11 +208,19 @@
   background: transparent;
 }
 
-.move-app-promo__secondary-cta {
-  --color-button: 245, 181, 196; /* #F5B5C4 MOVE pink */
-  --color-button-text: 47, 46, 43; /* #2F2E2B MOVE text dark */
-  --alpha-button-background: 1;
-  --alpha-button-border: 1;
+/* Make the phone media a bit taller on desktop */
+@media screen and (min-width: 750px) {
+  .move-app-promo__screenshot.media--portrait {
+    padding-bottom: 120%;
+  }
+}
+
+/* Secondary CTA: outline-only but pink (matches MOVE hero + nav) */
+.move-app-promo.move-app-promo .button--secondary.move-app-promo__secondary-cta {
+  --color-button-text: 245, 181, 196; /* #F5B5C4 MOVE pink */
+  --color-button: 255, 255, 255;
+  --alpha-button-background: 0;
+  --alpha-button-border: 0.2;
 }
 
 @media screen and (max-width: 749px) {
@@ -165,12 +235,6 @@
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
     border-radius: 0;
-  }
-
-  .move-app-promo__stores {
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
   }
 }
 
