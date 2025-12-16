@@ -33,6 +33,21 @@
   assign subheading_font_size_mobile = section.settings.subheading_font_size_mobile | default: 16
   assign subheading_font_size_desktop = section.settings.subheading_font_size_desktop | default: 16
 
+  assign content_font_size_mobile = section.settings.content_font_size_mobile | default: 14
+  assign content_font_size_desktop = section.settings.content_font_size_desktop | default: 16
+
+  comment
+    Fluid content type without CSS division:
+    size = A + B * 1vw
+    Use 360px (3.6vw) -> mobile size, and 1200px (12vw) -> desktop size.
+    B = (max-min) / 8.4
+    A = min - B*3.6
+  endcomment
+  assign content_delta = content_font_size_desktop | minus: content_font_size_mobile
+  assign content_slope = content_delta | times: 1.0 | divided_by: 8.4
+  assign content_slope_at_360 = content_slope | times: 3.6
+  assign content_intercept = content_font_size_mobile | minus: content_slope_at_360
+
   assign subheading_style = section.settings.subheading_style | default: 'default'
   assign subheading_weight = section.settings.subheading_weight | default: 'regular'
 
@@ -45,10 +60,10 @@
 >
   <div
     class="page-width move-section-padding"
-    style="--move-app-promo-heading-size-min: {{ heading_font_size_mobile }}px; --move-app-promo-heading-size-max: {{ heading_font_size_desktop }}px; --move-app-promo-heading-fluid-intercept: {{ heading_intercept }}px; --move-app-promo-heading-fluid-slope: {{ heading_slope }}vw; --move-app-promo-subheading-font-size-mobile: {{ subheading_font_size_mobile }}px; --move-app-promo-subheading-font-size-desktop: {{ subheading_font_size_desktop }}px;{% if section.settings.padding_top > 0 %} padding-top: {{ section.settings.padding_top }}px;{% endif %}{% if section.settings.padding_bottom > 0 %} padding-bottom: {{ section.settings.padding_bottom }}px;{% endif %}"
+    style="--move-app-promo-heading-size-min: {{ heading_font_size_mobile }}px; --move-app-promo-heading-size-max: {{ heading_font_size_desktop }}px; --move-app-promo-heading-fluid-intercept: {{ heading_intercept }}px; --move-app-promo-heading-fluid-slope: {{ heading_slope }}vw; --move-app-promo-subheading-font-size-mobile: {{ subheading_font_size_mobile }}px; --move-app-promo-subheading-font-size-desktop: {{ subheading_font_size_desktop }}px; --move-app-promo-content-size-min: {{ content_font_size_mobile }}px; --move-app-promo-content-size-max: {{ content_font_size_desktop }}px; --move-app-promo-content-fluid-intercept: {{ content_intercept }}px; --move-app-promo-content-fluid-slope: {{ content_slope }}vw;{% if section.settings.padding_top > 0 %} padding-top: {{ section.settings.padding_top }}px;{% endif %}{% if section.settings.padding_bottom > 0 %} padding-bottom: {{ section.settings.padding_bottom }}px;{% endif %}"
   >
     <div class="move-app-promo__inner">
-      <div class="move-app-promo__content">
+      <div class="move-app-promo__header">
         {%- if section.settings.heading != blank -%}
           <h2 class="h2">{{ section.settings.heading }}</h2>
         {%- endif -%}
@@ -57,7 +72,9 @@
             {{ section.settings.subheading }}
           </p>
         {%- endif -%}
+      </div>
 
+      <div class="move-app-promo__intro">
         {%- for block in section.blocks -%}
           {%- if block.type == 'download_links' -%}
             {%- assign presentation = block.settings.presentation | default: 'icon' -%}
@@ -119,47 +136,45 @@
           {%- endif -%}
         {%- endfor -%}
 
-        <div class="move-app-promo__content-main">
-          {%- if section.settings.body != blank -%}
-            <div class="move-app-promo__body text-body">{{ section.settings.body }}</div>
+        {%- if section.settings.body != blank -%}
+          <div class="move-app-promo__body text-body">{{ section.settings.body }}</div>
+        {%- endif -%}
+      </div>
+
+      <ul class="move-app-promo__bullets move-app-promo__bullets--{{ bullet_style }}">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'bullet' and block.settings.text != blank -%}
+            <li class="move-app-promo__bullet" {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
           {%- endif -%}
+        {%- endfor -%}
+      </ul>
 
-          <ul class="move-app-promo__bullets move-app-promo__bullets--{{ bullet_style }}">
-            {%- for block in section.blocks -%}
-              {%- if block.type == 'bullet' and block.settings.text != blank -%}
-                <li class="move-app-promo__bullet" {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
-              {%- endif -%}
-            {%- endfor -%}
-          </ul>
+      <div class="move-app-promo__actions">
+        {%- if section.settings.primary_cta_label != blank -%}
+          <a
+            {% if section.settings.primary_cta_link == blank %}
+              role="link" aria-disabled="true"
+            {% else %}
+              href="{{ section.settings.primary_cta_link }}"
+            {% endif %}
+            class="button button--primary"
+          >
+            {{- section.settings.primary_cta_label | escape -}}
+          </a>
+        {%- endif -%}
 
-          <div class="move-app-promo__actions">
-            {%- if section.settings.primary_cta_label != blank -%}
-              <a
-                {% if section.settings.primary_cta_link == blank %}
-                  role="link" aria-disabled="true"
-                {% else %}
-                  href="{{ section.settings.primary_cta_link }}"
-                {% endif %}
-                class="button button--primary"
-              >
-                {{- section.settings.primary_cta_label | escape -}}
-              </a>
-            {%- endif -%}
-
-            {%- if section.settings.secondary_cta_label != blank -%}
-              <a
-                {% if section.settings.secondary_cta_link == blank %}
-                  role="link" aria-disabled="true"
-                {% else %}
-                  href="{{ section.settings.secondary_cta_link }}"
-                {% endif %}
-                class="button button--secondary move-app-promo__secondary-cta"
-              >
-                {{- section.settings.secondary_cta_label | escape -}}
-              </a>
-            {%- endif -%}
-          </div>
-        </div>
+        {%- if section.settings.secondary_cta_label != blank -%}
+          <a
+            {% if section.settings.secondary_cta_link == blank %}
+              role="link" aria-disabled="true"
+            {% else %}
+              href="{{ section.settings.secondary_cta_link }}"
+            {% endif %}
+            class="button button--secondary move-app-promo__secondary-cta"
+          >
+            {{- section.settings.secondary_cta_label | escape -}}
+          </a>
+        {%- endif -%}
       </div>
 
       <div class="move-app-promo__media">
@@ -235,6 +250,26 @@
       "step": 1,
       "unit": "px",
       "label": "Subheading font size (desktop)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "content_font_size_mobile",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Description + bullets font size (mobile)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "content_font_size_desktop",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Description + bullets font size (desktop)",
       "default": 16
     },
     {
