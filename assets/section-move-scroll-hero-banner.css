@@ -5,11 +5,12 @@
   --move-scroll-hero-banner-frame-h: 520px;
   --move-scroll-hero-banner-radius: var(--move-scroll-hero-banner-start-radius, 18px);
   --move-scroll-hero-banner-image-zoom: 1.55;
-  --move-scroll-hero-banner-overlay-strength: 0;
-  --move-scroll-hero-banner-heading-translate-y: 80px;
+  --move-scroll-hero-banner-overlay-strength: 1;
+  --move-scroll-hero-banner-heading-translate-y: 140%;
   --move-scroll-hero-banner-cta-translate-y: 140%;
 
-  --move-scroll-hero-banner-overlay-opacity: var(--move-scroll-hero-banner-overlay-opacity, 0.35);
+  /* Fixed overlay amount for this section */
+  --move-scroll-hero-banner-overlay-opacity: 0.25;
 
   position: relative;
   width: 100%;
@@ -69,6 +70,10 @@
   object-position: center;
   display: block;
 
+  /* establish stacking so overlay can sit above image but below UI */
+  position: relative;
+  z-index: 0;
+
   transform: scale(var(--move-scroll-hero-banner-image-zoom));
   transform-origin: center;
   will-change: transform;
@@ -78,13 +83,15 @@
 .move-scroll-hero-banner__overlay {
   position: absolute;
   inset: 0;
+  z-index: 1;
+  pointer-events: none;
 
   /* Subtle vignette + readability gradient */
   background:
     radial-gradient(120% 90% at 50% 35%, rgba(0, 0, 0, 0.0) 0%, rgba(0, 0, 0, 0.30) 60%, rgba(0, 0, 0, 0.55) 100%),
     linear-gradient(to bottom, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.48));
 
-  opacity: calc(var(--move-scroll-hero-banner-overlay-opacity) * var(--move-scroll-hero-banner-overlay-strength));
+  opacity: var(--move-scroll-hero-banner-overlay-opacity);
   will-change: opacity;
 }
 
@@ -107,8 +114,23 @@
   width: 100%;
   max-width: 72rem;
   text-align: center;
+}
 
-  opacity: 1;
+/* Sunrise effect: text moves up behind a clipped "horizon" (the box). */
+.move-scroll-hero-banner__text-box {
+  display: inline-block;
+  max-width: 100%;
+
+  overflow: hidden;
+
+  /* Transparent background “box” (subtle, keeps the same feel you have now) */
+  background: rgba(0, 0, 0, 0.0);
+
+  /* A bit of padding so the clip doesn't chop letters */
+  padding: 0.8rem 1.2rem;
+}
+
+.move-scroll-hero-banner__text-box-inner {
   transform: translateY(var(--move-scroll-hero-banner-heading-translate-y));
   will-change: transform;
 }

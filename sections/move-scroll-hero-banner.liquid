@@ -1,13 +1,6 @@
 {{ 'section-move-scroll-hero-banner.css' | asset_url | stylesheet_tag }}
 {{ 'section-move-scroll-hero-banner.js' | asset_url | script_tag }}
 
-{%- style -%}
-  {%- if section.settings.image_overlay_opacity > 0 -%}
-    #MoveScrollHeroBanner-{{ section.id }} {
-      --move-scroll-hero-banner-overlay-opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
-    }
-  {%- endif -%}
-{%- endstyle -%}
 
 <section
   id="MoveScrollHeroBanner-{{ section.id }}"
@@ -40,17 +33,21 @@
 
         <div class="move-scroll-hero-banner__frame-ui">
           <div class="move-scroll-hero-banner__frame-header">
-            {%- if section.settings.heading != blank -%}
-              <h2 class="move-scroll-hero-banner__heading {{ section.settings.heading_size }}">
-                {{ section.settings.heading }}
-              </h2>
-            {%- endif -%}
+            <div class="move-scroll-hero-banner__text-box" aria-hidden="true">
+              <div class="move-scroll-hero-banner__text-box-inner">
+                {%- if section.settings.heading != blank -%}
+                  <h2 class="move-scroll-hero-banner__heading {{ section.settings.heading_size }}">
+                    {{ section.settings.heading }}
+                  </h2>
+                {%- endif -%}
 
-            {%- if section.settings.subheading != blank -%}
-              <div class="move-scroll-hero-banner__subheading rte">
-                {{ section.settings.subheading }}
+                {%- if section.settings.subheading != blank -%}
+                  <div class="move-scroll-hero-banner__subheading rte">
+                    {{ section.settings.subheading }}
+                  </div>
+                {%- endif -%}
               </div>
-            {%- endif -%}
+            </div>
           </div>
 
           {%- if section.settings.primary_cta_label != blank or section.settings.secondary_cta_label != blank -%}
@@ -109,16 +106,6 @@
       "type": "image_picker",
       "id": "image",
       "label": "Image"
-    },
-    {
-      "type": "range",
-      "id": "image_overlay_opacity",
-      "label": "Overlay",
-      "min": 0,
-      "max": 90,
-      "step": 5,
-      "unit": "%",
-      "default": 35
     },
     {
       "type": "header",

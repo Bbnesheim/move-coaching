@@ -112,8 +112,10 @@
 
       // UI reveal while the frame is still expanding.
       // Separate curves so heading doesn't "pop" and CTAs aren't too slow.
+      // Heading should begin slightly before the CTAs.
+      // Heading uses a "sunrise" mask (clipped box) so we animate with %.
       const headingStart = 0.18;
-      const headingEnd = 0.58;
+      const headingEnd = 0.54;
       const headingT = clamp01((progress - headingStart) / (headingEnd - headingStart));
       const headingEased = easeOutCubic(headingT);
 
@@ -122,18 +124,15 @@
       const ctaT = clamp01((progress - ctaStart) / (ctaEnd - ctaStart));
       const ctaEased = easeOutCubic(ctaT);
 
-      const headingTranslateY = `${lerp(80, 0, headingEased)}px`;
+      const headingTranslateY = `${lerp(140, 0, headingEased)}%`;
       const ctaTranslateY = `${lerp(140, 0, ctaEased)}%`;
 
-      // Overlay can track the later of the two reveals.
-      const overlayStrength = Math.max(headingEased, ctaEased);
 
       this.section.style.setProperty('--move-scroll-hero-banner-progress', String(progress));
       this.section.style.setProperty('--move-scroll-hero-banner-frame-w', `${frameW}px`);
       this.section.style.setProperty('--move-scroll-hero-banner-frame-h', `${frameH}px`);
       this.section.style.setProperty('--move-scroll-hero-banner-radius', `${radius}px`);
       this.section.style.setProperty('--move-scroll-hero-banner-image-zoom', String(zoom));
-      this.section.style.setProperty('--move-scroll-hero-banner-overlay-strength', String(overlayStrength));
       this.section.style.setProperty('--move-scroll-hero-banner-heading-translate-y', headingTranslateY);
       this.section.style.setProperty('--move-scroll-hero-banner-cta-translate-y', ctaTranslateY);
     }
