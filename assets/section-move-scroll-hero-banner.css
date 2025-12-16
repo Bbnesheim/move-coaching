@@ -1,0 +1,262 @@
+.move-scroll-hero-banner {
+  /* JS will set these CSS vars per scroll frame */
+  --move-scroll-hero-banner-progress: 0;
+  --move-scroll-hero-banner-frame-w: 320px;
+  --move-scroll-hero-banner-frame-h: 520px;
+  --move-scroll-hero-banner-radius: var(--move-scroll-hero-banner-start-radius, 18px);
+  --move-scroll-hero-banner-image-zoom: 1.55;
+  --move-scroll-hero-banner-overlay-strength: 0;
+  --move-scroll-hero-banner-heading-translate-y: 80px;
+  --move-scroll-hero-banner-cta-translate-y: 140%;
+
+  --move-scroll-hero-banner-overlay-opacity: var(--move-scroll-hero-banner-overlay-opacity, 0.35);
+
+  position: relative;
+  width: 100%;
+  overflow: clip;
+  padding: 0;
+
+  /* The overall scroll range; sticky occupies the viewport while you scroll through this section */
+  height: calc(100vh + var(--move-scroll-hero-banner-scroll-height, 220vh));
+}
+
+.move-scroll-hero-banner__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+
+  display: grid;
+  place-items: center;
+
+  /* Prevent scaled content from creating scrollbars */
+  overflow: hidden;
+}
+
+/* Media frame starts as a scaled-down "card" and grows to full screen */
+.move-scroll-hero-banner__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+/* Scaled + rounded frame. This is what expands in both directions. */
+.move-scroll-hero-banner__frame {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  width: var(--move-scroll-hero-banner-frame-w);
+  height: var(--move-scroll-hero-banner-frame-h);
+
+  transform: translate(-50%, -50%);
+  will-change: width, height, border-radius;
+
+  border-radius: var(--move-scroll-hero-banner-radius);
+  overflow: hidden;
+}
+
+/* Image is separately zoomed so you see the center subject first, then reveal more as it expands. */
+.move-scroll-hero-banner__image,
+.move-scroll-hero-banner__placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+
+  transform: scale(var(--move-scroll-hero-banner-image-zoom));
+  transform-origin: center;
+  will-change: transform;
+}
+
+/* Darken image a bit as the content comes in */
+.move-scroll-hero-banner__overlay {
+  position: absolute;
+  inset: 0;
+
+  /* Subtle vignette + readability gradient */
+  background:
+    radial-gradient(120% 90% at 50% 35%, rgba(0, 0, 0, 0.0) 0%, rgba(0, 0, 0, 0.30) 60%, rgba(0, 0, 0, 0.55) 100%),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.48));
+
+  opacity: calc(var(--move-scroll-hero-banner-overlay-opacity) * var(--move-scroll-hero-banner-overlay-strength));
+  will-change: opacity;
+}
+
+/* UI overlay lives INSIDE the expanding frame (so it can't bleed outside). */
+.move-scroll-hero-banner__frame-ui {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: clamp(1.6rem, 3vh, 3.2rem);
+
+  pointer-events: none;
+}
+
+.move-scroll-hero-banner__frame-header {
+  width: 100%;
+  max-width: 72rem;
+  text-align: center;
+
+  opacity: 1;
+  transform: translateY(var(--move-scroll-hero-banner-heading-translate-y));
+  will-change: transform;
+}
+
+.move-scroll-hero-banner__frame-ctas {
+  width: 100%;
+  margin-top: auto;
+
+  opacity: 1;
+  transform: translateY(var(--move-scroll-hero-banner-cta-translate-y));
+  will-change: transform;
+
+  pointer-events: auto;
+}
+
+.move-scroll-hero-banner__heading {
+  margin: 0;
+
+  color: rgba(var(--color-background), 1);
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.25);
+}
+
+.move-scroll-hero-banner__subheading {
+  margin-top: 1.2rem;
+  color: rgba(var(--color-background), 0.9);
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.25);
+}
+
+.move-scroll-hero-banner__cta-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  max-width: 92rem;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+@media screen and (min-width: 750px) {
+  .move-scroll-hero-banner__cta-grid {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.35fr);
+  }
+}
+
+.move-scroll-hero-banner__cta--small {
+  min-height: 9.6rem;
+}
+
+.move-scroll-hero-banner__cta--large {
+  min-height: 11.6rem;
+}
+
+.move-scroll-hero-banner__cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+
+  padding: 2.2rem 2.2rem;
+  min-height: 10.8rem;
+
+  /* Grid handles outer rounding; individual tiles should be square so they can touch */
+  border-radius: 0;
+  text-decoration: none;
+
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.18);
+}
+
+@media screen and (max-width: 749px) {
+  .move-scroll-hero-banner__cta {
+    padding: 1.8rem 1.8rem;
+    min-height: 9.2rem;
+  }
+
+  /* When stacked, keep a single card outline (top/bottom rounding handled by grid) */
+  .move-scroll-hero-banner__cta-grid {
+    border-radius: 18px;
+  }
+}
+
+.move-scroll-hero-banner__cta-text {
+  font-size: clamp(1.6rem, 1.4vw, 2.2rem);
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.move-scroll-hero-banner__cta--small .move-scroll-hero-banner__cta-text {
+  font-size: clamp(1.4rem, 1.1vw, 1.8rem);
+}
+
+.move-scroll-hero-banner__cta-icon {
+  width: 4.4rem;
+  height: 4.4rem;
+  border-radius: 9999px;
+  display: grid;
+  place-items: center;
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.move-scroll-hero-banner__cta--brown {
+  background: var(--move-color-brown-primary);
+  color: #ffffff;
+}
+
+.move-scroll-hero-banner__cta--brown .move-scroll-hero-banner__cta-icon {
+  background: rgba(0, 0, 0, 0.24);
+  color: #ffffff;
+}
+
+.move-scroll-hero-banner__cta--pink {
+  background: var(--move-color-pink-secondary);
+  color: var(--move-color-text-dark);
+}
+
+.move-scroll-hero-banner__cta--pink .move-scroll-hero-banner__cta-icon {
+  background: rgba(0, 0, 0, 0.14);
+  color: var(--move-color-text-dark);
+}
+
+.move-scroll-hero-banner__cta:focus-visible {
+  outline: 0.2rem solid rgba(255, 255, 255, 0.85);
+  outline-offset: 0.3rem;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .move-scroll-hero-banner__frame {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: none;
+    border-radius: 0;
+  }
+
+  .move-scroll-hero-banner__image,
+  .move-scroll-hero-banner__placeholder {
+    transform: none;
+  }
+
+  .move-scroll-hero-banner__overlay {
+    opacity: var(--move-scroll-hero-banner-overlay-opacity);
+  }
+
+  .move-scroll-hero-banner__frame-header,
+  .move-scroll-hero-banner__frame-ctas {
+    opacity: 1;
+    transform: none;
+  }
+}

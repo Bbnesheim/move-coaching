@@ -1,0 +1,218 @@
+{{ 'section-move-scroll-hero-banner.css' | asset_url | stylesheet_tag }}
+{{ 'section-move-scroll-hero-banner.js' | asset_url | script_tag }}
+
+{%- style -%}
+  {%- if section.settings.image_overlay_opacity > 0 -%}
+    #MoveScrollHeroBanner-{{ section.id }} {
+      --move-scroll-hero-banner-overlay-opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
+    }
+  {%- endif -%}
+{%- endstyle -%}
+
+<section
+  id="MoveScrollHeroBanner-{{ section.id }}"
+  class="section move-scroll-hero-banner color-{{ section.settings.color_scheme }} gradient"
+  data-move-scroll-hero-banner
+  style="
+    --move-scroll-hero-banner-scroll-height: {{ section.settings.scroll_height }}vh;
+    --move-scroll-hero-banner-min-scale: {{ section.settings.min_scale | divided_by: 100.0 }};
+    --move-scroll-hero-banner-start-radius: {{ section.settings.start_radius }}px;
+  "
+>
+  <div class="move-scroll-hero-banner__sticky">
+    <div class="move-scroll-hero-banner__media" aria-hidden="true">
+      <div class="move-scroll-hero-banner__frame">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 2800
+            | image_tag:
+              widths: '750, 1100, 1500, 2000, 2400, 2800',
+              sizes: '100vw',
+              class: 'move-scroll-hero-banner__image',
+              loading: 'eager'
+          }}
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg move-scroll-hero-banner__placeholder' }}
+        {%- endif -%}
+
+        <div class="move-scroll-hero-banner__overlay" aria-hidden="true"></div>
+
+        <div class="move-scroll-hero-banner__frame-ui">
+          <div class="move-scroll-hero-banner__frame-header">
+            {%- if section.settings.heading != blank -%}
+              <h2 class="move-scroll-hero-banner__heading {{ section.settings.heading_size }}">
+                {{ section.settings.heading }}
+              </h2>
+            {%- endif -%}
+
+            {%- if section.settings.subheading != blank -%}
+              <div class="move-scroll-hero-banner__subheading rte">
+                {{ section.settings.subheading }}
+              </div>
+            {%- endif -%}
+          </div>
+
+          {%- if section.settings.primary_cta_label != blank or section.settings.secondary_cta_label != blank -%}
+            <div class="move-scroll-hero-banner__frame-ctas">
+              <div class="move-scroll-hero-banner__cta-grid">
+                {%- if section.settings.primary_cta_label != blank -%}
+                  <a
+                    {% if section.settings.primary_cta_link == blank %}
+                      role="link" aria-disabled="true"
+                    {% else %}
+                      href="{{ section.settings.primary_cta_link }}"
+                    {% endif %}
+                    class="move-scroll-hero-banner__cta move-scroll-hero-banner__cta--brown move-scroll-hero-banner__cta--small"
+                  >
+                    <span class="move-scroll-hero-banner__cta-text">{{- section.settings.primary_cta_label | escape -}}</span>
+                    <span class="move-scroll-hero-banner__cta-icon" aria-hidden="true">→</span>
+                  </a>
+                {%- endif -%}
+
+                {%- if section.settings.secondary_cta_label != blank -%}
+                  <a
+                    {% if section.settings.secondary_cta_link == blank %}
+                      role="link" aria-disabled="true"
+                    {% else %}
+                      href="{{ section.settings.secondary_cta_link }}"
+                    {% endif %}
+                    class="move-scroll-hero-banner__cta move-scroll-hero-banner__cta--pink move-scroll-hero-banner__cta--large"
+                  >
+                    <span class="move-scroll-hero-banner__cta-text">{{- section.settings.secondary_cta_label | escape -}}</span>
+                    <span class="move-scroll-hero-banner__cta-icon" aria-hidden="true">→</span>
+                  </a>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MOVE scroll hero banner",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "label": "Overlay",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "default": 35
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h0", "label": "Large" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h2", "label": "Small" }
+      ],
+      "default": "h0"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Begin your journey"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "primary_cta_label",
+      "label": "Primary CTA label",
+      "default": "Start your build"
+    },
+    {
+      "type": "url",
+      "id": "primary_cta_link",
+      "label": "Primary CTA link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_cta_label",
+      "label": "Secondary CTA label"
+    },
+    {
+      "type": "url",
+      "id": "secondary_cta_link",
+      "label": "Secondary CTA link"
+    },
+    {
+      "type": "header",
+      "content": "Motion"
+    },
+    {
+      "type": "range",
+      "id": "scroll_height",
+      "label": "Scroll length (vh)",
+      "min": 120,
+      "max": 320,
+      "step": 10,
+      "unit": "vh",
+      "default": 220
+    },
+    {
+      "type": "range",
+      "id": "min_scale",
+      "label": "Start size (scale %)",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 35
+    },
+    {
+      "type": "range",
+      "id": "start_radius",
+      "label": "Start corner radius (px)",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "MOVE scroll hero banner",
+      "category": "MOVE"
+    }
+  ]
+}
+{% endschema %}
