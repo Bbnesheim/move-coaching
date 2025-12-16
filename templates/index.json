@@ -228,20 +228,12 @@
             "title": "Ukentlige innsjekker",
             "text": "Analyse av progresjon, personlige tilbakemeldinger og justeringer som holder deg på sporet."
           }
-        },
-        "usp_0aK3qP": {
-          "type": "usp",
-          "settings": {
-            "title": "Chat-support + full app-tilgang",
-            "text": "Spør når du står fast. Du får støtte på trening, mat, teknikk og mindset – og full tilgang til MOVE-appen."
-          }
         }
       },
       "block_order": [
         "usp_FVzDpN",
         "usp_rRH84h",
-        "usp_eTzcbK",
-        "usp_0aK3qP"
+        "usp_eTzcbK"
       ],
       "name": "MOVE USP grid",
       "settings": {
