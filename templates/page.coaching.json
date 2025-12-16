@@ -26,7 +26,7 @@
         "image_overlay_opacity": 30,
         "content_placement": "middle-center",
         "content_alignment": "center",
-        "text_layout": "standard",
+        "text_layout": "cover",
         "heading_size": "h1",
         "heading": "Kom i gang nå!",
         "subheading": "",
