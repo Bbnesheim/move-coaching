@@ -277,6 +277,44 @@
   text-decoration: none;
 }
 
+/* Download links hover/focus animation (App Store / Google Play) */
+.move-app-promo__download-link,
+.move-app-promo__store-link {
+  transition: transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+  will-change: transform;
+}
+
+.move-app-promo__download-link:hover,
+.move-app-promo__download-link:focus-visible,
+.move-app-promo__store-link:hover,
+.move-app-promo__store-link:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+.move-app-promo__download-link:active,
+.move-app-promo__store-link:active {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .move-app-promo__download-link,
+  .move-app-promo__store-link {
+    transition: none;
+  }
+
+  .move-app-promo__download-link:hover,
+  .move-app-promo__download-link:focus-visible,
+  .move-app-promo__store-link:hover,
+  .move-app-promo__store-link:focus-visible,
+  .move-app-promo__download-link:active,
+  .move-app-promo__store-link:active {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
 .move-app-promo__download-badge {
   display: block;
   height: 4.4rem;
