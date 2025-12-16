@@ -94,73 +94,34 @@
         "heading": "Slik fungerer det",
         "intro": "En enkel prosess fra første innsending til skreddersydd plan, tett støtte og nye vaner som varer.",
         "header_placement": "above",
-        "heading_alignment": "center",
-        "intro_alignment": "inherit",
-        "heading_size_mobile": 34,
-        "heading_size_desktop": 42,
-        "intro_size_mobile": 16,
-        "intro_size_desktop": 18,
+        "heading_alignment": "left",
+        "intro_alignment": "left",
+        "heading_size_mobile": 33,
+        "heading_size_desktop": 56,
+        "intro_size_mobile": 12,
+        "intro_size_desktop": 17,
         "header_max_width": 56,
         "background_variant": "surface",
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "color_scheme": ""
-      }
-    },
-    "move_gallery_yeKVMR": {
-      "type": "move-gallery",
-      "blocks": {
-        "image_fVjK7L": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/progresjon_13.webp",
-            "caption": "",
-            "tag": ""
-          }
-        },
-        "image_gAbEqh": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/progresjon_11.webp",
-            "caption": "",
-            "tag": ""
-          }
-        },
-        "image_MXgnjd": {
-          "type": "image",
-          "settings": {
-            "caption": "",
-            "tag": ""
-          }
-        },
-        "image_AtUCfC": {
-          "type": "image",
-          "settings": {
-            "caption": "",
-            "tag": ""
-          }
-        }
-      },
-      "block_order": [
-        "image_fVjK7L",
-        "image_gAbEqh",
-        "image_MXgnjd",
-        "image_AtUCfC"
-      ],
-      "name": "MOVE gallery",
-      "settings": {
-        "heading": "Før, etter og glimt fra hverdagen",
-        "heading_alignment": "center",
-        "display_captions": true,
-        "background_variant": "surface",
-        "padding_top": 0,
-        "padding_bottom": 0,
+        "padding_top": 88,
+        "padding_bottom": 88,
         "color_scheme": ""
       }
     },
     "move_app_promo_ngTpek": {
       "type": "move-app-promo",
       "blocks": {
+        "download_links_xwQGbz": {
+          "type": "download_links",
+          "settings": {
+            "presentation": "icon",
+            "app_store_badge": "shopify://shop_images/app-store-svgrepo-com.svg",
+            "app_store_link": "",
+            "app_store_style": "pink",
+            "play_store_badge": "shopify://shop_images/google-play-svgrepo-com.svg",
+            "play_store_link": "https://play.google.com/store/apps/details?id=io.beefit.movecoaching&pcampaignid=web_share",
+            "play_store_style": "brown"
+          }
+        },
         "bullet_yYKYLd": {
           "type": "bullet",
           "settings": {
@@ -181,6 +142,7 @@
         }
       },
       "block_order": [
+        "download_links_xwQGbz",
         "bullet_yYKYLd",
         "bullet_mVfAww",
         "bullet_FHfm6H"
@@ -188,23 +150,25 @@
       "name": "MOVE app promo",
       "settings": {
         "heading": "MOVE-appen",
-        "subheading": "<b>Verktøyet som følger deg i hverdagen</b>",
+        "subheading": "Verktøyet som følger deg i hverdagen",
         "heading_font_size_mobile": 28,
-        "heading_font_size_desktop": 80,
-        "subheading_font_size": 16,
-        "subheading_weight": "regular",
-        "subheading_style": "default",
+        "heading_font_size_desktop": 74,
+        "subheading_font_size_mobile": 17,
+        "subheading_font_size_desktop": 19,
+        "content_font_size_mobile": 14,
+        "content_font_size_desktop": 16,
+        "subheading_weight": "semibold",
+        "subheading_style": "eyebrow",
+        "bullet_style": "disc",
         "body": "Planlegg menyen, få raske familievennlige oppskrifter, følg treningsøkter med video og hold oversikt – alt samlet i én app.",
         "primary_cta_label": "Les mer om appen",
-        "primary_cta_link": "",
+        "primary_cta_link": "shopify://products/move-coaching-personlig-treningsprogram",
         "secondary_cta_label": "Se programmer",
-        "secondary_cta_link": "",
+        "secondary_cta_link": "shopify://pages/programmer",
         "screenshot": "shopify://shop_images/move-app-2.webp",
-        "app_store_link": "",
-        "play_store_link": "",
         "background_variant": "cream",
-        "padding_top": 0,
-        "padding_bottom": 0,
+        "padding_top": 88,
+        "padding_bottom": 88,
         "color_scheme": ""
       }
     },
@@ -266,7 +230,6 @@
     "move_image_banner_Gt9ecH",
     "move_brief_VPUDa6",
     "move_steps_bekiGQ",
-    "move_gallery_yeKVMR",
     "move_app_promo_ngTpek",
     "move_app_features_4H4CKf"
   ]
