@@ -62,7 +62,12 @@
                     {% endif %}
                     class="move-scroll-hero-banner__cta move-scroll-hero-banner__cta--brown move-scroll-hero-banner__cta--small"
                   >
-                    <span class="move-scroll-hero-banner__cta-text">{{- section.settings.primary_cta_label | escape -}}</span>
+                    <span class="move-scroll-hero-banner__cta-content">
+                      <span class="move-scroll-hero-banner__cta-heading">{{- section.settings.primary_cta_label | escape -}}</span>
+                      {%- if section.settings.primary_cta_description != blank -%}
+                        <span class="move-scroll-hero-banner__cta-description">{{- section.settings.primary_cta_description | escape -}}</span>
+                      {%- endif -%}
+                    </span>
                     <span class="move-scroll-hero-banner__cta-icon" aria-hidden="true">→</span>
                   </a>
                 {%- endif -%}
@@ -76,7 +81,12 @@
                     {% endif %}
                     class="move-scroll-hero-banner__cta move-scroll-hero-banner__cta--pink move-scroll-hero-banner__cta--large"
                   >
-                    <span class="move-scroll-hero-banner__cta-text">{{- section.settings.secondary_cta_label | escape -}}</span>
+                    <span class="move-scroll-hero-banner__cta-content">
+                      <span class="move-scroll-hero-banner__cta-heading">{{- section.settings.secondary_cta_label | escape -}}</span>
+                      {%- if section.settings.secondary_cta_description != blank -%}
+                        <span class="move-scroll-hero-banner__cta-description">{{- section.settings.secondary_cta_description | escape -}}</span>
+                      {%- endif -%}
+                    </span>
                     <span class="move-scroll-hero-banner__cta-icon" aria-hidden="true">→</span>
                   </a>
                 {%- endif -%}
@@ -136,8 +146,13 @@
     {
       "type": "text",
       "id": "primary_cta_label",
-      "label": "Primary CTA label",
+      "label": "Primary CTA heading",
       "default": "Start your build"
+    },
+    {
+      "type": "text",
+      "id": "primary_cta_description",
+      "label": "Primary CTA description"
     },
     {
       "type": "url",
@@ -147,7 +162,12 @@
     {
       "type": "text",
       "id": "secondary_cta_label",
-      "label": "Secondary CTA label"
+      "label": "Secondary CTA heading"
+    },
+    {
+      "type": "text",
+      "id": "secondary_cta_description",
+      "label": "Secondary CTA description"
     },
     {
       "type": "url",

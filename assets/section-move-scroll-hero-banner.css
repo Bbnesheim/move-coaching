@@ -185,7 +185,7 @@
 
 .move-scroll-hero-banner__cta {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
   gap: 1.6rem;
 
@@ -211,14 +211,40 @@
   }
 }
 
-.move-scroll-hero-banner__cta-text {
-  font-size: clamp(1.6rem, 1.4vw, 2.2rem);
-  line-height: 1.15;
-  font-weight: 600;
+/* Text block: heading pinned top-left, description pinned bottom-left */
+.move-scroll-hero-banner__cta-content {
+  flex: 1;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 0.8rem;
 }
 
-.move-scroll-hero-banner__cta--small .move-scroll-hero-banner__cta-text {
-  font-size: clamp(1.4rem, 1.1vw, 1.8rem);
+.move-scroll-hero-banner__cta-heading {
+  font-family: 'Black Mango', 'Playful Display', var(--font-heading-family);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+
+  font-size: clamp(1.8rem, 1.5vw, 2.4rem);
+}
+
+.move-scroll-hero-banner__cta--small .move-scroll-hero-banner__cta-heading {
+  font-size: clamp(1.6rem, 1.25vw, 2.1rem);
+}
+
+.move-scroll-hero-banner__cta-description {
+  font-size: 1.4rem;
+  line-height: 1.25;
+  opacity: 0.9;
+}
+
+.move-scroll-hero-banner__cta--small .move-scroll-hero-banner__cta-description {
+  font-size: 1.3rem;
 }
 
 .move-scroll-hero-banner__cta-icon {
@@ -229,6 +255,9 @@
   place-items: center;
   font-size: 2.2rem;
   line-height: 1;
+
+  /* Keep the arrow visually centered even when the text column spans full height */
+  align-self: center;
 }
 
 .move-scroll-hero-banner__cta--brown {
