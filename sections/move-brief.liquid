@@ -4,16 +4,129 @@
   style="{% if section.settings.padding_top > 0 %}padding-top: {{ section.settings.padding_top }}px;{% endif %}{% if section.settings.padding_bottom > 0 %} padding-bottom: {{ section.settings.padding_bottom }}px;{% endif %}"
 >
   <div class="page-width move-brief__inner move-brief__inner--{{ section.settings.container_alignment }}">
-    <div class="move-brief__card move-brief__card--{{ section.settings.text_alignment }}{% if section.settings.enable_depth_shadow %} move-brief__card--shadow{% endif %}">
+    <div class="move-brief__content move-brief__content--{{ section.settings.text_alignment }}">
       {%- if section.settings.heading != blank -%}
-        <h2 class="move-brief__heading h2">{{ section.settings.heading }}</h2>
-      {%- endif -%}
+        <div class="move-brief__heading-reveal" data-move-brief-blur>
+          <h2
+            class="move-brief__heading move-brief__heading-layer move-brief__heading-layer--blur move-brief__heading-layer--blur-1 {{ section.settings.heading_size }}"
+            aria-hidden="true"
+          ></h2>
+          <h2
+            class="move-brief__heading move-brief__heading-layer move-brief__heading-layer--blur move-brief__heading-layer--blur-2 {{ section.settings.heading_size }}"
+            aria-hidden="true"
+          ></h2>
+          <h2
+            class="move-brief__heading move-brief__heading-layer move-brief__heading-layer--blur move-brief__heading-layer--blur-3 {{ section.settings.heading_size }}"
+            aria-hidden="true"
+          ></h2>
 
-      {%- if section.settings.body != blank -%}
-        <div class="move-brief__body text-body">{{ section.settings.body }}</div>
+          <h2
+            class="move-brief__heading move-brief__heading-layer move-brief__heading-layer--sharp {{ section.settings.heading_size }}"
+            data-move-brief-layer="sharp"
+          >
+            {{ section.settings.heading | escape | newline_to_br }}
+          </h2>
+        </div>
       {%- endif -%}
     </div>
   </div>
+
+  <script defer>
+    (function () {
+      var root = document.documentElement;
+      if (root.dataset.moveBriefBlurInit === '1') return;
+      root.dataset.moveBriefBlurInit = '1';
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      var wrappers = Array.prototype.slice.call(document.querySelectorAll('[data-move-brief-blur]'));
+      if (!wrappers.length) return;
+
+      function clamp(n, min, max) {
+        return Math.min(max, Math.max(min, n));
+      }
+
+      function getLineHeightPx(el) {
+        var computed = window.getComputedStyle(el);
+        var lineHeight = parseFloat(computed.lineHeight);
+        if (!isFinite(lineHeight)) {
+          var fontSize = parseFloat(computed.fontSize) || 16;
+          lineHeight = fontSize * 1.4;
+        }
+        return lineHeight;
+      }
+
+      wrappers.forEach(function (wrapper) {
+        if (wrapper.dataset.moveBriefBlurReady === '1') return;
+        wrapper.dataset.moveBriefBlurReady = '1';
+
+        var sharp = wrapper.querySelector('[data-move-brief-layer="sharp"]');
+        if (!sharp) return;
+
+        var html = sharp.innerHTML;
+        var blurLayers = wrapper.querySelectorAll('.move-brief__heading-layer--blur');
+        blurLayers.forEach(function (layer) {
+          layer.innerHTML = html;
+        });
+
+        function update() {
+          // The element height/line wrapping can change with responsive layouts.
+          var lineHeight = getLineHeightPx(sharp);
+          var totalLines = Math.max(1, Math.round(sharp.scrollHeight / lineHeight));
+
+          // We want: heading is fully visible immediately, but blurred.
+          // Then as you scroll DOWN, it unblurs line-by-line.
+          // Capture a "start scroll" the first time the block is in/near view.
+          var rect = wrapper.getBoundingClientRect();
+          var vh = window.innerHeight || 800;
+
+          if (!wrapper.dataset.moveBriefStartScroll && rect.top < vh * 0.9) {
+            wrapper.dataset.moveBriefStartScroll = String(window.scrollY || 0);
+          }
+
+          var startScrollStr = wrapper.dataset.moveBriefStartScroll;
+          var startScroll = startScrollStr ? parseFloat(startScrollStr) : null;
+
+          // If we haven't "activated" this block yet, show only the first line as readable.
+          // The rest stays blurred.
+          var delta = 0;
+          if (startScroll !== null) {
+            delta = (window.scrollY || 0) - startScroll;
+            if (delta < 0) delta = 0;
+          }
+
+          // Reveal continuously as the user scrolls (no snapping), which makes the
+          // "blur out" feel much smoother.
+          // We still start with ~1 line readable and then reveal downward.
+          var revealLinesFloat = clamp(1 + delta / lineHeight, 1, totalLines);
+          var revealPx = revealLinesFloat * lineHeight;
+
+          // Fade the overall blur intensity down as we scroll, so the remaining
+          // blurred lines become gradually more readable.
+          var progress = 1;
+          if (totalLines > 1) {
+            progress = (revealLinesFloat - 1) / (totalLines - 1);
+          }
+
+          wrapper.style.setProperty('--move-brief-reveal-px', revealPx + 'px');
+          wrapper.style.setProperty('--move-brief-progress', String(progress));
+        }
+
+        var raf = 0;
+        function scheduleUpdate() {
+          if (raf) return;
+          raf = window.requestAnimationFrame(function () {
+            raf = 0;
+            update();
+          });
+        }
+
+        update();
+        window.addEventListener('scroll', scheduleUpdate, { passive: true });
+        window.addEventListener('resize', scheduleUpdate);
+      });
+    })();
+  </script>
 </section>
 
 {% schema %}
@@ -32,10 +145,17 @@
       "default": "Hva er MOVE Coaching?"
     },
     {
-      "type": "textarea",
-      "id": "body",
-      "label": "Body",
-      "default": "MOVE er skapt av Aline – tobarnsmamma, coach og grunnlegger – for kvinner som vil ha en ærlig, bærekraftig vei til en sunnere hverdag. Her får du coaching, struktur og støtte som faktisk passer inn i tidsklemma."
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" },
+        { "value": "hxl", "label": "XL" },
+        { "value": "hxxl", "label": "XXL" }
+      ],
+      "default": "h2"
     },
     {
       "type": "range",
@@ -78,12 +198,6 @@
         { "value": "right", "label": "Right" }
       ],
       "default": "left"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_depth_shadow",
-      "label": "Enable depth gradient shadow behind card",
-      "default": true
     }
   ],
   "presets": [

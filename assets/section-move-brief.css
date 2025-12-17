@@ -24,86 +24,201 @@
   justify-content: flex-end;
 }
 
-.move-brief__card {
-  position: relative;
-  background: #ffffff;
-  border-radius: var(--radius-md, 8px);
-  padding: 2.4rem 2.8rem;
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.06);
-  width: 50vw;
-  max-width: 620px;
+.move-brief__content {
+  width: 56vw;
+  max-width: 780px;
 }
 
-/* Brand-colored depth gradient shadow behind the card */
-.move-brief__card--shadow::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(
-    120% 160% at 20% 10%,
-    rgba(92, 72, 66, 0.6) 0%,
-    rgba(92, 72, 66, 0.4) 40%,
-    rgba(92, 72, 66, 0) 100%
-  );
-  z-index: -1;
-  transform: translate(10px, 12px);
-  opacity: 0.4;
-  filter: blur(8px);
-}
-
-.move-brief__card--shadow:hover::before {
-  opacity: 0.22;
-  transform: translate(6px, 8px);
+@media screen and (min-width: 1200px) {
+  .move-brief__content {
+    width: 60vw;
+    max-width: 860px;
+  }
 }
 
 @media screen and (max-width: 1023px) {
-  .move-brief__card {
+  .move-brief__content {
     width: 70vw;
     max-width: none;
   }
 }
 
 @media screen and (max-width: 749px) {
-  .move-brief__card {
+  .move-brief__content {
     width: 100%;
-    padding: 1.8rem 1.6rem;
   }
 }
 
 .move-brief__heading {
-  margin-bottom: 1.6rem;
+  margin: 0;
 }
 
-.move-brief__body {
-  max-width: 46rem;
+/* Add horizontal breathing room so blur doesn't get clipped by the text box edge */
+.move-brief__heading-layer {
+  box-sizing: border-box;
+  padding-inline: clamp(1.2rem, 2vw, 2.6rem);
+}
+
+.move-brief__heading-reveal {
+  /* Fallback if JS is disabled: show roughly the first line as readable */
+  --move-brief-reveal-px: 1.4em;
+  /* Softness of the reveal boundary */
+  --move-brief-feather: 18px;
+  /* 0 = maximum blur, 1 = minimum blur */
+  --move-brief-progress: 0;
+  position: relative;
+}
+
+.move-brief__heading-layer--sharp {
+  position: relative;
+  z-index: 1;
+  /* Only the revealed (readable) area is sharp, with a soft feather at the boundary */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0,
+    #000 calc(var(--move-brief-reveal-px) - var(--move-brief-feather)),
+    transparent var(--move-brief-reveal-px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0,
+    #000 calc(var(--move-brief-reveal-px) - var(--move-brief-feather)),
+    transparent var(--move-brief-reveal-px),
+    transparent 100%
+  );
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+/* The blurred layers sit on top of the sharp heading. As --move-brief-reveal-px grows,
+   we mask the blur away from the top with a soft feather so the transition isn't a hard line. */
+.move-brief__heading-layer--blur {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(var(--move-brief-reveal-px) - var(--move-brief-feather)),
+    #000 var(--move-brief-reveal-px),
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(var(--move-brief-reveal-px) - var(--move-brief-feather)),
+    #000 var(--move-brief-reveal-px),
+    #000 100%
+  );
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.move-brief__heading-layer--blur-1 {
+  /* Light blur just below the readable line(s) */
+  filter: blur(calc(0.6px + (2.2px - 0.6px) * (1 - var(--move-brief-progress))));
+  opacity: calc(0.9 + (0.06 * (1 - var(--move-brief-progress))));
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(var(--move-brief-reveal-px) - var(--move-brief-feather)),
+      #000 var(--move-brief-reveal-px),
+      #000 100%
+    ),
+    linear-gradient(to bottom, #000 0%, #000 45%, transparent 70%, transparent 100%);
+  mask-image:
+    linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(var(--move-brief-reveal-px) - var(--move-brief-feather)),
+      #000 var(--move-brief-reveal-px),
+      #000 100%
+    ),
+    linear-gradient(to bottom, #000 0%, #000 45%, transparent 70%, transparent 100%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.move-brief__heading-layer--blur-2 {
+  /* Medium blur in the middle */
+  filter: blur(calc(1.2px + (10px - 1.2px) * (1 - var(--move-brief-progress))));
+  opacity: calc(0.75 + (0.15 * (1 - var(--move-brief-progress))));
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(var(--move-brief-reveal-px) - var(--move-brief-feather)),
+      #000 var(--move-brief-reveal-px),
+      #000 100%
+    ),
+    linear-gradient(to bottom, transparent 0%, transparent 22%, #000 40%, #000 80%, transparent 96%);
+  mask-image:
+    linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(var(--move-brief-reveal-px) - var(--move-brief-feather)),
+      #000 var(--move-brief-reveal-px),
+      #000 100%
+    ),
+    linear-gradient(to bottom, transparent 0%, transparent 22%, #000 40%, #000 80%, transparent 96%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.move-brief__heading-layer--blur-3 {
+  /* Heavy blur near the bottom (least readable) */
+  filter: blur(calc(1.8px + (20px - 1.8px) * (1 - var(--move-brief-progress))));
+  opacity: calc(0.6 + (0.2 * (1 - var(--move-brief-progress))));
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(var(--move-brief-reveal-px) - var(--move-brief-feather)),
+      #000 var(--move-brief-reveal-px),
+      #000 100%
+    ),
+    linear-gradient(to bottom, transparent 0%, transparent 62%, #000 80%, #000 100%);
+  mask-image:
+    linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(var(--move-brief-reveal-px) - var(--move-brief-feather)),
+      #000 var(--move-brief-reveal-px),
+      #000 100%
+    ),
+    linear-gradient(to bottom, transparent 0%, transparent 62%, #000 80%, #000 100%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .move-brief__heading-layer--blur {
+    display: none;
+  }
 }
 
 /* Text alignment variants applied via schema */
-.move-brief__card--left {
+.move-brief__content--left {
   text-align: left;
 }
 
-.move-brief__card--center {
+.move-brief__content--center {
   text-align: center;
 }
 
-.move-brief__card--right {
+.move-brief__content--right {
   text-align: right;
-}
-
-/* Ensure the text block width aligns with the chosen text alignment */
-.move-brief__card--left .move-brief__body {
-  margin-left: 0;
-  margin-right: auto;
-}
-
-.move-brief__card--center .move-brief__body {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.move-brief__card--right .move-brief__body {
-  margin-left: auto;
-  margin-right: 0;
 }
