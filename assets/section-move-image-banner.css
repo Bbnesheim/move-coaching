@@ -1,4 +1,9 @@
 .move-image-banner {
+  /* Scroll-driven heading parallax */
+  --move-image-banner-heading-scroll-y: 0px;
+  --move-image-banner-heading-scroll-start-y: 18px;
+  --move-image-banner-heading-scroll-distance: 64px;
+
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -94,6 +99,10 @@
 .move-image-banner--text-layout-cover {
   /* Taller hero in cover mode so the image feels impactful */
   min-height: clamp(420px, 62vh, 820px);
+
+  /* Larger parallax range for oversized cover heading */
+  --move-image-banner-heading-scroll-start-y: 24px;
+  --move-image-banner-heading-scroll-distance: 88px;
 }
 
 @media screen and (max-width: 600px) {
@@ -173,8 +182,43 @@
   text-align: right;
 }
 
+.move-image-banner__heading-wrapper {
+  display: inline-block;
+  max-width: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /*
+    JS marks the wrapper as pending, so we can keep the heading visible for no-JS.
+    Animation: slide in from the left on page load.
+  */
+  .move-image-banner__heading-wrapper--slide-in-left.is-pending {
+    opacity: 0.01;
+    transform: translateX(-3rem);
+  }
+
+  .move-image-banner__heading-wrapper--slide-in-left.is-revealed {
+    opacity: 1;
+    animation: moveImageBannerSlideInLeft var(--duration-extra-longer) var(--ease-out-slow) forwards;
+  }
+
+  @keyframes moveImageBannerSlideInLeft {
+    from {
+      transform: translateX(-3rem);
+      opacity: 0.01;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+}
+
 .move-image-banner__heading {
   margin: 0;
+
+  transform: translate3d(0, var(--move-image-banner-heading-scroll-y, 0px), 0);
+  will-change: transform;
 }
 
 .move-image-banner__subheading {

@@ -67,7 +67,11 @@
     >
       <div class="move-image-banner__content-box">
         {%- if section.settings.heading != blank -%}
-          <h1 class="move-image-banner__heading {{ section.settings.heading_size | default: 'h1' }}">{{ section.settings.heading }}</h1>
+          <div
+            class="move-image-banner__heading-wrapper{% if settings.animations_reveal_on_scroll %} move-image-banner__heading-wrapper--slide-in-left{% endif %}"
+          >
+            <h1 class="move-image-banner__heading {{ section.settings.heading_size | default: 'h1' }}">{{ section.settings.heading }}</h1>
+          </div>
         {%- endif -%}
 
         {%- unless section.settings.text_layout == 'cover' -%}
