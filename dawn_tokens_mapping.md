@@ -152,5 +152,7 @@ Sections like `move-hero` and `move-cta-strip` apply these classes based on the 
 ## 6. Integration into Sections
 
 - In each custom section, reference CSS variables via classes rather than hard-coded values.
+- Prefer MOVE brand variables from `assets/base.css` (mirrors `tokens.json`) instead of hard-coding MOVE palette hex values in section CSS.
+- If a hard-coded MOVE palette hex is required for a specific reason, do it only when explicitly requested and document the rationale in the PR/commit.
 - Keep schema options (e.g., layout, alignment) high-level; styling differences are handled via CSS classes.
 - This keeps MOVE branding centralised in theme settings and easy to adjust without editing Liquid in multiple places.

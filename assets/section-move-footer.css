@@ -29,8 +29,8 @@
   display: block;
   padding: 1.6rem;
   border-radius: 1.2rem;
-  background: #5b3a29;
-  color: #ffffff;
+  background: var(--move-color-brown-primary);
+  color: var(--move-color-cream-background);
   text-decoration: none;
 }
 
@@ -134,6 +134,12 @@
   font-size: calc(var(--font-heading-scale) * 1.15rem);
 }
 
+/* Menu + download headings larger than default */
+.move-footer__menu .move-footer__menu-heading,
+.move-footer__download .move-footer__menu-heading {
+  font-size: calc(var(--font-heading-scale) * 1.55rem);
+}
+
 .move-footer__menu-list {
   margin: 0;
   padding: 0;
@@ -163,7 +169,10 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: flex-end;
   gap: 1.2rem;
+  /* Place social + payment icons as low as possible in their grid cell */
+  align-self: stretch;
 }
 
 .move-footer__icons--left {
@@ -189,18 +198,54 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 0.8rem;
+  gap: 1.2rem;
 }
 
 .move-footer__download-link {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.8rem;
+  height: 4.8rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: transform 150ms ease, opacity 150ms ease;
 }
 
-.move-footer__download-badge {
+.move-footer__download-link:hover {
+  transform: translateY(-1px);
+}
+
+.move-footer__download-link--ios {
+  background: var(--move-color-pink-secondary);
+  color: var(--move-color-brown-primary);
+}
+
+.move-footer__download-link--android {
+  /* Branding element: use Primary Brown, not the dark text colour */
+  background: var(--move-color-brown-primary);
+  color: var(--move-color-cream-background);
+}
+
+/* If the uploaded icon is a dark PNG/SVG, invert it for contrast on dark backgrounds */
+.move-footer__download-link--android .move-footer__download-icon-image {
+  filter: brightness(0) invert(1);
+}
+
+.move-footer__download-link .icon {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.move-footer__download-link .icon-apple path {
+  fill: currentColor;
+}
+
+.move-footer__download-icon-image {
   display: block;
-  width: 13rem;
-  max-width: 100%;
-  height: auto;
+  width: 2.2rem;
+  height: 2.2rem;
+  object-fit: contain;
 }
 
 .move-footer__icon-link,

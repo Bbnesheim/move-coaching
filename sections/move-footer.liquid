@@ -279,15 +279,47 @@
             {%- endif -%}
 
             <div class="move-footer__download-links" aria-label="App downloads">
-              {%- if download_block.settings.ios_badge != blank and download_block.settings.ios_link != blank -%}
-                <a class="move-footer__download-link" href="{{ download_block.settings.ios_link }}" target="_blank" rel="noopener" aria-label="Download on the App Store">
-                  {{ download_block.settings.ios_badge | image_url: width: 320 | image_tag: class: 'move-footer__download-badge', loading: 'lazy', alt: 'App Store' }}
+              {%- if download_block.settings.ios_link != blank -%}
+                <a
+                  class="move-footer__download-link move-footer__download-link--ios"
+                  href="{{ download_block.settings.ios_link }}"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Download on the App Store"
+                >
+                  {%- if download_block.settings.ios_badge != blank -%}
+                    {{
+                      download_block.settings.ios_badge
+                      | image_url: width: 96
+                      | image_tag: class: 'move-footer__download-icon-image', loading: 'lazy', alt: ''
+                    }}
+                  {%- else -%}
+                    <span class="svg-wrapper" aria-hidden="true">
+                      {{- 'icon-apple.svg' | inline_asset_content -}}
+                    </span>
+                  {%- endif -%}
                 </a>
               {%- endif -%}
 
-              {%- if download_block.settings.android_badge != blank and download_block.settings.android_link != blank -%}
-                <a class="move-footer__download-link" href="{{ download_block.settings.android_link }}" target="_blank" rel="noopener" aria-label="Get it on Google Play">
-                  {{ download_block.settings.android_badge | image_url: width: 320 | image_tag: class: 'move-footer__download-badge', loading: 'lazy', alt: 'Google Play' }}
+              {%- if download_block.settings.android_link != blank -%}
+                <a
+                  class="move-footer__download-link move-footer__download-link--android"
+                  href="{{ download_block.settings.android_link }}"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Get it on Google Play"
+                >
+                  {%- if download_block.settings.android_badge != blank -%}
+                    {{
+                      download_block.settings.android_badge
+                      | image_url: width: 96
+                      | image_tag: class: 'move-footer__download-icon-image', loading: 'lazy', alt: ''
+                    }}
+                  {%- else -%}
+                    <span class="svg-wrapper" aria-hidden="true">
+                      {{- 'icon-google-play.svg' | inline_asset_content -}}
+                    </span>
+                  {%- endif -%}
                 </a>
               {%- endif -%}
             </div>

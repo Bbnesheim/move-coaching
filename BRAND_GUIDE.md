@@ -26,6 +26,7 @@ Base palette from PRD:
 - **Text Dark Grey** – `#2F2E2B`
   - Role: Main body text and high-contrast UI text.
   - Usage: Paragraphs, labels, long-form content, and legal text.
+  - Important: This is a contrast/support colour for readability — do not use it as a primary “brand accent” colour for branded elements (e.g., key icons, badges, button backgrounds) unless explicitly required.
 
 Recommended semantic mapping for UI (to be reflected in `tokens.json`):
 
@@ -195,6 +196,18 @@ Spacing & rhythm:
 - Prefer Dawn’s native section patterns for layout (grid, split, collage) and adapt with brand styles instead of building entirely custom layouts.
 - Keep custom CSS scoped and minimal; rely on tokens and theme settings rather than hard-coded values spread across templates.
 - When adding new sections, ensure they are configurable via the Shopify theme editor (content, layout, and background variants) instead of being single-use.
+
+### 8.1 Brand colour usage guardrails (important)
+To avoid “almost brand colours” creeping into the codebase:
+- Do not introduce new hex values for brand colours (brown/pink/cream/dark text) in section CSS.
+- Always reference MOVE brand CSS variables from `assets/base.css` (these mirror `tokens.json`).
+- Only use hard-coded colours when they are neutral/structural and explicitly allowed (e.g. `#FFFFFF` surface backgrounds), otherwise prefer tokens.
+
+MOVE brand variables (source of truth in CSS):
+- `--move-color-brown-primary` (Primary Brown)
+- `--move-color-pink-secondary` (Secondary Pink)
+- `--move-color-cream-background` (Background Cream)
+- `--move-color-text-dark` (Text Dark Grey)
 
 ## 9. Layout, UX & Content Guidelines (inspired by best-in-class coaching sites)
 

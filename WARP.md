@@ -100,4 +100,6 @@ For UI and components (React/TypeScript assumed):
 - Always respect the conventions and constraints in this file when generating or editing code.
 - Prefer existing patterns and styles in this codebase over introducing new ones.
 - Before large changes, reference `PRD.md` and `PROMPT.md` for product context.
+- For styling: prefer `--move-color-*` variables from `assets/base.css` (mirrors `tokens.json`) over hard-coded MOVE palette hex values in section CSS.
+  - If hard-coding a MOVE palette hex is required for a specific reason, only do it when explicitly requested and document the rationale in the PR/commit.
 - When conventions here conflict with generic best practices, **this `WARP.md` takes precedence for this project**.

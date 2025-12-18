@@ -71,8 +71,8 @@
   gap: 1.6rem;
   padding: 1.6rem;
   border-radius: 1.2rem;
-  background: #5b3a29;
-  color: #ffffff;
+  background: var(--move-color-brown-primary);
+  color: var(--move-color-cream-background);
   text-decoration: none;
 }
 

@@ -72,7 +72,7 @@
 
 .move-hero__headline-layer--on_background .move-hero__heading,
 .move-hero__headline-layer--on_background .move-hero__subheading {
-  color: var(--color-move-pink, #f47da5);
+  color: var(--move-color-pink-secondary);
 }
 
 .move-hero__heading {
