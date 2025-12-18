@@ -38,7 +38,7 @@
       assign brand_empty = true
     endif
 
-    if section.blocks.size == 1 and section.blocks[0].type == 'brand_information' and brand_empty and has_social_icons == false and section.settings.newsletter_enable == false and section.settings.enable_follow_on_shop == false
+    if section.blocks.size == 1 and section.blocks[0].type == 'brand_information' and brand_empty and has_social_icons == false and section.settings.newsletter_enable == false and section.settings.enable_follow_on_shop == false and section.settings.packages_menu == blank and section.settings.top_heading == blank and section.settings.top_text == blank
       assign only_empty_brand = true
     endif
   -%}
@@ -47,129 +47,156 @@
     or section.settings.show_social
     and has_social_icons == true
     or section.settings.enable_follow_on_shop
+    or section.settings.packages_menu != blank
+    or section.settings.top_heading != blank
+    or section.settings.top_text != blank
   -%}
     {%- unless only_empty_brand -%}
       <div class="footer__content-top page-width">
-        {%- if section.blocks.size > 0 -%}
-          {%- liquid
-            if section.blocks.size == 9
-              assign footer_grid_class = 'grid--3-col-tablet'
-            elsif section.blocks.size > 6
-              assign footer_grid_class = 'grid--4-col-desktop'
-            elsif section.blocks.size > 4
-              assign footer_grid_class = 'grid--3-col-tablet'
-            endif
-          -%}
-          <div
-            class="footer__blocks-wrapper grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-            {% if settings.animations_reveal_on_scroll %}
-              data-cascade
-            {% endif %}
-          >
-            {%- for block in section.blocks -%}
-              <div
-                class="footer-block grid__item{% if block.type == 'link_list' %} footer-block--menu{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                {{ block.shopify_attributes }}
-                {% if settings.animations_reveal_on_scroll %}
-                  data-cascade
-                  style="--animation-order: {{ forloop.index }};"
-                {% endif %}
-              >
-                {%- if block.settings.heading != blank -%}
-                  <h2 class="footer-block__heading inline-richtext">{{- block.settings.heading -}}</h2>
-                {%- endif -%}
+        {%- liquid
+          assign footer_menu_block_count = 0
+        -%}
 
-                {%- case block.type -%}
-                  {%- when '@app' -%}
-                    {% render block %}
-                  {%- when 'text' -%}
-                    <div class="footer-block__details-content rte">
-                      {{ block.settings.subtext }}
-                    </div>
-                  {%- when 'link_list' -%}
-                    {%- if block.settings.menu != blank -%}
-                      <ul class="footer-block__details-content list-unstyled">
-                        {%- for link in block.settings.menu.links -%}
-                          <li>
-                            <a
-                              href="{{ link.url }}"
-                              class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
-                            >
-                              {{ link.title | escape }}
-                            </a>
-                          </li>
-                        {%- endfor -%}
-                      </ul>
-                    {%- endif -%}
-                  {%- when 'brand_information' -%}
-                    <div class="footer-block__brand-info">
-                      {%- if settings.brand_image != blank -%}
-                        {%- assign brand_image_height = settings.brand_image_width
-                          | divided_by: settings.brand_image.aspect_ratio
-                        -%}
-                        <div
-                          class="footer-block__image-wrapper"
-                          style="max-width: min(100%, {{ settings.brand_image_width }}px);"
-                        >
-                          {{
-                            settings.brand_image
-                            | image_url: width: 1100
-                            | image_tag:
-                              loading: 'lazy',
-                              widths: '50, 100, 150, 200, 300, 400, 550, 800, 1100',
-                              height: brand_image_height,
-                              width: settings.brand_image_width
-                          }}
-                        </div>
-                      {%- endif -%}
-                      {%- if settings.brand_headline != blank -%}
-                        <h2 class="footer-block__heading rte">{{ settings.brand_headline }}</h2>
-                      {%- endif -%}
-                      {%- if settings.brand_description != blank -%}
-                        <div class="rte">{{ settings.brand_description }}</div>
-                      {%- endif -%}
-                      {%- if block.settings.show_social and has_social_icons -%}
-                        {%- render 'social-icons', class: 'footer__list-social' -%}
-                      {%- endif -%}
-                    </div>
-                  {%- when 'image' -%}
-                    <div class="footer-block__details-content footer-block-image {{ block.settings.alignment }}">
-                      {%- if block.settings.image != blank -%}
-                        {%- assign image_size_2x = block.settings.image_width | times: 2 | at_most: 5760 -%}
-                        <div
-                          class="footer-block__image-wrapper"
-                          style="max-width: min(100%, {{ block.settings.image_width }}px);"
-                        >
-                          <img
-                            srcset="{{ block.settings.image | image_url: width: block.settings.image_width }}, {{ block.settings.image | image_url: width: image_size_2x }} 2x"
-                            src="{{ block.settings.image | image_url: width: 760 }}"
-                            alt="{{ block.settings.image.alt | escape }}"
-                            loading="lazy"
-                            width="{{ block.settings.image.width }}"
-                            height="{{ block.settings.image.height }}"
-                          >
-                        </div>
-                      {%- else -%}
-                        {{ 'image' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
-                      {%- endif -%}
-                    </div>
-                {%- endcase -%}
+        <div class="footer__grid">
+          <div class="footer__intro">
+            {%- if section.settings.top_heading != blank -%}
+              <h2 class="footer__top-heading inline-richtext">{{ section.settings.top_heading }}</h2>
+            {%- endif -%}
+            {%- if section.settings.top_text != blank -%}
+              <div class="footer__top-text rte">
+                {{ section.settings.top_text }}
               </div>
-            {%- endfor -%}
+            {%- endif -%}
           </div>
-        {%- endif -%}
 
-        <div
-          class="footer-block--newsletter{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-          {% if settings.animations_reveal_on_scroll %}
-            data-cascade
-          {% endif %}
-        >
-          {%- if section.settings.newsletter_enable -%}
-            <div class="footer-block__newsletter">
-              {%- if section.settings.newsletter_heading != blank -%}
-                <h2 class="footer-block__heading inline-richtext">{{ section.settings.newsletter_heading }}</h2>
+          <div class="footer__packages-wrapper">
+            {%- if section.settings.featured_product != blank -%}
+              {%- assign promo_product = section.settings.featured_product -%}
+              <div class="footer__product-promo">
+                <a class="footer__product-promo-link" href="{{ promo_product.url }}">
+                  {%- if promo_product.featured_media != blank -%}
+                    <div class="footer__product-promo-media">
+                      {{
+                        promo_product.featured_media
+                        | image_url: width: 220
+                        | image_tag:
+                          loading: 'lazy',
+                          widths: '110, 160, 220',
+                          sizes: '110px',
+                          class: 'footer__product-promo-image'
+                      }}
+                    </div>
+                  {%- endif -%}
+
+                  <div class="footer__product-promo-content">
+                    {%- if section.settings.featured_product_label != blank -%}
+                      <p class="footer__product-promo-eyebrow caption">{{ section.settings.featured_product_label | escape }}</p>
+                    {%- endif -%}
+                    <p class="footer__product-promo-title">{{ promo_product.title | escape }}</p>
+                    <p class="footer__product-promo-price">{{ promo_product.price | money }}</p>
+
+                    {%- if section.settings.featured_product_cta_label != blank -%}
+                      <span class="footer__product-promo-cta">{{ section.settings.featured_product_cta_label | escape }}</span>
+                    {%- endif -%}
+                  </div>
+                </a>
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.packages_menu != blank -%}
+              {%- if section.settings.packages_heading != blank -%}
+                <h2 class="footer-block__heading inline-richtext">{{ section.settings.packages_heading }}</h2>
               {%- endif -%}
+
+              <ol class="footer__packages" role="list">
+                {%- for link in section.settings.packages_menu.links -%}
+                  {%- liquid
+                    assign status_text = ''
+                    if section.settings.packages_show_status
+                      assign status_text = section.settings.packages_status_text
+                      if link.type == 'product_link' and link.object and link.object.available == false
+                        assign status_text = section.settings.packages_sold_out_text
+                      endif
+                    endif
+                  -%}
+                  <li class="footer__package">
+                    <a href="{{ link.url }}" class="footer__package-link link link--text">
+                      {{ link.title | escape }}
+                    </a>
+                    {%- if status_text != blank -%}
+                      <span class="footer__package-status caption">{{ status_text }}</span>
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ol>
+            {%- endif -%}
+          </div>
+
+
+          <div class="footer__bottom-right">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'link_list' and block.settings.menu != blank -%}
+                {%- if footer_menu_block_count < 2 -%}
+                  <div class="footer__menu" {{ block.shopify_attributes }}>
+                    {%- if block.settings.heading != blank -%}
+                      <h2 class="footer-block__heading inline-richtext">{{ block.settings.heading }}</h2>
+                    {%- endif -%}
+                    <ul class="footer-block__details-content list-unstyled">
+                      {%- for link in block.settings.menu.links -%}
+                        <li>
+                          <a
+                            href="{{ link.url }}"
+                            class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
+                          >
+                            {{ link.title | escape }}
+                          </a>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  </div>
+                {%- endif -%}
+                {%- assign footer_menu_block_count = footer_menu_block_count | plus: 1 -%}
+              {%- endif -%}
+            {%- endfor -%}
+
+            <div class="footer__social">
+              {%- if section.settings.show_social and has_social_icons -%}
+                {%- render 'social-icons', class: 'footer__list-social' -%}
+              {%- endif -%}
+
+              {%- if section.settings.payment_enable -%}
+                <div class="footer__payment">
+                  <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
+                  <ul class="list list-payment" role="list">
+                    {%- for type in shop.enabled_payment_types -%}
+                      <li class="list-payment__item">
+                        {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    {%- endunless -%}
+  {%- endif -%}
+
+  <div
+    class="footer__content-bottom{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+    {% if settings.animations_reveal_on_scroll %}
+      data-cascade
+    {% endif %}
+  >
+    <div class="footer__content-bottom-wrapper page-width">
+      {%- if section.settings.newsletter_enable -%}
+        <div class="footer__column footer__column--newsletter">
+          <div class="footer__newsletter-block">
+            {%- if section.settings.newsletter_heading != blank -%}
+              <h2 class="footer-block__heading inline-richtext">{{ section.settings.newsletter_heading }}</h2>
+            {%- endif -%}
+            <div class="footer-block__newsletter">
               {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
                 <input type="hidden" name="contact[tags]" value="newsletter">
                 <div class="newsletter-form__field-wrapper">
@@ -234,29 +261,16 @@
                 {%- endif -%}
               {%- endform -%}
             </div>
-          {%- endif -%}
+          </div>
 
           {%- if shop.features.follow_on_shop? and section.settings.enable_follow_on_shop -%}
             <div class="footer__follow-on-shop">
               {{ shop | login_button: action: 'follow' }}
             </div>
           {%- endif -%}
-
-          {%- if section.settings.show_social and has_social_icons -%}
-            {%- render 'social-icons', class: 'footer__list-social' -%}
-          {%- endif -%}
         </div>
-      </div>
-    {%- endunless -%}
-  {%- endif -%}
+      {%- endif -%}
 
-  <div
-    class="footer__content-bottom{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-    {% if settings.animations_reveal_on_scroll %}
-      data-cascade
-    {% endif %}
-  >
-    <div class="footer__content-bottom-wrapper page-width">
       <div class="footer__column footer__localization isolate">
         {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
           <localization-form>
@@ -282,47 +296,26 @@
           </localization-form>
         {%- endif -%}
       </div>
-      <div class="footer__column footer__column--info">
-        {%- if section.settings.payment_enable -%}
-          <div class="footer__payment">
-            <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
-            <ul class="list list-payment" role="list">
-              {%- for type in shop.enabled_payment_types -%}
-                <li class="list-payment__item">
-                  {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
-                </li>
-              {%- endfor -%}
-            </ul>
-          </div>
-        {%- endif -%}
-      </div>
+      <div class="footer__column footer__column--info"></div>
     </div>
     <div class="footer__content-bottom-wrapper page-width{% if section.settings.enable_country_selector == false and section.settings.enable_language_selector == false %} footer__content-bottom-wrapper--center{% endif %}">
-      <div class="footer__copyright caption">
-        <small class="copyright__content"
-          >&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url -}}
-        </small>
-        <small class="copyright__content footer__business-info">
-          MOVE Coaching AS – Org.nr: 926924745<br>
-          Dansarberget 13, 7510 Skatval, Norge<br>
-          E-post: <a href="mailto:aline@movecoaching.no">aline@movecoaching.no</a>
-        </small>
-        {%- if section.settings.show_policy -%}
-          <ul class="policies list-unstyled">
-            {%- for policy in shop.policies -%}
-              {%- if policy != blank -%}
-                <li>
-                  <small class="copyright__content"
-                    ><a href="{{ policy.url }}">{{ policy.title | escape }}</a></small
-                  >
-                </li>
-              {%- endif -%}
-            {%- endfor -%}
-          </ul>
-        {%- endif -%}
-        <small class="copyright__content copyright__content--developer">
-          Utviklet av <a href="https://www.nesheimvatten.no" target="_blank" rel="noopener">Nesheim & Vatten AS</a>
-        </small>
+      <div class="footer__bottom-bar caption">
+        <div class="footer__bottom-left">
+          <small class="copyright__content"
+            >&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url -}}
+          </small>
+          {%- if section.settings.policies_page != blank and section.settings.policies_link_label != blank -%}
+            <small class="copyright__content">
+              <a href="{{ section.settings.policies_page.url }}">{{ section.settings.policies_link_label | escape }}</a>
+            </small>
+          {%- endif -%}
+        </div>
+
+        <div class="footer__bottom-right">
+          <small class="copyright__content copyright__content--developer">
+            Created by <a href="https://www.nesheimvatten.no" target="_blank" rel="noopener">Nesheim & Vatten AS</a>
+          </small>
+        </div>
       </div>
     </div>
   </div>
@@ -439,6 +432,76 @@
     },
     {
       "type": "header",
+      "content": "Top content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "top_heading",
+      "label": "Heading",
+      "default": "Go further."
+    },
+    {
+      "type": "richtext",
+      "id": "top_text",
+      "label": "Text",
+      "default": "<p>Add a short intro about your brand and what you offer.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Packages"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "packages_heading",
+      "label": "Heading",
+      "default": "Packages"
+    },
+    {
+      "type": "link_list",
+      "id": "packages_menu",
+      "label": "Menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "packages_show_status",
+      "label": "Show availability text",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "packages_status_text",
+      "label": "Default availability text",
+      "default": "Available to order"
+    },
+    {
+      "type": "text",
+      "id": "packages_sold_out_text",
+      "label": "Sold out text",
+      "default": "Sold out"
+    },
+    {
+      "type": "header",
+      "content": "Featured product"
+    },
+    {
+      "type": "product",
+      "id": "featured_product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "featured_product_label",
+      "label": "Label",
+      "default": "Featured"
+    },
+    {
+      "type": "text",
+      "id": "featured_product_cta_label",
+      "label": "Call-to-action label",
+      "default": "Shop now"
+    },
+    {
+      "type": "header",
       "content": "t:sections.footer.settings.header__1.content",
       "info": "t:sections.footer.settings.header__1.info"
     },
@@ -491,6 +554,21 @@
       "id": "payment_enable",
       "default": true,
       "label": "t:sections.footer.settings.payment_enable.label"
+    },
+    {
+      "type": "header",
+      "content": "Policies"
+    },
+    {
+      "type": "page",
+      "id": "policies_page",
+      "label": "Policies page"
+    },
+    {
+      "type": "text",
+      "id": "policies_link_label",
+      "label": "Policies link label",
+      "default": "Policies"
     },
     {
       "type": "checkbox",
