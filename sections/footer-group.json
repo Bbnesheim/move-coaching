@@ -17,7 +17,7 @@
         "product": {
           "type": "product",
           "settings": {
-            "product": "",
+            "product": "move-coaching-personlig-treningsprogram",
             "label": "Membership",
             "cta_label": "View options"
           }
@@ -79,8 +79,8 @@
         "color_scheme": "scheme-1",
         "intro_heading": "Go Further.",
         "intro_text": "<p>Add a short intro about your brand and what you offer.</p>",
-        "policies_page": "",
-        "policies_link_label": "Policies",
+        "policies_page": "policies",
+        "policies_link_label": "Vilkår og retningslinjer",
         "enable_country_selector": true,
         "enable_language_selector": true,
         "margin_top": 0,
