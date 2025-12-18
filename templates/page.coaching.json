@@ -40,6 +40,18 @@
         "spacing_below_desktop": 0
       }
     },
+    "move_brief_diFT4R": {
+      "type": "move-brief",
+      "name": "MOVE brief",
+      "settings": {
+        "heading": "En enkel prosess fra første innsending til skreddersydd plan, tett støtte og nye vaner som varer.",
+        "heading_size": "h1",
+        "padding_top": 88,
+        "padding_bottom": 88,
+        "container_alignment": "right",
+        "text_alignment": "right"
+      }
+    },
     "move_steps_bekiGQ": {
       "type": "move-steps",
       "blocks": {
@@ -78,8 +90,8 @@
       ],
       "name": "MOVE steps",
       "settings": {
-        "heading": "Slik fungerer det",
-        "intro": "En enkel prosess fra første innsending til skreddersydd plan, tett støtte og nye vaner som varer.",
+        "heading": "",
+        "intro": "",
         "header_placement": "above",
         "heading_alignment": "left",
         "intro_alignment": "left",
@@ -235,6 +247,7 @@
   "order": [
     "main",
     "move_image_banner_Gt9ecH",
+    "move_brief_diFT4R",
     "move_steps_bekiGQ",
     "move_app_promo_ngTpek",
     "move_scroll_hero_banner_pbMTt6",
