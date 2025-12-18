@@ -1,0 +1,611 @@
+{{ 'section-move-footer.css' | asset_url | stylesheet_tag }}
+{{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
+{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .move-footer.section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .move-footer.section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+
+    .move-footer {
+      margin-top: {{ section.settings.margin_top }}px;
+    }
+  }
+{%- endstyle -%}
+
+<footer class="move-footer color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  {%- liquid
+    assign product_block = null
+    assign newsletter_block = null
+    assign icons_block = null
+    assign menu_block_1 = null
+    assign menu_block_2 = null
+    assign menu_count = 0
+
+    for block in section.blocks
+      if block.type == 'product' and product_block == null
+        assign product_block = block
+      elsif block.type == 'newsletter' and newsletter_block == null
+        assign newsletter_block = block
+      elsif block.type == 'icons' and icons_block == null
+        assign icons_block = block
+      elsif block.type == 'menu'
+        if menu_count == 0
+          assign menu_block_1 = block
+          assign menu_count = 1
+        elsif menu_count == 1
+          assign menu_block_2 = block
+          assign menu_count = 2
+        endif
+      endif
+    endfor
+
+  -%}
+
+  <div class="move-footer__content page-width">
+    <div class="move-footer__grid">
+      <div class="move-footer__intro">
+        {%- if section.settings.intro_heading != blank -%}
+          <h2 class="move-footer__intro-heading">{{ section.settings.intro_heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.intro_text != blank -%}
+          <div class="move-footer__intro-text rte">
+            {{ section.settings.intro_text }}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="move-footer__product">
+        {%- if product_block != null and product_block.settings.product != blank -%}
+          {%- assign promo_product = product_block.settings.product -%}
+          <a class="move-footer__product-promo" href="{{ promo_product.url }}" {{ product_block.shopify_attributes }}>
+            <span class="visually-hidden">{{ promo_product.title | escape }}</span>
+            <div class="move-footer__product-promo-inner">
+              {%- if promo_product.featured_media != blank -%}
+                {{
+                  promo_product.featured_media
+                  | image_url: width: 220
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '110, 160, 220',
+                    sizes: '70px',
+                    class: 'move-footer__product-promo-image',
+                    alt: promo_product.title
+                }}
+              {%- endif -%}
+
+              <div class="move-footer__product-promo-content">
+                {%- if product_block.settings.label != blank -%}
+                  <p class="move-footer__product-promo-eyebrow caption">{{ product_block.settings.label | escape }}</p>
+                {%- endif -%}
+
+                <p class="move-footer__product-promo-title">{{ promo_product.title | escape }}</p>
+
+                {%- if promo_product.variants.size > 0 -%}
+                  <div class="move-footer__product-promo-variant-window" aria-hidden="true">
+                    <span class="move-footer__product-promo-variant-track">
+                      {%- for v in promo_product.variants limit: 3 -%}
+                        <span class="move-footer__product-promo-variant">{{ v.title | escape }}</span>
+                      {%- endfor -%}
+                    </span>
+                  </div>
+                {%- endif -%}
+
+                {%- if product_block.settings.cta_label != blank -%}
+                  <span class="move-footer__product-promo-cta">{{ product_block.settings.cta_label | escape }}</span>
+                {%- endif -%}
+              </div>
+            </div>
+          </a>
+        {%- endif -%}
+      </div>
+
+      <div class="move-footer__newsletter">
+        {%- if newsletter_block != null and newsletter_block.settings.enable -%}
+          <div {{ newsletter_block.shopify_attributes }}>
+            {%- if newsletter_block.settings.heading != blank -%}
+              <h2 class="move-footer__menu-heading">{{ newsletter_block.settings.heading }}</h2>
+            {%- endif -%}
+
+            {%- form 'customer', id: 'ContactFooterMove', class: 'newsletter-form' -%}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <div class="newsletter-form__field-wrapper">
+                <div class="field">
+                  <input
+                    id="NewsletterForm--{{ section.id }}"
+                    type="email"
+                    name="contact[email]"
+                    class="field__input"
+                    value="{{ form.email }}"
+                    aria-required="true"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autocomplete="email"
+                    {% if form.errors %}
+                      autofocus
+                      aria-invalid="true"
+                      aria-describedby="ContactFooterMove-error"
+                    {% elsif form.posted_successfully? %}
+                      aria-describedby="ContactFooterMove-success"
+                    {% endif %}
+                    placeholder="{{ 'newsletter.label' | t }}"
+                    required
+                  >
+                  <label class="field__label" for="NewsletterForm--{{ section.id }}">
+                    {{ 'newsletter.label' | t }}
+                  </label>
+                  <button
+                    type="submit"
+                    class="newsletter-form__button field__button"
+                    name="commit"
+                    aria-label="{{ 'newsletter.button_label' | t }}"
+                  >
+                    <span class="svg-wrapper">
+                      {{- 'icon-arrow.svg' | inline_asset_content -}}
+                    </span>
+                  </button>
+                </div>
+
+                {%- if form.errors -%}
+                  <small class="newsletter-form__message form__message" id="ContactFooterMove-error">
+                    <span class="svg-wrapper">
+                      {{- 'icon-error.svg' | inline_asset_content -}}
+                    </span>
+                    {{- form.errors.translated_fields.email | capitalize }}
+                    {{ form.errors.messages.email -}}
+                  </small>
+                {%- endif -%}
+              </div>
+
+              {%- if form.posted_successfully? -%}
+                <h3 class="newsletter-form__message newsletter-form__message--success form__message" id="ContactFooterMove-success" tabindex="-1" autofocus>
+                  <span class="svg-wrapper">
+                    {{- 'icon-success.svg' | inline_asset_content -}}
+                  </span>
+                  {{- 'newsletter.success' | t }}
+                </h3>
+              {%- endif -%}
+            {%- endform -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="move-footer__bottom-right">
+        {%- if menu_block_1 != null and menu_block_1.settings.menu != blank -%}
+          <div class="move-footer__menu" {{ menu_block_1.shopify_attributes }}>
+            {%- if menu_block_1.settings.heading != blank -%}
+              <h2 class="move-footer__menu-heading">{{ menu_block_1.settings.heading }}</h2>
+            {%- endif -%}
+            <ul class="move-footer__menu-list">
+              {%- for link in menu_block_1.settings.menu.links -%}
+                <li>
+                  <a class="move-footer__menu-link" href="{{ link.url }}">{{ link.title | escape }}</a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        {%- if menu_block_2 != null and menu_block_2.settings.menu != blank -%}
+          <div class="move-footer__menu" {{ menu_block_2.shopify_attributes }}>
+            {%- if menu_block_2.settings.heading != blank -%}
+              <h2 class="move-footer__menu-heading">{{ menu_block_2.settings.heading }}</h2>
+            {%- endif -%}
+            <ul class="move-footer__menu-list">
+              {%- for link in menu_block_2.settings.menu.links -%}
+                <li>
+                  <a class="move-footer__menu-link" href="{{ link.url }}">{{ link.title | escape }}</a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        {%- if icons_block != null -%}
+          <div class="move-footer__icons" style="--move-footer-icon-size: {{ icons_block.settings.icon_size }}px;" {{ icons_block.shopify_attributes }}>
+            <div class="move-footer__icon-row" aria-label="Social media">
+              {%- if icons_block.settings.show_instagram and icons_block.settings.instagram_icon != blank and settings.social_instagram_link != blank -%}
+                <a class="move-footer__icon-link" href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener" aria-label="Instagram">
+                  {{ icons_block.settings.instagram_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'Instagram' }}
+                </a>
+              {%- endif -%}
+              {%- if icons_block.settings.show_facebook and icons_block.settings.facebook_icon != blank and settings.social_facebook_link != blank -%}
+                <a class="move-footer__icon-link" href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener" aria-label="Facebook">
+                  {{ icons_block.settings.facebook_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'Facebook' }}
+                </a>
+              {%- endif -%}
+              {%- if icons_block.settings.show_tiktok and icons_block.settings.tiktok_icon != blank and settings.social_tiktok_link != blank -%}
+                <a class="move-footer__icon-link" href="{{ settings.social_tiktok_link }}" target="_blank" rel="noopener" aria-label="TikTok">
+                  {{ icons_block.settings.tiktok_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'TikTok' }}
+                </a>
+              {%- endif -%}
+            </div>
+
+            <div class="move-footer__icon-row" aria-label="Payment methods">
+              {%- if icons_block.settings.show_klarna and icons_block.settings.klarna_icon != blank -%}
+                <span class="move-footer__icon" aria-label="Klarna">
+                  {{ icons_block.settings.klarna_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'Klarna' }}
+                </span>
+              {%- endif -%}
+              {%- if icons_block.settings.show_visa and icons_block.settings.visa_icon != blank -%}
+                <span class="move-footer__icon" aria-label="Visa">
+                  {{ icons_block.settings.visa_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'Visa' }}
+                </span>
+              {%- endif -%}
+              {%- if icons_block.settings.show_mc and icons_block.settings.mc_icon != blank -%}
+                <span class="move-footer__icon" aria-label="Mastercard">
+                  {{ icons_block.settings.mc_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'Mastercard' }}
+                </span>
+              {%- endif -%}
+              {%- if icons_block.settings.show_apple_pay and icons_block.settings.apple_pay_icon != blank -%}
+                <span class="move-footer__icon" aria-label="Apple Pay">
+                  {{ icons_block.settings.apple_pay_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'Apple Pay' }}
+                </span>
+              {%- endif -%}
+              {%- if icons_block.settings.show_paypal and icons_block.settings.paypal_icon != blank -%}
+                <span class="move-footer__icon" aria-label="PayPal">
+                  {{ icons_block.settings.paypal_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'PayPal' }}
+                </span>
+              {%- endif -%}
+              {%- if icons_block.settings.show_vipps and icons_block.settings.vipps_icon != blank -%}
+                <span class="move-footer__icon" aria-label="Vipps">
+                  {{ icons_block.settings.vipps_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'Vipps' }}
+                </span>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <hr class="move-footer__divider">
+
+  <div class="move-footer__below page-width">
+    {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+      <localization-form>
+        {%- form 'localization', id: 'MoveFooterCountryForm', class: 'localization-form' -%}
+          <div>
+            <h2 class="caption-large text-body" id="MoveFooterCountryLabel">{{ 'localization.country_label' | t }}</h2>
+            {%- render 'country-localization', localPosition: 'FooterCountry' -%}
+          </div>
+        {%- endform -%}
+      </localization-form>
+    {%- endif -%}
+
+    {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+      <localization-form>
+        {%- form 'localization', id: 'MoveFooterLanguageForm', class: 'localization-form' -%}
+          <div>
+            <h2 class="caption-large text-body" id="MoveFooterLanguageLabel">{{ 'localization.language_label' | t }}</h2>
+            {%- render 'language-localization', localPosition: 'FooterLanguage' -%}
+          </div>
+        {%- endform -%}
+      </localization-form>
+    {%- endif -%}
+
+    <div class="move-footer__bottom-bar">
+      <div class="move-footer__bottom-left">
+        <small class="move-footer__small">
+          &copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url -}}
+        </small>
+
+        {%- if section.settings.policies_page != blank and section.settings.policies_link_label != blank -%}
+          <small class="move-footer__small">
+            <a href="{{ section.settings.policies_page.url }}">{{ section.settings.policies_link_label | escape }}</a>
+          </small>
+        {%- endif -%}
+      </div>
+
+      <div class="move-footer__bottom-right-credit">
+        <small class="move-footer__small">
+          Created by <a href="https://www.nesheimvatten.no" target="_blank" rel="noopener">Nesheim &amp; Vatten AS</a>
+        </small>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Move Footer",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Intro"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "intro_heading",
+      "label": "Heading",
+      "default": "Go Further."
+    },
+    {
+      "type": "richtext",
+      "id": "intro_text",
+      "label": "Text",
+      "default": "<p>Add a short intro about your brand and what you offer.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Policies"
+    },
+    {
+      "type": "page",
+      "id": "policies_page",
+      "label": "Policies page"
+    },
+    {
+      "type": "text",
+      "id": "policies_link_label",
+      "label": "Policies link label",
+      "default": "Policies"
+    },
+    {
+      "type": "header",
+      "content": "Localization"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_country_selector",
+      "default": true,
+      "label": "Enable country selector"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_language_selector",
+      "default": true,
+      "label": "Enable language selector"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product highlight",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Membership"
+        },
+        {
+          "type": "text",
+          "id": "cta_label",
+          "label": "CTA label",
+          "default": "View options"
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "enable",
+          "label": "Enable",
+          "default": true
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Newsletter"
+        }
+      ]
+    },
+    {
+      "type": "menu",
+      "name": "Menu",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Menu"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    },
+    {
+      "type": "icons",
+      "name": "Icons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "range",
+          "id": "icon_size",
+          "min": 16,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "label": "Icon size",
+          "default": 24
+        },
+        {
+          "type": "header",
+          "content": "Social icons"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_instagram",
+          "label": "Show Instagram",
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "instagram_icon",
+          "label": "Instagram icon"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_facebook",
+          "label": "Show Facebook",
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "facebook_icon",
+          "label": "Facebook icon"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_tiktok",
+          "label": "Show TikTok",
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "tiktok_icon",
+          "label": "TikTok icon"
+        },
+        {
+          "type": "header",
+          "content": "Payment icons"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_klarna",
+          "label": "Show Klarna",
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "klarna_icon",
+          "label": "Klarna icon"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_visa",
+          "label": "Show Visa",
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "visa_icon",
+          "label": "Visa icon"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_mc",
+          "label": "Show Mastercard",
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "mc_icon",
+          "label": "Mastercard icon"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_apple_pay",
+          "label": "Show Apple Pay",
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "apple_pay_icon",
+          "label": "Apple Pay icon"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_paypal",
+          "label": "Show PayPal",
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "paypal_icon",
+          "label": "PayPal icon"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_vipps",
+          "label": "Show Vipps",
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "vipps_icon",
+          "label": "Vipps icon"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Move Footer",
+      "blocks": [
+        { "type": "product" },
+        { "type": "newsletter" },
+        { "type": "menu" },
+        { "type": "menu" },
+        { "type": "icons" }
+      ]
+    }
+  ]
+}
+{% endschema %}

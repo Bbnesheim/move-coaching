@@ -1,1 +1,67 @@
-{"name":"t:sections.footer.name","type":"footer","sections":{"footer":{"type":"footer","settings":{"color_scheme":"scheme-1","newsletter_enable":true,"newsletter_heading":"Subscribe to our emails","enable_follow_on_shop":true,"show_social":true,"enable_country_selector":true,"enable_language_selector":true,"payment_enable":true,"show_policy":true,"margin_top":0,"padding_top":36,"padding_bottom":36}}},"order":["footer"]}
+{
+  "name": "footer-group",
+  "type": "footer",
+  "sections": {
+    "move_footer": {
+      "type": "move-footer",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "intro_heading": "Go Further.",
+        "intro_text": "<p>Add a short intro about your brand and what you offer.</p>",
+        "policies_link_label": "Policies",
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "margin_top": 0,
+        "padding_top": 36,
+        "padding_bottom": 36
+      },
+      "blocks": {
+        "product": {
+          "type": "product",
+          "settings": {
+            "label": "Membership",
+            "cta_label": "View options"
+          }
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "enable": true,
+            "heading": "Newsletter"
+          }
+        },
+        "menu_1": {
+          "type": "menu",
+          "settings": {
+            "heading": "Menu",
+            "menu": "footer"
+          }
+        },
+        "menu_2": {
+          "type": "menu",
+          "settings": {
+            "heading": "Company",
+            "menu": "footer"
+          }
+        },
+        "icons": {
+          "type": "icons",
+          "settings": {
+            "icon_size": 24,
+            "show_instagram": true,
+            "show_facebook": true,
+            "show_tiktok": true,
+            "show_klarna": true,
+            "show_visa": true,
+            "show_mc": true,
+            "show_apple_pay": true,
+            "show_paypal": true,
+            "show_vipps": true
+          }
+        }
+      },
+      "block_order": ["product", "newsletter", "menu_1", "menu_2", "icons"]
+    }
+  },
+  "order": ["move_footer"]
+}
