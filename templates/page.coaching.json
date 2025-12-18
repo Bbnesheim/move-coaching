@@ -171,26 +171,6 @@
         "color_scheme": ""
       }
     },
-    "move_scroll_hero_banner_pbMTt6": {
-      "type": "move-scroll-hero-banner",
-      "name": "MOVE scroll hero banner",
-      "settings": {
-        "image": "shopify://shop_images/aline_25.webp",
-        "heading_size": "h0",
-        "heading": "Du er et steg nærmere",
-        "subheading": "",
-        "primary_cta_label": "Programmet",
-        "primary_cta_description": "Les mer om hvordan MOVE passer inn i din livsstil.",
-        "primary_cta_link": "shopify://pages/programmer",
-        "secondary_cta_label": "Om Aline",
-        "secondary_cta_description": "Les mer om reisen til Aline.",
-        "secondary_cta_link": "shopify://pages/aline",
-        "scroll_height": 220,
-        "min_scale": 35,
-        "start_radius": 18,
-        "color_scheme": ""
-      }
-    },
     "move_app_features_4H4CKf": {
       "type": "move-app-features",
       "blocks": {
@@ -242,6 +222,26 @@
         "padding_bottom": 88,
         "color_scheme": ""
       }
+    },
+    "move_scroll_hero_banner_pbMTt6": {
+      "type": "move-scroll-hero-banner",
+      "name": "MOVE scroll hero banner",
+      "settings": {
+        "image": "shopify://shop_images/aline_25.webp",
+        "heading_size": "h0",
+        "heading": "Du er et steg nærmere",
+        "subheading": "",
+        "primary_cta_label": "Programmet",
+        "primary_cta_description": "Les mer om hvordan MOVE passer inn i din livsstil.",
+        "primary_cta_link": "shopify://pages/programmer",
+        "secondary_cta_label": "Om Aline",
+        "secondary_cta_description": "Les mer om reisen til Aline.",
+        "secondary_cta_link": "shopify://pages/aline",
+        "scroll_height": 220,
+        "min_scale": 35,
+        "start_radius": 18,
+        "color_scheme": ""
+      }
     }
   },
   "order": [
@@ -250,7 +250,7 @@
     "move_brief_diFT4R",
     "move_steps_bekiGQ",
     "move_app_promo_ngTpek",
-    "move_scroll_hero_banner_pbMTt6",
-    "move_app_features_4H4CKf"
+    "move_app_features_4H4CKf",
+    "move_scroll_hero_banner_pbMTt6"
   ]
 }
