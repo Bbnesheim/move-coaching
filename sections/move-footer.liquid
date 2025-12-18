@@ -25,9 +25,15 @@
     assign product_block = null
     assign newsletter_block = null
     assign icons_block = null
+    assign download_block = null
     assign menu_block_1 = null
     assign menu_block_2 = null
     assign menu_count = 0
+    assign show_policies = false
+
+    if section.settings.policies_page != blank and section.settings.policies_link_label != blank
+      assign show_policies = true
+    endif
 
     for block in section.blocks
       if block.type == 'product' and product_block == null
@@ -36,6 +42,8 @@
         assign newsletter_block = block
       elsif block.type == 'icons' and icons_block == null
         assign icons_block = block
+      elsif block.type == 'download' and download_block == null
+        assign download_block = block
       elsif block.type == 'menu'
         if menu_count == 0
           assign menu_block_1 = block
@@ -51,67 +59,23 @@
 
   <div class="move-footer__content page-width">
     <div class="move-footer__grid">
-      <div class="move-footer__intro">
-        {%- if section.settings.intro_heading != blank -%}
-          <h2 class="move-footer__intro-heading">{{ section.settings.intro_heading }}</h2>
-        {%- endif -%}
-        {%- if section.settings.intro_text != blank -%}
-          <div class="move-footer__intro-text rte">
-            {{ section.settings.intro_text }}
-          </div>
-        {%- endif -%}
-      </div>
-
-      <div class="move-footer__product">
-        {%- if product_block != null and product_block.settings.product != blank -%}
-          {%- assign promo_product = product_block.settings.product -%}
-          <a class="move-footer__product-promo" href="{{ promo_product.url }}" {{ product_block.shopify_attributes }}>
-            <span class="visually-hidden">{{ promo_product.title | escape }}</span>
-            <div class="move-footer__product-promo-inner">
-              {%- if promo_product.featured_media != blank -%}
-                {{
-                  promo_product.featured_media
-                  | image_url: width: 220
-                  | image_tag:
-                    loading: 'lazy',
-                    widths: '110, 160, 220',
-                    sizes: '70px',
-                    class: 'move-footer__product-promo-image',
-                    alt: promo_product.title
-                }}
-              {%- endif -%}
-
-              <div class="move-footer__product-promo-content">
-                {%- if product_block.settings.label != blank -%}
-                  <p class="move-footer__product-promo-eyebrow caption">{{ product_block.settings.label | escape }}</p>
-                {%- endif -%}
-
-                <p class="move-footer__product-promo-title">{{ promo_product.title | escape }}</p>
-
-                {%- if promo_product.variants.size > 0 -%}
-                  <div class="move-footer__product-promo-variant-window" aria-hidden="true">
-                    <span class="move-footer__product-promo-variant-track">
-                      {%- for v in promo_product.variants limit: 3 -%}
-                        <span class="move-footer__product-promo-variant">{{ v.title | escape }}</span>
-                      {%- endfor -%}
-                    </span>
-                  </div>
-                {%- endif -%}
-
-                {%- if product_block.settings.cta_label != blank -%}
-                  <span class="move-footer__product-promo-cta">{{ product_block.settings.cta_label | escape }}</span>
-                {%- endif -%}
-              </div>
-            </div>
-          </a>
-        {%- endif -%}
-      </div>
-
       <div class="move-footer__newsletter">
         {%- if newsletter_block != null and newsletter_block.settings.enable -%}
           <div {{ newsletter_block.shopify_attributes }}>
+            {%- assign intro_heading = newsletter_block.settings.intro_heading | default: section.settings.intro_heading -%}
+            {%- assign intro_text = newsletter_block.settings.intro_text | default: section.settings.intro_text -%}
+
+            {%- if intro_heading != blank -%}
+              <h2 class="move-footer__intro-heading">{{ intro_heading }}</h2>
+            {%- endif -%}
+            {%- if intro_text != blank -%}
+              <div class="move-footer__intro-text rte">
+                {{ intro_text }}
+              </div>
+            {%- endif -%}
+
             {%- if newsletter_block.settings.heading != blank -%}
-              <h2 class="move-footer__menu-heading">{{ newsletter_block.settings.heading }}</h2>
+              <h3 class="move-footer__menu-heading">{{ newsletter_block.settings.heading }}</h3>
             {%- endif -%}
 
             {%- form 'customer', id: 'ContactFooterMove', class: 'newsletter-form' -%}
@@ -177,7 +141,107 @@
         {%- endif -%}
       </div>
 
-      <div class="move-footer__bottom-right">
+      <div class="move-footer__product">
+        {%- if product_block != null and product_block.settings.product != blank -%}
+          {%- assign promo_product = product_block.settings.product -%}
+          <a class="move-footer__product-promo" href="{{ promo_product.url }}" {{ product_block.shopify_attributes }}>
+            <span class="visually-hidden">{{ promo_product.title | escape }}</span>
+            <div class="move-footer__product-promo-inner">
+              {%- if promo_product.featured_media != blank -%}
+                {{
+                  promo_product.featured_media
+                  | image_url: width: 220
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '110, 160, 220',
+                    sizes: '70px',
+                    class: 'move-footer__product-promo-image',
+                    alt: promo_product.title
+                }}
+              {%- endif -%}
+
+              <div class="move-footer__product-promo-content">
+                {%- if product_block.settings.label != blank -%}
+                  <p class="move-footer__product-promo-eyebrow caption">{{ product_block.settings.label | escape }}</p>
+                {%- endif -%}
+
+                <p class="move-footer__product-promo-title">{{ promo_product.title | escape }}</p>
+
+                {%- if promo_product.variants.size > 0 -%}
+                  <div class="move-footer__product-promo-variant-window" aria-hidden="true">
+                    <span class="move-footer__product-promo-variant-track">
+                      {%- for v in promo_product.variants limit: 3 -%}
+                        <span class="move-footer__product-promo-variant">{{ v.title | escape }}</span>
+                      {%- endfor -%}
+                    </span>
+                  </div>
+                {%- endif -%}
+
+                {%- if product_block.settings.cta_label != blank -%}
+                  <span class="move-footer__product-promo-cta">{{ product_block.settings.cta_label | escape }}</span>
+                {%- endif -%}
+              </div>
+            </div>
+          </a>
+        {%- endif -%}
+      </div>
+
+      {%- if icons_block != null -%}
+        <div class="move-footer__icons move-footer__icons--left" style="--move-footer-icon-size: {{ icons_block.settings.icon_size }}px;" {{ icons_block.shopify_attributes }}>
+          <div class="move-footer__icon-row" aria-label="Social media">
+            {%- if icons_block.settings.show_facebook and icons_block.settings.facebook_icon != blank and settings.social_facebook_link != blank -%}
+              <a class="move-footer__icon-link" href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener" aria-label="Facebook">
+                {{ icons_block.settings.facebook_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'Facebook' }}
+              </a>
+            {%- endif -%}
+            {%- if icons_block.settings.show_instagram and icons_block.settings.instagram_icon != blank and settings.social_instagram_link != blank -%}
+              <a class="move-footer__icon-link" href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener" aria-label="Instagram">
+                {{ icons_block.settings.instagram_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'Instagram' }}
+              </a>
+            {%- endif -%}
+            {%- if icons_block.settings.show_tiktok and icons_block.settings.tiktok_icon != blank and settings.social_tiktok_link != blank -%}
+              <a class="move-footer__icon-link" href="{{ settings.social_tiktok_link }}" target="_blank" rel="noopener" aria-label="TikTok">
+                {{ icons_block.settings.tiktok_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'TikTok' }}
+              </a>
+            {%- endif -%}
+          </div>
+
+          <div class="move-footer__icon-row" aria-label="Payment methods">
+            {%- if icons_block.settings.show_klarna and icons_block.settings.klarna_icon != blank -%}
+              <span class="move-footer__icon" aria-label="Klarna">
+                {{ icons_block.settings.klarna_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'Klarna' }}
+              </span>
+            {%- endif -%}
+            {%- if icons_block.settings.show_visa and icons_block.settings.visa_icon != blank -%}
+              <span class="move-footer__icon" aria-label="Visa">
+                {{ icons_block.settings.visa_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'Visa' }}
+              </span>
+            {%- endif -%}
+            {%- if icons_block.settings.show_mc and icons_block.settings.mc_icon != blank -%}
+              <span class="move-footer__icon" aria-label="Mastercard">
+                {{ icons_block.settings.mc_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'Mastercard' }}
+              </span>
+            {%- endif -%}
+            {%- if icons_block.settings.show_apple_pay and icons_block.settings.apple_pay_icon != blank -%}
+              <span class="move-footer__icon" aria-label="Apple Pay">
+                {{ icons_block.settings.apple_pay_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'Apple Pay' }}
+              </span>
+            {%- endif -%}
+            {%- if icons_block.settings.show_paypal and icons_block.settings.paypal_icon != blank -%}
+              <span class="move-footer__icon" aria-label="PayPal">
+                {{ icons_block.settings.paypal_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'PayPal' }}
+              </span>
+            {%- endif -%}
+            {%- if icons_block.settings.show_vipps and icons_block.settings.vipps_icon != blank -%}
+              <span class="move-footer__icon" aria-label="Vipps">
+                {{ icons_block.settings.vipps_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'Vipps' }}
+              </span>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      <div class="move-footer__bottom-right{% if download_block != null %} move-footer__bottom-right--has-download{% endif %}">
         {%- if menu_block_1 != null and menu_block_1.settings.menu != blank -%}
           <div class="move-footer__menu" {{ menu_block_1.shopify_attributes }}>
             {%- if menu_block_1.settings.heading != blank -%}
@@ -208,56 +272,23 @@
           </div>
         {%- endif -%}
 
-        {%- if icons_block != null -%}
-          <div class="move-footer__icons" style="--move-footer-icon-size: {{ icons_block.settings.icon_size }}px;" {{ icons_block.shopify_attributes }}>
-            <div class="move-footer__icon-row" aria-label="Social media">
-              {%- if icons_block.settings.show_instagram and icons_block.settings.instagram_icon != blank and settings.social_instagram_link != blank -%}
-                <a class="move-footer__icon-link" href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener" aria-label="Instagram">
-                  {{ icons_block.settings.instagram_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'Instagram' }}
-                </a>
-              {%- endif -%}
-              {%- if icons_block.settings.show_facebook and icons_block.settings.facebook_icon != blank and settings.social_facebook_link != blank -%}
-                <a class="move-footer__icon-link" href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener" aria-label="Facebook">
-                  {{ icons_block.settings.facebook_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'Facebook' }}
-                </a>
-              {%- endif -%}
-              {%- if icons_block.settings.show_tiktok and icons_block.settings.tiktok_icon != blank and settings.social_tiktok_link != blank -%}
-                <a class="move-footer__icon-link" href="{{ settings.social_tiktok_link }}" target="_blank" rel="noopener" aria-label="TikTok">
-                  {{ icons_block.settings.tiktok_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'TikTok' }}
-                </a>
-              {%- endif -%}
-            </div>
+        {%- if download_block != null -%}
+          <div class="move-footer__download" {{ download_block.shopify_attributes }}>
+            {%- if download_block.settings.heading != blank -%}
+              <h2 class="move-footer__menu-heading">{{ download_block.settings.heading }}</h2>
+            {%- endif -%}
 
-            <div class="move-footer__icon-row" aria-label="Payment methods">
-              {%- if icons_block.settings.show_klarna and icons_block.settings.klarna_icon != blank -%}
-                <span class="move-footer__icon" aria-label="Klarna">
-                  {{ icons_block.settings.klarna_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'Klarna' }}
-                </span>
+            <div class="move-footer__download-links" aria-label="App downloads">
+              {%- if download_block.settings.ios_badge != blank and download_block.settings.ios_link != blank -%}
+                <a class="move-footer__download-link" href="{{ download_block.settings.ios_link }}" target="_blank" rel="noopener" aria-label="Download on the App Store">
+                  {{ download_block.settings.ios_badge | image_url: width: 320 | image_tag: class: 'move-footer__download-badge', loading: 'lazy', alt: 'App Store' }}
+                </a>
               {%- endif -%}
-              {%- if icons_block.settings.show_visa and icons_block.settings.visa_icon != blank -%}
-                <span class="move-footer__icon" aria-label="Visa">
-                  {{ icons_block.settings.visa_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'Visa' }}
-                </span>
-              {%- endif -%}
-              {%- if icons_block.settings.show_mc and icons_block.settings.mc_icon != blank -%}
-                <span class="move-footer__icon" aria-label="Mastercard">
-                  {{ icons_block.settings.mc_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'Mastercard' }}
-                </span>
-              {%- endif -%}
-              {%- if icons_block.settings.show_apple_pay and icons_block.settings.apple_pay_icon != blank -%}
-                <span class="move-footer__icon" aria-label="Apple Pay">
-                  {{ icons_block.settings.apple_pay_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'Apple Pay' }}
-                </span>
-              {%- endif -%}
-              {%- if icons_block.settings.show_paypal and icons_block.settings.paypal_icon != blank -%}
-                <span class="move-footer__icon" aria-label="PayPal">
-                  {{ icons_block.settings.paypal_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'PayPal' }}
-                </span>
-              {%- endif -%}
-              {%- if icons_block.settings.show_vipps and icons_block.settings.vipps_icon != blank -%}
-                <span class="move-footer__icon" aria-label="Vipps">
-                  {{ icons_block.settings.vipps_icon | image_url: width: 64 | image_tag: class: 'move-footer__icon-img', loading: 'lazy', alt: 'Vipps' }}
-                </span>
+
+              {%- if download_block.settings.android_badge != blank and download_block.settings.android_link != blank -%}
+                <a class="move-footer__download-link" href="{{ download_block.settings.android_link }}" target="_blank" rel="noopener" aria-label="Get it on Google Play">
+                  {{ download_block.settings.android_badge | image_url: width: 320 | image_tag: class: 'move-footer__download-badge', loading: 'lazy', alt: 'Google Play' }}
+                </a>
               {%- endif -%}
             </div>
           </div>
@@ -296,13 +327,15 @@
         <small class="move-footer__small">
           &copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url -}}
         </small>
+      </div>
 
-        {%- if section.settings.policies_page != blank and section.settings.policies_link_label != blank -%}
+      {%- if show_policies -%}
+        <div class="move-footer__bottom-center">
           <small class="move-footer__small">
             <a href="{{ section.settings.policies_page.url }}">{{ section.settings.policies_link_label | escape }}</a>
           </small>
-        {%- endif -%}
-      </div>
+        </div>
+      {%- endif -%}
 
       <div class="move-footer__bottom-right-credit">
         <small class="move-footer__small">
@@ -318,7 +351,7 @@
   "name": "Move Footer",
   "tag": "section",
   "class": "section",
-  "max_blocks": 6,
+  "max_blocks": 7,
   "settings": [
     {
       "type": "color_scheme",
@@ -438,6 +471,18 @@
       "name": "Newsletter",
       "limit": 1,
       "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "intro_heading",
+          "label": "Intro heading",
+          "default": "Go Further."
+        },
+        {
+          "type": "richtext",
+          "id": "intro_text",
+          "label": "Intro text",
+          "default": "<p>Add a short intro about your brand and what you offer.</p>"
+        },
         {
           "type": "checkbox",
           "id": "enable",
@@ -593,6 +638,39 @@
           "label": "Vipps icon"
         }
       ]
+    },
+    {
+      "type": "download",
+      "name": "Download links",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Download"
+        },
+        {
+          "type": "image_picker",
+          "id": "ios_badge",
+          "label": "App Store badge"
+        },
+        {
+          "type": "url",
+          "id": "ios_link",
+          "label": "App Store link"
+        },
+        {
+          "type": "image_picker",
+          "id": "android_badge",
+          "label": "Google Play badge"
+        },
+        {
+          "type": "url",
+          "id": "android_link",
+          "label": "Google Play link"
+        }
+      ]
     }
   ],
   "presets": [
@@ -603,7 +681,8 @@
         { "type": "newsletter" },
         { "type": "menu" },
         { "type": "menu" },
-        { "type": "icons" }
+        { "type": "icons" },
+        { "type": "download" }
       ]
     }
   ]
