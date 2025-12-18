@@ -1,24 +1,23 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "footer-group",
   "type": "footer",
   "sections": {
     "move_footer": {
       "type": "move-footer",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "intro_heading": "Go Further.",
-        "intro_text": "<p>Add a short intro about your brand and what you offer.</p>",
-        "policies_link_label": "Policies",
-        "enable_country_selector": true,
-        "enable_language_selector": true,
-        "margin_top": 0,
-        "padding_top": 36,
-        "padding_bottom": 36
-      },
       "blocks": {
         "product": {
           "type": "product",
           "settings": {
+            "product": "",
             "label": "Membership",
             "cta_label": "View options"
           }
@@ -30,17 +29,17 @@
             "heading": "Newsletter"
           }
         },
-        "menu_1": {
-          "type": "menu",
-          "settings": {
-            "heading": "Menu",
-            "menu": "footer"
-          }
-        },
         "menu_2": {
           "type": "menu",
           "settings": {
             "heading": "Company",
+            "menu": "footer"
+          }
+        },
+        "menu_1": {
+          "type": "menu",
+          "settings": {
+            "heading": "Menu",
             "menu": "footer"
           }
         },
@@ -49,19 +48,48 @@
           "settings": {
             "icon_size": 24,
             "show_instagram": true,
+            "instagram_icon": "shopify://shop_images/google-play-svgrepo-com.svg",
             "show_facebook": true,
+            "facebook_icon": "shopify://shop_images/google-play-svgrepo-com.svg",
             "show_tiktok": true,
+            "tiktok_icon": "shopify://shop_images/google-play-svgrepo-com.svg",
             "show_klarna": true,
+            "klarna_icon": "shopify://shop_images/shuffle-change-svgrepo-com.svg",
             "show_visa": true,
+            "visa_icon": "shopify://shop_images/shuffle-change-svgrepo-com.svg",
             "show_mc": true,
+            "mc_icon": "shopify://shop_images/shuffle-change-svgrepo-com.svg",
             "show_apple_pay": true,
+            "apple_pay_icon": "shopify://shop_images/shuffle-change-svgrepo-com.svg",
             "show_paypal": true,
-            "show_vipps": true
+            "paypal_icon": "shopify://shop_images/shuffle-change-svgrepo-com.svg",
+            "show_vipps": true,
+            "vipps_icon": "shopify://shop_images/shuffle-change-svgrepo-com.svg"
           }
         }
       },
-      "block_order": ["product", "newsletter", "menu_1", "menu_2", "icons"]
+      "block_order": [
+        "product",
+        "newsletter",
+        "menu_2",
+        "menu_1",
+        "icons"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "intro_heading": "Go Further.",
+        "intro_text": "<p>Add a short intro about your brand and what you offer.</p>",
+        "policies_page": "",
+        "policies_link_label": "Policies",
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "margin_top": 0,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
-  "order": ["move_footer"]
+  "order": [
+    "move_footer"
+  ]
 }
