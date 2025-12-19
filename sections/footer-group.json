@@ -18,8 +18,10 @@
           "type": "download",
           "settings": {
             "heading": "Download",
-            "ios_link": "",
-            "android_link": ""
+            "ios_badge": "shopify://shop_images/app-store-svgrepo-com.svg",
+            "ios_link": "https://apps.apple.com/gb/app/move-coaching-no/id6736608350",
+            "android_badge": "shopify://shop_images/google-play-svgrepo-com.svg",
+            "android_link": "https://play.google.com/store/apps/details?id=io.beefit.movecoaching&hl=en"
           }
         },
         "product": {
