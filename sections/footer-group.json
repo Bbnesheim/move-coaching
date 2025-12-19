@@ -25,22 +25,24 @@
         "newsletter": {
           "type": "newsletter",
           "settings": {
+            "intro_heading": "Go Further.",
+            "intro_text": "<p>Add a short intro about your brand and what you offer.</p>",
             "enable": true,
-            "heading": "Newsletter"
+            "heading": ""
           }
         },
         "menu_2": {
           "type": "menu",
           "settings": {
             "heading": "Company",
-            "menu": "footer"
+            "menu": "hovedmeny"
           }
         },
         "menu_1": {
           "type": "menu",
           "settings": {
             "heading": "Menu",
-            "menu": "footer"
+            "menu": "hovedmeny"
           }
         },
         "icons": {
