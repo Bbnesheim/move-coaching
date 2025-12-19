@@ -38,11 +38,37 @@
   text-decoration: none;
 }
 
-.move-footer__product-promo-inner {
+.move-footer__product-promo--has-cta {
+  padding: 0;
+  background: transparent;
+  overflow: hidden;
+  display: grid;
+  /* 80/20 split */
+  grid-template-columns: minmax(0, 4fr) minmax(0, 1fr);
+  border-radius: 1.2rem;
+}
+
+.move-footer__product-promo-main-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.move-footer__product-promo-main {
   display: grid;
   grid-template-columns: 7rem minmax(0, 1fr);
   gap: 1.6rem;
   align-items: center;
+  padding: 1.6rem;
+  background: var(--move-color-brown-primary);
+}
+
+.move-footer__product-promo-side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.6rem;
+  background: var(--move-color-pink-secondary);
 }
 
 .move-footer__product-promo-image {
@@ -53,15 +79,19 @@
   border-radius: 0.8rem;
 }
 
-.move-footer__product-promo-eyebrow {
-  margin: 0 0 0.4rem;
-  color: rgba(255, 255, 255, 0.85);
+.move-footer__product-promo-heading {
+  margin: 0 0 0.6rem;
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .move-footer__product-promo-title {
   margin: 0 0 0.4rem;
   font-weight: 600;
   color: #ffffff;
+}
+
+.move-footer__product-promo-content {
+  min-width: 0;
 }
 
 .move-footer__product-promo-variant-window {
@@ -83,11 +113,30 @@
 }
 
 .move-footer__product-promo-cta {
-  display: inline-block;
-  margin-top: 0.8rem;
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 0.3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.2rem;
+  height: 4.2rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.35);
+  color: var(--move-color-brown-primary);
+  transition: transform 150ms ease, background-color 150ms ease;
+}
+
+.move-footer__product-promo--has-cta:hover .move-footer__product-promo-cta {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.move-footer__product-promo-cta:focus-visible {
+  outline: var(--focused-base-outline);
+  outline-offset: var(--focused-base-outline-offset);
+}
+
+.move-footer__product-promo-cta .svg-wrapper {
+  width: 2.2rem;
+  height: 2.2rem;
 }
 
 /* Only animate on hover/focus-within (and when motion allowed) */
@@ -324,6 +373,16 @@
   .move-footer__grid {
     grid-template-columns: 1fr;
     row-gap: 4rem;
+  }
+
+  .move-footer__product-promo-main {
+    padding: 1.2rem;
+    grid-template-columns: 5.6rem minmax(0, 1fr);
+    gap: 1.2rem;
+  }
+
+  .move-footer__product-promo-side {
+    padding: 1.2rem;
   }
 
   .move-footer__bottom-right {

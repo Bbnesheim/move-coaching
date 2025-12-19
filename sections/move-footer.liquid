@@ -144,45 +144,98 @@
       <div class="move-footer__product">
         {%- if product_block != null and product_block.settings.product != blank -%}
           {%- assign promo_product = product_block.settings.product -%}
-          <a class="move-footer__product-promo" href="{{ promo_product.url }}" {{ product_block.shopify_attributes }}>
-            <span class="visually-hidden">{{ promo_product.title | escape }}</span>
-            <div class="move-footer__product-promo-inner">
-              {%- if promo_product.featured_media != blank -%}
-                {{
-                  promo_product.featured_media
-                  | image_url: width: 220
-                  | image_tag:
-                    loading: 'lazy',
-                    widths: '110, 160, 220',
-                    sizes: '70px',
-                    class: 'move-footer__product-promo-image',
-                    alt: promo_product.title
-                }}
-              {%- endif -%}
+          {%- assign product_cta_label = product_block.settings.cta_label | default: 'View options' -%}
+          {%- assign has_product_cta = true -%}
 
-              <div class="move-footer__product-promo-content">
-                {%- if product_block.settings.label != blank -%}
-                  <p class="move-footer__product-promo-eyebrow caption">{{ product_block.settings.label | escape }}</p>
-                {%- endif -%}
+          {%- if has_product_cta -%}
+            <div class="move-footer__product-promo move-footer__product-promo--has-cta" {{ product_block.shopify_attributes }}>
+              <a class="move-footer__product-promo-main-link" href="{{ promo_product.url }}">
+                <span class="visually-hidden">{{ promo_product.title | escape }}</span>
 
-                <p class="move-footer__product-promo-title">{{ promo_product.title | escape }}</p>
+                <div class="move-footer__product-promo-main">
+                  {%- if promo_product.featured_media != blank -%}
+                    {{
+                      promo_product.featured_media
+                      | image_url: width: 220
+                      | image_tag:
+                        loading: 'lazy',
+                        widths: '110, 160, 220',
+                        sizes: '70px',
+                        class: 'move-footer__product-promo-image',
+                        alt: promo_product.title
+                    }}
+                  {%- endif -%}
 
-                {%- if promo_product.variants.size > 0 -%}
-                  <div class="move-footer__product-promo-variant-window" aria-hidden="true">
-                    <span class="move-footer__product-promo-variant-track">
-                      {%- for v in promo_product.variants limit: 3 -%}
-                        <span class="move-footer__product-promo-variant">{{ v.title | escape }}</span>
-                      {%- endfor -%}
-                    </span>
+                  <div class="move-footer__product-promo-content">
+                    {%- if product_block.settings.label != blank -%}
+                      <p class="move-footer__product-promo-heading h3">{{ product_block.settings.label | escape }}</p>
+                    {%- endif -%}
+
+                    <p class="move-footer__product-promo-title">{{ promo_product.title | escape }}</p>
+
+                    {%- if promo_product.variants.size > 0 -%}
+                      <div class="move-footer__product-promo-variant-window" aria-hidden="true">
+                        <span class="move-footer__product-promo-variant-track">
+                          {%- for v in promo_product.variants limit: 3 -%}
+                            <span class="move-footer__product-promo-variant">{{ v.title | escape }}</span>
+                          {%- endfor -%}
+                        </span>
+                      </div>
+                    {%- endif -%}
                   </div>
-                {%- endif -%}
+                </div>
+              </a>
 
-                {%- if product_block.settings.cta_label != blank -%}
-                  <span class="move-footer__product-promo-cta">{{ product_block.settings.cta_label | escape }}</span>
-                {%- endif -%}
+              <div class="move-footer__product-promo-side">
+                <a
+                  class="move-footer__product-promo-cta"
+                  href="{{ promo_product.url }}"
+                  aria-label="{{ product_cta_label | escape }}"
+                >
+                  <span class="svg-wrapper" aria-hidden="true">
+                    {{- 'icon-arrow.svg' | inline_asset_content -}}
+                  </span>
+                </a>
               </div>
             </div>
-          </a>
+          {%- else -%}
+            <a class="move-footer__product-promo" href="{{ promo_product.url }}" {{ product_block.shopify_attributes }}>
+              <span class="visually-hidden">{{ promo_product.title | escape }}</span>
+
+              <div class="move-footer__product-promo-main">
+                {%- if promo_product.featured_media != blank -%}
+                  {{
+                    promo_product.featured_media
+                    | image_url: width: 220
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '110, 160, 220',
+                      sizes: '70px',
+                      class: 'move-footer__product-promo-image',
+                      alt: promo_product.title
+                  }}
+                {%- endif -%}
+
+                <div class="move-footer__product-promo-content">
+                  {%- if product_block.settings.label != blank -%}
+                    <p class="move-footer__product-promo-heading h3">{{ product_block.settings.label | escape }}</p>
+                  {%- endif -%}
+
+                  <p class="move-footer__product-promo-title">{{ promo_product.title | escape }}</p>
+
+                  {%- if promo_product.variants.size > 0 -%}
+                    <div class="move-footer__product-promo-variant-window" aria-hidden="true">
+                      <span class="move-footer__product-promo-variant-track">
+                        {%- for v in promo_product.variants limit: 3 -%}
+                          <span class="move-footer__product-promo-variant">{{ v.title | escape }}</span>
+                        {%- endfor -%}
+                      </span>
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+            </a>
+          {%- endif -%}
         {%- endif -%}
       </div>
 
@@ -488,7 +541,7 @@
           "type": "text",
           "id": "label",
           "label": "Label",
-          "default": "Membership"
+          "default": "Se våre programmer"
         },
         {
           "type": "text",
