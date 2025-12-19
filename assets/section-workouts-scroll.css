@@ -6,8 +6,11 @@
   --workouts-scroll-radius: var(--workouts-scroll-start-radius, 18px);
   --workouts-scroll-media-zoom: 1;
 
-  --workouts-scroll-top-x: 0px;
-  --workouts-scroll-bottom-x: 0px;
+  /* Headline per-line drift (set by JS) */
+  --workouts-scroll-top-line-1-x: 0px;
+  --workouts-scroll-top-line-2-x: 0px;
+  --workouts-scroll-bottom-line-1-x: 0px;
+  --workouts-scroll-bottom-line-2-x: 0px;
 
   position: relative;
   width: 100%;
@@ -49,6 +52,7 @@
   position: absolute;
   left: 50%;
   top: 50%;
+  z-index: 2;
 
   width: var(--workouts-scroll-frame-w);
   height: var(--workouts-scroll-frame-h);
@@ -79,37 +83,63 @@
   will-change: transform;
 }
 
-/* Big headlines: NOT clipped by the expanding frame. */
+/* Big headlines: sit BEHIND the expanding frame (so they get covered). */
 .workouts-scroll__headlines {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 1;
   pointer-events: none;
 }
 
 .workouts-scroll__headline {
   position: absolute;
   color: rgb(var(--color-foreground));
-  line-height: 1;
+  line-height: 0.95;
+}
+
+/* Make the section's h0/h1/h2 options MUCH larger without changing global typography. */
+.workouts-scroll__headline.h0 {
+  font-size: clamp(5.6rem, 12vw, 13rem);
+}
+
+.workouts-scroll__headline.h1 {
+  font-size: clamp(4.6rem, 10vw, 11rem);
+}
+
+.workouts-scroll__headline.h2 {
+  font-size: clamp(3.6rem, 8vw, 9rem);
 }
 
 .workouts-scroll__headline-line {
   display: block;
+  will-change: transform;
+}
+
+.workouts-scroll__headline--top .workouts-scroll__headline-line:nth-child(1) {
+  transform: translateX(var(--workouts-scroll-top-line-1-x));
+}
+
+.workouts-scroll__headline--top .workouts-scroll__headline-line:nth-child(2) {
+  transform: translateX(var(--workouts-scroll-top-line-2-x));
+}
+
+.workouts-scroll__headline--bottom .workouts-scroll__headline-line:nth-child(1) {
+  transform: translateX(var(--workouts-scroll-bottom-line-1-x));
+}
+
+.workouts-scroll__headline--bottom .workouts-scroll__headline-line:nth-child(2) {
+  transform: translateX(var(--workouts-scroll-bottom-line-2-x));
 }
 
 .workouts-scroll__headline--top {
   top: clamp(2.4rem, 6vh, 6.8rem);
   left: clamp(1.6rem, 5vw, 6rem);
-  transform: translateX(var(--workouts-scroll-top-x));
-  will-change: transform;
 }
 
 .workouts-scroll__headline--bottom {
   bottom: clamp(2.4rem, 7vh, 8rem);
   right: clamp(1.6rem, 5vw, 6rem);
   text-align: right;
-  transform: translateX(var(--workouts-scroll-bottom-x));
-  will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {
