@@ -81,6 +81,8 @@
         this.section.style.setProperty('--move-scroll-hero-banner-frame-h', '100vh');
         this.section.style.setProperty('--move-scroll-hero-banner-radius', '0px');
         this.section.style.setProperty('--move-scroll-hero-banner-image-zoom', '1');
+        this.section.style.setProperty('--move-scroll-hero-banner-top-x', '0px');
+        this.section.style.setProperty('--move-scroll-hero-banner-bottom-x', '0px');
         this.section.style.setProperty('--move-scroll-hero-banner-content-opacity', '1');
         this.section.style.setProperty('--move-scroll-hero-banner-content-y', '0px');
         return;
@@ -128,6 +130,12 @@
       const ctaTranslateY = `${lerp(140, 0, ctaEased)}%`;
 
 
+      // Headline drift: top and bottom move in opposite horizontal directions.
+      // Keep it responsive by basing the shift on viewport width.
+      const headlineShiftPx = vw * 0.22;
+      const topX = lerp(0, headlineShiftPx, eased);
+      const bottomX = lerp(0, -headlineShiftPx, eased);
+
       this.section.style.setProperty('--move-scroll-hero-banner-progress', String(progress));
       this.section.style.setProperty('--move-scroll-hero-banner-frame-w', `${frameW}px`);
       this.section.style.setProperty('--move-scroll-hero-banner-frame-h', `${frameH}px`);
@@ -135,6 +143,8 @@
       this.section.style.setProperty('--move-scroll-hero-banner-image-zoom', String(zoom));
       this.section.style.setProperty('--move-scroll-hero-banner-heading-translate-y', headingTranslateY);
       this.section.style.setProperty('--move-scroll-hero-banner-cta-translate-y', ctaTranslateY);
+      this.section.style.setProperty('--move-scroll-hero-banner-top-x', `${topX.toFixed(2)}px`);
+      this.section.style.setProperty('--move-scroll-hero-banner-bottom-x', `${bottomX.toFixed(2)}px`);
     }
 
     destroy() {

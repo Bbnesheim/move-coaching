@@ -9,6 +9,9 @@
   --move-scroll-hero-banner-heading-translate-y: 140%;
   --move-scroll-hero-banner-cta-translate-y: 140%;
 
+  --move-scroll-hero-banner-top-x: 0px;
+  --move-scroll-hero-banner-bottom-x: 0px;
+
   /* Fixed overlay amount for this section */
   --move-scroll-hero-banner-overlay-opacity: 0.25;
 
@@ -63,6 +66,7 @@
 
 /* Image is separately zoomed so you see the center subject first, then reveal more as it expands. */
 .move-scroll-hero-banner__image,
+.move-scroll-hero-banner__video,
 .move-scroll-hero-banner__placeholder {
   width: 100%;
   height: 100%;
@@ -70,7 +74,7 @@
   object-position: center;
   display: block;
 
-  /* establish stacking so overlay can sit above image but below UI */
+  /* establish stacking so overlay can sit above media but below UI */
   position: relative;
   z-index: 0;
 
@@ -95,11 +99,41 @@
   will-change: opacity;
 }
 
+/* Big headlines: NOT clipped by the expanding frame (so they can sit over the background). */
+.move-scroll-hero-banner__headlines {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.move-scroll-hero-banner__headline {
+  position: absolute;
+  color: rgba(var(--color-background), 1);
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.35);
+  line-height: 1;
+}
+
+.move-scroll-hero-banner__headline--top {
+  top: clamp(2.4rem, 6vh, 6.8rem);
+  left: clamp(1.6rem, 5vw, 6rem);
+  transform: translateX(var(--move-scroll-hero-banner-top-x));
+  will-change: transform;
+}
+
+.move-scroll-hero-banner__headline--bottom {
+  bottom: clamp(2.4rem, 7vh, 8rem);
+  right: clamp(1.6rem, 5vw, 6rem);
+  text-align: right;
+  transform: translateX(var(--move-scroll-hero-banner-bottom-x));
+  will-change: transform;
+}
+
 /* UI overlay lives INSIDE the expanding frame (so it can't bleed outside). */
 .move-scroll-hero-banner__frame-ui {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 3;
 
   display: flex;
   flex-direction: column;
@@ -297,7 +331,13 @@
   }
 
   .move-scroll-hero-banner__image,
+  .move-scroll-hero-banner__video,
   .move-scroll-hero-banner__placeholder {
+    transform: none;
+  }
+
+  .move-scroll-hero-banner__headline--top,
+  .move-scroll-hero-banner__headline--bottom {
     transform: none;
   }
 

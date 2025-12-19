@@ -15,7 +15,18 @@
   <div class="move-scroll-hero-banner__sticky">
     <div class="move-scroll-hero-banner__media" aria-hidden="true">
       <div class="move-scroll-hero-banner__frame">
-        {%- if section.settings.image != blank -%}
+        {%- if section.settings.video != blank -%}
+          {{
+            section.settings.video
+            | video_tag:
+              autoplay: true,
+              loop: true,
+              muted: true,
+              controls: false,
+              playsinline: true,
+              class: 'move-scroll-hero-banner__video'
+          }}
+        {%- elsif section.settings.image != blank -%}
           {{
             section.settings.image
             | image_url: width: 2800
@@ -30,6 +41,20 @@
         {%- endif -%}
 
         <div class="move-scroll-hero-banner__overlay" aria-hidden="true"></div>
+
+        <div class="move-scroll-hero-banner__headlines" aria-hidden="true">
+          {%- if section.settings.top_heading != blank -%}
+            <div class="move-scroll-hero-banner__headline move-scroll-hero-banner__headline--top {{ section.settings.top_heading_size }}">
+              {{ section.settings.top_heading }}
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.bottom_heading != blank -%}
+            <div class="move-scroll-hero-banner__headline move-scroll-hero-banner__headline--bottom {{ section.settings.bottom_heading_size }}">
+              {{ section.settings.bottom_heading }}
+            </div>
+          {%- endif -%}
+        </div>
 
         <div class="move-scroll-hero-banner__frame-ui">
           <div class="move-scroll-hero-banner__frame-header">
@@ -113,9 +138,14 @@
       "content": "Media"
     },
     {
+      "type": "video",
+      "id": "video",
+      "label": "Video"
+    },
+    {
       "type": "image_picker",
       "id": "image",
-      "label": "Image"
+      "label": "Image (fallback)"
     },
     {
       "type": "header",
@@ -142,6 +172,44 @@
       "type": "richtext",
       "id": "subheading",
       "label": "Subheading"
+    },
+    {
+      "type": "header",
+      "content": "Headlines (moving)"
+    },
+    {
+      "type": "text",
+      "id": "top_heading",
+      "label": "Top heading",
+      "default": "FOLLOW THE MARK"
+    },
+    {
+      "type": "select",
+      "id": "top_heading_size",
+      "label": "Top heading size",
+      "options": [
+        { "value": "h0", "label": "Large" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h2", "label": "Small" }
+      ],
+      "default": "h0"
+    },
+    {
+      "type": "text",
+      "id": "bottom_heading",
+      "label": "Bottom heading",
+      "default": "LEAVE YOURS"
+    },
+    {
+      "type": "select",
+      "id": "bottom_heading_size",
+      "label": "Bottom heading size",
+      "options": [
+        { "value": "h0", "label": "Large" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h2", "label": "Small" }
+      ],
+      "default": "h0"
     },
     {
       "type": "text",
