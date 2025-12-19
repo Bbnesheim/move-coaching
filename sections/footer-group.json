@@ -14,6 +14,14 @@
     "move_footer": {
       "type": "move-footer",
       "blocks": {
+        "download_zAjTeD": {
+          "type": "download",
+          "settings": {
+            "heading": "Download",
+            "ios_link": "",
+            "android_link": ""
+          }
+        },
         "product": {
           "type": "product",
           "settings": {
@@ -50,27 +58,28 @@
           "settings": {
             "icon_size": 24,
             "show_instagram": true,
-            "instagram_icon": "shopify://shop_images/google-play-svgrepo-com.svg",
+            "instagram_icon": "shopify://shop_images/instagram-svgrepo-com_6.svg",
             "show_facebook": true,
-            "facebook_icon": "shopify://shop_images/google-play-svgrepo-com.svg",
+            "facebook_icon": "shopify://shop_images/facebook-svgrepo-com_3.svg",
             "show_tiktok": true,
-            "tiktok_icon": "shopify://shop_images/google-play-svgrepo-com.svg",
+            "tiktok_icon": "shopify://shop_images/tiktok-svgrepo-com_2.svg",
             "show_klarna": true,
-            "klarna_icon": "shopify://shop_images/shuffle-change-svgrepo-com.svg",
+            "klarna_icon": "shopify://shop_images/klarna-svgrepo-com.svg",
             "show_visa": true,
-            "visa_icon": "shopify://shop_images/shuffle-change-svgrepo-com.svg",
+            "visa_icon": "shopify://shop_images/visa-4-logo-svgrepo-com.svg",
             "show_mc": true,
-            "mc_icon": "shopify://shop_images/shuffle-change-svgrepo-com.svg",
+            "mc_icon": "shopify://shop_images/mastercard-full-svgrepo-com.svg",
             "show_apple_pay": true,
-            "apple_pay_icon": "shopify://shop_images/shuffle-change-svgrepo-com.svg",
+            "apple_pay_icon": "shopify://shop_images/card-apple-pay-solid-svgrepo-com.svg",
             "show_paypal": true,
-            "paypal_icon": "shopify://shop_images/shuffle-change-svgrepo-com.svg",
+            "paypal_icon": "shopify://shop_images/paypal-svgrepo-com.svg",
             "show_vipps": true,
-            "vipps_icon": "shopify://shop_images/shuffle-change-svgrepo-com.svg"
+            "vipps_icon": "shopify://shop_images/Vipps_Pay_Mark_Large_CMYK_060225.svg"
           }
         }
       },
       "block_order": [
+        "download_zAjTeD",
         "product",
         "newsletter",
         "menu_2",
