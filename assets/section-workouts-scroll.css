@@ -1,0 +1,162 @@
+.workouts-scroll {
+  position: relative;
+}
+
+.workouts-scroll__scene {
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Only the non-GSAP fallback needs extra scroll room. */
+.workouts-scroll.is-fallback .workouts-scroll__scene {
+  /* Total scrollable distance ~= duration-vh, so add +100vh for the viewport itself. */
+  height: calc((var(--workouts-scroll-duration-vh, 300) + 100) * 1vh);
+}
+
+.workouts-scroll__pin {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  /* Use the theme color scheme background when no video is present. */
+  background: rgb(var(--color-background));
+}
+
+/* Fallback mode (no ScrollTrigger): use sticky pinning. */
+.workouts-scroll__pin.is-sticky {
+  position: sticky;
+  top: 0;
+}
+
+.workouts-scroll__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.workouts-scroll__bg-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.workouts-scroll__overlay {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  padding-top: max(6vh, 32px);
+  padding-bottom: max(6vh, 32px);
+}
+
+.workouts-scroll__heading {
+  margin: 0 0 max(3vh, 20px) 0;
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity var(--duration-medium, 220ms) var(--ease-out-slow, ease-out),
+    transform var(--duration-medium, 220ms) var(--ease-out-slow, ease-out);
+}
+
+.workouts-scroll.is-heading-visible .workouts-scroll__heading {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.workouts-scroll__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: max(3vh, 24px);
+  align-items: end;
+  height: calc(100% - max(6vh, 32px));
+}
+
+@media screen and (min-width: 990px) {
+  .workouts-scroll__layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: max(4vh, 40px);
+  }
+}
+
+.workouts-scroll__media {
+  width: min(560px, 86vw);
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-md, 8px);
+  overflow: hidden;
+  /* keep media readable on top of the bg video without forcing brand colors */
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+}
+
+@media screen and (min-width: 990px) {
+  .workouts-scroll__media {
+    width: min(520px, 40vw);
+    margin-left: 0;
+  }
+}
+
+.workouts-scroll__media img,
+.workouts-scroll__media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.workouts-scroll__right {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.workouts-scroll__card {
+  max-width: 42rem;
+  padding: 18px 18px;
+  border-radius: var(--radius-md, 8px);
+  /* rely on theme variables when present; otherwise, a gentle translucent backdrop */
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+}
+
+.workouts-scroll__card-title {
+  margin: 0 0 0.8rem 0;
+}
+
+.workouts-scroll__labels {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.workouts-scroll__label {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font: inherit;
+  opacity: 0.55;
+  transform: scale(0.98);
+  transition:
+    opacity var(--duration-short, 150ms) ease,
+    transform var(--duration-short, 150ms) ease;
+}
+
+.workouts-scroll__label.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .workouts-scroll__heading {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  /* Avoid long pinned scroll areas in reduced-motion mode. */
+  .workouts-scroll__scene {
+    height: auto;
+  }
+}
